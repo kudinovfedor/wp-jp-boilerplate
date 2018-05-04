@@ -1,0 +1,342 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-04 18:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: 404.php:4
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:5
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: archive.php:32 page.php:17 search.php:7 single.php:17
+msgid "Nothing Found"
+msgstr ""
+
+#: archive.php:33 page.php:18 single.php:18
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: comments.php:15
+#, php-format
+msgctxt "comments title"
+msgid "One Reply to &ldquo;%s&rdquo;"
+msgstr ""
+
+#: comments.php:18
+#, php-format
+msgctxt "comments title"
+msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:41
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:14
+msgid "Edit Scroll Top"
+msgstr ""
+
+#: footer.php:17
+msgid "Edit Analytics Tracking Code"
+msgstr ""
+
+#: footer.php:20
+msgid "Edit Login Logo"
+msgstr ""
+
+#: search.php:5
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: search.php:28
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: searchform.php:5
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:7
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: searchform.php:8
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: inc/admin.php:12
+msgid "Developed by"
+msgstr ""
+
+#: inc/admin.php:13
+msgid "JoomPress.biz"
+msgstr ""
+
+#: inc/admin.php:18 inc/admin.php:90
+msgid "Running PHP version"
+msgstr ""
+
+#: inc/admin.php:23
+#, php-format
+msgid "%d queries in %s sec"
+msgstr ""
+
+#: inc/admin.php:29
+#, php-format
+msgid "Using %d Mb memory (including unused pages %d Mb)."
+msgstr ""
+
+#. Author of the theme
+#: inc/admin.php:56
+msgid "Kudinov Fedor"
+msgstr ""
+
+#: inc/admin.php:61 inc/comment-form.php:22
+msgid "Email"
+msgstr ""
+
+#: inc/admin.php:66
+msgid "Tel"
+msgstr ""
+
+#: inc/comment-form.php:5
+msgctxt "noun"
+msgid "Comment"
+msgstr ""
+
+#: inc/comment-form.php:20
+msgid "Name"
+msgstr ""
+
+#: inc/comment-form.php:24
+msgid "Website"
+msgstr ""
+
+#: inc/customizer.php:17
+msgid "Theme Options"
+msgstr ""
+
+#: inc/customizer.php:18
+msgid "Theme Options Customizer"
+msgstr ""
+
+#: inc/customizer.php:24
+msgid "Scroll Top"
+msgstr ""
+
+#: inc/customizer.php:25
+msgid "Customizer Custom Scroll Top"
+msgstr ""
+
+#: inc/customizer.php:89
+msgid "Display"
+msgstr ""
+
+#: inc/customizer.php:90
+msgid "Show/Hide scroll top"
+msgstr ""
+
+#: inc/customizer.php:97
+msgid "Width"
+msgstr ""
+
+#: inc/customizer.php:104
+msgid "Height"
+msgstr ""
+
+#: inc/customizer.php:111
+msgid "Shape"
+msgstr ""
+
+#: inc/customizer.php:116
+msgid "Circle"
+msgstr ""
+
+#: inc/customizer.php:117
+msgid "Rounded"
+msgstr ""
+
+#: inc/customizer.php:118
+msgid "Square"
+msgstr ""
+
+#: inc/customizer.php:123
+msgid "Position"
+msgstr ""
+
+#: inc/customizer.php:128
+msgid "Right"
+msgstr ""
+
+#: inc/customizer.php:129
+msgid "Left"
+msgstr ""
+
+#: inc/customizer.php:134
+msgid "Offset Left/Right"
+msgstr ""
+
+#: inc/customizer.php:141
+msgid "Offset bottom"
+msgstr ""
+
+#: inc/customizer.php:148
+msgid "Border width"
+msgstr ""
+
+#: inc/customizer.php:155
+msgid "Border color"
+msgstr ""
+
+#: inc/customizer.php:162
+msgid "Background color"
+msgstr ""
+
+#: inc/customizer.php:169
+msgid "Background color hover"
+msgstr ""
+
+#: inc/customizer.php:176
+msgid "Arrow color"
+msgstr ""
+
+#: inc/customizer.php:184
+msgid "Analytics"
+msgstr ""
+
+#: inc/customizer.php:185
+msgid "Analytics Tracking Code"
+msgstr ""
+
+#: inc/customizer.php:208
+msgid "Google Analytics"
+msgstr ""
+
+#: inc/customizer.php:209 inc/customizer.php:232 inc/customizer.php:254
+msgid "Placed (head/body)"
+msgstr ""
+
+#: inc/customizer.php:214 inc/customizer.php:237 inc/customizer.php:259
+msgid "Head"
+msgstr ""
+
+#: inc/customizer.php:215 inc/customizer.php:238 inc/customizer.php:260
+msgid "Body"
+msgstr ""
+
+#: inc/customizer.php:221 inc/customizer.php:243 inc/customizer.php:265
+msgid "Paste tracking code here &dArr;"
+msgstr ""
+
+#: inc/customizer.php:231
+msgid "Yandex Metrika"
+msgstr ""
+
+#: inc/customizer.php:253
+msgid "Custom Analytics"
+msgstr ""
+
+#: inc/customizer.php:276
+msgid "Login"
+msgstr ""
+
+#: inc/customizer.php:277
+msgid "Customizer Custom Login"
+msgstr ""
+
+#: inc/customizer.php:286
+msgid "Logo"
+msgstr ""
+
+#: inc/customizer.php:287
+msgid "Image size 80x80 px"
+msgstr ""
+
+#: inc/helpers.php:258
+msgid "Scroll to top"
+msgstr ""
+
+#: inc/helpers.php:376
+#, php-format
+msgid "Copyright &copy; <span itemprop=\"copyrightYear\">%d</span> %s. %s."
+msgstr ""
+
+#: inc/helpers.php:379
+msgid "All rights reserved"
+msgstr ""
+
+#: inc/helpers.php:408
+msgid "Delete This"
+msgstr ""
+
+#: inc/login.php:25
+msgid "<strong>ERROR:</strong> The username and password is incorrect."
+msgstr ""
+
+#: inc/theme-setup.php:40
+msgid "Menu in header"
+msgstr ""
+
+#: inc/theme-setup.php:41
+msgid "Menu in footer"
+msgstr ""
+
+#: inc/widgets-init.php:9 inc/widgets-init.php:11
+msgid "Sidebar Left"
+msgstr ""
+
+#: inc/widgets-init.php:19 inc/widgets-init.php:21
+msgid "Sidebar Right"
+msgstr ""
+
+#: template-parts/page/content-page.php:18
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/page/content-page.php:20
+msgid "Next page"
+msgstr ""
+
+#: template-parts/page/content-page.php:21
+msgid "Previous page"
+msgstr ""
+
+#. Name of the theme
+msgid "JoomPress"
+msgstr ""
+
+#. Description of the theme
+msgid "Wordpress theme"
+msgstr ""
+
+#. URI of the theme
+msgid "https://joompress.biz/"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://joompress.biz/about-me/"
+msgstr ""

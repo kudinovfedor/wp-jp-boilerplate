@@ -1,0 +1,26 @@
+.header {
+  padding: 10px 0;
+
+  &-search {
+    float: right;
+    padding-top: 5px;
+  }
+}
+
+.logo {
+
+  &,
+  &-link,
+  &-img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &-link {
+
+  }
+
+  &-img {
+
+  }
+}

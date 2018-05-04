@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/*
+Theme Name: JoomPress
+Theme URI: https://joompress.biz
+Author: Kudinov Fedor
+Author URI: https://joompress.biz/about-me
+Description: Wordpress theme
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: joompress
+Domain Path: /languages
+Tags: one-column
+*/
+
+@import "bootstrap/bootstrap";
+
+@import "utilities/variables";
+@import "utilities/mixins";
+@import "utilities/functions";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+%clearfix {
+  &::after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+}
+
+.container {
+  //padding-left: 15px;
+  //padding-right: 15px;
+  //margin-left: auto;
+  //margin-right: auto;
+  @extend %clearfix;
+
+  //@media only screen and (min-width: 1200px) {
+  //  width: 1200px;
+  //}
+}
+
+@import "helpers";
+@import "header";
+@import "nav";
+@import "footer";
+@import "scroll-top";
