@@ -1,0 +1,48 @@
+.btn {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    @include user-select(none);
+    @include transition(.15s ease-in-out);
+
+    &:not(:disabled):not(.disabled) {
+        cursor: pointer;
+    }
+
+    &:focus,
+    &.focus {
+        outline: 0;
+        @include box-shadow(0 0 0 .2rem rgba(#007bff, .25));
+    }
+
+    &.disabled,
+    &:disabled {
+        @include opacity(.65);
+    }
+
+    &-sm {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+
+    &-lg {
+        padding: 8px 16px;
+        font-size: 20px;
+    }
+
+    &-block {
+        display: block;
+        width: 100%;
+
+        & + & {
+            margin-top: 8px;
+        }
+    }
+}

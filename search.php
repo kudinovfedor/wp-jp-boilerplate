@@ -1,34 +1,37 @@
 <?php get_header(); ?>
 
-<article>
-  <?php if (have_posts()) : ?>
-    <h1><?php printf(__('Search Results for: %s', 'joompress'), '<span>' . get_search_query() . '</span>'); ?></h1>
-  <?php else : ?>
-    <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
-  <?php endif; ?>
-</article>
+<section class="container">
 
-<?php if (have_posts()) : ?>
+    <?php if (have_posts()) : ?>
 
-  <?php while (have_posts()) : the_post(); ?>
+        <h1><?php printf(__('Search Results for: %s', 'joompress'), '<span>' . get_search_query() . '</span>'); ?></h1>
 
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+        <?php while (have_posts()) : the_post(); ?>
 
-      <h2><?php the_title(); ?></h2>
-      <?php the_excerpt(); ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    </article>
+                <h2><?php the_title(); ?></h2>
+                <?php if (has_post_thumbnail()) {
+                    the_post_thumbnail('post-thumbnail');
+                } ?>
+                <?php the_excerpt(); ?>
 
-  <?php endwhile; ?>
+            </article>
 
-  <?php the_posts_pagination(); ?>
+        <?php endwhile; ?>
 
-<?php else : ?>
+        <?php the_posts_pagination(); ?>
 
-  <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'joompress'); ?></p>
-  <?php get_search_form(); ?>
+    <?php else : ?>
 
-<?php endif; ?>
+        <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
+        <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.',
+                'joompress'); ?></p>
+        <?php get_search_form(); ?>
+
+    <?php endif; ?>
+
+</section>
 
 <?php get_sidebar(); ?>
 
