@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-04 18:18+0000\n"
+"POT-Creation-Date: 2018-05-08 11:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -62,6 +62,18 @@ msgstr ""
 msgid "Edit Login Logo"
 msgstr ""
 
+#: footer.php:23
+msgid "Edit Socials"
+msgstr ""
+
+#: footer.php:26
+msgid "Edit Phone Number"
+msgstr ""
+
+#: header.php:13
+msgid "Skip to content"
+msgstr ""
+
 #: search.php:5
 #, php-format
 msgid "Search Results for: %s"
@@ -73,17 +85,17 @@ msgid ""
 "different keywords."
 msgstr ""
 
-#: searchform.php:5
+#: searchform.php:4
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: searchform.php:7
+#: searchform.php:5
 msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr ""
 
-#: searchform.php:8
+#: searchform.php:6
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -136,160 +148,20 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: inc/customizer.php:17
-msgid "Theme Options"
-msgstr ""
-
-#: inc/customizer.php:18
-msgid "Theme Options Customizer"
-msgstr ""
-
-#: inc/customizer.php:24
-msgid "Scroll Top"
-msgstr ""
-
-#: inc/customizer.php:25
-msgid "Customizer Custom Scroll Top"
-msgstr ""
-
-#: inc/customizer.php:89
-msgid "Display"
-msgstr ""
-
-#: inc/customizer.php:90
-msgid "Show/Hide scroll top"
-msgstr ""
-
-#: inc/customizer.php:97
-msgid "Width"
-msgstr ""
-
-#: inc/customizer.php:104
-msgid "Height"
-msgstr ""
-
-#: inc/customizer.php:111
-msgid "Shape"
-msgstr ""
-
-#: inc/customizer.php:116
-msgid "Circle"
-msgstr ""
-
-#: inc/customizer.php:117
-msgid "Rounded"
-msgstr ""
-
-#: inc/customizer.php:118
-msgid "Square"
-msgstr ""
-
-#: inc/customizer.php:123
-msgid "Position"
-msgstr ""
-
-#: inc/customizer.php:128
-msgid "Right"
-msgstr ""
-
-#: inc/customizer.php:129
-msgid "Left"
-msgstr ""
-
-#: inc/customizer.php:134
-msgid "Offset Left/Right"
-msgstr ""
-
-#: inc/customizer.php:141
-msgid "Offset bottom"
-msgstr ""
-
-#: inc/customizer.php:148
-msgid "Border width"
-msgstr ""
-
-#: inc/customizer.php:155
-msgid "Border color"
-msgstr ""
-
-#: inc/customizer.php:162
-msgid "Background color"
-msgstr ""
-
-#: inc/customizer.php:169
-msgid "Background color hover"
-msgstr ""
-
-#: inc/customizer.php:176
-msgid "Arrow color"
-msgstr ""
-
-#: inc/customizer.php:184
-msgid "Analytics"
-msgstr ""
-
-#: inc/customizer.php:185
-msgid "Analytics Tracking Code"
-msgstr ""
-
-#: inc/customizer.php:208
-msgid "Google Analytics"
-msgstr ""
-
-#: inc/customizer.php:209 inc/customizer.php:232 inc/customizer.php:254
-msgid "Placed (head/body)"
-msgstr ""
-
-#: inc/customizer.php:214 inc/customizer.php:237 inc/customizer.php:259
-msgid "Head"
-msgstr ""
-
-#: inc/customizer.php:215 inc/customizer.php:238 inc/customizer.php:260
-msgid "Body"
-msgstr ""
-
-#: inc/customizer.php:221 inc/customizer.php:243 inc/customizer.php:265
-msgid "Paste tracking code here &dArr;"
-msgstr ""
-
-#: inc/customizer.php:231
-msgid "Yandex Metrika"
-msgstr ""
-
-#: inc/customizer.php:253
-msgid "Custom Analytics"
-msgstr ""
-
-#: inc/customizer.php:276
-msgid "Login"
-msgstr ""
-
-#: inc/customizer.php:277
-msgid "Customizer Custom Login"
-msgstr ""
-
-#: inc/customizer.php:286
-msgid "Logo"
-msgstr ""
-
-#: inc/customizer.php:287
-msgid "Image size 80x80 px"
-msgstr ""
-
-#: inc/helpers.php:258
+#: inc/helpers.php:290
 msgid "Scroll to top"
 msgstr ""
 
-#: inc/helpers.php:376
+#: inc/helpers.php:424
 #, php-format
 msgid "Copyright &copy; <span itemprop=\"copyrightYear\">%d</span> %s. %s."
 msgstr ""
 
-#: inc/helpers.php:379
+#: inc/helpers.php:427
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:408
+#: inc/helpers.php:456
 msgid "Delete This"
 msgstr ""
 
@@ -334,9 +206,9 @@ msgid "Wordpress theme"
 msgstr ""
 
 #. URI of the theme
-msgid "https://joompress.biz/"
+msgid "https://joompress.biz"
 msgstr ""
 
 #. Author URI of the theme
-msgid "https://joompress.biz/about-me/"
+msgid "https://joompress.biz/about-me"
 msgstr ""

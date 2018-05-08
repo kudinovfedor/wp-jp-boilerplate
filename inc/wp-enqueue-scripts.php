@@ -35,7 +35,7 @@ function jp_remove_jquery_migrate($scripts)
         return;
     }
 
-    $suffix = SCRIPT_DEBUG ? '' : '.min';
+    $suffix         = SCRIPT_DEBUG ? '' : '.min';
     $jquery_version = '1.12.4';
 
     $scripts->remove('jquery');
@@ -53,6 +53,36 @@ function jp_remove_jquery_migrate($scripts)
 }
 
 add_action('wp_default_scripts', 'jp_remove_jquery_migrate', 11);
+
+/**
+ * Customizer Preview
+ */
+function jp_customizer_preview()
+{
+    wp_register_script('jp_customizer_preview', JP_JS . '/customizer-preview.js', array(
+        'jquery',
+        'customize-preview'
+    ), null, true);
+
+    wp_enqueue_script('jp_customizer_preview');
+}
+
+add_action('customize_preview_init', 'jp_customizer_preview');
+
+/**
+ * Customizer Controls
+ */
+function jp_customize_controls_enqueue_scripts()
+{
+    wp_register_script('jp_customizer_control', JP_JS . '/customizer-control.js', array(
+        'jquery',
+        'customize-controls'
+    ), null, true);
+
+    wp_enqueue_script('jp_customizer_control');
+}
+
+add_action('customize_controls_enqueue_scripts', 'jp_customize_controls_enqueue_scripts');
 
 /**
  * wp_head Analytics Tracking Code

@@ -8,8 +8,9 @@
 function jp_admin_footer_text()
 {
     $developed_by = sprintf(
-        '%s: <strong><a href="https://joompress.biz" target="_blank">%s</a></strong>',
+        '%s: <strong><a href="%s" target="_blank">%s</a></strong>',
         __('Developed by', 'joompress'),
+        __('https://joompress.biz', 'joompress'),
         __('JoomPress.biz', 'joompress')
     );
 

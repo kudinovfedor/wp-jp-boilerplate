@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('wp-body')) {
+if ( ! function_exists('wp-body')) {
     /**
      * Fire the wp_body action.
      */
@@ -13,7 +13,7 @@ if (!function_exists('wp-body')) {
     }
 }
 
-if (!function_exists('theme_mod')) {
+if ( ! function_exists('theme_mod')) {
     /**
      * Display theme modification value for the current theme.
      *
@@ -26,13 +26,13 @@ if (!function_exists('theme_mod')) {
     {
         $theme_mod = get_theme_mod($name, $default);
 
-        if (!empty($theme_mod)) {
+        if ( ! empty($theme_mod)) {
             echo $theme_mod;
         }
     }
 }
 
-if (!function_exists('logo')) {
+if ( ! function_exists('logo')) {
     /**
      * Displays a logo, linked to home.
      *
@@ -45,7 +45,7 @@ if (!function_exists('logo')) {
     }
 }
 
-if (!function_exists('get_logo')) {
+if ( ! function_exists('get_logo')) {
     /**
      * Returns a logo, linked to home.
      *
@@ -69,7 +69,7 @@ if (!function_exists('get_logo')) {
     }
 }
 
-if (!function_exists('the_phone_number')) {
+if ( ! function_exists('the_phone_number')) {
     /**
      * Display phone number for html markup <a href="tel:phone_number"></a>
      *
@@ -84,7 +84,7 @@ if (!function_exists('the_phone_number')) {
     }
 }
 
-if (!function_exists('get_phone_number')) {
+if ( ! function_exists('get_phone_number')) {
     /**
      * Clear phone number for tag <a href="tel:phone_number"></a>
      *
@@ -98,7 +98,7 @@ if (!function_exists('get_phone_number')) {
     }
 }
 
-if (!function_exists('has_phones')) {
+if ( ! function_exists('has_phones')) {
     /**
      * Determines whether the site has a phone numbers.
      *
@@ -111,7 +111,7 @@ if (!function_exists('has_phones')) {
     }
 }
 
-if (!function_exists('get_phones')) {
+if ( ! function_exists('get_phones')) {
     /**
      * Return Phone Numbers in array
      *
@@ -120,21 +120,22 @@ if (!function_exists('get_phones')) {
     function get_phones()
     {
         $_phones = [
-            get_theme_mod('bw_phone1'),
-            get_theme_mod('bw_phone2'),
-            get_theme_mod('bw_phone3'),
-            get_theme_mod('bw_phone4'),
+            get_theme_mod('jp_phone_one'),
+            get_theme_mod('jp_phone_two'),
+            get_theme_mod('jp_phone_three'),
+            get_theme_mod('jp_phone_four'),
+            get_theme_mod('jp_phone_five'),
         ];
 
         $phones = array_filter($_phones, function ($value) {
-            return !empty($value);
+            return ! empty($value);
         });
 
         return $phones;
     }
 }
 
-if (!function_exists('has_social')) {
+if ( ! function_exists('has_social')) {
     /**
      * Determines whether the site has a social links.
      *
@@ -147,7 +148,7 @@ if (!function_exists('has_social')) {
     }
 }
 
-if (!function_exists('get_social')) {
+if ( ! function_exists('get_social')) {
     /**
      * Return Social Link in array
      *
@@ -156,51 +157,82 @@ if (!function_exists('get_social')) {
     function get_social()
     {
         $_socials = [
-            'vk' => [
-                'url' => get_theme_mod('bw_social_vk'),
+            'vk'            => [
+                'url'  => get_theme_mod('jp_social_vk'),
                 'text' => 'Vk',
                 'icon' => 'fa-vk',
             ],
-            'twitter' => [
-                'url' => get_theme_mod('bw_social_twitter'),
+            'twitter'       => [
+                'url'  => get_theme_mod('jp_social_twitter'),
                 'text' => 'Twitter',
                 'icon' => 'fa-twitter',
             ],
-            'facebook' => [
-                'url' => get_theme_mod('bw_social_facebook'),
+            'facebook'      => [
+                'url'  => get_theme_mod('jp_social_facebook'),
                 'text' => 'Facebook',
                 'icon' => 'fa-facebook',
             ],
-            'linkedin' => [
-                'url' => get_theme_mod('bw_social_linkedin'),
+            'odnoklassniki' => [
+                'url'  => get_theme_mod('jp_social_odnoklassniki'),
+                'text' => 'Odnoklassniki',
+                'icon' => 'fa-odnoklassniki',
+            ],
+            'linkedin'      => [
+                'url'  => get_theme_mod('jp_social_linkedin'),
                 'text' => 'Linkedin',
                 'icon' => 'fa-linkedin',
             ],
-            'instagram' => [
-                'url' => get_theme_mod('bw_social_instagram'),
+            'instagram'     => [
+                'url'  => get_theme_mod('jp_social_instagram'),
                 'text' => 'Instagram',
                 'icon' => 'fa-instagram',
             ],
-            'google-plus' => [
-                'url' => get_theme_mod('bw_social_google_plus'),
+            'google-plus'   => [
+                'url'  => get_theme_mod('jp_social_google_plus'),
                 'text' => 'Google Plus',
                 'icon' => 'fa-google-plus',
             ],
-            'youtube' => [
-                'url' => get_theme_mod('bw_social_youtube'),
+            'youtube'       => [
+                'url'  => get_theme_mod('jp_social_youtube'),
                 'text' => 'YouTube',
                 'icon' => 'fa-youtube-play',
             ],
+            'pinterest'     => [
+                'url'  => get_theme_mod('jp_social_pinterest'),
+                'text' => 'Pinterest',
+                'icon' => 'fa-pinterest',
+            ],
+            'tumblr'        => [
+                'url'  => get_theme_mod('jp_social_tumblr'),
+                'text' => 'Tumblr',
+                'icon' => 'fa-tumblr',
+            ],
+            'flickr'        => [
+                'url'  => get_theme_mod('jp_social_flickr'),
+                'text' => 'Flickr',
+                'icon' => 'fa-flickr',
+            ],
+            'reddit'        => [
+                'url'  => get_theme_mod('jp_social_reddit'),
+                'text' => 'Reddit',
+                'icon' => 'fa-reddit',
+            ],
+            'rss'           => [
+                'url'  => get_theme_mod('jp_social_rss'),
+                'text' => 'RSS',
+                'icon' => 'fa-rss',
+            ],
         ];
+
         $socials = array_filter($_socials, function ($value) {
-            return $value['url'] !== '#' && !empty($value['url']) && filter_var($value['url'], FILTER_VALIDATE_URL);
+            return $value['url'] !== '#' && ! empty($value['url']) && filter_var($value['url'], FILTER_VALIDATE_URL);
         });
 
         return $socials;
     }
 }
 
-if (!function_exists('scroll_top')) {
+if ( ! function_exists('scroll_top')) {
     /**
      * Display scroll top
      *
@@ -213,7 +245,7 @@ if (!function_exists('scroll_top')) {
     }
 }
 
-if (!function_exists('has_scroll_top')) {
+if ( ! function_exists('has_scroll_top')) {
     /**
      * Determines whether the site has a enable scroll top.
      *
@@ -225,7 +257,7 @@ if (!function_exists('has_scroll_top')) {
     }
 }
 
-if (!function_exists('get_scroll_top')) {
+if ( ! function_exists('get_scroll_top')) {
     /**
      * Return html markup for scroll top
      *
@@ -265,7 +297,7 @@ if (!function_exists('get_scroll_top')) {
     }
 }
 
-if (!function_exists('svg_sprite')) {
+if ( ! function_exists('svg_sprite')) {
     /**
      * Display svg sprite markup
      *
@@ -278,7 +310,7 @@ if (!function_exists('svg_sprite')) {
     }
 }
 
-if (!function_exists('has_svg_sprite')) {
+if ( ! function_exists('has_svg_sprite')) {
     /**
      * Determines file exist and file size > 0.
      *
@@ -292,7 +324,7 @@ if (!function_exists('has_svg_sprite')) {
     }
 }
 
-if (!function_exists('get_svg_sprite')) {
+if ( ! function_exists('get_svg_sprite')) {
     /**
      * Return svg sprite markup
      *
@@ -312,7 +344,7 @@ if (!function_exists('get_svg_sprite')) {
     }
 }
 
-if (!function_exists('analytics_tracking_code')) {
+if ( ! function_exists('analytics_tracking_code')) {
     /**
      * Display Analytics Tracking Code
      *
@@ -327,7 +359,7 @@ if (!function_exists('analytics_tracking_code')) {
     }
 }
 
-if (!function_exists('get_analytics_tracking_code')) {
+if ( ! function_exists('get_analytics_tracking_code')) {
     /**
      * Return Analytics Tracking Code
      *
@@ -337,12 +369,12 @@ if (!function_exists('get_analytics_tracking_code')) {
      */
     function get_analytics_tracking_code($placed = 'body')
     {
-        $tracking_code = array();
+        $tracking_code           = array();
         $tracking_code['google'] = get_theme_mod('jp_analytics_google');
         $tracking_code['yandex'] = get_theme_mod('jp_analytics_yandex');
         $tracking_code['custom'] = get_theme_mod('jp_analytics_custom');
 
-        $tracking_placed = array();
+        $tracking_placed           = array();
         $tracking_placed['google'] = get_theme_mod('jp_analytics_google_placed', 'body');
         $tracking_placed['yandex'] = get_theme_mod('jp_analytics_yandex_placed', 'body');
         $tracking_placed['custom'] = get_theme_mod('jp_analytics_custom_placed', 'body');
@@ -350,14 +382,14 @@ if (!function_exists('get_analytics_tracking_code')) {
         $output = '';
 
         foreach ($tracking_code as $key => $script) {
-            if (!empty($tracking_placed[$key]) && !empty($script)) {
+            if ( ! empty($tracking_placed[$key]) && ! empty($script)) {
                 if ($tracking_placed[$key] === $placed) {
                     $output .= $script . PHP_EOL;
                 }
             }
         };
 
-        if (!empty($output)) {
+        if ( ! empty($output)) {
             return sprintf('<script>%s</script>', $output);
             //return $output;
         }
@@ -367,7 +399,7 @@ if (!function_exists('get_analytics_tracking_code')) {
     }
 }
 
-if (!function_exists('copyright')) {
+if ( ! function_exists('copyright')) {
     /**
      * Display copyright info
      *
@@ -380,7 +412,7 @@ if (!function_exists('copyright')) {
     }
 }
 
-if (!function_exists('get_copyright')) {
+if ( ! function_exists('get_copyright')) {
     /**
      * Return copyright info
      *
@@ -397,7 +429,7 @@ if (!function_exists('get_copyright')) {
     }
 }
 
-if (!function_exists('delete_post_link')) {
+if ( ! function_exists('delete_post_link')) {
     /**
      * Displays the delete post link for post.
      *
@@ -412,11 +444,11 @@ if (!function_exists('delete_post_link')) {
      */
     function delete_post_link($text = null, $before = '', $after = '', $id = 0, $class = 'post-delete-link')
     {
-        if (!$post = get_post($id)) {
+        if ( ! $post = get_post($id)) {
             return;
         }
 
-        if (!$url = get_delete_post_link($post->ID)) {
+        if ( ! $url = get_delete_post_link($post->ID)) {
             return;
         }
 
@@ -439,7 +471,7 @@ if (!function_exists('delete_post_link')) {
     }
 }
 
-if (!function_exists('dump')) {
+if ( ! function_exists('dump')) {
     /**
      * Dumps information about a variable
      *
@@ -455,7 +487,7 @@ if (!function_exists('dump')) {
     }
 }
 
-if (!function_exists('dd')) {
+if ( ! function_exists('dd')) {
     /**
      * Dump and die
      *

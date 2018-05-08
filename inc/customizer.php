@@ -7,265 +7,266 @@
  */
 function jp_customize_register($wp_customize)
 {
-    $wp_customize->get_setting('blogname')->transport = 'postMessage';
-    $wp_customize->get_setting('blogdescription')->transport = 'postMessage';
+    $wp_customize->get_setting('blogname')->transport         = 'postMessage';
+    $wp_customize->get_setting('blogdescription')->transport  = 'postMessage';
     $wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
     $wp_customize->get_setting('background_color')->transport = 'postMessage';
 
     // Panel Theme Options
     $wp_customize->add_panel('jp_theme_options', array(
-        'title' => __('Theme Options', 'joompress'),
-        'description' => esc_html__('Theme Options Customizer', 'joompress'),
-        'priority' => 201,
+        'title'       => 'Theme Options',
+        'description' => 'Theme Options Customizer',
+        'priority'    => 201,
     ));
 
     // Section Scroll Top
     $wp_customize->add_section('jp_scroll_top', array(
-        'title' => __('Scroll Top', 'joompress'),
-        'description' => esc_html__('Customizer Custom Scroll Top', 'joompress'),
-        'panel' => 'jp_theme_options',
+        'title'       => 'Scroll Top',
+        'description' => 'Customizer Custom Scroll Top',
+        'panel'       => 'jp_theme_options',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_enable', array(
-        'default' => true,
+        'default'           => true,
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_width', array(
-        'default' => '55',
-        'transport' => 'postMessage',
+        'default'           => '55',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_height', array(
-        'default' => '55',
-        'transport' => 'postMessage',
+        'default'           => '55',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_shape', array(
-        'default' => 'circle',
-        'transport' => 'postMessage',
+        'default'           => 'circle',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_position', array(
-        'default' => 'right',
-        'transport' => 'postMessage',
+        'default'           => 'right',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_offset_left_right', array(
-        'default' => '20',
-        'transport' => 'postMessage',
+        'default'           => '20',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_offset_bottom', array(
-        'default' => '20',
-        'transport' => 'postMessage',
+        'default'           => '20',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_border_width', array(
-        'default' => '1',
-        'transport' => 'postMessage',
+        'default'           => '1',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_border_color', array(
-        'default' => '#000000',
-        'transport' => 'postMessage',
+        'default'           => '#000000',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_background_color', array(
-        'default' => '#000000',
-        'transport' => 'postMessage',
+        'default'           => '#000000',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_background_color_hover', array(
-        'default' => '#000000',
-        'transport' => 'postMessage',
+        'default'           => '#000000',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_arrow_color', array(
-        'default' => '#ffffff',
-        'transport' => 'postMessage',
+        'default'           => '#ffffff',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_control('jp_scroll_top_enable', array(
-        'label' => __('Display', 'joompress'),
-        'description' => esc_html__('Show/Hide scroll top', 'joompress'),
-        'section' => 'jp_scroll_top',
-        'settings' => 'jp_scroll_top_enable',
-        'type' => 'checkbox',
+        'label'       => 'Enable/Disable',
+        'description' => 'Display Scroll Top',
+        'section'     => 'jp_scroll_top',
+        'settings'    => 'jp_scroll_top_enable',
+        'type'        => 'checkbox',
     ));
 
     $wp_customize->add_control('jp_scroll_top_width', array(
-        'label' => __('Width', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Width',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_width',
-        'type' => 'number',
+        'type'     => 'number',
     ));
 
     $wp_customize->add_control('jp_scroll_top_height', array(
-        'label' => __('Height', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Height',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_height',
-        'type' => 'number',
+        'type'     => 'number',
     ));
 
     $wp_customize->add_control('jp_scroll_top_shape', array(
-        'label' => __('Shape', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Shape',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_shape',
-        'type' => 'select',
-        'choices' => array(
-            'circle' => __('Circle', 'joompress'),
-            'rounded' => __('Rounded', 'joompress'),
-            'square' => __('Square', 'joompress'),
+        'type'     => 'select',
+        'choices'  => array(
+            'circle'  => 'Circle',
+            'rounded' => 'Rounded',
+            'square'  => 'Square',
         ),
     ));
 
     $wp_customize->add_control('jp_scroll_top_position', array(
-        'label' => __('Position', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Position',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_position',
-        'type' => 'select',
-        'choices' => array(
-            'right' => __('Right', 'joompress'),
-            'left' => __('Left', 'joompress'),
+        'type'     => 'select',
+        'choices'  => array(
+            'right' => 'Right',
+            'left'  => 'Left',
         ),
     ));
 
     $wp_customize->add_control('jp_scroll_top_offset_left_right', array(
-        'label' => __('Offset Left/Right', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Offset Left/Right',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_offset_left_right',
-        'type' => 'number',
+        'type'     => 'number',
     ));
 
     $wp_customize->add_control('jp_scroll_top_offset_bottom', array(
-        'label' => __('Offset bottom', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Offset bottom',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_offset_bottom',
-        'type' => 'number',
+        'type'     => 'number',
     ));
 
     $wp_customize->add_control('jp_scroll_top_border_width', array(
-        'label' => __('Border width', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Border width',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_border_width',
-        'type' => 'number',
+        'type'     => 'number',
     ));
 
     $wp_customize->add_control('jp_scroll_top_border_color', array(
-        'label' => __('Border color', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Border color',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_border_color',
-        'type' => 'color',
+        'type'     => 'color',
     ));
 
     $wp_customize->add_control('jp_scroll_top_background_color', array(
-        'label' => __('Background color', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Background color',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_background_color',
-        'type' => 'color',
+        'type'     => 'color',
     ));
 
     $wp_customize->add_control('jp_scroll_top_background_color_hover', array(
-        'label' => __('Background color hover', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Background color hover',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_background_color_hover',
-        'type' => 'color',
+        'type'     => 'color',
     ));
 
     $wp_customize->add_control('jp_scroll_top_arrow_color', array(
-        'label' => __('Arrow color', 'joompress'),
-        'section' => 'jp_scroll_top',
+        'label'    => 'Arrow color',
+        'section'  => 'jp_scroll_top',
         'settings' => 'jp_scroll_top_arrow_color',
-        'type' => 'color',
+        'type'     => 'color',
     ));
 
     // Section Analytics Tracking Code
     $wp_customize->add_section('jp_analytics', array(
-        'title' => __('Analytics', 'joompress'),
-        'description' => esc_html__('Analytics Tracking Code', 'joompress'),
-        'panel' => 'jp_theme_options',
+        'title'       => 'Analytics',
+        'description' => 'Analytics Tracking Code',
+        'panel'       => 'jp_theme_options',
     ));
 
-    $wp_customize->add_setting('jp_analytics_google_placed', array(
-        'default' => 'body',
-    ));
+    $wp_customize->add_setting('jp_analytics_google_placed', array('default' => 'body', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_yandex_placed', array('default' => 'body', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_custom_placed', array('default' => 'body', 'sanitize_callback' => '',));
 
-    $wp_customize->add_setting('jp_analytics_yandex_placed', array(
-        'default' => 'body',
-    ));
-
-    $wp_customize->add_setting('jp_analytics_custom_placed', array(
-        'default' => 'body',
-    ));
-
-    $wp_customize->add_setting('jp_analytics_google', array());
-
-    $wp_customize->add_setting('jp_analytics_yandex', array());
-
-    $wp_customize->add_setting('jp_analytics_custom', array());
+    $wp_customize->add_setting('jp_analytics_google', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_yandex', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_custom', array('sanitize_callback' => '',));
 
     $wp_customize->add_control('jp_analytics_google_placed', array(
-        'label' => __('Google Analytics', 'joompress'),
-        'description' => esc_html__('Placed (head/body)', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_google_placed',
-        'type' => 'select',
-        'choices' => array(
-            'head' => __('Head', 'joompress'),
-            'body' => __('Body', 'joompress'),
+        'label'       => 'Google Analytics',
+        'description' => 'Placed (head/body)',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_google_placed',
+        'type'        => 'select',
+        'choices'     => array(
+            'head' => 'Head',
+            'body' => 'Body',
         ),
     ));
 
     $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_google', array(
-        'label' => 'JavaScript Code',
-        'description' => esc_html__('Paste tracking code here &dArr;', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_google',
-        'code_type' => 'text/javascript',
+        'description' => 'Paste tracking code here &dArr;',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_google',
+        'code_type'   => 'text/javascript',
         'input_attrs' => array(
             'placeholder' => '',
         ),
     )));
 
     $wp_customize->add_control('jp_analytics_yandex_placed', array(
-        'label' => __('Yandex Metrika', 'joompress'),
-        'description' => esc_html__('Placed (head/body)', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_yandex_placed',
-        'type' => 'select',
-        'choices' => array(
-            'head' => __('Head', 'joompress'),
-            'body' => __('Body', 'joompress'),
+        'label'       => 'Yandex Metrika',
+        'description' => 'Placed (head/body)',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_yandex_placed',
+        'type'        => 'select',
+        'choices'     => array(
+            'head' => 'Head',
+            'body' => 'Body',
         ),
     ));
 
     $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_yandex', array(
-        'description' => esc_html__('Paste tracking code here &dArr;', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_yandex',
-        'code_type' => 'text/javascript',
+        'description' => 'Paste tracking code here &dArr;',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_yandex',
+        'code_type'   => 'text/javascript',
         'input_attrs' => array(
             'placeholder' => '',
         ),
     )));
 
     $wp_customize->add_control('jp_analytics_custom_placed', array(
-        'label' => __('Custom Analytics', 'joompress'),
-        'description' => esc_html__('Placed (head/body)', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_custom_placed',
-        'type' => 'select',
-        'choices' => array(
-            'head' => __('Head', 'joompress'),
-            'body' => __('Body', 'joompress'),
+        'label'       => 'Custom Analytics',
+        'description' => 'Placed (head/body)',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_custom_placed',
+        'type'        => 'select',
+        'choices'     => array(
+            'head' => 'Head',
+            'body' => 'Body',
         ),
     ));
 
     $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_custom', array(
-        'description' => esc_html__('Paste tracking code here &dArr;', 'joompress'),
-        'section' => 'jp_analytics',
-        'settings' => 'jp_analytics_custom',
-        'code_type' => 'text/javascript',
+        'description' => 'Paste tracking code here &dArr;',
+        'section'     => 'jp_analytics',
+        'settings'    => 'jp_analytics_custom',
+        'code_type'   => 'text/javascript',
         'input_attrs' => array(
             'placeholder' => '',
         ),
@@ -273,53 +274,186 @@ function jp_customize_register($wp_customize)
 
     // Section Login
     $wp_customize->add_section('jp_login', array(
-        'title' => __('Login', 'joompress'),
-        'description' => esc_html__('Customizer Custom Login', 'joompress'),
-        'panel' => 'jp_theme_options',
+        'title'       => 'Login',
+        'description' => 'Customizer Custom Login logo',
+        'panel'       => 'jp_theme_options',
     ));
 
     $wp_customize->add_setting('jp_login_logo', array(
-        'default' => JP_IMG . '/login-logo.png',
+        'default'           => JP_IMG . '/login-logo.png',
+        'sanitize_callback' => '',
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'jp_login_logo', array(
-        'label' => __('Logo', 'joompress'),
-        'description' => esc_html__('Image size 80x80 px', 'joompress'),
-        'section' => 'jp_login',
-        'settings' => 'jp_login_logo',
+        'label'       => 'Logo',
+        'description' => 'Image size 80x80 px',
+        'section'     => 'jp_login',
+        'settings'    => 'jp_login_logo',
     )));
+
+    // Section Social
+    $wp_customize->add_section('jp_social', array(
+        'title'       => 'Social',
+        'description' => 'Customizer Custom Social links',
+        'panel'       => 'jp_theme_options',
+    ));
+
+    $wp_customize->add_setting('jp_social_vk', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_twitter', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_facebook', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_linkedin', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_instagram', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_odnoklassniki', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_google_plus', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_youtube', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_pinterest', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_tumblr', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_flickr', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_reddit', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_rss', array('default' => '', 'sanitize_callback' => '',));
+
+    $wp_customize->add_control('jp_social_vk', array(
+        'label'    => 'Vk',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_vk',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_twitter', array(
+        'label'    => 'Twitter',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_twitter',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_facebook', array(
+        'label'    => 'Facebook',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_facebook',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_linkedin', array(
+        'label'    => 'Linkedin',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_linkedin',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_instagram', array(
+        'label'    => 'Instagram',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_instagram',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_odnoklassniki', array(
+        'label'    => 'Odnoklassniki',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_odnoklassniki',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_google_plus', array(
+        'label'    => 'Google Plus',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_google_plus',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_youtube', array(
+        'label'    => 'YouTube',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_youtube',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_pinterest', array(
+        'label'    => 'Pinterest',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_pinterest',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_tumblr', array(
+        'label'    => 'Tumblr',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_tumblr',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_flickr', array(
+        'label'    => 'Flickr',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_flickr',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_reddit', array(
+        'label'    => 'Reddit',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_reddit',
+        'type'     => 'url',
+    ));
+
+    $wp_customize->add_control('jp_social_rss', array(
+        'label'    => 'RSS',
+        'section'  => 'jp_social',
+        'settings' => 'jp_social_rss',
+        'type'     => 'url',
+    ));
+
+    // Section Phones
+    $wp_customize->add_section('jp_phones', array(
+        'title'       => 'Phones',
+        'description' => 'Customizer Custom Phone numbers',
+        'panel'       => 'jp_theme_options',
+    ));
+
+    $wp_customize->add_setting('jp_phone_one', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_phone_two', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_phone_three', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_phone_four', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_phone_five', array('sanitize_callback' => '',));
+
+    $wp_customize->add_control('jp_phone_one', array(
+        'label'    => 'Phone 1',
+        'section'  => 'jp_phones',
+        'settings' => 'jp_phone_one',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_phone_two', array(
+        'label'    => 'Phone 2',
+        'section'  => 'jp_phones',
+        'settings' => 'jp_phone_two',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_phone_three', array(
+        'label'    => 'Phone 3',
+        'section'  => 'jp_phones',
+        'settings' => 'jp_phone_three',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_phone_four', array(
+        'label'    => 'Phone 4',
+        'section'  => 'jp_phones',
+        'settings' => 'jp_phone_four',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_phone_five', array(
+        'label'    => 'Phone 5',
+        'section'  => 'jp_phones',
+        'settings' => 'jp_phone_five',
+        'type'     => 'tel',
+    ));
 
 }
 
 add_action('customize_register', 'jp_customize_register');
-
-/**
- * Customizer Preview
- */
-function jp_customizer_preview()
-{
-    wp_register_script('jp_customizer_preview', JP_JS . '/customizer-preview.js', array(
-        'jquery',
-        'customize-preview'
-    ), null, true);
-    wp_enqueue_script('jp_customizer_preview');
-}
-
-add_action('customize_preview_init', 'jp_customizer_preview');
-
-/**
- * Customizer Controls
- */
-function jp_customize_controls_enqueue_scripts()
-{
-    wp_register_script('jp_customizer_control', JP_JS . '/customizer-control.js', array(
-        'jquery',
-        'customize-controls'
-    ), null, true);
-    wp_enqueue_script('jp_customizer_control');
-}
-
-add_action('customize_controls_enqueue_scripts', 'jp_customize_controls_enqueue_scripts');
 
 /**
  * Customizer CSS
@@ -360,7 +494,7 @@ add_action('wp_head', 'jp_customizer_css');
 function jp_scroll_top_position_offset()
 {
     $position = get_theme_mod('jp_scroll_top_position', 'right');
-    $offset = get_theme_mod('jp_scroll_top_offset_left_right', 20);
+    $offset   = get_theme_mod('jp_scroll_top_offset_left_right', 20);
 
     $output = sprintf('%s: %spx;', $position, $offset);
 
