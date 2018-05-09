@@ -1,4 +1,4 @@
-<?php $unique_id = esc_attr(uniqid('search-form-')); ?>
+<?php $unique_id = esc_attr(uniqid('form-search-')); ?>
 
 <form role="search" method="get" class="form-search" action="<?php echo esc_url(home_url('/')); ?>">
   <label class="screen-reader-text" for="<?php echo $unique_id; ?>"><?php echo _x('Search for:', 'label', 'joompress'); ?></label>

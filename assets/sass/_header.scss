@@ -1,26 +1,76 @@
 .header {
-  padding: 10px 0;
+    padding: 10px 0;
 
-  &-search {
-    float: right;
-    padding-top: 5px;
-  }
+    &-search {
+        float: right;
+        padding-top: 5px;
+    }
 }
 
 .logo {
 
-  &,
-  &-link,
-  &-img {
+    &,
+    &-link,
+    &-img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &-link {
+
+    }
+
+    &-img {
+
+    }
+}
+
+.social {
+    @extend %reset-list;
+    font-size: 0;
+
+    &,
+    &-item {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &-item {
+        font-size: 16px;
+        padding: 4px;
+    }
+
+    &-link {
+        cursor: pointer;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: #efefef;
+        @include border-radius(50%);
+        @include transition(.15s ease-in-out);
+    }
+}
+
+.phone {
+    @extend %reset-list;
     display: inline-block;
     vertical-align: middle;
-  }
+    font-size: 0;
 
-  &-link {
+    &,
+    &-item {
 
-  }
+    }
 
-  &-img {
+    &-item {
+        padding: 1px 0;
+        font-size: 16px;
+    }
 
-  }
+    &-link {
+        display: block;
+        @include transition(.15s ease-in-out);
+    }
 }

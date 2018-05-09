@@ -65,11 +65,12 @@ if (!function_exists('jp_social_shortcode')) {
         if (has_social()) {
             $items = '';
 
-            foreach (get_social() as $social) {
+            foreach (get_social() as $name => $social) {
                 $items .= sprintf(
                     '<li class="social-item">%s</li>',
                     sprintf(
-                        '<a class="social-link" href="%s" target="_blank"><i class="fa %s" aria-hidden="true" aria-label="%s"></i></a>',
+                        '<a class="social-link social-%s" href="%s" target="_blank"><i class="fa %s" aria-hidden="true" aria-label="%s"></i></a>',
+                        esc_attr($name),
                         esc_attr(esc_url($social['url'])),
                         esc_attr($social['icon']),
                         esc_attr($social['text'])

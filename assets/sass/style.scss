@@ -18,6 +18,9 @@ Tags: one-column
 @import "utilities/variables";
 @import "utilities/mixins";
 @import "utilities/functions";
+@import "utilities/placeholders";
+
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 html,
 body {
@@ -30,15 +33,8 @@ body {
 }
 
 .wrapper {
+  padding: 10px 0;
   flex: 1;
-}
-
-%clearfix {
-  &::after {
-    content: ' ';
-    display: table;
-    clear: both;
-  }
 }
 
 .container {
@@ -53,6 +49,7 @@ body {
   //}
 }
 
+@import "variables";
 @import "helpers";
 @import "form";
 @import "button";

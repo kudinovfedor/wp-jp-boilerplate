@@ -1,23 +1,25 @@
 <?php get_header(); ?>
 
-<?php if (have_posts()) : ?>
+<main class="main">
 
-  <main class="main">
+    <div class="container">
+        <?php if (have_posts()) : ?>
 
-    <?php while ( have_posts() ) : the_post(); ?>
+            <?php while (have_posts()) : the_post(); ?>
 
-      <?php get_template_part('template-parts/page/content', 'page'); ?>
+                <?php get_template_part('template-parts/page/content', 'page'); ?>
 
-    <?php endwhile; ?>
+            <?php endwhile; ?>
 
-  </main>
+        <?php else : ?>
 
-<?php else : ?>
+            <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
+            <p><?php _e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'joompress'); ?></p>
 
-  <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
-  <p><?php _e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'joompress'); ?></p>
+        <?php endif; ?>
+    </div>
 
-<?php endif; ?>
+</main>
 
 <?php get_sidebar(); ?>
 

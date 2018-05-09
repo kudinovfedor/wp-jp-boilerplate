@@ -3,14 +3,15 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, shrink-to-fit=no">
     <?php wp_head(); ?>
 </head>
 <body id="top" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
 
 <?php wp_body(); ?>
 
-<a class="skip-link screen-reader-text" href="#content" tabindex="0"><?php _e('Skip to content', 'joompress'); ?></a>
+<?php skip_to_content('content'); ?>
 
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
     <div class="container">
@@ -24,6 +25,7 @@
         <div class="header-search">
             <?php get_search_form(); ?>
         </div>
+        <?php hamburger('js-hamburger'); ?>
     </div>
 </header>
 
@@ -32,6 +34,8 @@
 <div class="wrapper">
 
     <div class="container">
-        <h2 class="blogname" itemprop="name"><?php bloginfo('name'); ?></h2>
-        <p class="blogdescription" itemprop="description"><?php bloginfo('description'); ?></p>
+        <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
+        <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
+        <div><?php social(); ?></div>
+        <div><?php phones(); ?></div>
     </div>

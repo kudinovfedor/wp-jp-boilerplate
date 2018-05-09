@@ -7,6 +7,7 @@
 (function ($, Modernizr) {
   $(function () {
     scrollTop('.js-scroll-top');
+    hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
     commentValidation('#commentform');
 
     if (Modernizr) {
@@ -58,6 +59,32 @@
         }
       } else {
         el.removeClass('is-visible');
+      }
+    });
+  };
+  /**
+   * Hamburger Menu
+   *
+   * @example
+   * hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
+   * @author Fedor Kudinov <brothersrabbits@mail.ru>
+   * @param {(string|Object)} menuElement - Selected menu
+   * @param {(string|Object)} hamburgerElement - Trigger element for open/close menu
+   * @param {(string|Object)} closeTrigger - Trigger element for close opened menu
+   */
+
+
+  var hamburgerMenu = function hamburgerMenu(menuElement, hamburgerElement, closeTrigger) {
+    var menu = $(menuElement),
+        close = $(closeTrigger),
+        hamburger = $(hamburgerElement),
+        menuAll = hamburger.add(menu);
+    hamburger.add(close).on('click', function () {
+      menuAll.toggleClass('is-active');
+    });
+    $(window).on('click', function (e) {
+      if (!$(e.target).closest(menuAll).length) {
+        menuAll.removeClass('is-active');
       }
     });
   };

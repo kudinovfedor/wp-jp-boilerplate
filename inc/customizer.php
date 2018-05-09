@@ -12,6 +12,20 @@ function jp_customize_register($wp_customize)
     $wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
     $wp_customize->get_setting('background_color')->transport = 'postMessage';
 
+    $wp_customize->selective_refresh->add_partial('blogname', array(
+        'selector'        => '.blog-name',
+        'render_callback' => function () {
+            return get_bloginfo('name', 'display');
+        },
+    ));
+
+    $wp_customize->selective_refresh->add_partial('blogdescription', array(
+        'selector'        => '.blog-description',
+        'render_callback' => function () {
+            return get_bloginfo('description', 'display');
+        },
+    ));
+
     // Panel Theme Options
     $wp_customize->add_panel('jp_theme_options', array(
         'title'       => 'Theme Options',
@@ -103,6 +117,10 @@ function jp_customize_register($wp_customize)
         'section'     => 'jp_scroll_top',
         'settings'    => 'jp_scroll_top_enable',
         'type'        => 'checkbox',
+    ));
+
+    $wp_customize->selective_refresh->add_partial('jp_scroll_top_enable', array(
+        'selector' => '.js-scroll-top',
     ));
 
     $wp_customize->add_control('jp_scroll_top_width', array(
@@ -312,6 +330,10 @@ function jp_customize_register($wp_customize)
     $wp_customize->add_setting('jp_social_reddit', array('default' => '', 'sanitize_callback' => '',));
     $wp_customize->add_setting('jp_social_rss', array('default' => '', 'sanitize_callback' => '',));
 
+    $wp_customize->selective_refresh->add_partial('jp_social_vk', array(
+        'selector' => '.social',
+    ));
+
     $wp_customize->add_control('jp_social_vk', array(
         'label'    => 'Vk',
         'section'  => 'jp_social',
@@ -415,6 +437,10 @@ function jp_customize_register($wp_customize)
     $wp_customize->add_setting('jp_phone_three', array('sanitize_callback' => '',));
     $wp_customize->add_setting('jp_phone_four', array('sanitize_callback' => '',));
     $wp_customize->add_setting('jp_phone_five', array('sanitize_callback' => '',));
+
+    $wp_customize->selective_refresh->add_partial('jp_phone_one', array(
+        'selector' => '.phone',
+    ));
 
     $wp_customize->add_control('jp_phone_one', array(
         'label'    => 'Phone 1',

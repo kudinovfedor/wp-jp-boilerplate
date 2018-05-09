@@ -10,20 +10,11 @@
 <?php scroll_top(); ?>
 
 <?php if (is_customize_preview()) { ?>
-    <button class="btn customizer-edit" data-control='{ "name":"jp_scroll_top_enable" }'>
-        <?php esc_html_e('Edit Scroll Top', 'joompress'); ?>
-    </button>
-    <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
+    <button class="btn btn-block customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
         <?php esc_html_e('Edit Analytics Tracking Code', 'joompress'); ?>
     </button>
-    <button class="btn customizer-edit" data-control='{ "name":"jp_login_logo" }'>
+    <button class="btn btn-block customizer-edit" data-control='{ "name":"jp_login_logo" }'>
         <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
-    </button>
-    <button class="btn customizer-edit" data-control='{ "name":"jp_social_vk" }'>
-        <?php esc_html_e('Edit Socials', 'joompress'); ?>
-    </button>
-    <button class="btn customizer-edit" data-control='{ "name":"jp_phone_one" }'>
-        <?php esc_html_e('Edit Phone Number', 'joompress'); ?>
     </button>
 <?php } ?>
 

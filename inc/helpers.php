@@ -69,6 +69,88 @@ if ( ! function_exists('get_logo')) {
     }
 }
 
+if ( ! function_exists('get_hamburger')) {
+    /**
+     * Return Hamburger HTML Markup
+     *
+     * @param string $class
+     *
+     * @return string
+     */
+    function get_hamburger($class = 'js-hamburger')
+    {
+        $hamburger_box = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
+
+        $hamburger_markup = sprintf(
+            '<button class="hamburger %s" type="button" tabindex="0">%s</button>',
+            esc_attr($class),
+            $hamburger_box
+        );
+
+        return $hamburger_markup;
+    }
+}
+
+if ( ! function_exists('hamburger')) {
+    /**
+     * Display Hamburger HTML Markup
+     *
+     * @see get_hamburger()
+     *
+     * @param string $class
+     *
+     * @return void
+     */
+    function hamburger($class = 'js-hamburger')
+    {
+        echo get_hamburger($class);
+    }
+}
+
+if ( ! function_exists('btn_close_menu')) {
+    function btn_close_menu($class = 'js-menu-close')
+    {
+        echo sprintf(
+            '<button type="button" tabindex="0" class="menu-close %s"></button>',
+            esc_attr($class)
+        );
+    }
+}
+
+if ( ! function_exists('get_skip_to_content')) {
+    /**
+     * Return Skip To Content HTML Markup
+     *
+     * @param string $id
+     *
+     * @return string
+     */
+    function get_skip_to_content($id = 'content')
+    {
+        return sprintf(
+            '<a class="skip-link screen-reader-text" href="#%s" tabindex="0">%s</a>',
+            esc_attr($id),
+            __('Skip to content', 'joompress')
+        );
+    }
+}
+
+if ( ! function_exists('skip_to_content')) {
+    /**
+     * Display Skip To Content HTML Markup
+     *
+     * @see get_skip_to_content()
+     *
+     * @param string $id
+     *
+     * @return void
+     */
+    function skip_to_content($id = 'content')
+    {
+        echo get_skip_to_content($id);
+    }
+}
+
 if ( ! function_exists('the_phone_number')) {
     /**
      * Display phone number for html markup <a href="tel:phone_number"></a>
@@ -103,6 +185,7 @@ if ( ! function_exists('has_phones')) {
      * Determines whether the site has a phone numbers.
      *
      * @see get_phones()
+     *
      * @return bool
      */
     function has_phones()
@@ -132,6 +215,45 @@ if ( ! function_exists('get_phones')) {
         });
 
         return $phones;
+    }
+}
+
+if ( ! function_exists('phones')) {
+    /**
+     * Display Phone Numbers
+     *
+     * @see has_phones()
+     * @see get_phones()
+     *
+     * @return void
+     */
+    function phones()
+    {
+        if (has_phones()) {
+
+            $items = '';
+
+            foreach (get_phones() as $phone) {
+
+                $phone_icon = '<i class="fa fa-fw fa-phone" aria-hidden="true"></i>';
+
+                $phone_number = sprintf(
+                    '<a href="tel:%s" class="phone-number">%s %s</a>',
+                    esc_attr(get_phone_number($phone)),
+                    $phone_icon,
+                    esc_html($phone)
+                );
+
+                $phone_item = sprintf('<li class="phone-item">%s</li>', $phone_number);
+
+                $items .= $phone_item . PHP_EOL;
+
+            }
+
+            $phone_list = sprintf('<ul class="phone">%s</ul>', $items);
+
+            echo $phone_list;
+        }
     }
 }
 
@@ -229,6 +351,48 @@ if ( ! function_exists('get_social')) {
         });
 
         return $socials;
+    }
+}
+
+if ( ! function_exists('social')) {
+    /**
+     * Display Social Networks
+     *
+     * @see has_social()
+     * @see get_social()
+     *
+     * @return void
+     */
+    function social()
+    {
+        if (has_social()) {
+
+            $items = '';
+
+            foreach (get_social() as $name => $social) {
+
+                $social_icon = sprintf(
+                    '<i class="fa %s" aria-hidden="true" aria-label="%s"></i>',
+                    esc_attr($social['icon']),
+                    esc_attr($social['text'])
+                );
+
+                $social_link = sprintf(
+                    '<a class="social-link social-%s" href="%s" target="_blank">%s</a>',
+                    esc_attr($name),
+                    esc_attr(esc_url($social['url'])),
+                    $social_icon
+                );
+
+                $social_item = sprintf('<li class="social-item">%s</li>', $social_link);
+
+                $items .= $social_item . PHP_EOL;
+            }
+
+            $social_list = sprintf('<ul class="social">%s</ul>', $items);
+
+            echo $social_list;
+        }
     }
 }
 

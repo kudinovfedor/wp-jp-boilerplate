@@ -18,4 +18,8 @@
             @include box-shadow(0 0 0 .2rem rgba(#007bff, .25));
         }
     }
+
+    &-search {
+        @include flexbox(flex);
+    }
 }
