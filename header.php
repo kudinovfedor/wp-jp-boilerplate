@@ -19,7 +19,7 @@
             <?php if (has_custom_logo()) {
                 the_custom_logo();
             } else {
-                logo();
+                logo('logo.png');
             } ?>
         </div>
         <div class="header-search">

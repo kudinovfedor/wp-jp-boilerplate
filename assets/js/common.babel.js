@@ -73,23 +73,27 @@
      * @example
      * hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
      * @author Fedor Kudinov <brothersrabbits@mail.ru>
-     * @param {(string|Object)} menuElement - Selected menu
-     * @param {(string|Object)} hamburgerElement - Trigger element for open/close menu
-     * @param {(string|Object)} closeTrigger - Trigger element for close opened menu
+     * @param {(string|Object)} menu_element - Selected menu
+     * @param {(string|Object)} hamburger_element - Trigger element for open/close menu
+     * @param {(string|Object)} close_trigger - Trigger element for close opened menu
      */
-    const hamburgerMenu = (menuElement, hamburgerElement, closeTrigger) => {
-        const menu = $(menuElement),
-            close = $(closeTrigger),
-            hamburger = $(hamburgerElement),
-            menuAll = hamburger.add(menu);
+    const hamburgerMenu = (menu_element, hamburger_element, close_trigger) => {
+        const menu = $(menu_element),
+            close = $(close_trigger),
+            button = $(hamburger_element),
+            menu_button = button.add(menu).add(close);
 
-        hamburger.add(close).on('click', () => {
-            menuAll.toggleClass('is-active');
+        button.on('click', () => {
+            menu_button.toggleClass('is-active');
+        });
+
+        close.on('click', () => {
+            menu_button.removeClass('is-active');
         });
 
         $(window).on('click', (e) => {
-            if (!$(e.target).closest(menuAll).length) {
-                menuAll.removeClass('is-active');
+            if (!$(e.target).closest(menu_button).length) {
+                menu_button.removeClass('is-active');
             }
         });
     };

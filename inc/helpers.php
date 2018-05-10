@@ -36,12 +36,15 @@ if ( ! function_exists('logo')) {
     /**
      * Displays a logo, linked to home.
      *
+     * @param string $file_name
+     *
      * @see get_logo()
+     *
      * @return void
      */
-    function logo()
+    function logo($file_name = 'logo.png')
     {
-        echo get_logo();
+        echo get_logo($file_name);
     }
 }
 
@@ -49,21 +52,42 @@ if ( ! function_exists('get_logo')) {
     /**
      * Returns a logo, linked to home.
      *
+     * @param string $file_name
+     *
      * @return string Logo markup.
      */
-    function get_logo()
+    function get_logo($file_name = 'logo.png')
     {
-        $logo = sprintf(
-            '<img class="logo-img" src="%s" alt="%s">',
-            esc_url(JP_IMG . '/logo.png'),
-            get_bloginfo('name')
-        );
+        $src = JP_IMG . '/' . $file_name;
 
-        $html = sprintf(
-            '<a class="logo-link" href="%s" itemprop="url">%s</a>',
-            esc_url(home_url('/')),
-            $logo
-        );
+        $src_dir = get_template_directory() . '/assets/img/' . $file_name;
+
+        $html = '';
+
+        if (file_exists($src_dir)) {
+
+            list($width, $height) = getimagesize($src);
+
+            $logo_img = sprintf(
+                '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s">',
+                esc_url($src),
+                esc_attr($width),
+                esc_attr($height),
+                get_bloginfo('name')
+            );
+
+            $html = sprintf(
+                '<a class="logo-link" href="%s" itemprop="url">%s</a>',
+                esc_url(home_url('/')),
+                $logo_img
+            );
+
+        } else {
+            trigger_error(
+                sprintf('A file name %s is not found in %s/', $file_name, JP_IMG),
+                E_USER_WARNING
+            );
+        }
 
         return $html;
     }

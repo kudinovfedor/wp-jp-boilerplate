@@ -43,7 +43,7 @@ function jp_remove_jquery_migrate($scripts)
 
     $scripts->remove('jquery-core');
     $scripts->add('jquery-core',
-        '//cdnjs.cloudflare.com/ajax/libs/jquery/' . $jquery_version . '/jquery' . $suffix . '.js', array(),
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $jquery_version . '/jquery' . $suffix . '.js', array(),
         $jquery_version, array('in_footer' => true));
     //$scripts->add('jquery-core', JP_JS . '/libs/jquery' . $suffix . '.js', array(), null, 1);
 
