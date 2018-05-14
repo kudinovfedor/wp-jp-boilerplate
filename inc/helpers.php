@@ -402,7 +402,7 @@ if ( ! function_exists('social')) {
                 );
 
                 $social_link = sprintf(
-                    '<a class="social-link social-%s" href="%s" target="_blank">%s</a>',
+                    '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s</a>',
                     esc_attr($name),
                     esc_attr(esc_url($social['url'])),
                     $social_icon
