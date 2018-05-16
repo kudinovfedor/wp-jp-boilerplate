@@ -38,13 +38,15 @@ if ( ! function_exists('logo')) {
      *
      * @param string $file_name
      *
-     * @see get_logo()
+     * @param array $attr
      *
      * @return void
+     * @see get_logo()
+     *
      */
-    function logo($file_name = 'logo.png')
+    function logo($file_name = 'logo.png', $attr = array())
     {
-        echo get_logo($file_name);
+        echo get_logo($file_name, $attr);
     }
 }
 
@@ -54,27 +56,49 @@ if ( ! function_exists('get_logo')) {
      *
      * @param string $file_name
      *
+     * @param array $attr
+     *
      * @return string Logo markup.
      */
-    function get_logo($file_name = 'logo.png')
+    function get_logo($file_name = 'logo.png', $attr = array())
     {
-        $src = JP_IMG . '/' . $file_name;
-
         $src_dir = get_template_directory() . '/assets/img/' . $file_name;
 
         $html = '';
 
         if (file_exists($src_dir)) {
 
-            list($width, $height) = getimagesize($src);
+            $src  = JP_IMG . '/' . $file_name;
+            $mime = mime_content_type($src_dir);
 
-            $logo_img = sprintf(
-                '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s">',
-                esc_url($src),
-                esc_attr($width),
-                esc_attr($height),
-                get_bloginfo('name')
-            );
+            if ('image/svg' !== $mime) {
+
+                list($width, $height) = getimagesize($src);
+
+                $logo_img = sprintf(
+                    '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s">',
+                    esc_url($src),
+                    esc_attr($width),
+                    esc_attr($height),
+                    get_bloginfo('name')
+                );
+
+            } else {
+
+                $fill   = isset($attr['fill']) ? $attr['fill'] : '#000';
+                $width  = isset($attr['width']) ? $attr['width'] : 100;
+                $height = isset($attr['height']) ? $attr['height'] : 50;
+
+                $logo_img = sprintf(
+                    '<svg class="logo-img" width="%s" height="%s" fill="%s" aria-label="%s"><use xlink:href="#%s"></use></svg>',
+                    esc_attr($width),
+                    esc_attr($height),
+                    esc_attr($fill),
+                    get_bloginfo('name'),
+                    esc_attr(basename($file_name, '.svg'))
+                );
+
+            }
 
             $html = sprintf(
                 '<a class="logo-link" href="%s" itemprop="url">%s</a>',

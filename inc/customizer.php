@@ -26,6 +26,13 @@ function jp_customize_register($wp_customize)
         },
     ));
 
+    $wp_customize->selective_refresh->add_partial('custom_logo', array(
+        'selector'        => '.logo',
+        'render_callback' => function () {
+            return get_custom_logo();
+        },
+    ));
+
     // Panel Theme Options
     $wp_customize->add_panel('jp_theme_options', array(
         'title'       => 'Theme Options',

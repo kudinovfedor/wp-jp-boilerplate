@@ -1,16 +1,16 @@
 <?php
 
 /** Update textarea for comments */
-function joompress_comment_form_defaults($defaults) {
+function jp_comment_form_defaults($defaults) {
   $defaults['comment_field'] = '<div class="form__row comment-form-comment"><label for="comment" class="screen-reader-text">' . _x('Comment', 'noun', 'joompress') . '</label> <textarea id="comment" class="form__field" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required" placeholder="' . _x('Comment', 'noun', 'joompress') . '"></textarea></div>';
 
   return $defaults;
 }
 
-add_filter('comment_form_defaults', 'joompress_comment_form_defaults');
+add_filter('comment_form_defaults', 'jp_comment_form_defaults');
 
 /** Remove the Comment URL Field and Update other */
-function joompress_comment_fields($fields) {
+function jp_comment_fields($fields) {
   $req = get_option('require_name_email');
   $aria_req = ($req ? " aria-required='true'" : '');
   $html_req = ($req ? " required='required'" : '');
@@ -33,4 +33,4 @@ function joompress_comment_fields($fields) {
 
 }
 
-add_filter('comment_form_default_fields', 'joompress_comment_fields');
+add_filter('comment_form_default_fields', 'jp_comment_fields');

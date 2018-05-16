@@ -19,9 +19,36 @@ function jp_theme_setup()
 
         add_theme_support('post-thumbnails');
 
-        add_theme_support('custom-background');
+        add_theme_support('custom-background', array(
+            'default-image'          => '',
+            'default-preset'         => 'default',
+            'default-position-x'     => 'center',
+            'default-position-y'     => 'center',
+            'default-size'           => 'cover',
+            'default-repeat'         => 'no-repeat',
+            'default-attachment'     => 'scroll',
+            'default-color'          => '',
+            'wp-head-callback'       => '_custom_background_cb',
+            'admin-head-callback'    => '',
+            'admin-preview-callback' => '',
+        ));
 
-        add_theme_support('custom-header');
+        add_theme_support('custom-header', array(
+            'default-image'          => '',
+            'random-default'         => false,
+            'width'                  => 0,
+            'height'                 => 0,
+            'flex-height'            => false,
+            'flex-width'             => false,
+            'default-text-color'     => '',
+            'header-text'            => true,
+            'uploads'                => true,
+            'wp-head-callback'       => '',
+            'admin-head-callback'    => '',
+            'admin-preview-callback' => '',
+            'video'                  => true,
+            'video-active-callback'  => 'is_front_page',
+        ));
 
         add_theme_support('automatic-feed-links');
 
@@ -32,6 +59,42 @@ function jp_theme_setup()
         add_theme_support('custom-logo');
 
         add_theme_support('customize-selective-refresh-widgets');
+
+        add_theme_support('starter-content', array(
+            'options' => array(),
+
+            'theme_mods' => array(),
+
+            'widgets' => array(),
+
+            'nav_menus' => array(
+                'header_menu' => array(
+                    'name'  => 'Top Menu',
+                    'items' => array(
+                        'link_home' => array(
+                            'type'  => 'custom',
+                            'title' => 'Home',
+                            'url'   => home_url('/'),
+                        ),
+                    ),
+                ),
+                'footer_menu' => array(
+                    'name'  => 'Bottom Menu',
+                    'items' => array(
+                        'link_home' => array(
+                            'type'  => 'custom',
+                            'title' => 'Home',
+                            'url'   => home_url('/'),
+                        ),
+                    ),
+                ),
+            ),
+
+            'attachments' => array(),
+
+            'posts' => array(),
+
+        ));
     }
 
     add_editor_style(JP_CSS . '/editor-style.css');
@@ -41,7 +104,7 @@ function jp_theme_setup()
         'footer_menu' => __('Menu in footer', 'joompress'),
     ));
 
-    if (!is_admin()) {
+    if ( ! is_admin()) {
         add_filter('comment_text', 'do_shortcode');
         add_filter('the_excerpt', 'do_shortcode');
     }
@@ -50,7 +113,7 @@ function jp_theme_setup()
 
 add_action('after_setup_theme', 'jp_theme_setup');
 
-if (!isset($content_width)) {
+if ( ! isset($content_width)) {
     $content_width = 900;
 }
 
@@ -85,7 +148,7 @@ function jp_get_custom_logo($html)
     return $html;
 }
 
-add_filter('get_custom_logo', 'joompress_get_custom_logo');
+add_filter('get_custom_logo', 'jp_get_custom_logo');
 
 /**
  * WP Nav Menu Args
@@ -150,7 +213,7 @@ add_filter('nav_menu_css_class', 'jp_nav_menu_css_class', 10, 4);
 function jp_nav_menu_link_attributes($atts, $item, $args, $depth)
 {
     $atts['itemprop'] = 'url';
-    $atts['class'] = $depth > 0 ? 'sub-menu-link' : 'menu-link';
+    $atts['class']    = $depth > 0 ? 'sub-menu-link' : 'menu-link';
 
     return $atts;
 }
@@ -244,8 +307,8 @@ function jp_mce_page_break($mce_buttons)
     $pos = array_search('wp_more', $mce_buttons, true);
 
     if ($pos !== false) {
-        $buttons = array_slice($mce_buttons, 0, $pos);
-        $buttons[] = 'wp_page';
+        $buttons     = array_slice($mce_buttons, 0, $pos);
+        $buttons[]   = 'wp_page';
         $mce_buttons = array_merge($buttons, array_slice($mce_buttons, $pos));
     }
 
@@ -283,3 +346,19 @@ function jp_posts_per_page($query)
 }
 
 add_action('pre_get_posts', 'jp_posts_per_page');
+
+/**
+ * Add allowed mime types
+ *
+ * @param array $mimes
+ *
+ * @return array
+ */
+function jp_upload_types($mimes = array())
+{
+    $mimes['svg'] = 'image/svg+xml';
+
+    return $mimes;
+}
+
+add_filter('upload_mimes', 'jp_upload_types');
