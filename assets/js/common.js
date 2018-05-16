@@ -25,8 +25,8 @@
       debug: false
     });
     $.validator.addMethod('lettersonly', function (value, element) {
-      return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-    }, 'Letters only please');
+      return this.optional(element) || /^[a-zA-Z\s.-]+$/i.test(value);
+    }, 'Only latin letters and symbols: whitespace, dot, dash is allowed.');
 
     $.validator.methods.email = function (value, element) {
       return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$/i.test(value);
@@ -78,7 +78,7 @@
     var menu = $(menu_element),
         close = $(close_trigger),
         button = $(hamburger_element),
-        menu_button = button.add(menu).add(close);
+        menu_button = button.add(menu);
     button.on('click', function () {
       menu_button.toggleClass('is-active');
     });
