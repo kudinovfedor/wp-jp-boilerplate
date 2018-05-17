@@ -1220,8 +1220,13 @@ body {
 }
 
 .wrapper {
-  padding: 10px 0;
+  padding: 15px 0 30px;
   flex: 1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .text-left {
@@ -1308,6 +1313,14 @@ body {
   display: none;
 }
 
+.is-error {
+  color: #f00;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
 .form-field {
   display: block;
   width: 100%;
@@ -1341,6 +1354,10 @@ body {
   display: flex;
 }
 
+.required {
+  color: #f00;
+}
+
 .btn {
   display: inline-block;
   vertical-align: middle;
@@ -1360,6 +1377,10 @@ body {
   -o-transition: 0.15s ease-in-out;
   -webkit-transition: 0.15s ease-in-out;
   transition: 0.15s ease-in-out;
+}
+
+.btn:hover {
+  text-decoration: none;
 }
 
 .btn:not(:disabled):not(.disabled) {
@@ -1395,6 +1416,11 @@ body {
 
 .btn-block + .btn-block {
   margin-top: 8px;
+}
+
+.btn-default {
+  background-color: #ced4da;
+  color: #333;
 }
 
 .header {

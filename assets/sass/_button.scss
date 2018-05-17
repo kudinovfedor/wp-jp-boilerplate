@@ -12,6 +12,14 @@
     @include user-select(none);
     @include transition(.15s ease-in-out);
 
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:focus { }
+
+    &:active { }
+
     &:not(:disabled):not(.disabled) {
         cursor: pointer;
     }
@@ -44,5 +52,10 @@
         & + & {
             margin-top: 8px;
         }
+    }
+
+    &-default {
+        background-color: #ced4da;
+        color: #333;
     }
 }

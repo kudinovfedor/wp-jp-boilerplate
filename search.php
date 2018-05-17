@@ -1,37 +1,55 @@
 <?php get_header(); ?>
 
-<section class="container">
+<main class="main">
 
-    <?php if (have_posts()) : ?>
+    <article class="container">
 
-        <h1><?php printf(__('Search Results for: %s', 'joompress'), '<span>' . get_search_query() . '</span>'); ?></h1>
+        <?php if (have_posts()) : ?>
 
-        <?php while (have_posts()) : the_post(); ?>
+            <h1 class="text-center">
+                <?php printf(__('Search Results for: %s', 'joompress'), '<span>' . get_search_query() . '</span>'); ?>
+            </h1>
 
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div class="row">
 
-                <h2><?php the_title(); ?></h2>
-                <?php if (has_post_thumbnail()) {
-                    the_post_thumbnail('post-thumbnail');
-                } ?>
-                <?php the_excerpt(); ?>
+                <?php while (have_posts()) : the_post(); ?>
 
-            </article>
+                    <section id="post-<?php the_ID(); ?>" <?php post_class('col-md-4'); ?>>
 
-        <?php endwhile; ?>
+                        <h2>
+                            <a href="<?php the_permalink(); ?>">
+                                <?php the_title(); ?>
+                            </a>
+                        </h2>
 
-        <?php the_posts_pagination(); ?>
+                        <?php if (has_post_thumbnail()) {
+                            the_post_thumbnail('medium');
+                        } ?>
 
-    <?php else : ?>
+                        <?php the_excerpt(); ?>
 
-        <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
-        <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.',
-                'joompress'); ?></p>
-        <?php get_search_form(); ?>
+                        <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more'); ?></a>
 
-    <?php endif; ?>
+                    </section>
 
-</section>
+                <?php endwhile; ?>
+
+            </div>
+
+            <?php the_posts_pagination(); ?>
+
+        <?php else : ?>
+
+            <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
+            <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.',
+                    'joompress'); ?></p>
+            <?php get_search_form(); ?>
+
+        <?php endif; ?>
+
+    </article>
+
+</main>
 
 <?php get_sidebar(); ?>
 

@@ -130,8 +130,9 @@ if ( ! function_exists('get_hamburger')) {
         $hamburger_box = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
 
         $hamburger_markup = sprintf(
-            '<button class="hamburger %s" type="button" tabindex="0">%s</button>',
+            '<button class="hamburger %s" type="button" tabindex="0" aria-label="%s">%s</button>',
             esc_attr($class),
+            __('Trigger mobile menu.', 'joompress'),
             $hamburger_box
         );
 
@@ -159,8 +160,9 @@ if ( ! function_exists('btn_close_menu')) {
     function btn_close_menu($class = 'js-menu-close')
     {
         echo sprintf(
-            '<button type="button" tabindex="0" class="menu-close %s"></button>',
-            esc_attr($class)
+            '<button type="button" tabindex="0" class="menu-close %s" aria-label="%s"></button>',
+            esc_attr($class),
+            __('Close mobile menu.', 'joompress')
         );
     }
 }

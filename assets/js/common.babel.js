@@ -22,23 +22,6 @@
 
     });
 
-    if (typeof $.fn.validate === 'function') {
-        $.validator.setDefaults({
-            errorClass: 'is-error',
-            validClass: 'is-valid',
-            errorElement: 'div',
-            debug: false,
-        });
-
-        $.validator.addMethod('lettersonly', function (value, element) {
-            return this.optional(element) || /^[a-zA-Z\s.-]+$/i.test(value);
-        }, 'Only latin letters and symbols: whitespace, dot, dash is allowed.');
-
-        $.validator.methods.email = function (value, element) {
-            return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$/i.test(value);
-        };
-    }
-
     /**
      * Scroll Top
      *
@@ -112,12 +95,28 @@
         const form = $(form_id);
 
         if (form.length && typeof $.fn.validate === 'function') {
+
+            $.validator.setDefaults({
+                errorClass: 'is-error',
+                validClass: 'is-valid',
+                errorElement: 'div',
+                debug: false,
+            });
+
+            $.validator.addMethod('lettersonly', function (value, element) {
+                return this.optional(element) || /^[a-zA-Z\s.-]+$/i.test(value);
+            }, 'Only latin letters and symbols: whitespace, dot, dash is allowed.');
+
+            $.validator.methods.email = function (value, element) {
+                return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$/i.test(value);
+            };
+
             $(form).validate({
                 rules: {
                     author: {
                         required: true,
                         minlength: 3,
-                        lettersonly: true
+                        lettersonly: true,
                     },
                     email: {
                         required: true,
@@ -138,6 +137,7 @@
                     comment: {},
                 },
             });
+
         }
 
     };

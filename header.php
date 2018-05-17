@@ -5,6 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport"
           content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, shrink-to-fit=no">
+    <?php if ( ! has_site_icon()) { ?>
+        <link href="<?php echo JP_FAVICON . '/apple-touch-icon.png'; ?>" rel="apple-touch-icon" sizes="180x180">
+        <link href="<?php echo JP_FAVICON . '/favicon-16x16.png'; ?>" rel="icon" type="image/png" sizes="16x16">
+        <link href="<?php echo JP_FAVICON . '/favicon-32x32.png'; ?>" rel="icon" type="image/png" sizes="32x32">
+        <link href="<?php echo JP_FAVICON . '/site.webmanifest'; ?>" rel="manifest">
+        <link href="<?php echo JP_FAVICON . '/safari-pinned-tab.svg'; ?>" rel="mask-icon" color="#ff6347">
+        <link href="<?php echo JP_FAVICON . '/favicon.ico'; ?>" rel="shortcut icon">
+        <meta name="apple-mobile-web-app-title" content="<?php bloginfo('name'); ?>">
+        <meta name="application-name" content="<?php bloginfo('name'); ?>">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="<?php echo JP_FAVICON . '/mstile-144x144.png'; ?>">
+        <meta name="msapplication-config" content="<?php echo JP_FAVICON . '/browserconfig.xml'; ?>">
+        <meta name="theme-color" content="#ffffff">
+    <?php } ?>
     <?php wp_head(); ?>
 </head>
 <body id="top" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">

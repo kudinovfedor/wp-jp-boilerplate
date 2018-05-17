@@ -2,22 +2,27 @@
 
 <?php //echo __FILE__; ?>
 
-<?php if(have_posts()) : ?>
+<?php if (have_posts()) : ?>
 
-  <main id="content" class="main container" itemscope itemtype="http://schema.org/Blog">
-    <meta itemprop="description" content="<?php bloginfo('description'); ?>">
+    <main id="content" class="main container" itemscope itemtype="http://schema.org/Blog">
 
-    <?php while ( have_posts() ) : the_post(); ?>
+        <meta itemprop="description" content="<?php bloginfo('description'); ?>">
 
-      <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
+        <div class="row">
 
-    <?php endwhile; ?>
+            <?php while (have_posts()) : the_post(); ?>
 
-  </main>
+                <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
+
+            <?php endwhile; ?>
+
+        </div>
+
+    </main>
 
 <?php else : ?>
 
-  <p><?php _e('', 'joompress'); ?></p>
+    <p><?php _e('', 'joompress'); ?></p>
 
 <?php endif; ?>
 

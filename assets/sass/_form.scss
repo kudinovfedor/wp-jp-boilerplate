@@ -1,4 +1,8 @@
 .form {
+    &-row {
+        margin-bottom: 20px;
+    }
+
     &-field {
         display: block;
         width: 100%;
@@ -22,4 +26,8 @@
     &-search {
         @include flexbox(flex);
     }
+}
+
+.required {
+    color: #f00;
 }

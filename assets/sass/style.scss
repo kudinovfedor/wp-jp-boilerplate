@@ -33,7 +33,7 @@ body {
 }
 
 .wrapper {
-  padding: 10px 0;
+  padding: 15px 0 30px;
   flex: 1;
 }
 
@@ -47,6 +47,11 @@ body {
   //@media only screen and (min-width: 1200px) {
   //  width: 1200px;
   //}
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 @import "variables";
