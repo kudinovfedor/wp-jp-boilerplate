@@ -46,6 +46,6 @@
 
     <div itemprop="description"><?php the_excerpt(); ?></div>
 
-    <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more'); ?></a>
+    <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
 
 </article>
