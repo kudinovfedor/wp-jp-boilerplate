@@ -29,7 +29,7 @@
 
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
     <div class="container">
-        <div class="logo header-logo">
+        <div class="logo header-logo" itemscope itemtype="http://schema.org/Organization">
             <?php if (has_custom_logo()) {
                 the_custom_logo();
             } else {
@@ -44,6 +44,21 @@
 </header>
 
 <?php get_template_part('template-parts/navigation/menu', 'header'); ?>
+
+<span class="screen-reader-text" itemscope itemtype="http://schema.org/Person">
+    <link itemprop="url" href="<?php echo esc_url(home_url('/')); ?>">
+    <meta itemprop="name" content="<?php _e('Kudinov Fedor', 'joompress'); ?>">
+    <a itemprop="sameAs" href="https://www.facebook.com/">Facebook</a>
+    <a itemprop="sameAs" href="https://twitter.com/">Twitter</a>
+    <a itemprop="sameAs" href="https://plus.google.com/">Google+</a>
+    <a itemprop="sameAs" href="https://www.instagram.com/">Instagram</a>
+    <a itemprop="sameAs" href="https://www.youtube.com/">Youtube</a>
+    <a itemprop="sameAs" href="https://www.linkedin.com/">LinkedIn</a>
+    <a itemprop="sameAs" href="https://myspace.com/">Myspace</a>
+    <a itemprop="sameAs" href="https://ru.pinterest.com/">Pinterest</a>
+    <a itemprop="sameAs" href="https://soundcloud.com/">SoundCloud</a>
+    <a itemprop="sameAs" href="https://www.tumblr.com/">Tumblr</a>
+</span>
 
 <div class="wrapper">
 

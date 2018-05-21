@@ -1,14 +1,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('col-md-4'); ?>
-         itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+         itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <meta itemscope itemprop="mainEntityOfPage"
-          itemType="https://schema.org/WebPage" itemid="<?php the_permalink(); ?>" content="<?php the_title(); ?>">
-
-    <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
-
-    <?php /*
-    <div itemprop="articleBody"><?php the_content(); ?></div>
-    */ ?>
+    <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage"
+          itemid="<?php the_permalink(); ?>" content="<?php the_title(); ?>">
 
     <meta itemprop="author" content="<?php the_author(); ?>">
 
@@ -21,6 +15,7 @@
     </h2>
 
     <time itemprop="datePublished" datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
+    <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
 
     <span itemprop="articleSection"><?php the_category(','); ?></span>
 
@@ -45,6 +40,8 @@
     <?php } */?>
 
     <div itemprop="description"><?php the_excerpt(); ?></div>
+
+    <?php /* <div itemprop="articleBody"><?php the_content(); ?></div> */ ?>
 
     <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
 

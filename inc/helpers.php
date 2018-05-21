@@ -76,7 +76,7 @@ if ( ! function_exists('get_logo')) {
                 list($width, $height) = getimagesize($src);
 
                 $logo_img = sprintf(
-                    '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s">',
+                    '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s" itemprop="logo">',
                     esc_url($src),
                     esc_attr($width),
                     esc_attr($height),
@@ -90,7 +90,7 @@ if ( ! function_exists('get_logo')) {
                 $height = isset($attr['height']) ? $attr['height'] : 50;
 
                 $logo_img = sprintf(
-                    '<svg class="logo-img" width="%s" height="%s" fill="%s" aria-label="%s"><use xlink:href="#%s"></use></svg>',
+                    '<svg class="logo-img" width="%s" height="%s" fill="%s" aria-label="%s" itemprop="logo"><use xlink:href="#%s"></use></svg>',
                     esc_attr($width),
                     esc_attr($height),
                     esc_attr($fill),
