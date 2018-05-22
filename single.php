@@ -10,6 +10,15 @@
 
                 <?php get_template_part('template-parts/post/content', get_post_format()); ?>
 
+                <?php if (comments_open() || get_comments_number()) {
+                    comments_template();
+                } ?>
+
+                <?php the_post_navigation(array(
+                    'prev_text' => __('Previous Post', 'joompress'),
+                    'next_text' => __('Next Post', 'joompress'),
+                )); ?>
+
             <?php endwhile; ?>
 
         <?php else : ?>

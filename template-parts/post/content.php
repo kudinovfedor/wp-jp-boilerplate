@@ -8,8 +8,8 @@
 
     <p>
         <time itemprop="datePublished" datetime="<?php the_time( 'c' ); ?>"><?php the_time( 'd.m.Y' ); ?></time>
-        <span itemprop="articleSection"><?php the_category( ',' ); ?></span>
-        <?php the_tags('<span>', ', ', '</span>'); ?>
+        <span itemprop="articleSection"><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
+        <?php the_tags(sprintf('<span>%s: ', __('Tags', 'joompress')), ', ', '</span>'); ?>
     </p>
 
     <?php if (has_post_thumbnail()) { ?>
@@ -17,7 +17,5 @@
     <?php } ?>
 
     <div itemprop="articleBody"><?php the_content(); ?></div>
-
-    <?php if (comments_open() || get_comments_number()) comments_template(); ?>
 
 </article>

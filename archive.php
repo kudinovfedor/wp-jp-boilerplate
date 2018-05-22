@@ -27,7 +27,10 @@
 
                         <p>
                             <time datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
-                            <span><?php the_category(','); ?></span>
+                            <br>
+                            <span><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
+                            <br>
+                            <?php the_tags(sprintf('<span>%s: ', __('Tags', 'joompress')), ', ', '</span>'); ?>
                         </p>
 
                         <?php the_excerpt(); ?>
@@ -49,6 +52,8 @@
             <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
             <p><?php _e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.',
                     'joompress'); ?></p>
+
+            <?php get_search_form(); ?>
 
         <?php endif; ?>
 

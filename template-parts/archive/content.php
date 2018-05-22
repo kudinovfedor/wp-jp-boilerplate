@@ -21,8 +21,10 @@
     <p>
         <time itemprop="datePublished" datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
         <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
-
-        <span itemprop="articleSection"><?php the_category(','); ?></span>
+        <br>
+        <span itemprop="articleSection"><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
+        <br>
+        <?php the_tags(sprintf('<span>%s: ', __('Tags', 'joompress')), ', ', '</span>'); ?>
     </p>
 
     <?php /*

@@ -4,20 +4,22 @@
 
     <div class="container">
 
-        <?php if (have_posts()) : ?>
+        <?php while (have_posts()) : the_post(); ?>
 
-            <?php while (have_posts()) : the_post(); ?>
+            <?php get_template_part('template-parts/page/content', 'page'); ?>
 
-                <?php get_template_part('template-parts/page/content', 'page'); ?>
+            <?php if (comments_open() || get_comments_number()) {
+                comments_template();
+            } ?>
 
-            <?php endwhile; ?>
+            <?php wp_link_pages(array(
+                'before'           => '<p>' . __('Pages:', 'joompress'),
+                'after'            => '</p>',
+                'nextpagelink'     => __('Next page', 'joompress'),
+                'previouspagelink' => __('Previous page', 'joompress'),
+            )); ?>
 
-        <?php else : ?>
-
-            <h1><?php _e('Nothing Found', 'joompress'); ?></h1>
-            <p><?php _e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'joompress'); ?></p>
-
-        <?php endif; ?>
+        <?php endwhile; ?>
 
     </div>
 

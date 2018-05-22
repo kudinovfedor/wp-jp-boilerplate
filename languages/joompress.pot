@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-20 15:30+0000\n"
+"POT-Creation-Date: 2018-05-22 07:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,24 +14,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: 404.php:4
+#: 404.php:7
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:5
+#: 404.php:8
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: archive.php:30 search.php:31 template-parts/archive/content.php:49
+#: archive.php:31 template-parts/archive/content.php:25
+#: template-parts/page/content-page.php:13 template-parts/post/content.php:11
+msgid "Categories"
+msgstr ""
+
+#: archive.php:33 template-parts/archive/content.php:27
+#: template-parts/post/content.php:12
+msgid "Tags"
+msgstr ""
+
+#: archive.php:39 search.php:32 template-parts/archive/content.php:55
 msgid "Read more"
 msgstr ""
 
-#: archive.php:42 page.php:16 search.php:43
+#: archive.php:52 front-page.php:27 search.php:45
 #: template-parts/post/content-none.php:2
 msgid "Nothing Found"
 msgstr ""
 
-#: archive.php:43 page.php:17 template-parts/post/content-none.php:3
+#: archive.php:53 template-parts/post/content-none.php:3
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
@@ -63,30 +73,55 @@ msgstr ""
 msgid "Edit Login Logo"
 msgstr ""
 
-#: search.php:10
-#, php-format
-msgid "Search Results for: %s"
-msgstr ""
-
-#: search.php:44
+#: front-page.php:28 search.php:46
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
 
-#: searchform.php:4
+#. Author of the theme
+#: header.php:50 inc/admin.php:57
+msgid "Kudinov Fedor"
+msgstr ""
+
+#: page.php:16
+msgid "Pages:"
+msgstr ""
+
+#: page.php:18
+msgid "Next page"
+msgstr ""
+
+#: page.php:19
+msgid "Previous page"
+msgstr ""
+
+#: search.php:10
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:8
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: searchform.php:5
+#: searchform.php:10
 msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr ""
 
-#: searchform.php:6
+#: searchform.php:12
 msgctxt "submit button"
 msgid "Search"
+msgstr ""
+
+#: single.php:18
+msgid "Previous Post"
+msgstr ""
+
+#: single.php:19
+msgid "Next Post"
 msgstr ""
 
 #: inc/admin.php:12
@@ -114,11 +149,6 @@ msgstr ""
 #: inc/admin.php:30
 #, php-format
 msgid "Using %d Mb memory (including unused pages %d Mb)."
-msgstr ""
-
-#. Author of the theme
-#: inc/admin.php:57
-msgid "Kudinov Fedor"
 msgstr ""
 
 #: inc/admin.php:62 inc/comment-form.php:21
@@ -189,18 +219,6 @@ msgstr ""
 
 #: inc/widgets-init.php:19 inc/widgets-init.php:21
 msgid "Sidebar Right"
-msgstr ""
-
-#: template-parts/page/content-page.php:18
-msgid "Pages:"
-msgstr ""
-
-#: template-parts/page/content-page.php:20
-msgid "Next page"
-msgstr ""
-
-#: template-parts/page/content-page.php:21
-msgid "Previous page"
 msgstr ""
 
 #. Name of the theme

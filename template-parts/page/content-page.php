@@ -10,7 +10,7 @@
         <time itemprop="datePublished" datetime="<?php the_time( 'c' ); ?>"><?php the_time( 'd.m.Y' ) ?></time>
         <meta itemprop="dateModified" content="<?php the_modified_date( 'c' ); ?>">
 
-        <span itemprop="articleSection"><?php the_category( ',' ) ?></span>
+        <span itemprop="articleSection"><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
     </p>
 
     <?php if (has_post_thumbnail()) { ?>
@@ -18,14 +18,5 @@
     <?php } ?>
 
     <div itemprop="articleBody"><?php the_content(); ?></div>
-
-    <?php if (comments_open() || get_comments_number()) comments_template(); ?>
-
-    <?php wp_link_pages(array(
-        'before' => '<p>' . __('Pages:', 'joompress'),
-        'after' => '</p>',
-        'nextpagelink' => __('Next page', 'joompress'),
-        'previouspagelink' => __('Previous page', 'joompress'),
-    )); ?>
 
 </article>
