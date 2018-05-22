@@ -21,13 +21,20 @@
                             </a>
                         </h2>
 
-                        <?php if (has_post_thumbnail()) {
-                            the_post_thumbnail('medium');
-                        } ?>
+                        <?php if (has_post_thumbnail()) { ?>
+                            <figure><?php the_post_thumbnail('medium'); ?></figure>
+                        <?php } ?>
+
+                        <p>
+                            <time datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
+                            <span><?php the_category(','); ?></span>
+                        </p>
 
                         <?php the_excerpt(); ?>
 
-                        <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
+                        <p>
+                            <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
+                        </p>
 
                     </section>
 

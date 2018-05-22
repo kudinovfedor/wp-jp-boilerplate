@@ -14,10 +14,16 @@
         </a>
     </h2>
 
-    <time itemprop="datePublished" datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
-    <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
+    <?php if (has_post_thumbnail()) { ?>
+        <figure><?php the_post_thumbnail('medium'); ?></figure>
+    <?php } ?>
 
-    <span itemprop="articleSection"><?php the_category(','); ?></span>
+    <p>
+        <time itemprop="datePublished" datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
+        <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
+
+        <span itemprop="articleSection"><?php the_category(','); ?></span>
+    </p>
 
     <?php /*
     $id    = get_post_thumbnail_id(get_the_ID());
@@ -43,6 +49,8 @@
 
     <?php /* <div itemprop="articleBody"><?php the_content(); ?></div> */ ?>
 
-    <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
+    <p>
+        <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
+    </p>
 
 </article>
