@@ -55,6 +55,17 @@ function jp_remove_jquery_migrate($scripts)
 add_action('wp_default_scripts', 'jp_remove_jquery_migrate', 11);
 
 /**
+ * Login page (css, js)
+ */
+function jp_login_enqueue()
+{
+    wp_register_script('recaptcha_login', 'https://www.google.com/recaptcha/api.js');
+    wp_enqueue_script('recaptcha_login');
+}
+
+add_action('login_enqueue_scripts', 'jp_login_enqueue');
+
+/**
  * Customizer Preview
  */
 function jp_customizer_preview()
