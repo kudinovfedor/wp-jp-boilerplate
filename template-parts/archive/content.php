@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class('col-md-4'); ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>
          itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 
     <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage"

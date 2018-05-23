@@ -10,14 +10,13 @@
         <link href="<?php echo JP_FAVICON . '/favicon-16x16.png'; ?>" rel="icon" type="image/png" sizes="16x16">
         <link href="<?php echo JP_FAVICON . '/favicon-32x32.png'; ?>" rel="icon" type="image/png" sizes="32x32">
         <link href="<?php echo JP_FAVICON . '/site.webmanifest'; ?>" rel="manifest">
-        <link href="<?php echo JP_FAVICON . '/safari-pinned-tab.svg'; ?>" rel="mask-icon" color="#ff6347">
+        <link href="<?php echo JP_FAVICON . '/safari-pinned-tab.svg'; ?>" rel="mask-icon" color="#146994">
         <link href="<?php echo JP_FAVICON . '/favicon.ico'; ?>" rel="shortcut icon">
         <meta name="apple-mobile-web-app-title" content="<?php bloginfo('name'); ?>">
         <meta name="application-name" content="<?php bloginfo('name'); ?>">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="msapplication-TileImage" content="<?php echo JP_FAVICON . '/mstile-144x144.png'; ?>">
+        <meta name="msapplication-TileColor" content="#146994">
         <meta name="msapplication-config" content="<?php echo JP_FAVICON . '/browserconfig.xml'; ?>">
-        <meta name="theme-color" content="#ffffff">
+        <meta name="theme-color" content="#146994">
     <?php } ?>
     <?php wp_head(); ?>
 </head>

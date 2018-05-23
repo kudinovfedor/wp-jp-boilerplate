@@ -14,7 +14,7 @@
 
                 <?php while (have_posts()) : the_post(); ?>
 
-                    <section id="post-<?php the_ID(); ?>" <?php post_class('col-md-4'); ?>>
+                    <section id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>>
 
                         <h2>
                             <a href="<?php the_permalink(); ?>">
