@@ -316,6 +316,42 @@ function jp_customize_register($wp_customize)
         'settings'    => 'jp_login_logo',
     )));
 
+    // Section Messenger
+    $wp_customize->add_section('jp_messenger', array(
+        'title'       => 'Messenger',
+        'description' => 'Customizer Custom Messenger links',
+        'panel'       => 'jp_theme_options',
+    ));
+
+    $wp_customize->add_setting('jp_messenger_viber', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_messenger_whatsapp', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_messenger_telegram', array('default' => '', 'sanitize_callback' => '',));
+
+    $wp_customize->selective_refresh->add_partial('jp_messenger_viber', array(
+        'selector' => '.messenger',
+    ));
+
+    $wp_customize->add_control('jp_messenger_viber', array(
+        'label'    => 'Viber',
+        'section'  => 'jp_messenger',
+        'settings' => 'jp_messenger_viber',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_messenger_whatsapp', array(
+        'label'    => 'WhatsApp',
+        'section'  => 'jp_messenger',
+        'settings' => 'jp_messenger_whatsapp',
+        'type'     => 'tel',
+    ));
+
+    $wp_customize->add_control('jp_messenger_telegram', array(
+        'label'    => 'Telegram',
+        'section'  => 'jp_messenger',
+        'settings' => 'jp_messenger_telegram',
+        'type'     => 'tel',
+    ));
+
     // Section Social
     $wp_customize->add_section('jp_social', array(
         'title'       => 'Social',

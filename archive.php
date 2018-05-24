@@ -15,6 +15,9 @@
 
                     <section id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>>
 
+                        <?php edit_post_link(); ?>
+                        <?php delete_post_link(); ?>
+
                         <h2>
                             <a href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>

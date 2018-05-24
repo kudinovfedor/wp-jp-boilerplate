@@ -68,6 +68,14 @@ remove_action('comments_atom_head', 'the_generator');
 remove_filter('comment_text', 'make_clickable', 9);
 
 /**
+ * Hide link when customizer previews
+ */
+if (is_customize_preview()) {
+    add_filter('get_edit_post_link', '__return_empty_string');
+    add_filter('get_delete_post_link', '__return_empty_string');
+}
+
+/**
  * Disable the admin bar
  */
 //add_filter( 'show_admin_bar', '__return_false' );

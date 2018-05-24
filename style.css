@@ -1197,7 +1197,7 @@ pre code {
   }
 }
 
-.social, .phone {
+.social, .messenger, .phone {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1307,6 +1307,36 @@ img {
   clip-path: none;
   clip: auto;
   overflow: visible;
+}
+
+.post-delete-link,
+.post-edit-link {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 7px 10px;
+  margin: 5px 2px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #545454;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.3;
+  text-decoration: underline;
+  background-color: #f3f3f3;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.post-delete-link:hover,
+.post-edit-link:hover {
+  text-decoration: none;
+}
+
+.post-delete-link {
+  top: 35px;
 }
 
 .is-hide {
@@ -1452,6 +1482,37 @@ img {
 }
 
 .social-link {
+  cursor: pointer;
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #efefef;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  -webkit-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
+}
+
+.messenger {
+  font-size: 0;
+}
+
+.messenger, .messenger-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.messenger-item {
+  font-size: 16px;
+  padding: 4px;
+}
+
+.messenger-link {
   cursor: pointer;
   display: block;
   width: 30px;

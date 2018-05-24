@@ -307,6 +307,96 @@ if ( ! function_exists('phones')) {
     }
 }
 
+if ( ! function_exists('has_messengers')) {
+    /**
+     * Determines whether the site has a messenger.
+     *
+     * @see get_messengers()
+     * @return bool
+     */
+    function has_messengers()
+    {
+        return (bool)get_messengers();
+    }
+}
+
+if ( ! function_exists('get_messengers')) {
+    /**
+     * Return Messengers in array
+     *
+     * @return array
+     */
+    function get_messengers()
+    {
+        $_messengers = [
+            'viber'    => [
+                'tel'  => get_theme_mod('jp_messenger_viber'),
+                'text' => 'Viber',
+                'icon' => 'fa-viber',
+            ],
+            'whatsapp' => [
+                'tel'  => get_theme_mod('jp_messenger_whatsapp'),
+                'text' => 'WhatsApp',
+                'icon' => 'fa-whatsapp',
+            ],
+            'telegram' => [
+                'tel'  => get_theme_mod('jp_messenger_telegram'),
+                'text' => 'Telegram',
+                'icon' => 'fa-telegram',
+            ],
+        ];
+
+        $messengers = array_filter($_messengers, function ($value) {
+            return ! empty($value['tel']);
+        });
+
+        return $messengers;
+    }
+}
+
+if ( ! function_exists('messenger')) {
+    /**
+     * Display Messengers
+     *
+     * @see has_messengers()
+     * @see get_messengers()
+     *
+     * @return void
+     */
+    function messengers()
+    {
+        if (has_messengers()) {
+
+            $items = '';
+
+            foreach (get_messengers() as $name => $messenger) {
+
+                $icon = sprintf(
+                    '<i class="fa %s" aria-hidden="true" aria-label="%s"></i>',
+                    esc_attr($messenger['icon']),
+                    esc_attr($messenger['text'])
+                );
+
+                $link = sprintf(
+                    '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s</a>',
+                    esc_attr($name),
+                    esc_attr(get_phone_number($messenger['tel'])),
+                    $icon
+                );
+
+                $item = sprintf('<li class="messenger-item">%s</li>', $link);
+
+                $items .= $item . PHP_EOL;
+            }
+
+            $list = sprintf('<ul class="messenger">%s</ul>', $items);
+
+            echo $list;
+
+        }
+    }
+}
+
 if ( ! function_exists('has_social')) {
     /**
      * Determines whether the site has a social links.

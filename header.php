@@ -66,4 +66,5 @@
         <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
         <div><?php social(); ?></div>
         <div><?php phones(); ?></div>
+        <div><?php messengers(); ?></div>
     </div>

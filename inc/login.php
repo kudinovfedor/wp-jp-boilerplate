@@ -58,11 +58,12 @@ add_filter('login_headertitle', 'jp_login_header_title');
  */
 function jp_login_form_recaptcha()
 { ?>
-    <p class="g-recaptcha" data-size="normal" data-theme="light"
-       data-sitekey="<?php echo get_option('captcha_site_key'); ?>"></p>
+    <style>.g-recaptcha {-webkit-transform: scale(0.895);-moz-transform: scale(0.895);-ms-transform: scale(0.895);-o-transform: scale(0.895);transform: scale(0.895);-webkit-transform-origin: 0 0;-moz-transform-origin: 0 0;-ms-transform-origin: 0 0;-o-transform-origin: 0 0;transform-origin: 0 0;margin-bottom: 15px;}</style>
+    <div class="g-recaptcha" data-size="normal" data-theme="light"
+         data-sitekey="<?php echo get_option('captcha_site_key', '6LcbElsUAAAAAEZTUgtptruZGk94ZxSLnNYyVDR4'); ?>"></div>
 <?php }
 
-add_action('login_form', 'jp_login_form_recaptcha');
+//add_action('login_form', 'jp_login_form_recaptcha');
 
 function jp_authenticate_recaptcha_login_form($user, $username, $password)
 {
@@ -75,7 +76,7 @@ function jp_authenticate_recaptcha_login_form($user, $username, $password)
 
     if (isset($_POST['g-recaptcha-response'])) {
 
-        $secret   = get_option('captcha_secret_key');
+        $secret   = get_option('captcha_secret_key', '6LcbElsUAAAAALligth_B8XmNKTnuF8aJrF419Hk');
         $response = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . "&response=" . $_POST['g-recaptcha-response']);
         $response = json_decode($response['body'], true);
 
@@ -94,8 +95,6 @@ function jp_authenticate_recaptcha_login_form($user, $username, $password)
         return new WP_Error('Captcha Invalid', '<strong>ERROR</strong>: You are a bot! If not then enable JavaScript');
 
     }
-
-    //die();
 }
 
 add_filter('authenticate', 'jp_authenticate_recaptcha_login_form', 10, 3);

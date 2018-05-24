@@ -53,6 +53,34 @@
     }
 }
 
+.messenger {
+    @extend %reset-list;
+    font-size: 0;
+
+    &,
+    &-item {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &-item {
+        font-size: 16px;
+        padding: 4px;
+    }
+
+    &-link {
+        cursor: pointer;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: #efefef;
+        @include border-radius(50%);
+        @include transition(.15s ease-in-out);
+    }
+}
+
 .phone {
     @extend %reset-list;
     display: inline-block;

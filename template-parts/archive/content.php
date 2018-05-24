@@ -8,6 +8,9 @@
 
     <meta itemprop="image" content="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'medium')[0]; ?>">
 
+    <?php edit_post_link(); ?>
+    <?php delete_post_link(); ?>
+
     <h2 itemprop="headline">
         <a href="<?php the_permalink(); ?>">
             <?php the_title(); ?>
