@@ -4,6 +4,16 @@
   html.className = html.className.replace(/\bno-js\b/, 'js');
 })(document.documentElement);
 
+if (false && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', {
+    scope: './'
+  }).then(function (registration) {
+    console.log("[ServiceWorker] Registered. Scope is ".concat(registration.scope));
+  }).catch(function (error) {
+    console.log("[ServiceWorker] Failed to Register with ".concat(error));
+  });
+}
+
 (function ($, Modernizr) {
   $(function () {
     scrollTop('.js-scroll-top');

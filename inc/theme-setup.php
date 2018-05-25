@@ -62,16 +62,15 @@ function jp_theme_setup()
 
         add_theme_support('starter-content', array(
             'options' => array(
-                'blogdescription'     => 'JoomPress - WordPress Boilerplate Theme',
-                'date_format'         => 'd.m.Y',
-                'time_format'         => 'H:i',
-                'show_on_front'       => 'page',
-                'page_on_front'       => '{{home}}',
-                'page_for_posts'      => '{{blog}}',
-                'posts_per_page'      => '12',
-                'posts_per_rss'       => '12',
-                'selection'           => '/%postname%/',
-                'permalink_structure' => '/%postname%/',
+                'blogdescription' => 'JoomPress - WordPress Boilerplate Theme',
+                //'date_format' => 'd.m.Y',
+                //'time_format' => 'H:i',
+                'show_on_front'   => 'posts', // posts, page
+                'page_on_front'   => '{{home}}',
+                'page_for_posts'  => '{{blog}}',
+                //'posts_per_page' => '10',
+                //'posts_per_rss' => '10',
+                //'permalink_structure' => '/%postname%/',
             ),
 
             'theme_mods' => array(),
@@ -130,8 +129,9 @@ function jp_theme_setup()
             'posts' => array(
                 'home'        => array(
                     'post_type'  => 'page',
-                    'post_name'  => '/',
+                    'post_name'  => 'home',
                     'post_title' => 'Home',
+                    //'template'   => '',
                 ),
                 'blog'        => array(
                     'post_type'  => 'page',
@@ -141,36 +141,36 @@ function jp_theme_setup()
                 ),
                 'blog-item-1' => array(
                     'post_type'    => 'post',
-                    'post_title'   => 'Blog item title 1',
-                    'post_name'    => 'blog-item-1e',
+                    'post_title'   => 'Blog title 1',
+                    'post_name'    => 'blog-item-1',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail'    => '{{blog-item-1}}',
                 ),
                 'blog-item-2' => array(
                     'post_type'    => 'post',
-                    'post_title'   => 'Blog item title 2',
-                    'post_name'    => 'blog-item-2e',
+                    'post_title'   => 'Blog title 2',
+                    'post_name'    => 'blog-item-2',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail'    => '{{blog-item-2}}',
                 ),
                 'blog-item-3' => array(
                     'post_type'    => 'post',
-                    'post_title'   => 'Blog item title 3',
-                    'post_name'    => 'blog-item-3e',
+                    'post_title'   => 'Blog title 3',
+                    'post_name'    => 'blog-item-3',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail'    => '{{blog-item-3}}',
                 ),
                 'blog-item-4' => array(
                     'post_type'    => 'post',
-                    'post_title'   => 'Blog item title 4',
-                    'post_name'    => 'blog-item-4e',
+                    'post_title'   => 'Blog title 4',
+                    'post_name'    => 'blog-item-4',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail'    => '{{blog-item-4}}',
                 ),
                 'blog-item-5' => array(
                     'post_type'    => 'post',
-                    'post_title'   => 'Blog item title 5',
-                    'post_name'    => 'blog-item-5e',
+                    'post_title'   => 'Blog title 5',
+                    'post_name'    => 'blog-item-5',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail'    => '{{blog-item-5}}',
                 ),
