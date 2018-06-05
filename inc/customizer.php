@@ -533,6 +533,10 @@ function jp_customize_register($wp_customize)
         'panel' => 'google_map',
     ));
 
+    $wp_customize->add_setting('google_map_js_display', array(
+        'default' => false,
+        'sanitize_callback' => '',
+    ));
     $wp_customize->add_setting('google_map_project_setup_api_key', array(
         'default' => '',
         'sanitize_callback' => '',
@@ -560,6 +564,13 @@ function jp_customize_register($wp_customize)
     $wp_customize->add_setting('google_map_project_setup_zoom_level', array(
         'default' => 3,
         'sanitize_callback' => '',
+    ));
+
+    $wp_customize->add_control('google_map_js_display', array(
+        'label' => 'Enable/Disable',
+        'section' => 'google_map_project_setup',
+        'settings' => 'google_map_js_display',
+        'type' => 'checkbox',
     ));
 
     $wp_customize->add_control('google_map_project_setup_api_key', array(

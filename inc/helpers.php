@@ -806,11 +806,17 @@ if ( ! function_exists('dd')) {
     }
 }
 
-if ( ! function_exists('google_map_options')) {
-    function google_map_options()
+if ( ! function_exists('get_google_map_options')) {
+    /**
+     * Get Google Map Options
+     *
+     * @return array
+     */
+    function get_google_map_options()
     {
-        $map = array(
+        $map_options = array(
             // Project Setup
+            'enable'                   => get_theme_mod('google_map_js_display', false),
             'api_key'                  => get_theme_mod('google_map_project_setup_api_key'),
             'selector'                 => get_theme_mod('google_map_project_setup_map_selector', 'google-map'),
             'width'                    => get_theme_mod('google_map_project_setup_width', 600),
@@ -842,6 +848,26 @@ if ( ! function_exists('google_map_options')) {
             'styles_themes'            => get_theme_mod('google_map_themes_styles', 0),
         );
 
-        return $map;
+        return $map_options;
+    }
+}
+
+if ( ! function_exists('get_googleapis_src')) {
+    /**
+     * Get Google Map Api Src
+     *
+     * @param string $callback
+     * @return string
+     */
+    function get_googleapis_src($callback = 'initMap')
+    {
+        $api_key = get_theme_mod('google_map_project_setup_api_key', '');
+        $src = sprintf(
+            'https://maps.googleapis.com/maps/api/js?key=%s&callback=%s',
+            $api_key,
+            $callback
+        );
+
+        return $src;
     }
 }

@@ -13,6 +13,12 @@ function jp_enqueue_style_script()
         'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array('jquery'), null,
         true);
 
+    wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, false);
+
+    if (get_theme_mod('google_map_js_display', false)) {
+        wp_enqueue_script('jp-googleapis');
+    }
+
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);
     wp_enqueue_script('jp-common');
 
@@ -118,3 +124,75 @@ function jp_wp_footer()
 }
 
 add_action('wp_footer', 'jp_wp_footer', 20);
+
+/**
+ * @param $tag
+ * @param $handle
+ * @return mixed
+ */
+function jp_add_async_attribute($tag, $handle)
+{
+    $scripts_to_async = array('jp-js-handle');
+
+    foreach ($scripts_to_async as $async_script) {
+
+        if ($async_script === $handle) {
+
+            return str_replace(' src', ' async src', $tag);
+
+        }
+
+    }
+
+    return $tag;
+
+}
+
+add_filter('script_loader_tag', 'jp_add_async_attribute', 10, 2);
+
+/**
+ * @param $tag
+ * @param $handle
+ * @return mixed
+ */
+function jp_add_defer_attribute($tag, $handle)
+{
+    $scripts_to_defer = array('jp-js-handle');
+
+    foreach ($scripts_to_defer as $defer_script) {
+
+        if ($defer_script === $handle) {
+
+            return str_replace(' src', ' defer src', $tag);
+
+        }
+
+    }
+
+    return $tag;
+}
+
+add_filter('script_loader_tag', 'jp_add_defer_attribute', 10, 2);
+
+/**
+ * @param $tag
+ * @param $handle
+ * @return mixed
+ */
+function jp_add_async_defer_attribute($tag, $handle)
+{
+    $scripts = array('jp-googleapis');
+
+    foreach ($scripts as $script) {
+
+        if ($script === $handle) {
+
+            return str_replace(' src', ' async defer src', $tag);
+
+        }
+    }
+
+    return $tag;
+}
+
+add_filter('script_loader_tag', 'jp_add_async_defer_attribute', 10, 2);
