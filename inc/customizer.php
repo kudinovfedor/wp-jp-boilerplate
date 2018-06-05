@@ -892,7 +892,7 @@ function jp_customize_register($wp_customize)
         ),
     ));
 
-    // Section Positions
+    // Section Themes
     $wp_customize->add_section('google_map_themes', array(
         'title' => 'Themes',
         'panel' => 'google_map',

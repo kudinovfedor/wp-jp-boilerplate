@@ -805,3 +805,43 @@ if ( ! function_exists('dd')) {
         die();
     }
 }
+
+if ( ! function_exists('google_map_options')) {
+    function google_map_options()
+    {
+        $map = array(
+            // Project Setup
+            'api_key'                  => get_theme_mod('google_map_project_setup_api_key'),
+            'selector'                 => get_theme_mod('google_map_project_setup_map_selector', 'google-map'),
+            'width'                    => get_theme_mod('google_map_project_setup_width', 600),
+            'height'                   => get_theme_mod('google_map_project_setup_height', 400),
+            'latitude'                 => get_theme_mod('google_map_project_setup_latitude'),
+            'longitude'                => get_theme_mod('google_map_project_setup_longitude'),
+            'zoom'                     => get_theme_mod('google_map_project_setup_zoom_level', 3),
+
+            // Controls
+            'type_control'             => get_theme_mod('google_map_controls_map_type', 'horizontal_bar'),
+            'zoom_control'             => get_theme_mod('google_map_controls_zoom', 1),
+            'gesture_handling_control' => get_theme_mod('google_map_controls_gesture_handling', 'auto'),
+            'full_screen_control'      => get_theme_mod('google_map_controls_full_screen', 0),
+            'street_view_control'      => get_theme_mod('google_map_controls_street_view', 1),
+            'scale_control'            => get_theme_mod('google_map_controls_scale', 1),
+            'clickable_poi_control'    => get_theme_mod('google_map_controls_clickable_poi', 0),
+            'draggable'                => get_theme_mod('google_map_controls_draggable', 1),
+            'double_click_zoom'        => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
+            'scroll_wheel'             => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
+
+            // Positions
+            'type_position'            => get_theme_mod('google_map_positions_map_type', 10),
+            'zoom_position'            => get_theme_mod('google_map_positions_zoom', 6),
+            'street_view_position'     => get_theme_mod('google_map_positions_street_view', 6),
+            'full_screen_position'     => get_theme_mod('google_map_positions_full_screen', 11),
+
+            // Themes
+            'type_themes'              => get_theme_mod('google_map_themes_type', 'roadmap'),
+            'styles_themes'            => get_theme_mod('google_map_themes_styles', 0),
+        );
+
+        return $map;
+    }
+}
