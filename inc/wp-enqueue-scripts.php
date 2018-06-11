@@ -16,7 +16,7 @@ function jp_enqueue_style_script()
     wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, false);
 
     if (get_theme_mod('google_map_js_display', false)) {
-        wp_enqueue_script('jp-googleapis');
+        //wp_enqueue_script('jp-googleapis');
     }
 
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);

@@ -643,7 +643,7 @@ function jp_customize_register($wp_customize)
     ));
 
     $wp_customize->add_setting('google_map_controls_map_type', array(
-        'default' => 'horizontal_bar',
+        'default' => 1,
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_controls_zoom', array(
@@ -689,9 +689,9 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_controls_map_type',
         'type' => 'select',
         'choices' => array(
-            'false' => 'Hide',
-            'horizontal_bar' => 'Horizontal Bar',
-            'dropdown_menu' => 'Dropdown Menu',
+            0 => 'Hide',
+            1 => 'Horizontal Bar',
+            2 => 'Dropdown Menu',
         ),
     ));
 
@@ -780,8 +780,8 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_controls_double_click_to_zoom',
         'type' => 'select',
         'choices' => array(
-            0 => 'Disable',
-            1 => 'Enable',
+            0 => 'Enable',
+            1 => 'Disable',
         ),
     ));
 
@@ -803,19 +803,19 @@ function jp_customize_register($wp_customize)
     ));
 
     $wp_customize->add_setting('google_map_positions_map_type', array(
-        'default' => 10,
+        'default' => 1,
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_positions_zoom', array(
-        'default' => 6,
+        'default' => 9,
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_positions_street_view', array(
-        'default' => 6,
+        'default' => 9,
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_positions_full_screen', array(
-        'default' => 11,
+        'default' => 3,
         'sanitize_callback' => '',
     ));
 
@@ -825,18 +825,18 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_positions_map_type',
         'type' => 'select',
         'choices' => array(
-            0 => 'Bottom Center',
-            1 => 'Bottom Left',
-            2 => 'Bottom Right',
-            3 => 'Left Bottom',
+            1 => 'Top Left',
+            2 => 'Top Center',
+            3 => 'Top Right',
             4 => 'Left Center',
             5 => 'Left Top',
-            6 => 'Right Bottom',
+            6 => 'Left Bottom',
             7 => 'Right Center',
             8 => 'Right Top',
-            9 => 'Top Center',
-            10 => 'Top Left',
-            11 => 'Top Right',
+            9 => 'Right Bottom',
+            10 => 'Bottom Left',
+            11 => 'Bottom Center',
+            12 => 'Bottom Right',
         ),
     ));
 
@@ -846,18 +846,18 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_positions_zoom',
         'type' => 'select',
         'choices' => array(
-            0 => 'Bottom Center',
-            1 => 'Bottom Left',
-            2 => 'Bottom Right',
-            3 => 'Left Bottom',
+            1 => 'Top Left',
+            2 => 'Top Center',
+            3 => 'Top Right',
             4 => 'Left Center',
             5 => 'Left Top',
-            6 => 'Right Bottom',
+            6 => 'Left Bottom',
             7 => 'Right Center',
             8 => 'Right Top',
-            9 => 'Top Center',
-            10 => 'Top Left',
-            11 => 'Top Right',
+            9 => 'Right Bottom',
+            10 => 'Bottom Left',
+            11 => 'Bottom Center',
+            12 => 'Bottom Right',
         ),
     ));
 
@@ -867,18 +867,18 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_positions_street_view',
         'type' => 'select',
         'choices' => array(
-            0 => 'Bottom Center',
-            1 => 'Bottom Left',
-            2 => 'Bottom Right',
-            3 => 'Left Bottom',
+            1 => 'Top Left',
+            2 => 'Top Center',
+            3 => 'Top Right',
             4 => 'Left Center',
             5 => 'Left Top',
-            6 => 'Right Bottom',
+            6 => 'Left Bottom',
             7 => 'Right Center',
             8 => 'Right Top',
-            9 => 'Top Center',
-            10 => 'Top Left',
-            11 => 'Top Right',
+            9 => 'Right Bottom',
+            10 => 'Bottom Left',
+            11 => 'Bottom Center',
+            12 => 'Bottom Right',
         ),
     ));
 
@@ -888,18 +888,18 @@ function jp_customize_register($wp_customize)
         'settings' => 'google_map_positions_full_screen',
         'type' => 'select',
         'choices' => array(
-            0 => 'Bottom Center',
-            1 => 'Bottom Left',
-            2 => 'Bottom Right',
-            3 => 'Left Bottom',
+            1 => 'Top Left',
+            2 => 'Top Center',
+            3 => 'Top Right',
             4 => 'Left Center',
             5 => 'Left Top',
-            6 => 'Right Bottom',
+            6 => 'Left Bottom',
             7 => 'Right Center',
             8 => 'Right Top',
-            9 => 'Top Center',
-            10 => 'Top Left',
-            11 => 'Top Right',
+            9 => 'Right Bottom',
+            10 => 'Bottom Left',
+            11 => 'Bottom Center',
+            12 => 'Bottom Right',
         ),
     ));
 
