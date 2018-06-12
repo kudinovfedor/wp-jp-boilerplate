@@ -1,18 +1,9 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfg_bUbfwXmpJaKc27H03VaQXPZELMS_I&callback=initMap" async
-        defer></script>
 <?php
 $map = get_google_map_options();
 
-function isOptionEnabled($option)
-{
-    echo $option ? 'true' : 'false';
-}
-
-dump($map);
-
 if (true === $map['enable']) { ?>
     <script>
-        function initMap() {
+        function <?php echo $map['callback']; ?>() {
             var uluru, map, mapElement, mapMarker, mapOptions;
 
             uluru = {
@@ -23,6 +14,9 @@ if (true === $map['enable']) { ?>
             mapElement = document.getElementById("<?php echo $map['selector'] ?>");
 
             mapOptions = {
+
+                //disableDefaultUI: true,
+
                 center: uluru,
 
                 zoom: <?php echo $map['zoom'] ?>,
@@ -58,53 +52,7 @@ if (true === $map['enable']) { ?>
 
                 clickableIcons: <?php isOptionEnabled($map['clickable_poi_control']) ?>,
 
-                /*styles: [{
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 17}]
-                }, {
-                    "featureType": "landscape",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 20}]
-                }, {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [{"color": "#000000"}, {"lightness": 17}]
-                }, {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{"color": "#000000"}, {"lightness": 29}, {"weight": 0.2}]
-                }, {
-                    "featureType": "road.arterial",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 18}]
-                }, {
-                    "featureType": "road.local",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 16}]
-                }, {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 21}]
-                }, {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{"visibility": "on"}, {"color": "#000000"}, {"lightness": 16}]
-                }, {
-                    "elementType": "labels.text.fill",
-                    "stylers": [{"saturation": 36}, {"color": "#000000"}, {"lightness": 40}]
-                }, {"elementType": "labels.icon", "stylers": [{"visibility": "off"}]}, {
-                    "featureType": "transit",
-                    "elementType": "geometry",
-                    "stylers": [{"color": "#000000"}, {"lightness": 19}]
-                }, {
-                    "featureType": "administrative",
-                    "elementType": "geometry.fill",
-                    "stylers": [{"color": "#000000"}, {"lightness": 20}]
-                }, {
-                    "featureType": "administrative",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{"color": "#000000"}, {"lightness": 17}, {"weight": 1.2}]
-                }]*/
+                styles: [],
             };
 
             map = new google.maps.Map(mapElement, mapOptions);
@@ -121,8 +69,14 @@ if (true === $map['enable']) { ?>
                     "origin": {"x": 0, "y": 0},
                     "style": 1
                 },
-                map: map
+                map: map,
             });
+
+            mapMarker.addListener('click', function () {
+                console.log('Marker was clicked!');
+            });
+
+            console.log('Google Maps API version: ' + google.maps.version);
         }
     </script>
 <?php } ?>

@@ -520,9 +520,9 @@ function jp_customize_register($wp_customize)
         'type' => 'tel',
     ));
 
-    // Panel Google Map
+    // Panel Google Maps Api
     $wp_customize->add_panel('google_map', array(
-        'title' => 'Google Map',
+        'title' => 'Google Maps Api',
         'description' => 'Customizer for Google Map',
         'priority' => 202,
     ));
@@ -533,12 +533,32 @@ function jp_customize_register($wp_customize)
         'panel' => 'google_map',
     ));
 
+    $wp_customize->selective_refresh->add_partial('google_map_project_setup_api_key', array(
+        'selector' => '.jp-google-map',
+    ));
+
     $wp_customize->add_setting('google_map_js_display', array(
         'default' => false,
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_project_setup_api_key', array(
         'default' => '',
+        'sanitize_callback' => '',
+    ));
+    $wp_customize->add_setting('google_map_project_setup_version', array(
+        'default' => '',
+        'sanitize_callback' => '',
+    ));
+    $wp_customize->add_setting('google_map_project_setup_language', array(
+        'default' => 0,
+        'sanitize_callback' => '',
+    ));
+    $wp_customize->add_setting('google_map_project_setup_region', array(
+        'default' => '',
+        'sanitize_callback' => '',
+    ));
+    $wp_customize->add_setting('google_map_project_setup_map_callback', array(
+        'default' => 'initMap',
         'sanitize_callback' => '',
     ));
     $wp_customize->add_setting('google_map_project_setup_map_selector', array(
@@ -578,6 +598,38 @@ function jp_customize_register($wp_customize)
         'description' => 'All Google Maps JavaScript API applications require authentication.',
         'section' => 'google_map_project_setup',
         'settings' => 'google_map_project_setup_api_key',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_control('google_map_project_setup_version', array(
+        'label' => 'Google Maps API Version',
+        'description' => 'You can indicate which version of the API to load within your application.',
+        'section' => 'google_map_project_setup',
+        'settings' => 'google_map_project_setup_version',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_control('google_map_project_setup_language', array(
+        'label' => 'Language localization',
+        'description' => 'Change the default language settings.',
+        'section' => 'google_map_project_setup',
+        'settings' => 'google_map_project_setup_language',
+        'type' => 'select',
+        'choices' => array_merge(array(0 => 'Default'), get_google_map_languages()),
+    ));
+
+    $wp_customize->add_control('google_map_project_setup_region', array(
+        'label' => 'Region localization',
+        'description' => 'Specify a region code, which alters the map\'s behavior based on a given country or territory.',
+        'section' => 'google_map_project_setup',
+        'settings' => 'google_map_project_setup_region',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_control('google_map_project_setup_map_callback', array(
+        'label' => 'Map callback (for js)',
+        'section' => 'google_map_project_setup',
+        'settings' => 'google_map_project_setup_map_callback',
         'type' => 'text',
     ));
 
@@ -831,8 +883,8 @@ function jp_customize_register($wp_customize)
             4 => 'Left Center',
             5 => 'Left Top',
             6 => 'Left Bottom',
-            7 => 'Right Center',
-            8 => 'Right Top',
+            7 => 'Right Top',
+            8 => 'Right Center',
             9 => 'Right Bottom',
             10 => 'Bottom Left',
             11 => 'Bottom Center',
@@ -852,8 +904,8 @@ function jp_customize_register($wp_customize)
             4 => 'Left Center',
             5 => 'Left Top',
             6 => 'Left Bottom',
-            7 => 'Right Center',
-            8 => 'Right Top',
+            7 => 'Right Top',
+            8 => 'Right Center',
             9 => 'Right Bottom',
             10 => 'Bottom Left',
             11 => 'Bottom Center',
@@ -873,8 +925,8 @@ function jp_customize_register($wp_customize)
             4 => 'Left Center',
             5 => 'Left Top',
             6 => 'Left Bottom',
-            7 => 'Right Center',
-            8 => 'Right Top',
+            7 => 'Right Top',
+            8 => 'Right Center',
             9 => 'Right Bottom',
             10 => 'Bottom Left',
             11 => 'Bottom Center',
@@ -894,8 +946,8 @@ function jp_customize_register($wp_customize)
             4 => 'Left Center',
             5 => 'Left Top',
             6 => 'Left Bottom',
-            7 => 'Right Center',
-            8 => 'Right Top',
+            7 => 'Right Top',
+            8 => 'Right Center',
             9 => 'Right Bottom',
             10 => 'Bottom Left',
             11 => 'Bottom Center',

@@ -71,9 +71,6 @@ function jp_authenticate_recaptcha_login_form($user, $username, $password)
         return $user;
     }
 
-    //var_dump(isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : 'false');
-    //var_dump($user, $username, $password);
-
     if (isset($_POST['g-recaptcha-response'])) {
 
         $secret   = get_option('captcha_secret_key', '6LcbElsUAAAAALligth_B8XmNKTnuF8aJrF419Hk');

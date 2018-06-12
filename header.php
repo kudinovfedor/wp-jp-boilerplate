@@ -67,4 +67,8 @@
         <div><?php social(); ?></div>
         <div><?php phones(); ?></div>
         <div><?php messengers(); ?></div>
+        <div>
+            <?php google_map_html(); ?>
+            <?php get_template_part('template-parts/google-map-js'); ?>
+        </div>
     </div>

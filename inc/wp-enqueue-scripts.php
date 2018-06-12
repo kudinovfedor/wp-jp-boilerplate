@@ -13,10 +13,10 @@ function jp_enqueue_style_script()
         'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array('jquery'), null,
         true);
 
-    wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, false);
+    wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, true);
 
     if (get_theme_mod('google_map_js_display', false)) {
-        //wp_enqueue_script('jp-googleapis');
+        wp_enqueue_script('jp-googleapis');
     }
 
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);

@@ -818,11 +818,15 @@ if ( ! function_exists('get_google_map_options')) {
             // Project Setup
             'enable'                   => get_theme_mod('google_map_js_display', false),
             'api_key'                  => get_theme_mod('google_map_project_setup_api_key'),
+            'version'                  => get_theme_mod('google_map_project_setup_version'),
+            'language'                 => get_theme_mod('google_map_project_setup_language'),
+            'region'                   => get_theme_mod('google_map_project_setup_region'),
+            'callback'                 => get_theme_mod('google_map_project_setup_map_callback', 'initMap'),
             'selector'                 => get_theme_mod('google_map_project_setup_map_selector', 'google-map'),
             'width'                    => get_theme_mod('google_map_project_setup_width', 600),
             'height'                   => get_theme_mod('google_map_project_setup_height', 400),
-            'latitude'                 => get_theme_mod('google_map_project_setup_latitude', 46.669579491978666),
-            'longitude'                => get_theme_mod('google_map_project_setup_longitude', 32.61989488818358),
+            'latitude'                 => get_theme_mod('google_map_project_setup_latitude', 36.580247),
+            'longitude'                => get_theme_mod('google_map_project_setup_longitude', -41.817628),
             'zoom'                     => get_theme_mod('google_map_project_setup_zoom_level', 3),
 
             // Controls
@@ -852,22 +856,148 @@ if ( ! function_exists('get_google_map_options')) {
     }
 }
 
+if ( ! function_exists('get_google_map_languages')) {
+    /**
+     * Get Google Map Languages
+     *
+     * @return array
+     */
+    function get_google_map_languages()
+    {
+        $languages = array(
+            'ar'    => 'Arabic',
+            'be'    => 'Belarusian',
+            'bg'    => 'Bulgarian',
+            'bn'    => 'Bengali',
+            'ca'    => 'Catalan',
+            'cs'    => 'Czech',
+            'da'    => 'Danish',
+            'de'    => 'German',
+            'el'    => 'Greek',
+            'en'    => 'English',
+            'en-Au' => 'English(Australian)',
+            'en-GB' => 'English(Great Britain)',
+            'es'    => 'Spanish',
+            'eu'    => 'Basque',
+            'fa'    => 'Farsi',
+            'fi'    => 'Finnish',
+            'fil'   => 'Filipino',
+            'fr'    => 'French',
+            'gl'    => 'Galician',
+            'gu'    => 'Gujarati',
+            'hi'    => 'Hindi',
+            'hr'    => 'Croatian',
+            'hu'    => 'Hungarian',
+            'id'    => 'Indonesian',
+            'it'    => 'Italian',
+            'iw'    => 'Hebrew',
+            'ja'    => 'Japanese',
+            'kk'    => 'Kazakh',
+            'kn'    => 'Kannada',
+            'ko'    => 'Korean',
+            'ky'    => 'Kyrgyz',
+            'lt'    => 'Lithuanian',
+            'lv'    => 'Latvian',
+            'mk'    => 'Macedonian',
+            'ml'    => 'Malayalam',
+            'mr'    => 'Marathi',
+            'my'    => 'Burmese',
+            'nl'    => 'Dutch',
+            'no'    => 'Norwegian',
+            'pa'    => 'Punjabi',
+            'pl'    => 'Polish',
+            'pt'    => 'Portuguese',
+            'pt-BR' => 'Portuguese(Brazil)',
+            'pt-PT' => 'Portuguese(Portugal)',
+            'ro'    => 'Romanian',
+            'ru'    => 'Russian',
+            'sk'    => 'Slovak',
+            'sl'    => 'Slovenian',
+            'sq'    => 'Albanian',
+            'sr'    => 'Serbian',
+            'sv'    => 'Swedish',
+            'ta'    => 'Tamil',
+            'te'    => 'Telugu',
+            'th'    => 'Thai',
+            'tl'    => 'Tagalog',
+            'tr'    => 'Turkish',
+            'uk'    => 'Ukrainian',
+            'uz'    => 'Uzbek',
+            'vi'    => 'Vietnamese',
+            'zh-CN' => 'Chinese(Simlified)',
+            'zh-TW' => 'Chinese(Traditional)',
+        );
+
+        return $languages;
+    }
+}
+
 if ( ! function_exists('get_googleapis_src')) {
     /**
      * Get Google Map Api Src
      *
-     * @param string $callback
      * @return string
      */
-    function get_googleapis_src($callback = 'initMap')
+    function get_googleapis_src()
     {
-        $api_key = get_theme_mod('google_map_project_setup_api_key', '');
-        $src = sprintf(
-            'https://maps.googleapis.com/maps/api/js?key=%s&callback=%s',
-            $api_key,
-            $callback
+        $map = get_google_map_options();
+
+        $query_data = array(
+            'v'        => $map['version'],
+            'language' => $map['language'],
+            'region'   => $map['region'],
+            'key'      => $map['api_key'],
+            'callback' => $map['callback'],
         );
 
+        $query_data = array_filter($query_data, function ($value, $key) {
+            return ! empty($value);
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $query = http_build_query($query_data);
+
+        $src = sprintf('https://maps.googleapis.com/maps/api/js?%s', $query);
+
         return $src;
+    }
+}
+
+if ( ! function_exists('google_map_html')) {
+    /**
+     * Display Google Map HTML Markup
+     *
+     * @return void
+     */
+    function google_map_html()
+    {
+        $map = get_google_map_options();
+
+        if ($map['enable']) {
+
+            $markup = sprintf(
+                '<div id="%s" style="width: %spx; height: %spx;"></div>',
+                $map['selector'], $map['width'], $map['height']
+            );
+
+            if (is_customize_preview()) {
+                $markup = sprintf('<div class="jp-google-map">%s</div>', $markup);
+            }
+
+            echo $markup;
+        }
+    }
+}
+
+if ( ! function_exists('isOptionEnabled')) {
+    /**
+     * Is Option Enabled
+     *
+     * @param $option
+     *
+     * @return void
+     */
+    function isOptionEnabled($option)
+    {
+        echo $option ? 'true' : 'false';
     }
 }
