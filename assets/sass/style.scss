@@ -20,7 +20,7 @@ Tags: one-column
 @import "utilities/functions";
 @import "utilities/placeholders";
 
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import "vendors/font-awesome/font-awesome";
 
 html,
 body {

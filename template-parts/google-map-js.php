@@ -52,7 +52,8 @@ if (true === $map['enable']) { ?>
 
                 clickableIcons: <?php isOptionEnabled($map['clickable_poi_control']) ?>,
 
-                styles: [],
+                <?php $style_theme_id = (int)$map['styles_themes']; ?>
+                styles: <?php echo $style_theme_id === 0 ? '[]' : get_snazzymap_json($style_theme_id) ?>,
             };
 
             map = new google.maps.Map(mapElement, mapOptions);

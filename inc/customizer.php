@@ -988,9 +988,7 @@ function jp_customize_register($wp_customize)
         'section' => 'google_map_themes',
         'settings' => 'google_map_themes_styles',
         'type' => 'select',
-        'choices' => array(
-            0 => 'None',
-        ),
+        'choices' => array_merge(array(0 => 'None'), get_snazzymaps_styles()),
     ));
 
 }
