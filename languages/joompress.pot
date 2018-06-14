@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 05:43+0000\n"
+"POT-Creation-Date: 2018-06-14 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -65,14 +65,6 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:14
-msgid "Edit Analytics Tracking Code"
-msgstr ""
-
-#: footer.php:17
-msgid "Edit Login Logo"
-msgstr ""
-
 #: front-page.php:28 search.php:46
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
@@ -82,6 +74,14 @@ msgstr ""
 #. Author of the theme
 #: header.php:49 inc/admin.php:57
 msgid "Kudinov Fedor"
+msgstr ""
+
+#: header.php:91
+msgid "Edit Analytics Tracking Code"
+msgstr ""
+
+#: header.php:94
+msgid "Edit Login Logo"
 msgstr ""
 
 #: page.php:16
@@ -172,37 +172,33 @@ msgctxt "noun"
 msgid "Comment"
 msgstr ""
 
-#: inc/helpers.php:135
+#: inc/helpers.php:152
 msgid "Trigger mobile menu."
 msgstr ""
 
-#: inc/helpers.php:165
+#: inc/helpers.php:182
 msgid "Close mobile menu."
 msgstr ""
 
-#: inc/helpers.php:183
+#: inc/helpers.php:200
 msgid "Skip to content"
 msgstr ""
 
-#: inc/helpers.php:594
+#: inc/helpers.php:611
 msgid "Scroll to top"
 msgstr ""
 
-#: inc/helpers.php:728
+#: inc/helpers.php:745
 #, php-format
 msgid "Copyright &copy; <span itemprop=\"copyrightYear\">%d</span> %s. %s."
 msgstr ""
 
-#: inc/helpers.php:731
+#: inc/helpers.php:748
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:760
+#: inc/helpers.php:777
 msgid "Delete This"
-msgstr ""
-
-#: inc/login.php:25
-msgid "<strong>ERROR:</strong> The username or password is incorrect."
 msgstr ""
 
 #: inc/theme-setup.php:185
