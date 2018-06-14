@@ -99,8 +99,17 @@ function jp_check_recaptcha_login_form($user, $username, $password)
         return $error;
     }
 
-    $secret   = get_theme_mod('jp_recaptcha_secret_key');
-    $response = wp_remote_get('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . "&response=" . $g_recaptcha);
+    $query_data = array(
+        'secret'   => get_theme_mod('jp_recaptcha_secret_key'),
+        'response' => $g_recaptcha,
+        'remoteip' => jp_get_ip() || '127.0.0.1',
+    );
+
+    $query = http_build_query($query_data);
+
+    $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
+
+    $response = wp_remote_get($url);
     $response = json_decode($response['body'], true);
 
     if (true === $response['success']) {

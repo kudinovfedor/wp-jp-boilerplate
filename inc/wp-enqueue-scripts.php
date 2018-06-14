@@ -14,7 +14,7 @@ function jp_enqueue_style_script()
         true);
 
     wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, true);
-    wp_register_script('jp_recaptcha', 'https://www.google.com/recaptcha/api.js');
+    wp_register_script('jp_recaptcha', get_recaptcha_src(), array(), null, false);
 
     if (get_theme_mod('google_map_js_display', false)) {
         wp_enqueue_script('jp-googleapis');
@@ -70,7 +70,7 @@ add_action('wp_default_scripts', 'jp_remove_jquery_migrate', 11);
  */
 function jp_login_enqueue()
 {
-    wp_register_script('jp_recaptcha', 'https://www.google.com/recaptcha/api.js');
+    wp_register_script('jp_recaptcha', get_recaptcha_src(), array(), null, false);
     wp_enqueue_script('jp_recaptcha');
 }
 
