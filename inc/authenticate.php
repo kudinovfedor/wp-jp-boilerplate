@@ -43,10 +43,8 @@ function jp_authenticate_username_password($user, $username, $password)
 
     if ( ! $user) {
         return new WP_Error('invalid_username',
-            '<strong>ERROR</strong>: Invalid username or password.' .
-            ' <a href="' . wp_lostpassword_url() . '">' .
-            'Lost your password?' .
-            '</a>'
+            sprintf('<strong>ERROR</strong>: Invalid username or password. <a href="%s">%s</a>',
+                wp_lostpassword_url(), 'Lost your password?')
         );
     }
 
@@ -63,14 +61,8 @@ function jp_authenticate_username_password($user, $username, $password)
 
     if ( ! wp_check_password($password, $user->user_pass, $user->ID)) {
         return new WP_Error('incorrect_password',
-            sprintf(
-            /* translators: %s: user name */
-                '<strong>ERROR</strong>: Invalid username or password.',
-                '<strong>' . $username . '</strong>'
-            ) .
-            ' <a href="' . wp_lostpassword_url() . '">' .
-            'Lost your password?' .
-            '</a>'
+            sprintf('<strong>ERROR</strong>: Invalid username or password. <a href="%s">%s</a>',
+                wp_lostpassword_url(), 'Lost your password?')
         );
     }
 
@@ -122,10 +114,8 @@ function jp_authenticate_email_password($user, $email, $password)
 
     if ( ! $user) {
         return new WP_Error('invalid_email',
-            '<strong>ERROR</strong>: Invalid email address or password.' .
-            ' <a href="' . wp_lostpassword_url() . '">' .
-            'Lost your password?' .
-            '</a>'
+            sprintf('<strong>ERROR</strong>: Invalid email address or password. <a href="%s">%s</a>',
+                wp_lostpassword_url(), 'Lost your password?')
         );
     }
 
@@ -138,14 +128,8 @@ function jp_authenticate_email_password($user, $email, $password)
 
     if ( ! wp_check_password($password, $user->user_pass, $user->ID)) {
         return new WP_Error('incorrect_password',
-            sprintf(
-            /* translators: %s: email address */
-                '<strong>ERROR</strong>: Invalid email address or password.',
-                '<strong>' . $email . '</strong>'
-            ) .
-            ' <a href="' . wp_lostpassword_url() . '">' .
-            'Lost your password?' .
-            '</a>'
+            sprintf('<strong>ERROR</strong>: Invalid email address or password. <a href="%s">%s</a>',
+                wp_lostpassword_url(), 'Lost your password?')
         );
     }
 
