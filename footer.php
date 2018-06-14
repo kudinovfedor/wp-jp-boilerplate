@@ -9,15 +9,6 @@
 
 <?php scroll_top(); ?>
 
-<?php if (is_customize_preview()) { ?>
-    <button class="btn btn-block customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
-        <?php esc_html_e('Edit Analytics Tracking Code', 'joompress'); ?>
-    </button>
-    <button class="btn btn-block customizer-edit" data-control='{ "name":"jp_login_logo" }'>
-        <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
-    </button>
-<?php } ?>
-
 <span class="blackout js-blackout"></span>
 
 <div class="is-hide"><?php svg_sprite(); ?></div>

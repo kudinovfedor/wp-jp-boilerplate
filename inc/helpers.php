@@ -32,6 +32,23 @@ if ( ! function_exists('theme_mod')) {
     }
 }
 
+if ( ! function_exists('e_get_option')) {
+    /**
+     * Displays an option value based on an option name
+     *
+     * @see get_option()
+     *
+     * @param string $option Name of option to retrieve. Expected to not be SQL-escaped.
+     * @param mixed $default Optional. Default value to return if the option does not exist.
+     *
+     * @return void
+     */
+    function e_get_option($option, $default = false)
+    {
+        echo get_option($option, $default);
+    }
+}
+
 if ( ! function_exists('logo')) {
     /**
      * Displays a logo, linked to home.
@@ -999,5 +1016,28 @@ if ( ! function_exists('isOptionEnabled')) {
     function isOptionEnabled($option)
     {
         echo $option ? 'true' : 'false';
+    }
+}
+
+if ( ! function_exists('get_recaptcha_tag_attributes')) {
+    /**
+     * g-recaptcha tag attributes and grecaptcha.render parameters
+     *
+     * @return array
+     */
+    function get_recaptcha_tag_attributes()
+    {
+        $attr = array(
+            'site-key'         => get_theme_mod('jp_recaptcha_site_key'),
+            'secret-key'       => get_theme_mod('jp_recaptcha_secret_key'),
+            'theme'            => get_theme_mod('jp_recaptcha_theme', 'light'),
+            'size'             => get_theme_mod('jp_recaptcha_size', 'normal'),
+            'tabindex'         => get_theme_mod('jp_recaptcha_tabindex', 0),
+            'callback'         => get_theme_mod('jp_recaptcha_callback'),
+            'expired-callback' => get_theme_mod('jp_recaptcha_expired_callback'),
+            'error-callback'   => get_theme_mod('jp_recaptcha_error_callback'),
+        );
+
+        return $attr;
     }
 }

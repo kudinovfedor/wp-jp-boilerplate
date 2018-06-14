@@ -520,6 +520,108 @@ function jp_customize_register($wp_customize)
         'type' => 'tel',
     ));
 
+    // Section reCAPTCHA
+    $wp_customize->add_section('jp_recaptcha', array(
+        'title' => 'reCAPTCHA',
+        'description' => '',
+        'panel' => 'jp_theme_options',
+    ));
+
+    $wp_customize->add_setting('jp_recaptcha_site_key', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_secret_key', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_theme', array('default' => 'light', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_size', array('default' => 'normal', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_tabindex', array('default' => 0, 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_callback', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_expired_callback', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_recaptcha_error_callback', array('sanitize_callback' => '',));
+
+    $wp_customize->selective_refresh->add_partial('jp_recaptcha_site_key', array(
+        'selector' => '.jp-g-recaptcha',
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_site_key', array(
+        'label' => 'Site Key',
+        'description' => 'Your site key.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_site_key',
+        'type' => 'text',
+        'input_attrs' => array(
+            'autocomplete' => 'off',
+        ),
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_secret_key', array(
+        'label' => 'Secret Key',
+        'description' => 'Your secret key.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_secret_key',
+        'type' => 'password',
+        'input_attrs' => array(
+            'autocomplete' => 'off',
+        ),
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_theme', array(
+        'label' => 'Theme',
+        'description' => 'Optional. The color theme of the widget.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_theme',
+        'type' => 'select',
+        'choices' => array(
+            'dark' => 'Dark',
+            'light' => 'Light',
+        ),
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_size', array(
+        'label' => 'Size',
+        'description' => 'Optional. The size of the widget.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_size',
+        'type' => 'select',
+        'choices' => array(
+            'compact' => 'Compact',
+            'normal' => 'Normal',
+        ),
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_tabindex', array(
+        'label' => 'Tab Index',
+        'description' => 'Optional. The tabindex of the widget and challenge. If other elements in your page use tabindex, it should be set to make user navigation easier.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_tabindex',
+        'type' => 'number',
+        'choices' => array(
+            'min' => 0,
+            'step' => 1,
+        ),
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_callback', array(
+        'label' => 'Callback',
+        'description' => 'Optional. The name of your callback function, executed when the user submits a successful response. The <b>g-recaptcha-response</b> token is passed to your callback.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_callback',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_expired_callback', array(
+        'label' => 'Expired Callback',
+        'description' => 'Optional. The name of your callback function, executed when the reCAPTCHA response expires and the user needs to re-verify.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_expired_callback',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_control('jp_recaptcha_error_callback', array(
+        'label' => 'Error Callback',
+        'description' => 'Optional. The name of your callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry.',
+        'section' => 'jp_recaptcha',
+        'settings' => 'jp_recaptcha_error_callback',
+        'type' => 'text',
+    ));
+
     // Panel Google Maps Api
     $wp_customize->add_panel('google_map', array(
         'title' => 'Google Maps Api',

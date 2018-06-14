@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 07:36+0000\n"
+"POT-Creation-Date: 2018-06-14 05:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -22,26 +22,26 @@ msgstr ""
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: archive.php:31 template-parts/archive/content.php:25
+#: archive.php:34 template-parts/archive/content.php:28
 #: template-parts/page/content-page.php:13 template-parts/post/content.php:11
 msgid "Categories"
 msgstr ""
 
-#: archive.php:33 template-parts/archive/content.php:27
+#: archive.php:36 template-parts/archive/content.php:30
 #: template-parts/post/content.php:12
 msgid "Tags"
 msgstr ""
 
-#: archive.php:39 search.php:32 template-parts/archive/content.php:55
+#: archive.php:42 search.php:32 template-parts/archive/content.php:58
 msgid "Read more"
 msgstr ""
 
-#: archive.php:52 front-page.php:27 search.php:45
+#: archive.php:55 front-page.php:27 search.php:45
 #: template-parts/post/content-none.php:2
 msgid "Nothing Found"
 msgstr ""
 
-#: archive.php:53 template-parts/post/content-none.php:3
+#: archive.php:56 template-parts/post/content-none.php:3
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
@@ -80,7 +80,7 @@ msgid ""
 msgstr ""
 
 #. Author of the theme
-#: header.php:50 inc/admin.php:57
+#: header.php:49 inc/admin.php:57
 msgid "Kudinov Fedor"
 msgstr ""
 
@@ -184,32 +184,32 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/helpers.php:504
+#: inc/helpers.php:594
 msgid "Scroll to top"
 msgstr ""
 
-#: inc/helpers.php:638
+#: inc/helpers.php:728
 #, php-format
 msgid "Copyright &copy; <span itemprop=\"copyrightYear\">%d</span> %s. %s."
 msgstr ""
 
-#: inc/helpers.php:641
+#: inc/helpers.php:731
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:670
+#: inc/helpers.php:760
 msgid "Delete This"
 msgstr ""
 
 #: inc/login.php:25
-msgid "<strong>ERROR:</strong> The username and password is incorrect."
+msgid "<strong>ERROR:</strong> The username or password is incorrect."
 msgstr ""
 
-#: inc/theme-setup.php:103
+#: inc/theme-setup.php:185
 msgid "Menu in header"
 msgstr ""
 
-#: inc/theme-setup.php:104
+#: inc/theme-setup.php:186
 msgid "Menu in footer"
 msgstr ""
 

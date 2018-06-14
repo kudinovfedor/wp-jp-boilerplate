@@ -11,6 +11,8 @@ if ( ! function_exists('has_db_table')) {
     /**
      * Checks if the table exists in the DB
      *
+     * @global wpdb $wpdb WordPress database abstraction object.
+     *
      * @param string $table_name
      *
      * @return bool
@@ -27,6 +29,8 @@ if ( ! function_exists('empty_db_table')) {
     /**
      * Check if the table is empty
      *
+     * @global wpdb $wpdb WordPress database abstraction object.
+     *
      * @param string $table_name
      *
      * @return bool
@@ -42,6 +46,8 @@ if ( ! function_exists('empty_db_table')) {
 if ( ! function_exists('drop_table_snazzymaps')) {
     /**
      * Drop Table snazzymaps from DB
+     *
+     * @global wpdb $wpdb WordPress database abstraction object.
      *
      * @return void
      */
@@ -64,6 +70,8 @@ if ( ! function_exists('drop_table_snazzymaps')) {
 if ( ! function_exists('create_table_snazzymaps')) {
     /**
      * Create DB Table snazzymaps
+     *
+     * @global wpdb $wpdb WordPress database abstraction object.
      *
      * @return void
      */
@@ -95,6 +103,8 @@ if ( ! function_exists('create_table_snazzymaps')) {
 if ( ! function_exists('fill_table_snazzymaps')) {
     /**
      * Fills the table with values
+     *
+     * @global wpdb $wpdb WordPress database abstraction object.
      *
      * @return void
      */
@@ -160,6 +170,8 @@ if ( ! function_exists('get_snazzymaps')) {
     /**
      * Get Snazzy Maps Items
      *
+     * @global wpdb $wpdb WordPress database abstraction object.
+     *
      * @return array|null|object
      */
     function get_snazzymaps()
@@ -177,6 +189,8 @@ if ( ! function_exists('get_snazzymaps')) {
 if ( ! function_exists('get_snazzymap_json')) {
     /**
      * Get Snazzy Map Style By ID
+     *
+     * @global wpdb $wpdb WordPress database abstraction object.
      *
      * @param int $id
      *

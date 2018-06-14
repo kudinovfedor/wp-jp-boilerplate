@@ -67,8 +67,33 @@
         <div><?php social(); ?></div>
         <div><?php phones(); ?></div>
         <div><?php messengers(); ?></div>
-        <div>
-            <?php google_map_html(); ?>
-            <?php get_template_part('template-parts/google-map-js'); ?>
-        </div>
+
+        <?php if (is_customize_preview()) {
+            $recaptcha = get_recaptcha_tag_attributes();
+            ?>
+
+            <p>
+                <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
+                    <?php esc_html_e('Edit Analytics Tracking Code', 'joompress'); ?>
+                </button>
+                <button class="btn customizer-edit" data-control='{ "name":"jp_login_logo" }'>
+                    <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
+                </button>
+            </p>
+
+            <div class="jp-g-recaptcha" style="margin-bottom: 16px;">
+                <div class="g-recaptcha"
+                     data-size="<?php echo esc_attr($recaptcha['size']); ?>"
+                     data-theme="<?php echo esc_attr($recaptcha['theme']); ?>"
+                     data-tabindex="<?php echo esc_attr($recaptcha['tabindex']); ?>"
+                     data-sitekey="<?php echo esc_attr($recaptcha['site-key']); ?>">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <?php google_map_html(); ?>
+                <?php get_template_part('template-parts/google-map-js'); ?>
+            </div>
+        <?php } ?>
+
     </div>
