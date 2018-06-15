@@ -1,5 +1,33 @@
 <?php
 
+if ( ! class_exists('SnazzyMaps')) {
+    /**
+     * Class SnazzyMaps
+     */
+    class SnazzyMaps
+    {
+        private $wpdb;
+        private $table_name;
+        private $charset_collate;
+        private $has_table = false;
+
+        /**
+         * SnazzyMaps constructor.
+         */
+        public function __construct()
+        {
+            global $wpdb;
+            $this->wpdb            = $wpdb;
+            $this->table_name      = $this->wpdb->prefix . 'snazzymaps';
+            $this->charset_collate = $this->wpdb->get_charset_collate();
+        }
+
+        public function hasTable($name) {
+
+        }
+    }
+}
+
 $pagination = array(
     'currentPage' => 1,
     'pageSize'    => 10,
@@ -159,7 +187,7 @@ if ( ! function_exists('fill_table_snazzymaps')) {
                     'json'     => $item->json,
                 ];
 
-                $wpdb->insert($table_name, $maps[$key], array('%s', '%s', '%s',));
+                $wpdb->insert($table_name, $maps[$key], array('%s', '%s', '%s'));
             }
 
         }
@@ -179,7 +207,8 @@ if ( ! function_exists('get_snazzymaps')) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'snazzymaps';
 
-        $results = $wpdb->get_results("SELECT `id`, `name`, `imageUrl`, `json` FROM $table_name", ARRAY_A);
+        $results = $wpdb->get_results("SELECT `id`, `name`, `imageUrl`, `json` FROM $table_name ORDER BY `name` LIMIT 100",
+            ARRAY_A);
 
         return $results;
     }
@@ -201,7 +230,7 @@ if ( ! function_exists('get_snazzymap_json')) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'snazzymaps';
 
-        $result = $wpdb->get_results("SELECT `json` FROM `$table_name` WHERE `id`=$id", ARRAY_A);
+        $result = $wpdb->get_results("SELECT `json` FROM `$table_name` WHERE `id`=$id LIMIT 1", ARRAY_A);
 
         return $result[0]['json'];
     }

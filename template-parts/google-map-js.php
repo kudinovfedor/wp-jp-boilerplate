@@ -1,5 +1,8 @@
 <?php
+
 $map = get_google_map_options();
+
+$style_theme_id = (int)$map['styles_themes'];
 
 if (true === $map['enable']) { ?>
     <script>
@@ -22,7 +25,7 @@ if (true === $map['enable']) { ?>
                 zoom: <?php echo $map['zoom'] ?>,
                 zoomControl: <?php isOptionEnabled($map['zoom_control']) ?>,
                 zoomControlOptions: {
-                    position: <?php echo $map['zoom_position'] ?>
+                    position: <?php echo $map['zoom_position'] ?>,
                 },
 
                 scaleControl: <?php isOptionEnabled($map['scale_control']) ?>,
@@ -38,12 +41,12 @@ if (true === $map['enable']) { ?>
                 mapTypeControl: <?php isOptionEnabled($map['type_control']) ?>,
                 mapTypeControlOptions: {
                     style: <?php echo $map['type_control'] ?>,
-                    position: <?php echo $map['type_position'] ?>
+                    position: <?php echo $map['type_position'] ?>,
                 },
 
                 streetViewControl: <?php isOptionEnabled($map['street_view_control']) ?>,
                 streetViewControlOptions: {
-                    position: <?php echo $map['street_view_position'] ?>
+                    position: <?php echo $map['street_view_position'] ?>,
                 },
 
                 draggable: <?php isOptionEnabled($map['draggable']) ?>,
@@ -52,7 +55,6 @@ if (true === $map['enable']) { ?>
 
                 clickableIcons: <?php isOptionEnabled($map['clickable_poi_control']) ?>,
 
-                <?php $style_theme_id = (int)$map['styles_themes']; ?>
                 styles: <?php echo $style_theme_id === 0 ? '[]' : get_snazzymap_json($style_theme_id) ?>,
             };
 
