@@ -99,7 +99,7 @@ if (!class_exists('ReCaptchaCustomizer')) {
         {
             // Section reCAPTCHA
             $wp_customize->add_section('jp_recaptcha', array(
-                'title' => 'reCAPTCHA',
+                'title' => 'ReCaptcha',
                 'description' => 'Register your website with Google to get required API keys and enter them below. <a target="_blank" rel="nofollow noopener" href="https://www.google.com/recaptcha/admin#list">Get the API Keys</a>',
                 'priority' => 161,
                 'panel' => 'jp_theme_options',

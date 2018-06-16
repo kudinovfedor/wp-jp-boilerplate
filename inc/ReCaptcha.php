@@ -1,10 +1,19 @@
 <?php
 
 if (!class_exists('ReCaptcha')) {
+    /**
+     * Class ReCaptcha
+     */
     class ReCaptcha
     {
+        /**
+         * @var array
+         */
         public $options = array();
 
+        /**
+         * @var array
+         */
         public $error_code = array(
             'missing-input-secret' => 'The secret parameter is missing.',
             'invalid-input-secret' => 'The secret parameter is invalid or malformed.',
@@ -13,6 +22,9 @@ if (!class_exists('ReCaptcha')) {
             'bad-request' => 'The request is invalid or malformed.',
         );
 
+        /**
+         * ReCaptcha constructor.
+         */
         public function __construct()
         {
             $this->options = array(
@@ -65,16 +77,26 @@ if (!class_exists('ReCaptcha')) {
             }
         }
 
+        /**
+         * @return bool
+         */
         public function isEnabled()
         {
             return $this->options['site-key'] && $this->options['secret-key'];
         }
 
+        /**
+         * @param $name
+         * @return mixed
+         */
         public function isReCaptchaRequired($name)
         {
             return $this->options[$name . '-form'];
         }
 
+        /**
+         * @return void
+         */
         public function cssLogin()
         {
             $style = '<style>.g-recaptcha{-webkit-transform:scale(0.895);-moz-transform:scale(0.895);-ms-transform:scale(0.895);-o-transform:scale(0.895);transform:scale(0.895);-webkit-transform-origin:0 0;-moz-transform-origin:0 0;-ms-transform-origin:0 0;-o-transform-origin:0 0;transform-origin:0 0;margin-bottom:15px;}</style>';
@@ -82,6 +104,9 @@ if (!class_exists('ReCaptcha')) {
             echo $style;
         }
 
+        /**
+         * @return void
+         */
         public function enqueueScripts()
         {
             $query_data = array(
@@ -107,6 +132,9 @@ if (!class_exists('ReCaptcha')) {
             wp_enqueue_script('jp_recaptcha');
         }
 
+        /**
+         * @return void
+         */
         public function htmlMarkup()
         {
             $opt = $this->options;
@@ -178,21 +206,35 @@ if (!class_exists('ReCaptcha')) {
             }
         }
 
+        /**
+         *
+         */
         public function checkRegistrationForm()
         {
 
         }
 
+        /**
+         *
+         */
         public function checkResetPasswordForm()
         {
 
         }
 
+        /**
+         *
+         */
         public function checkCommentsForm()
         {
 
         }
 
+        /**
+         * Get client IP.
+         *
+         * @return string|null
+         */
         public function getIP()
         {
             $fields = array(

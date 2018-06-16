@@ -1,5 +1,7 @@
 <?php
 
+global $snazzy_maps;
+
 $map = get_google_map_options();
 
 $style_theme_id = (int)$map['styles_themes'];
@@ -55,7 +57,7 @@ if (true === $map['enable']) { ?>
 
                 clickableIcons: <?php isOptionEnabled($map['clickable_poi_control']) ?>,
 
-                styles: <?php echo $style_theme_id === 0 ? '[]' : get_snazzymap_json($style_theme_id) ?>,
+                styles: <?php echo $style_theme_id === 0 ? '[]' : $snazzy_maps->getItemJson($style_theme_id) ?>,
             };
 
             map = new google.maps.Map(mapElement, mapOptions);
