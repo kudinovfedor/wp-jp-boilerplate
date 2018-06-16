@@ -214,12 +214,12 @@ if (!class_exists('SnazzyMaps')) {
 
             if ($this->table_exists && !$this->table_empty) {
 
-                $result = $this->wpdb->get_results(
+                $result = $this->wpdb->get_row(
                     "SELECT `json` FROM `$this->table_name` WHERE `id`=$id LIMIT 1",
                     ARRAY_A
                 );
 
-                return $result[0]['json'];
+                return $result['json'];
 
             }
 
