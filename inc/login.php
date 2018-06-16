@@ -65,8 +65,7 @@ add_filter('login_errors', 'jp_login_error');
 function jp_shake_error_codes($shake_error_codes)
 {
     $new_error_codes = array(
-        'empty_input_response',
-        'invalid_secret_key',
+        'recaptcha_empty_input_response',
         'recaptcha_error',
     );
 

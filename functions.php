@@ -19,6 +19,7 @@ require_once('inc/rss-turbo.php');
 
 require_once('inc/authenticate.php');
 require_once('inc/recaptcha.php');
+require_once('inc/recaptcha-customizer.php');
 require_once('inc/admin.php');
 require_once('inc/login.php');
 

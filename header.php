@@ -74,15 +74,15 @@
         </div>
 
         <?php if (is_customize_preview()) {
-            $recaptcha = get_recaptcha_tag_attributes();
+            $opt = (new ReCaptcha)->getOptions();
             ?>
 
             <div class="jp-g-recaptcha" style="margin-bottom: 16px;">
                 <div class="g-recaptcha"
-                     data-size="<?php echo esc_attr($recaptcha['size']); ?>"
-                     data-theme="<?php echo esc_attr($recaptcha['theme']); ?>"
-                     data-tabindex="<?php echo esc_attr($recaptcha['tabindex']); ?>"
-                     data-sitekey="<?php echo esc_attr($recaptcha['site-key']); ?>">
+                     data-size="<?php echo esc_attr($opt['size']); ?>"
+                     data-theme="<?php echo esc_attr($opt['theme']); ?>"
+                     data-tabindex="<?php echo esc_attr($opt['tabindex']); ?>"
+                     data-sitekey="<?php echo esc_attr($opt['site-key']); ?>">
                 </div>
             </div>
 
