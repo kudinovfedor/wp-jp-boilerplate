@@ -45,12 +45,12 @@ if (!class_exists('ReCaptcha')) {
 
             if ($this->isEnabled()) {
 
-                //add_action('login_enqueue_scripts', array($this, 'cssLogin'));
+                add_action('login_enqueue_scripts', array($this, 'cssLogin'));
                 add_action('login_enqueue_scripts', array($this, 'enqueueScripts'));
 
                 if ($this->isReCaptchaRequired('login')) {
                     add_action('login_form', array($this, 'htmlMarkup'));
-                    //add_filter('authenticate', array($this, 'checkLoginForm'), 20, 3);
+                    add_filter('authenticate', array($this, 'checkLoginForm'), 20, 3);
                 }
 
                 if ($this->isReCaptchaRequired('registration')) {
@@ -63,10 +63,10 @@ if (!class_exists('ReCaptcha')) {
                     //add_filter('allow_password_reset', array($this, 'checkResetPasswordForm'), 10, 1);
                 }
 
-                if (($this->isReCaptchaRequired('comments') && is_singular() && comments_open() && get_option('thread_comments')) || is_customize_preview()) {
+                if ($this->isReCaptchaRequired('comments') || is_customize_preview()) {
 
-                    //add_action('comment_form_after_fields', array($this, 'htmlMarkup'));
-                    //add_action('comment_form_logged_in_after', array($this, 'htmlMarkup'));
+                    add_action('comment_form_after_fields', array($this, 'htmlMarkup'));
+                    add_action('comment_form_logged_in_after', array($this, 'htmlMarkup'));
 
                     //add_action('pre_comment_on_post', array($this, 'checkCommentsForm'));
 
@@ -99,7 +99,7 @@ if (!class_exists('ReCaptcha')) {
          */
         public function cssLogin()
         {
-            $style = '<style>.g-recaptcha{-webkit-transform:scale(0.895);-moz-transform:scale(0.895);-ms-transform:scale(0.895);-o-transform:scale(0.895);transform:scale(0.895);-webkit-transform-origin:0 0;-moz-transform-origin:0 0;-ms-transform-origin:0 0;-o-transform-origin:0 0;transform-origin:0 0;margin-bottom:15px;}</style>';
+            $style = '<style>.login .g-recaptcha{margin:0 -15px 15px}</style>';
 
             echo $style;
         }
@@ -129,7 +129,11 @@ if (!class_exists('ReCaptcha')) {
             }
 
             wp_register_script('jp_recaptcha', $src, array(), null, false);
-            wp_enqueue_script('jp_recaptcha');
+
+            if ($this->is_comments() || $this->is_login_page() || is_customize_preview()) {
+                wp_enqueue_script('jp_recaptcha');
+            }
+
         }
 
         /**
@@ -140,9 +144,13 @@ if (!class_exists('ReCaptcha')) {
             $opt = $this->options;
 
             $markup = sprintf(
-                '<div class="g-recaptcha" data-size="%s" data-theme="%s" data-sitekey="%s" data-tabindex="%d" style="margin: 0 -15px 15px;"></div>',
+                '<div class="g-recaptcha" data-size="%s" data-theme="%s" data-sitekey="%s" data-tabindex="%d"></div>',
                 esc_attr($opt['size']), esc_attr($opt['theme']), esc_attr($opt['site-key']), esc_attr($opt['tabindex'])
             );
+
+            if (is_singular()) {
+                $markup = sprintf('<div class="form-row comment-form-recapthca">%s</div>', $markup);
+            }
 
             echo $markup;
         }
@@ -261,6 +269,22 @@ if (!class_exists('ReCaptcha')) {
         public function getOptions()
         {
             return $this->options;
+        }
+
+        /**
+         * @return bool
+         */
+        public function is_login_page()
+        {
+            return in_array($GLOBALS['pagenow'], array('wp-login.php'));
+        }
+
+        /**
+         * @return bool
+         */
+        public function is_comments()
+        {
+            return is_singular() && comments_open() && get_option('thread_comments');
         }
 
     }
