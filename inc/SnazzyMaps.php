@@ -85,9 +85,11 @@ if (!class_exists('SnazzyMaps')) {
 
                 $sql = "CREATE TABLE $this->table_name (
                   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                  style_id INT NOT NULL,
                   name VARCHAR(255) NOT NULL,
-                  imageUrl VARCHAR(255) NOT NULL,
+                  image_url VARCHAR(255) NOT NULL,
                   json TEXT NOT NULL,
+                  views INT NOT NULL,
                   PRIMARY KEY (id)
                 ) $this->charset_collate;";
 
@@ -126,7 +128,7 @@ if (!class_exists('SnazzyMaps')) {
 
                 $query_data = array(
                     'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
-                    'pageSize' => 100,
+                    'pageSize' => 200,
                     'page' => 1,
                     'sort' => 'popular',
                 );
@@ -163,12 +165,14 @@ if (!class_exists('SnazzyMaps')) {
 
                 foreach ($obj as $key => $item) {
                     $maps[$key] = [
+                        'style_id' => $item->id,
                         'name' => $item->name,
-                        'imageUrl' => $item->imageUrl,
+                        'image_url' => $item->imageUrl,
                         'json' => $item->json,
+                        'views' => $item->views,
                     ];
 
-                    $this->wpdb->insert($this->table_name, $maps[$key], array('%s', '%s', '%s'));
+                    $this->wpdb->insert($this->table_name, $maps[$key], array('%d', '%s', '%s', '%s', '%d'));
                 }
 
                 $this->table_empty = false;
@@ -191,7 +195,7 @@ if (!class_exists('SnazzyMaps')) {
             if ($this->table_exists && !$this->table_empty) {
 
                 $results = $this->wpdb->get_results(
-                    "SELECT `id`, `name`, `imageUrl`, `json` FROM $this->table_name ORDER BY `name` LIMIT $limit_value",
+                    "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name ORDER BY `name` LIMIT $limit_value",
                     ARRAY_A
                 );
 
@@ -215,7 +219,7 @@ if (!class_exists('SnazzyMaps')) {
             if ($this->table_exists && !$this->table_empty) {
 
                 $result = $this->wpdb->get_row(
-                    "SELECT `json` FROM `$this->table_name` WHERE `id`=$id LIMIT 1",
+                    "SELECT `json` FROM `$this->table_name` WHERE `style_id`=$id LIMIT 1",
                     ARRAY_A
                 );
 
@@ -238,7 +242,7 @@ if (!class_exists('SnazzyMaps')) {
             $styles = array();
 
             foreach ($items as $item) {
-                $styles[$item['id']] = $item['name'];
+                $styles[$item['style_id']] = $item['name'];
             }
 
             return $styles;
