@@ -1,6 +1,6 @@
 <?php
 
-if (!class_exists('SnazzyMaps')) {
+if ( ! class_exists('SnazzyMaps')) {
     /**
      * Class SnazzyMaps
      */
@@ -32,13 +32,23 @@ if (!class_exists('SnazzyMaps')) {
         private $table_empty = true;
 
         /**
+         * @var array
+         */
+        private $styles = array();
+
+        /**
+         * @var array
+         */
+        private $pagination = array();
+
+        /**
          * SnazzyMaps constructor.
          */
         public function __construct()
         {
             global $wpdb;
-            $this->wpdb = $wpdb;
-            $this->table_name = $this->wpdb->prefix . 'snazzymaps';
+            $this->wpdb            = $wpdb;
+            $this->table_name      = $this->wpdb->prefix . 'snazzymaps';
             $this->charset_collate = $this->wpdb->get_charset_collate();
 
             $this->isTableExist();
@@ -55,7 +65,7 @@ if (!class_exists('SnazzyMaps')) {
          */
         public function isTableExist()
         {
-            $this->table_exists = $this->table_name === $this->wpdb->get_var("SHOW TABLES LIKE '$this->table_name'");
+            $this->table_exists = $this->table_name === $this->wpdb->get_var("SHOW TABLES LIKE '$this->table_name';");
 
             return $this->table_exists;
         }
@@ -68,7 +78,7 @@ if (!class_exists('SnazzyMaps')) {
         public function isTableEmpty()
         {
             if ($this->table_exists) {
-                $this->table_empty = false === (bool)$this->wpdb->get_var("SELECT COUNT(*) FROM `$this->table_name`");
+                $this->table_empty = false === (bool)$this->wpdb->get_var("SELECT COUNT(*) FROM `$this->table_name`;");
             }
 
             return $this->table_empty;
@@ -81,7 +91,7 @@ if (!class_exists('SnazzyMaps')) {
          */
         public function createTable()
         {
-            if (!$this->table_exists) {
+            if ( ! $this->table_exists) {
 
                 $sql = "CREATE TABLE $this->table_name (
                   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -108,7 +118,7 @@ if (!class_exists('SnazzyMaps')) {
         {
             if ($this->table_exists) {
 
-                $sql = "DROP TABLE IF EXISTS `$this->table_name`";
+                $sql = "DROP TABLE IF EXISTS `$this->table_name`;";
 
                 $this->wpdb->query($sql);
 
@@ -126,50 +136,25 @@ if (!class_exists('SnazzyMaps')) {
         {
             if ($this->table_exists && $this->table_empty) {
 
-                $query_data = array(
-                    'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
-                    'pageSize' => 200,
-                    'page' => 1,
-                    'sort' => 'popular',
-                );
+                $url = $this->getRemoteUrl();
 
-                $query = http_build_query($query_data);
+                $response = $this->getResponse($url);
 
-                $url = sprintf('https://snazzymaps.com/explore.json?%s', $query);
+                $this->pagination = $response['pagination'];
 
-                if (extension_loaded('curl')) {
-
-                    $ch = curl_init();
-
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                    $json = curl_exec($ch);
-
-                    $error['errno'] = curl_errno($ch);
-                    $error['error'] = curl_error($ch);
-                    $error['strerror'] = curl_strerror($error['errno']);
-
-                    curl_close($ch);
-
-                } else {
-
-                    $json = file_get_contents($url);
-
+                if (null !== $response) {
+                    $this->styles = $response['styles'];
                 }
-
-                $obj = json_decode($json)->styles;
 
                 $maps = array();
 
-                foreach ($obj as $key => $item) {
+                foreach ($this->styles as $key => $item) {
                     $maps[$key] = [
-                        'style_id' => $item->id,
-                        'name' => $item->name,
-                        'image_url' => $item->imageUrl,
-                        'json' => $item->json,
-                        'views' => $item->views,
+                        'style_id'  => (int)$item['id'],
+                        'name'      => htmlspecialchars($this->validate_field($item['name'])),
+                        'image_url' => htmlspecialchars($this->validate_field($item['imageUrl'])),
+                        'json'      => $this->validate_field($item['json']),
+                        'views'     => (int)$item['views'],
                     ];
 
                     $this->wpdb->insert($this->table_name, $maps[$key], array('%d', '%s', '%s', '%s', '%d'));
@@ -180,10 +165,51 @@ if (!class_exists('SnazzyMaps')) {
             }
         }
 
+        public function getRemoteUrl($query_data = array())
+        {
+            $query_defaults = array(
+                'key'      => 'ecaccc3c-44fa-486c-9503-5d473587a493',
+                'pageSize' => 500,
+                'page'     => 1,
+                'sort'     => 'popular',
+            );
+
+            $query_data = array_merge($query_defaults, $query_data);
+
+            $query = http_build_query($query_data);
+
+            $url = sprintf('https://snazzymaps.com/explore.json?%s', $query);
+
+            return $url;
+        }
+
+        /**
+         * @param $url
+         *
+         * @return array|mixed|null|object|WP_Error
+         */
+        public function getResponse($url)
+        {
+            $response = wp_remote_get($url);
+            $response = json_decode($response['body'], true);
+
+            return $response;
+        }
+
+        public function validate_field($field)
+        {
+            $field = trim($field);
+            $field = stripslashes($field);
+            $field = strip_tags($field);
+
+            return $field;
+        }
+
         /**
          * Get Snazzy Maps Items
          *
          * @param int $limit
+         *
          * @return array|null|object
          */
         public function getItems($limit = 100)
@@ -192,10 +218,10 @@ if (!class_exists('SnazzyMaps')) {
 
             $results = array();
 
-            if ($this->table_exists && !$this->table_empty) {
+            if ($this->table_exists && ! $this->table_empty) {
 
                 $results = $this->wpdb->get_results(
-                    "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name ORDER BY `name` LIMIT $limit_value",
+                    "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name ORDER BY `views` DESC LIMIT $limit_value;",
                     ARRAY_A
                 );
 
@@ -208,6 +234,7 @@ if (!class_exists('SnazzyMaps')) {
          * Get Snazzy Map Style item By ID
          *
          * @param int $id
+         *
          * @return string
          */
         public function getItemJson($id)
@@ -216,10 +243,10 @@ if (!class_exists('SnazzyMaps')) {
 
             $result = '';
 
-            if ($this->table_exists && !$this->table_empty) {
+            if ($this->table_exists && ! $this->table_empty) {
 
                 $result = $this->wpdb->get_row(
-                    "SELECT `json` FROM `$this->table_name` WHERE `style_id`=$id LIMIT 1",
+                    "SELECT `json` FROM `$this->table_name` WHERE `style_id` = $id LIMIT 1;",
                     ARRAY_A
                 );
 
@@ -233,17 +260,22 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * Get Snazzy Maps Styles
          *
+         * @param int $limit
+         *
          * @return array
          */
-        public function getMapStyles()
+        public function getMapStyles($limit = 100)
         {
-            $items = $this->getItems();
+            $limit = (int)$limit;
+            $items = $this->getItems($limit);
 
             $styles = array();
 
             foreach ($items as $item) {
-                $styles[$item['style_id']] = $item['name'];
+                $styles[$item['style_id']] = ucfirst($item['name']);
             }
+
+            asort($styles, SORT_STRING);
 
             return $styles;
         }

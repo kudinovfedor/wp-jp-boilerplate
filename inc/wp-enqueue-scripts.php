@@ -10,14 +10,8 @@ function jp_enqueue_style_script()
     wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', array(), null);
 
     wp_register_script('jp-validate',
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array('jquery'), null,
-        true);
-
-    wp_register_script('jp-googleapis', get_googleapis_src(), array(), null, true);
-
-    if (get_theme_mod('google_map_js_display', false)) {
-        wp_enqueue_script('jp-googleapis');
-    }
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
+        array('jquery'), null, true);
 
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);
     wp_enqueue_script('jp-common');
@@ -117,6 +111,7 @@ add_action('wp_footer', 'jp_wp_footer', 20);
 /**
  * @param $tag
  * @param $handle
+ *
  * @return mixed
  */
 function jp_add_async_attribute($tag, $handle)
@@ -142,6 +137,7 @@ add_filter('script_loader_tag', 'jp_add_async_attribute', 10, 2);
 /**
  * @param $tag
  * @param $handle
+ *
  * @return mixed
  */
 function jp_add_defer_attribute($tag, $handle)
@@ -166,11 +162,12 @@ add_filter('script_loader_tag', 'jp_add_defer_attribute', 10, 2);
 /**
  * @param $tag
  * @param $handle
+ *
  * @return mixed
  */
 function jp_add_async_defer_attribute($tag, $handle)
 {
-    $scripts = array('jp-googleapis');
+    $scripts = array('jp-js-handle');
 
     foreach ($scripts as $script) {
 

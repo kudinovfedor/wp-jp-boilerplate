@@ -69,8 +69,7 @@
         <div><?php messengers(); ?></div>
 
         <div style="margin-bottom: 16px;">
-            <?php google_map_html(); ?>
-            <?php get_template_part('template-parts/google-map-js'); ?>
+            <?php (new GoogleMaps)->htmlMarkup(); ?>
         </div>
 
         <?php if (is_customize_preview()) {

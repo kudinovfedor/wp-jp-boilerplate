@@ -5,8 +5,6 @@
 require_once('inc/helpers.php');
 require_once('inc/config.php');
 
-require_once('inc/SnazzyMaps.php');
-
 require_once('inc/theme-setup.php');
 require_once('inc/widgets-init.php');
 require_once('inc/wp-enqueue-scripts.php');
@@ -21,6 +19,11 @@ require_once('inc/admin.php');
 require_once('inc/login.php');
 
 require_once('inc/customizer.php');
+
+require_once('inc/SnazzyMaps.php');
+
+require_once('inc/GoogleMaps.php');
+require_once('inc/GoogleMapsCustomizer.php');
 
 require_once('inc/ReCaptcha.php');
 require_once('inc/ReCaptchaCustomizer.php');
