@@ -302,7 +302,7 @@ if ( ! function_exists('phones')) {
 
             foreach (get_phones() as $phone) {
 
-                $phone_icon = '<i class="fa fa-fw fa-phone" aria-hidden="true"></i>';
+                $phone_icon = '<i class="fas fa-phone fa-fw" aria-hidden="true"></i>';
 
                 $phone_number = sprintf(
                     '<a href="tel:%s" class="phone-number">%s %s</a>',
@@ -346,20 +346,25 @@ if ( ! function_exists('get_messengers')) {
     function get_messengers()
     {
         $_messengers = [
+            'skype'    => [
+                'tel'  => get_theme_mod('jp_messenger_skype'),
+                'text' => 'Skype',
+                'icon' => 'fab fa-skype',
+            ],
             'viber'    => [
                 'tel'  => get_theme_mod('jp_messenger_viber'),
                 'text' => 'Viber',
-                'icon' => 'fa-viber',
+                'icon' => 'fab fa-viber',
             ],
             'whatsapp' => [
                 'tel'  => get_theme_mod('jp_messenger_whatsapp'),
                 'text' => 'WhatsApp',
-                'icon' => 'fa-whatsapp',
+                'icon' => 'fab fa-whatsapp',
             ],
             'telegram' => [
                 'tel'  => get_theme_mod('jp_messenger_telegram'),
                 'text' => 'Telegram',
-                'icon' => 'fa-telegram',
+                'icon' => 'fab fa-telegram-plane',
             ],
         ];
 
@@ -389,7 +394,7 @@ if ( ! function_exists('messenger')) {
             foreach (get_messengers() as $name => $messenger) {
 
                 $icon = sprintf(
-                    '<i class="fa %s" aria-hidden="true" aria-label="%s"></i>',
+                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
                     esc_attr($messenger['icon']),
                     esc_attr($messenger['text'])
                 );
@@ -439,67 +444,67 @@ if ( ! function_exists('get_social')) {
             'vk'            => [
                 'url'  => get_theme_mod('jp_social_vk'),
                 'text' => 'Vk',
-                'icon' => 'fa-vk',
+                'icon' => 'fab fa-vk',
             ],
             'twitter'       => [
                 'url'  => get_theme_mod('jp_social_twitter'),
                 'text' => 'Twitter',
-                'icon' => 'fa-twitter',
+                'icon' => 'fab fa-twitter',
             ],
             'facebook'      => [
                 'url'  => get_theme_mod('jp_social_facebook'),
                 'text' => 'Facebook',
-                'icon' => 'fa-facebook',
+                'icon' => 'fab fa-facebook-f',
             ],
             'odnoklassniki' => [
                 'url'  => get_theme_mod('jp_social_odnoklassniki'),
                 'text' => 'Odnoklassniki',
-                'icon' => 'fa-odnoklassniki',
+                'icon' => 'fab fa-odnoklassniki',
             ],
             'linkedin'      => [
                 'url'  => get_theme_mod('jp_social_linkedin'),
                 'text' => 'Linkedin',
-                'icon' => 'fa-linkedin',
+                'icon' => 'fab fa-linkedin-in',
             ],
             'instagram'     => [
                 'url'  => get_theme_mod('jp_social_instagram'),
                 'text' => 'Instagram',
-                'icon' => 'fa-instagram',
+                'icon' => 'fab fa-instagram',
             ],
             'google-plus'   => [
                 'url'  => get_theme_mod('jp_social_google_plus'),
                 'text' => 'Google Plus',
-                'icon' => 'fa-google-plus',
+                'icon' => 'fab fa-google-plus-g',
             ],
             'youtube'       => [
                 'url'  => get_theme_mod('jp_social_youtube'),
                 'text' => 'YouTube',
-                'icon' => 'fa-youtube-play',
+                'icon' => 'fab fa-youtube',
             ],
             'pinterest'     => [
                 'url'  => get_theme_mod('jp_social_pinterest'),
                 'text' => 'Pinterest',
-                'icon' => 'fa-pinterest',
+                'icon' => 'fab fa-pinterest-p',
             ],
             'tumblr'        => [
                 'url'  => get_theme_mod('jp_social_tumblr'),
                 'text' => 'Tumblr',
-                'icon' => 'fa-tumblr',
+                'icon' => 'fab fa-tumblr',
             ],
             'flickr'        => [
                 'url'  => get_theme_mod('jp_social_flickr'),
                 'text' => 'Flickr',
-                'icon' => 'fa-flickr',
+                'icon' => 'fab fa-flickr',
             ],
             'reddit'        => [
                 'url'  => get_theme_mod('jp_social_reddit'),
                 'text' => 'Reddit',
-                'icon' => 'fa-reddit',
+                'icon' => 'fab fa-reddit-alien',
             ],
             'rss'           => [
                 'url'  => get_theme_mod('jp_social_rss'),
                 'text' => 'RSS',
-                'icon' => 'fa-rss',
+                'icon' => 'fas fa-rss',
             ],
         ];
 
@@ -529,7 +534,7 @@ if ( ! function_exists('social')) {
             foreach (get_social() as $name => $social) {
 
                 $social_icon = sprintf(
-                    '<i class="fa %s" aria-hidden="true" aria-label="%s"></i>',
+                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
                     esc_attr($social['icon']),
                     esc_attr($social['text'])
                 );

@@ -58,7 +58,10 @@ if ( ! class_exists('GoogleMaps')) {
                 'type_themes'              => get_theme_mod('google_map_themes_type', 'roadmap'),
                 'styles_themes'            => get_theme_mod('google_map_themes_styles', 0),
             );
+        }
 
+        public function init()
+        {
             if ($this->isEnabled()) {
                 add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
                 add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
@@ -261,3 +264,4 @@ if ( ! class_exists('GoogleMaps')) {
  * @var GoogleMaps $google_map
  */
 $google_map = new GoogleMaps;
+$google_map->init();

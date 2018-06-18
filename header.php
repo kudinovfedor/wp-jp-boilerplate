@@ -64,26 +64,14 @@
     <div class="container">
         <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
         <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
-        <div><?php social(); ?></div>
-        <div><?php phones(); ?></div>
-        <div><?php messengers(); ?></div>
 
-        <div style="margin-bottom: 16px;">
-            <?php (new GoogleMaps)->htmlMarkup(); ?>
-        </div>
+        <div style="margin-bottom: 16px;"><?php (new GoogleMaps)->htmlMarkup(); ?></div>
 
-        <?php if (is_customize_preview()) {
-            $opt = (new ReCaptcha)->getOptions();
-            ?>
-
-            <div class="jp-g-recaptcha" style="margin-bottom: 16px;">
-                <div class="g-recaptcha"
-                     data-size="<?php echo esc_attr($opt['size']); ?>"
-                     data-theme="<?php echo esc_attr($opt['theme']); ?>"
-                     data-tabindex="<?php echo esc_attr($opt['tabindex']); ?>"
-                     data-sitekey="<?php echo esc_attr($opt['site-key']); ?>">
-                </div>
-            </div>
+        <?php if (is_customize_preview()) { ?>
+            <div style="margin-bottom: 16px;"><?php social(); ?></div>
+            <div style="margin-bottom: 16px;"><?php phones(); ?></div>
+            <div style="margin-bottom: 16px;"><?php messengers(); ?></div>
+            <div style="margin-bottom: 16px;"><?php (new ReCaptcha)->htmlMarkup(); ?></div>
 
             <p>
                 <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
@@ -93,7 +81,6 @@
                     <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
                 </button>
             </p>
-
         <?php } ?>
 
     </div>

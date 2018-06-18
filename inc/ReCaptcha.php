@@ -1,6 +1,6 @@
 <?php
 
-if (!class_exists('ReCaptcha')) {
+if ( ! class_exists('ReCaptcha')) {
     /**
      * Class ReCaptcha
      */
@@ -15,11 +15,11 @@ if (!class_exists('ReCaptcha')) {
          * @var array
          */
         public $error_code = array(
-            'missing-input-secret' => 'The secret parameter is missing.',
-            'invalid-input-secret' => 'The secret parameter is invalid or malformed.',
+            'missing-input-secret'   => 'The secret parameter is missing.',
+            'invalid-input-secret'   => 'The secret parameter is invalid or malformed.',
             'missing-input-response' => 'The response parameter is missing.',
             'invalid-input-response' => 'The response parameter is invalid or malformed.',
-            'bad-request' => 'The request is invalid or malformed.',
+            'bad-request'            => 'The request is invalid or malformed.',
         );
 
         /**
@@ -28,19 +28,19 @@ if (!class_exists('ReCaptcha')) {
         public function __construct()
         {
             $this->options = array(
-                'site-key' => get_theme_mod('jp_recaptcha_site_key'),
-                'secret-key' => get_theme_mod('jp_recaptcha_secret_key'),
-                'login-form' => get_theme_mod('jp_recaptcha_login_form'),
-                'registration-form' => get_theme_mod('jp_recaptcha_registration_form'),
+                'site-key'            => get_theme_mod('jp_recaptcha_site_key'),
+                'secret-key'          => get_theme_mod('jp_recaptcha_secret_key'),
+                'login-form'          => get_theme_mod('jp_recaptcha_login_form'),
+                'registration-form'   => get_theme_mod('jp_recaptcha_registration_form'),
                 'reset-password-form' => get_theme_mod('jp_recaptcha_reset_password_form'),
-                'comments-form' => get_theme_mod('jp_recaptcha_comments_form'),
-                'theme' => get_theme_mod('jp_recaptcha_theme', 'light'),
-                'size' => get_theme_mod('jp_recaptcha_size', 'normal'),
-                'language' => get_theme_mod('jp_recaptcha_language', 0),
-                'tabindex' => get_theme_mod('jp_recaptcha_tabindex', 0),
-                'callback' => get_theme_mod('jp_recaptcha_callback'),
-                'expired-callback' => get_theme_mod('jp_recaptcha_expired_callback'),
-                'error-callback' => get_theme_mod('jp_recaptcha_error_callback'),
+                'comments-form'       => get_theme_mod('jp_recaptcha_comments_form'),
+                'theme'               => get_theme_mod('jp_recaptcha_theme', 'light'),
+                'size'                => get_theme_mod('jp_recaptcha_size', 'normal'),
+                'language'            => get_theme_mod('jp_recaptcha_language', 0),
+                'tabindex'            => get_theme_mod('jp_recaptcha_tabindex', 0),
+                'callback'            => get_theme_mod('jp_recaptcha_callback'),
+                'expired-callback'    => get_theme_mod('jp_recaptcha_expired_callback'),
+                'error-callback'      => get_theme_mod('jp_recaptcha_error_callback'),
             );
 
             if ($this->isEnabled()) {
@@ -55,12 +55,12 @@ if (!class_exists('ReCaptcha')) {
 
                 if ($this->isReCaptchaRequired('registration')) {
                     add_action('register_form', array($this, 'htmlMarkup'));
-                    //add_filter('registration_errors', array($this, 'checkRegistrationForm'), 10, 1);
+                    add_filter('registration_errors', array($this, 'checkRegistrationForm'));
                 }
 
                 if ($this->isReCaptchaRequired('reset-password')) {
                     add_action('lostpassword_form', array($this, 'htmlMarkup'));
-                    //add_filter('allow_password_reset', array($this, 'checkResetPasswordForm'), 10, 1);
+                    add_filter('allow_password_reset', array($this, 'checkResetPasswordForm'));
                 }
 
                 if ($this->isReCaptchaRequired('comments') || is_customize_preview()) {
@@ -68,7 +68,7 @@ if (!class_exists('ReCaptcha')) {
                     add_action('comment_form_after_fields', array($this, 'htmlMarkup'));
                     add_action('comment_form_logged_in_after', array($this, 'htmlMarkup'));
 
-                    //add_action('pre_comment_on_post', array($this, 'checkCommentsForm'));
+                    add_action('pre_comment_on_post', array($this, 'checkCommentsForm'));
 
                     add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
 
@@ -87,6 +87,7 @@ if (!class_exists('ReCaptcha')) {
 
         /**
          * @param $name
+         *
          * @return mixed
          */
         public function isReCaptchaRequired($name)
@@ -112,19 +113,19 @@ if (!class_exists('ReCaptcha')) {
             $query_data = array(
                 'onload' => '',
                 'render' => '',
-                'hl' => get_theme_mod('jp_recaptcha_language'),
+                'hl'     => get_theme_mod('jp_recaptcha_language'),
             );
 
 
             $query_data = array_filter($query_data, function ($value, $key) {
-                return !empty($value);
+                return ! empty($value);
             }, ARRAY_FILTER_USE_BOTH);
 
             $query = http_build_query($query_data);
 
             $src = 'https://www.google.com/recaptcha/api.js';
 
-            if (!empty($query)) {
+            if ( ! empty($query)) {
                 $src = sprintf($src . '?%s', $query);
             }
 
@@ -147,6 +148,10 @@ if (!class_exists('ReCaptcha')) {
                 '<div class="g-recaptcha" data-size="%s" data-theme="%s" data-sitekey="%s" data-tabindex="%d"></div>',
                 esc_attr($opt['size']), esc_attr($opt['theme']), esc_attr($opt['site-key']), esc_attr($opt['tabindex'])
             );
+
+            if (is_customize_preview()) {
+                $markup = sprintf('<div class="jp-g-recaptcha">%s</div>', $markup);
+            }
 
             if (is_singular()) {
                 $markup = sprintf('<div class="form-row comment-form-recapthca">%s</div>', $markup);
@@ -183,7 +188,7 @@ if (!class_exists('ReCaptcha')) {
             }
 
             $query_data = array(
-                'secret' => $this->options['secret-key'],
+                'secret'   => $this->options['secret-key'],
                 'response' => $g_recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
             );
@@ -215,19 +220,105 @@ if (!class_exists('ReCaptcha')) {
         }
 
         /**
+         * @param $allow
          *
+         * @return WP_Error
          */
-        public function checkRegistrationForm()
+        public function checkRegistrationForm($allow)
         {
+            $error = new WP_Error();
 
+            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+
+            if (empty($g_recaptcha)) {
+
+                $error->add('recaptcha_empty_input_response',
+                    '<strong>ERROR</strong>: reCAPTCHA checkbox should be marked.');
+
+                return $error;
+            }
+
+            $query_data = array(
+                'secret'   => $this->options['secret-key'],
+                'response' => $g_recaptcha,
+                'remoteip' => $this->getIP() || '127.0.0.1',
+            );
+
+            $query = http_build_query($query_data);
+
+            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
+
+            $response = wp_remote_post($url);
+            $response = json_decode($response['body'], true);
+
+            if (true === $response['success']) {
+
+                return $allow;
+
+            } else {
+
+                foreach ($response['error-codes'] as $item) {
+                    if (array_key_exists($item, $this->error_code)) {
+                        $error->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
+                    } else {
+                        $error->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
+                    }
+                }
+
+                return $error;
+
+            }
         }
 
         /**
+         * @param $allow
          *
+         * @return WP_Error
          */
-        public function checkResetPasswordForm()
+        public function checkResetPasswordForm($allow)
         {
+            $error = new WP_Error();
 
+            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+
+            if (empty($g_recaptcha)) {
+
+                $error->add('recaptcha_empty_input_response',
+                    '<strong>ERROR</strong>: reCAPTCHA checkbox should be marked.');
+
+                return $error;
+            }
+
+            $query_data = array(
+                'secret'   => $this->options['secret-key'],
+                'response' => $g_recaptcha,
+                'remoteip' => $this->getIP() || '127.0.0.1',
+            );
+
+            $query = http_build_query($query_data);
+
+            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
+
+            $response = wp_remote_post($url);
+            $response = json_decode($response['body'], true);
+
+            if (true === $response['success']) {
+
+                return $allow;
+
+            } else {
+
+                foreach ($response['error-codes'] as $item) {
+                    if (array_key_exists($item, $this->error_code)) {
+                        $error->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
+                    } else {
+                        $error->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
+                    }
+                }
+
+                return $error;
+
+            }
         }
 
         /**
@@ -235,7 +326,34 @@ if (!class_exists('ReCaptcha')) {
          */
         public function checkCommentsForm()
         {
+            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
 
+            if (empty($g_recaptcha)) {
+
+                wp_die('<strong>ERROR</strong>: reCAPTCHA checkbox should be marked. <a href="javascript:history.back()">&laquo; Back</a>');
+
+            }
+
+            $query_data = array(
+                'secret'   => $this->options['secret-key'],
+                'response' => $g_recaptcha,
+                'remoteip' => $this->getIP() || '127.0.0.1',
+            );
+
+            $query = http_build_query($query_data);
+
+            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
+
+            $response = wp_remote_post($url);
+            $response = json_decode($response['body'], true);
+
+            if (false === $response['success']) {
+
+                wp_die('<strong>ERROR</strong>: Click the BACK button on your browser and try again. <a href="javascript:history.back()">&laquo; Back</a>');
+
+            }
+
+            return;
         }
 
         /**
@@ -255,7 +373,7 @@ if (!class_exists('ReCaptcha')) {
             );
 
             foreach ($fields as $ip_field) {
-                if (!empty($_SERVER[$ip_field])) {
+                if ( ! empty($_SERVER[$ip_field])) {
                     return $_SERVER[$ip_field];
                 }
             }

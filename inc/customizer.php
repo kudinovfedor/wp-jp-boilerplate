@@ -323,12 +323,20 @@ function jp_customize_register($wp_customize)
         'panel'       => 'jp_theme_options',
     ));
 
+    $wp_customize->add_setting('jp_messenger_skype', array('default' => '', 'sanitize_callback' => '',));
     $wp_customize->add_setting('jp_messenger_viber', array('default' => '', 'sanitize_callback' => '',));
     $wp_customize->add_setting('jp_messenger_whatsapp', array('default' => '', 'sanitize_callback' => '',));
     $wp_customize->add_setting('jp_messenger_telegram', array('default' => '', 'sanitize_callback' => '',));
 
-    $wp_customize->selective_refresh->add_partial('jp_messenger_viber', array(
+    $wp_customize->selective_refresh->add_partial('jp_messenger_skype', array(
         'selector' => '.messenger',
+    ));
+
+    $wp_customize->add_control('jp_messenger_skype', array(
+        'label'    => 'Skype',
+        'section'  => 'jp_messenger',
+        'settings' => 'jp_messenger_skype',
+        'type'     => 'tel',
     ));
 
     $wp_customize->add_control('jp_messenger_viber', array(

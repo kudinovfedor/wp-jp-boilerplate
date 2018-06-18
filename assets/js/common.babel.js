@@ -124,28 +124,36 @@ if (false && 'serviceWorker' in navigator) {
 
             $(form).validate({
                 rules: {
-                    author: {
+                    'author': {
                         required: true,
                         minlength: 3,
                         lettersonly: true,
                     },
-                    email: {
+                    'email': {
                         required: true,
                         email: true,
                     },
-                    url: {
+                    'url': {
                         url: true,
                     },
-                    comment: {
+                    'comment': {
                         required: true,
                         minlength: 10,
                     },
+                    'g-recaptcha-response': {
+                        required: function () {
+                            return grecaptcha.getResponse() === '';
+                        },
+                    },
                 },
                 messages: {
-                    author: {},
-                    email: {},
-                    url: {},
-                    comment: {},
+                    'author': {},
+                    'email': {},
+                    'url': {},
+                    'comment': {},
+                    'g-recaptcha-response': {
+                        'required': 'reCAPTCHA unchecked. Please tick and resubmit the form.',
+                    },
                 },
             });
 
