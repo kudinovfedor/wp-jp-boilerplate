@@ -88,11 +88,11 @@ if ( ! class_exists('GoogleMapsCustomizer')) {
          */
         public function customizer($wp_customize)
         {
-            // Panel Google Maps Api
+            // Panel Google Maps API
             $wp_customize->add_panel('google_map', array(
-                'title'       => 'Google Maps Api',
+                'title'       => 'Google Maps API',
                 'description' => 'Customizer for Google Map',
-                'priority'    => 202,
+                'priority'    => 203,
             ));
 
             // Section Project Setup

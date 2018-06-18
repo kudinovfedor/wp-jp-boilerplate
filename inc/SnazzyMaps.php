@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists('SnazzyMaps')) {
+if (!class_exists('SnazzyMaps')) {
     /**
      * Class SnazzyMaps
      */
@@ -47,8 +47,8 @@ if ( ! class_exists('SnazzyMaps')) {
         public function __construct()
         {
             global $wpdb;
-            $this->wpdb            = $wpdb;
-            $this->table_name      = $this->wpdb->prefix . 'snazzymaps';
+            $this->wpdb = $wpdb;
+            $this->table_name = $this->wpdb->prefix . 'snazzymaps';
             $this->charset_collate = $this->wpdb->get_charset_collate();
 
             $this->isTableExist();
@@ -91,7 +91,7 @@ if ( ! class_exists('SnazzyMaps')) {
          */
         public function createTable()
         {
-            if ( ! $this->table_exists) {
+            if (!$this->table_exists) {
 
                 $sql = "CREATE TABLE $this->table_name (
                   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -140,9 +140,8 @@ if ( ! class_exists('SnazzyMaps')) {
 
                 $response = $this->getResponse($url);
 
-                $this->pagination = $response['pagination'];
-
                 if (null !== $response) {
+                    $this->pagination = $response['pagination'];
                     $this->styles = $response['styles'];
                 }
 
@@ -150,11 +149,11 @@ if ( ! class_exists('SnazzyMaps')) {
 
                 foreach ($this->styles as $key => $item) {
                     $maps[$key] = [
-                        'style_id'  => (int)$item['id'],
-                        'name'      => htmlspecialchars($this->validate_field($item['name'])),
+                        'style_id' => (int)$item['id'],
+                        'name' => htmlspecialchars($this->validate_field($item['name'])),
                         'image_url' => htmlspecialchars($this->validate_field($item['imageUrl'])),
-                        'json'      => $this->validate_field($item['json']),
-                        'views'     => (int)$item['views'],
+                        'json' => $this->validate_field($item['json']),
+                        'views' => (int)$item['views'],
                     ];
 
                     $this->wpdb->insert($this->table_name, $maps[$key], array('%d', '%s', '%s', '%s', '%d'));
@@ -168,10 +167,10 @@ if ( ! class_exists('SnazzyMaps')) {
         public function getRemoteUrl($query_data = array())
         {
             $query_defaults = array(
-                'key'      => 'ecaccc3c-44fa-486c-9503-5d473587a493',
+                'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
                 'pageSize' => 500,
-                'page'     => 1,
-                'sort'     => 'popular',
+                'page' => 1,
+                'sort' => 'popular',
             );
 
             $query_data = array_merge($query_defaults, $query_data);
@@ -190,7 +189,15 @@ if ( ! class_exists('SnazzyMaps')) {
          */
         public function getResponse($url)
         {
-            $response = wp_remote_get($url);
+            $response = wp_remote_get($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
+
+            if (is_object($response)) {
+                return null;
+            }
+
             $response = json_decode($response['body'], true);
 
             return $response;
@@ -218,7 +225,7 @@ if ( ! class_exists('SnazzyMaps')) {
 
             $results = array();
 
-            if ($this->table_exists && ! $this->table_empty) {
+            if ($this->table_exists && !$this->table_empty) {
 
                 $results = $this->wpdb->get_results(
                     "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name ORDER BY `views` DESC LIMIT $limit_value;",
@@ -243,7 +250,7 @@ if ( ! class_exists('SnazzyMaps')) {
 
             $result = '';
 
-            if ($this->table_exists && ! $this->table_empty) {
+            if ($this->table_exists && !$this->table_empty) {
 
                 $result = $this->wpdb->get_row(
                     "SELECT `json` FROM `$this->table_name` WHERE `style_id` = $id LIMIT 1;",

@@ -91,7 +91,7 @@ if (!class_exists('ReCaptchaCustomizer')) {
         }
 
         /**
-         * reCAPTCHA Customizer
+         * Google reCAPTCHA Customizer
          *
          * @param $wp_customize WP_Customize_Manager
          */
@@ -99,10 +99,10 @@ if (!class_exists('ReCaptchaCustomizer')) {
         {
             // Section reCAPTCHA
             $wp_customize->add_section('jp_recaptcha', array(
-                'title' => 'reCAPTCHA',
+                'title' => 'Google reCAPTCHA v2',
                 'description' => 'Register your website with Google to get required API keys and enter them below. <a target="_blank" rel="nofollow noopener" href="https://www.google.com/recaptcha/admin#list">Get the API Keys</a>',
-                'priority' => 161,
-                'panel' => 'jp_theme_options',
+                'priority' => 202,
+                //'panel' => 'jp_theme_options',
             ));
 
             $wp_customize->add_setting('jp_recaptcha_site_key', array(

@@ -197,7 +197,10 @@ if ( ! class_exists('ReCaptcha')) {
 
             $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
 
-            $response = wp_remote_post($url);
+            $response = wp_remote_post($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
             $response = json_decode($response['body'], true);
 
             if (true === $response['success']) {
@@ -248,7 +251,10 @@ if ( ! class_exists('ReCaptcha')) {
 
             $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
 
-            $response = wp_remote_post($url);
+            $response = wp_remote_post($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
             $response = json_decode($response['body'], true);
 
             if (true === $response['success']) {
@@ -299,7 +305,10 @@ if ( ! class_exists('ReCaptcha')) {
 
             $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
 
-            $response = wp_remote_post($url);
+            $response = wp_remote_post($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
             $response = json_decode($response['body'], true);
 
             if (true === $response['success']) {
@@ -344,7 +353,10 @@ if ( ! class_exists('ReCaptcha')) {
 
             $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
 
-            $response = wp_remote_post($url);
+            $response = wp_remote_post($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
             $response = json_decode($response['body'], true);
 
             if (false === $response['success']) {
