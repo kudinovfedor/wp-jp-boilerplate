@@ -198,9 +198,13 @@ if (!class_exists('SnazzyMaps')) {
                 return null;
             }
 
-            $response = json_decode($response['body'], true);
+            if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                $body = wp_remote_retrieve_body($response);
+                $response = json_decode($body, true);
+            }
 
             return $response;
+
         }
 
         public function validate_field($field)

@@ -33,7 +33,7 @@ if (!function_exists('jp_polylang_shortcode')) {
         if (function_exists('pll_the_languages')) {
             $flags = pll_the_languages($atts);
 
-            return $flags;
+            return sprintf('<ul class="lang">%s</ul>', $flags);
         }
 
         return '';
@@ -66,16 +66,19 @@ if (!function_exists('jp_social_shortcode')) {
             $items = '';
 
             foreach (get_social() as $name => $social) {
-                $items .= sprintf(
-                    '<li class="social-item">%s</li>',
-                    sprintf(
-                        '<a class="social-link social-%s" href="%s" target="_blank"><i class="%s" aria-hidden="true" aria-label="%s"></i></a>',
-                        esc_attr($name),
-                        esc_attr(esc_url($social['url'])),
-                        esc_attr($social['icon']),
-                        esc_attr($social['text'])
-                    )
+                $icon = sprintf(
+                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
+                    esc_attr($social['icon']), esc_attr($social['text'])
                 );
+
+                $link = sprintf(
+                    '<a class="social-link social-%s" href="%s" target="_blank">%s</a>',
+                    esc_attr($name), esc_attr(esc_url($social['url'])), $icon
+                );
+
+                $item = sprintf('<li class="social-item">%s</li>', $link);
+
+                $items .= $item . PHP_EOL;
             }
 
             $output = sprintf('<ul class="social">%s</ul>', $items);
@@ -85,7 +88,7 @@ if (!function_exists('jp_social_shortcode')) {
 
     }
 
-    add_shortcode('jp-social', 'jp_social_shortcode');
+    add_shortcode('jp_social', 'jp_social_shortcode');
 }
 
 if (!function_exists('jp_phones_shortcode')) {
@@ -111,14 +114,17 @@ if (!function_exists('jp_phones_shortcode')) {
             $items = '';
 
             foreach (get_phones() as $phone) {
-                $items .= sprintf(
-                    '<li class="phone-item">%s</li>',
-                    sprintf(
-                        '<a class="phone-number" href="tel:%s"></a>',
-                        esc_attr(get_phone_number($phone)),
-                        esc_html($phone)
-                    )
+
+                $link = sprintf(
+                    '<a class="phone-number" href="tel:%s">%s</a>',
+                    esc_attr(get_phone_number($phone)),
+                    esc_html($phone)
                 );
+
+                $item = sprintf('<li class="phone-item">%s</li>', $link);
+
+                $items .= $item . PHP_EOL;
+
             }
 
             $output = sprintf('<ul class="phone">%s</ul>', $items);
@@ -128,7 +134,7 @@ if (!function_exists('jp_phones_shortcode')) {
 
     }
 
-    add_shortcode('jp-phones', 'jp_phones_shortcode');
+    add_shortcode('jp_phones', 'jp_phones_shortcode');
 }
 
 if (!function_exists('jp_messengers_shortcode')) {
@@ -179,7 +185,7 @@ if (!function_exists('jp_messengers_shortcode')) {
 
     }
 
-    add_shortcode('jp-messengers', 'jp_messengers_shortcode');
+    add_shortcode('jp_messengers', 'jp_messengers_shortcode');
 }
 
 if (!function_exists('jp_sitemap_shortcode')) {
@@ -241,5 +247,24 @@ if (!function_exists('jp_search_shortcode')) {
         return get_search_form(false);
     }
 
-    add_shortcode('jp-search', 'jp_search_shortcode');
+    add_shortcode('jp_search', 'jp_search_shortcode');
 }
+
+/**
+ * Add Quicktags Buttons
+ */
+function jp_add_quicktags()
+{
+    if (wp_script_is('quicktags')) { ?>
+        <script>
+            QTags.addButton('jp_search', 'search', '[jp_search]', '', 's', 'Add shortcode Search');
+            QTags.addButton('jp_social', 'social', '[jp_social]', '', 's', 'Add shortcode Social');
+            QTags.addButton('jp_phones', 'phones', '[jp_phones]', '', 'p', 'Add shortcode Phones');
+            QTags.addButton('jp_sitemap', 'sitemap', '[jp_sitemap]', '', 's', 'Add shortcode Sitemap');
+            QTags.addButton('jp_polylang', 'polylang', '[jp_polylang]', '', 'p', 'Add shortcode Polylang');
+            QTags.addButton('jp_messengers', 'messengers', '[jp_messengers]', '', 'm', 'Add shortcode Messengers');
+        </script>
+    <?php }
+}
+
+add_action('admin_print_footer_scripts', 'jp_add_quicktags');
