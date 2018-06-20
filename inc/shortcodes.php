@@ -33,7 +33,11 @@ if (!function_exists('jp_polylang_shortcode')) {
         if (function_exists('pll_the_languages')) {
             $flags = pll_the_languages($atts);
 
-            return sprintf('<ul class="lang">%s</ul>', $flags);
+            if (0 === (int)$atts['dropdown']) {
+                $flags = sprintf('<ul class="lang"></ul>', $flags);
+            }
+
+            return $flags;
         }
 
         return '';

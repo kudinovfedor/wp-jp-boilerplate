@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists('GoogleMaps')) {
+if (!class_exists('GoogleMaps')) {
     /**
      * Class GoogleMaps
      */
@@ -23,40 +23,43 @@ if ( ! class_exists('GoogleMaps')) {
         {
             $this->options = array(
                 // Project Setup
-                'enable'                   => get_theme_mod('google_map_display', false),
-                'api_key'                  => get_theme_mod('google_map_project_setup_api_key'),
-                'version'                  => get_theme_mod('google_map_project_setup_version'),
-                'language'                 => get_theme_mod('google_map_project_setup_language'),
-                'region'                   => get_theme_mod('google_map_project_setup_region'),
-                'callback'                 => get_theme_mod('google_map_project_setup_map_callback', 'initMap'),
-                'selector'                 => get_theme_mod('google_map_project_setup_map_selector', 'google-map'),
-                'width'                    => get_theme_mod('google_map_project_setup_width', 600),
-                'height'                   => get_theme_mod('google_map_project_setup_height', 400),
-                'latitude'                 => get_theme_mod('google_map_project_setup_latitude', 36.580247),
-                'longitude'                => get_theme_mod('google_map_project_setup_longitude', -41.817628),
-                'zoom'                     => get_theme_mod('google_map_project_setup_zoom_level', 3),
+                'enable' => get_theme_mod('google_map_display', false),
+                'api_key' => get_theme_mod('google_map_project_setup_api_key'),
+                'version' => get_theme_mod('google_map_project_setup_version'),
+                'language' => get_theme_mod('google_map_project_setup_language'),
+                'region' => get_theme_mod('google_map_project_setup_region'),
+                'callback' => get_theme_mod('google_map_project_setup_map_callback', 'initMap'),
+                'selector' => get_theme_mod('google_map_project_setup_map_selector', 'google-map'),
+                'width' => get_theme_mod('google_map_project_setup_width', 600),
+                'height' => get_theme_mod('google_map_project_setup_height', 400),
+                'latitude' => get_theme_mod('google_map_project_setup_latitude', 36.580247),
+                'longitude' => get_theme_mod('google_map_project_setup_longitude', -41.817628),
+                'zoom' => get_theme_mod('google_map_project_setup_zoom_level', 3),
+
+                // Layers
+                'layers' => get_theme_mod('google_map_layers_layer', 'off'),
 
                 // Controls
-                'type_control'             => get_theme_mod('google_map_controls_map_type', 'horizontal_bar'),
-                'zoom_control'             => get_theme_mod('google_map_controls_zoom', 1),
+                'type_control' => get_theme_mod('google_map_controls_map_type', 'horizontal_bar'),
+                'zoom_control' => get_theme_mod('google_map_controls_zoom', 1),
                 'gesture_handling_control' => get_theme_mod('google_map_controls_gesture_handling', 'auto'),
-                'full_screen_control'      => get_theme_mod('google_map_controls_full_screen', 0),
-                'street_view_control'      => get_theme_mod('google_map_controls_street_view', 1),
-                'scale_control'            => get_theme_mod('google_map_controls_scale', 1),
-                'clickable_poi_control'    => get_theme_mod('google_map_controls_clickable_poi', 0),
-                'draggable'                => get_theme_mod('google_map_controls_draggable', 1),
-                'double_click_zoom'        => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
-                'scroll_wheel'             => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
+                'full_screen_control' => get_theme_mod('google_map_controls_full_screen', 0),
+                'street_view_control' => get_theme_mod('google_map_controls_street_view', 1),
+                'scale_control' => get_theme_mod('google_map_controls_scale', 1),
+                'clickable_poi_control' => get_theme_mod('google_map_controls_clickable_poi', 0),
+                'draggable' => get_theme_mod('google_map_controls_draggable', 1),
+                'double_click_zoom' => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
+                'scroll_wheel' => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
 
                 // Positions
-                'type_position'            => get_theme_mod('google_map_positions_map_type', 1),
-                'zoom_position'            => get_theme_mod('google_map_positions_zoom', 9),
-                'street_view_position'     => get_theme_mod('google_map_positions_street_view', 9),
-                'full_screen_position'     => get_theme_mod('google_map_positions_full_screen', 3),
+                'type_position' => get_theme_mod('google_map_positions_map_type', 1),
+                'zoom_position' => get_theme_mod('google_map_positions_zoom', 9),
+                'street_view_position' => get_theme_mod('google_map_positions_street_view', 9),
+                'full_screen_position' => get_theme_mod('google_map_positions_full_screen', 3),
 
                 // Themes
-                'type_themes'              => get_theme_mod('google_map_themes_type', 'roadmap'),
-                'styles_themes'            => get_theme_mod('google_map_themes_styles', 0),
+                'type_themes' => get_theme_mod('google_map_themes_type', 'roadmap'),
+                'styles_themes' => get_theme_mod('google_map_themes_styles', 0),
             );
         }
 
@@ -73,7 +76,7 @@ if ( ! class_exists('GoogleMaps')) {
          */
         public function isEnabled()
         {
-            return $this->options['enable'] && ! empty($this->options['api_key']);
+            return $this->options['enable'] && !empty($this->options['api_key']);
         }
 
         /**
@@ -84,10 +87,10 @@ if ( ! class_exists('GoogleMaps')) {
         public function getGoogleApisSrc()
         {
             $query_data = array(
-                'v'        => $this->options['version'],
+                'v' => $this->options['version'],
                 'language' => $this->options['language'],
-                'region'   => $this->options['region'],
-                'key'      => $this->options['api_key'],
+                'region' => $this->options['region'],
+                'key' => $this->options['api_key'],
                 'callback' => $this->options['callback'],
             );
 
@@ -134,7 +137,7 @@ if ( ! class_exists('GoogleMaps')) {
          */
         public function isNotEmpty($value, $key)
         {
-            return ! empty($value);
+            return !empty($value);
         }
 
         /**
@@ -183,7 +186,7 @@ if ( ! class_exists('GoogleMaps')) {
             ?>
             <script>
                 function <?php echo $map['callback']; ?>() {
-                    var uluru, map, mapElement, mapMarker, mapOptions;
+                    var uluru, map, mapElement, mapMarker, mapOptions, infoWindow;
 
                     uluru = {
                         lat: <?php echo $map['latitude']; ?>,
@@ -249,8 +252,26 @@ if ( ! class_exists('GoogleMaps')) {
                         map: map,
                     });
 
+                    <?php
+                    if ('off' !== $map['layers']) {
+                        echo sprintf('var %1$sLayer = new google.maps.%2$sLayer(); %1$sLayer.setMap(map);' . PHP_EOL,
+                            $map['layers'], ucfirst($map['layers']));
+                    } ?>
+
+                    infoWindow = new google.maps.InfoWindow({
+                        content: 'Hello World',
+                        maxWidth: 320,
+                    });
+
                     mapMarker.addListener('click', function () {
+                        infoWindow.open(map, mapMarker);
                         console.log('Marker was clicked!');
+                    });
+
+                    //infoWindow.open(map, mapMarker);
+
+                    google.maps.event.addListener(map, 'click', function () {
+                        infoWindow.close();
                     });
 
                     console.log('Google Maps API version: ' + google.maps.version);
