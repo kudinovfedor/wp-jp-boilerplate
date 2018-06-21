@@ -339,7 +339,8 @@ add_filter('excerpt_length', 'jp_excerpt_length');
  */
 function jp_excerpt_more($more)
 {
-    return '[...]';
+    //return '[...]';
+    return '...';
 }
 
 add_filter('excerpt_more', 'jp_excerpt_more');
