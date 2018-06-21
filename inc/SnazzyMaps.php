@@ -292,10 +292,3 @@ if (!class_exists('SnazzyMaps')) {
         }
     }
 }
-
-global $snazzy_maps;
-
-/**
- * @var SnazzyMaps $snazzy_maps
- */
-$snazzy_maps = new SnazzyMaps();

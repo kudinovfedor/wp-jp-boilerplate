@@ -418,6 +418,6 @@ if ( ! class_exists('ReCaptcha')) {
         }
 
     }
-}
 
-new ReCaptcha;
+    new ReCaptcha;
+}

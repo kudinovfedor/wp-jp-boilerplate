@@ -74,10 +74,16 @@ if (!class_exists('GoogleMapsCustomizer')) {
         );
 
         /**
+         * @var SnazzyMaps
+         */
+        public $snazzy_maps;
+
+        /**
          * GoogleMapsCustomizer constructor.
          */
         public function __construct()
         {
+            $this->snazzy_maps = new SnazzyMaps;
             add_action('customize_register', array($this, 'customizer'));
         }
 
@@ -135,11 +141,11 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_project_setup_height', array(
                 'default' => 400,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
             $wp_customize->add_setting('google_map_project_setup_width', array(
                 'default' => 600,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
             $wp_customize->add_setting('google_map_project_setup_latitude', array(
                 'default' => '',
@@ -151,7 +157,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_project_setup_zoom_level', array(
                 'default' => 3,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
 
             $wp_customize->add_control('google_map_display', array(
@@ -559,7 +565,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_themes_styles', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
 
             $wp_customize->add_control('google_map_themes_type', array(
@@ -581,12 +587,13 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_themes',
                 'settings' => 'google_map_themes_styles',
                 'type' => 'select',
-                'choices' => array_replace(array(0 => 'Default'), (new SnazzyMaps())->getMapStyles()),
+                'choices' => array_replace(array(0 => 'Default'), $this->snazzy_maps->getMapStyles()),
             ));
 
             // Section Marker
             $wp_customize->add_section('google_map_marker', array(
                 'title' => 'Marker',
+                'description' => 'Options used to define the properties that can be set on a Marker.',
                 'panel' => 'google_map',
             ));
 
@@ -595,15 +602,15 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_animation', array(
-                'default' => '',
-                'sanitize_callback' => '',
+                'default' => 0,
+                'sanitize_callback' => 'absint',
             ));
             $wp_customize->add_setting('google_map_marker_clickable', array(
-                'default' => '',
+                'default' => 1,
                 'sanitize_callback' => '',
             ));
-            $wp_customize->add_setting('google_map_marker_cross_on_drag', array(
-                'default' => '',
+            $wp_customize->add_setting('google_map_marker_cross_drag', array(
+                'default' => 1,
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_cursor', array(
@@ -611,10 +618,14 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_draggable', array(
-                'default' => '',
+                'default' => 0,
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_icon', array(
+                'default' => '',
+                'sanitize_callback' => '',
+            ));
+            $wp_customize->add_setting('google_map_marker_label', array(
                 'default' => '',
                 'sanitize_callback' => '',
             ));
@@ -623,11 +634,11 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_opacity', array(
-                'default' => '',
-                'sanitize_callback' => '',
+                'default' => 1,
+                'sanitize_callback' => 'absint',
             ));
             $wp_customize->add_setting('google_map_marker_optimized', array(
-                'default' => '',
+                'default' => 1,
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_position', array(
@@ -643,12 +654,12 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_visible', array(
-                'default' => '',
+                'default' => 1,
                 'sanitize_callback' => '',
             ));
-            $wp_customize->add_setting('google_map_marker_z_index', array(
+            $wp_customize->add_setting('google_map_marker_zindex', array(
                 'default' => '',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
 
             $wp_customize->add_control('google_map_marker_anchor_point', array(
@@ -664,31 +675,36 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'description' => 'Which animation to play when marker is added to a map.',
                 'section' => 'google_map_marker',
                 'settings' => 'google_map_marker_animation',
-                'type' => 'text',
-            ));
-
-            $wp_customize->add_control('google_map_marker_animation', array(
-                'label' => 'Animation',
-                'description' => 'Which animation to play when marker is added to a map.',
-                'section' => 'google_map_marker',
-                'settings' => 'google_map_marker_animation',
-                'type' => 'text',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'None',
+                    1 => 'Bounce',
+                    2 => 'Drop',
+                ),
             ));
 
             $wp_customize->add_control('google_map_marker_clickable', array(
                 'label' => 'Clickable',
-                'description' => 'If true, the marker receives mouse and touch events. Default value is true.',
+                'description' => 'If enable, the marker receives mouse and touch events. Default value is enable.',
                 'section' => 'google_map_marker',
                 'settings' => 'google_map_marker_clickable',
-                'type' => 'text',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'Disable',
+                    1 => 'Enable',
+                ),
             ));
 
-            $wp_customize->add_control('google_map_marker_cross_on_drag', array(
+            $wp_customize->add_control('google_map_marker_cross_drag', array(
                 'label' => 'Cross On Drag',
-                'description' => 'If false, disables cross that appears beneath the marker when dragging. This option is true by default.',
+                'description' => 'If disable, disables cross that appears beneath the marker when dragging. This option is enable by default.',
                 'section' => 'google_map_marker',
-                'settings' => 'google_map_marker_cross_on_drag',
-                'type' => 'text',
+                'settings' => 'google_map_marker_cross_drag',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'Disable',
+                    1 => 'Enable',
+                ),
             ));
 
             $wp_customize->add_control('google_map_marker_cursor', array(
@@ -698,8 +714,114 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'settings' => 'google_map_marker_cursor',
                 'type' => 'text',
             ));
+
+            $wp_customize->add_control('google_map_marker_draggable', array(
+                'label' => 'Draggable',
+                'description' => 'If rnable, the marker can be dragged. Default value is disable.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_draggable',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'Disable',
+                    1 => 'Enable',
+                ),
+            ));
+
+            $wp_customize->add_control('google_map_marker_icon', array(
+                'label' => 'Icon',
+                'description' => 'Icon for the foreground. If a string is provided, it is treated as though it were an Icon with the string as url.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_icon',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_label', array(
+                'label' => 'Label',
+                'description' => 'Adds a label to the marker. The label can either be a string, or a MarkerLabel object.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_label',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_map', array(
+                'label' => 'Map',
+                'description' => 'Map on which to display Marker.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_map',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_opacity', array(
+                'label' => 'Opacity',
+                'description' => 'The marker\'s opacity between 0.0 and 1.0.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_opacity',
+                'type' => 'number',
+                'input_attrs' => array(
+                    'min' => 0,
+                    'max' => 1,
+                    'step' => 0.1,
+                ),
+            ));
+
+            $wp_customize->add_control('google_map_marker_optimized', array(
+                'label' => 'Optimized',
+                'description' => 'Optimization renders many markers as a single static element. Optimized rendering is enabled by default. Disable optimized rendering for animated GIFs or PNGs, or when each marker must be rendered as a separate DOM element (advanced usage only).',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_optimized',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'Disable',
+                    1 => 'Enable',
+                ),
+            ));
+
+            $wp_customize->add_control('google_map_marker_position', array(
+                'label' => 'Position',
+                'description' => 'Marker position. Required.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_position',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_shape', array(
+                'label' => 'Shape',
+                'description' => 'Image map region definition used for drag/click.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_shape',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_title', array(
+                'label' => 'Title',
+                'description' => 'Rollover text',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_title',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_marker_visible', array(
+                'label' => 'Visible',
+                'description' => 'If enable, the marker is visible',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_visible',
+                'type' => 'select',
+                'choices' => array(
+                    0 => 'Disable',
+                    1 => 'Enable',
+                ),
+            ));
+
+            $wp_customize->add_control('google_map_marker_zindex', array(
+                'label' => 'zIndex',
+                'description' => 'All markers are displayed on the map in order of their zIndex, with higher values displaying in front of markers with lower values. By default, markers are displayed according to their vertical position on screen, with lower markers appearing in front of markers further up the screen.',
+                'section' => 'google_map_marker',
+                'settings' => 'google_map_marker_zindex',
+                'type' => 'number',
+            ));
+
         }
     }
-}
 
-new GoogleMapsCustomizer;
+    new GoogleMapsCustomizer;
+}

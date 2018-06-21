@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport"
           content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, shrink-to-fit=no">
-    <?php if ( ! has_site_icon()) { ?>
+    <?php if (!has_site_icon()) { ?>
         <link href="<?php echo JP_FAVICON . '/apple-touch-icon.png'; ?>" rel="apple-touch-icon" sizes="180x180">
         <link href="<?php echo JP_FAVICON . '/favicon-16x16.png'; ?>" rel="icon" type="image/png" sizes="16x16">
         <link href="<?php echo JP_FAVICON . '/favicon-32x32.png'; ?>" rel="icon" type="image/png" sizes="32x32">
@@ -65,7 +65,7 @@
         <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
         <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
 
-        <div style="margin-bottom: 16px;"><?php (new GoogleMaps)->htmlMarkup(); ?></div>
+        <div style="margin-bottom: 16px;"><?php google_map(); ?></div>
 
         <?php if (is_customize_preview()) { ?>
             <div style="margin-bottom: 16px;"><?php social(); ?></div>
