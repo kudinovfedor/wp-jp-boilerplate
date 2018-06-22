@@ -14,6 +14,11 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * @var string
          */
+        private $table = 'snazzymaps';
+
+        /**
+         * @var string
+         */
         private $table_name;
 
         /**
@@ -48,7 +53,12 @@ if (!class_exists('SnazzyMaps')) {
         {
             global $wpdb;
             $this->wpdb = $wpdb;
-            $this->table_name = $this->wpdb->prefix . 'snazzymaps';
+
+            if (!in_array($this->table, $this->wpdb->tables)) {
+                $this->wpdb->tables[] = $this->table;
+            }
+
+            $this->table_name = $this->wpdb->prefix . $this->table;
             $this->charset_collate = $this->wpdb->get_charset_collate();
 
             $this->isTableExist();
@@ -85,7 +95,7 @@ if (!class_exists('SnazzyMaps')) {
         }
 
         /**
-         * Create Table snazzymaps in DB
+         * Create Table in DB
          *
          * @return void
          */
@@ -110,7 +120,7 @@ if (!class_exists('SnazzyMaps')) {
         }
 
         /**
-         * Drop Table snazzymaps in DB
+         * Drop Table in DB
          *
          * @return void
          */

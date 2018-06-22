@@ -27,3 +27,5 @@ require_once('inc/GoogleMapsCustomizer.php');
 
 require_once('inc/ReCaptcha.php');
 require_once('inc/ReCaptchaCustomizer.php');
+
+require_once('inc/ChangeSiteURL.php');

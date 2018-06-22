@@ -3,7 +3,8 @@
 
     $(function () {
 
-        $('.js-scroll-top').addClass('is-visible');
+        var scrollTop = $('.js-scroll-top');
+        scrollTop.addClass('is-visible');
 
         var api = wp.customize;
 
@@ -36,39 +37,37 @@
             });
         });
 
-        var scroll_top = $('.scroll-top');
-
         api('jp_scroll_top_width', function (control) {
             control.bind(function (value) {
-                scroll_top.css('width', value);
+                scrollTop.css('width', value);
             })
         });
 
         api('jp_scroll_top_height', function (control) {
             control.bind(function (value) {
-                scroll_top.css('height', value);
+                scrollTop.css('height', value);
             })
         });
 
         api('jp_scroll_top_shape', function (control) {
             control.bind(function (value) {
-                scroll_top.removeClass('is-circle is-rounded is-square').addClass('is-' + value);
+                scrollTop.removeClass('is-circle is-rounded is-square').addClass('is-' + value);
             })
         });
 
         api('jp_scroll_top_position', function (control) {
             control.bind(function (value) {
-                scroll_top.removeClass('is-left is-right').addClass('is-' + value);
+                scrollTop.removeClass('is-left is-right').addClass('is-' + value);
 
                 var offset = api.get().jp_scroll_top_offset_left_right;
 
                 if (value === 'right') {
-                    scroll_top.css({
+                    scrollTop.css({
                         'right': offset + 'px',
                         'left': 'auto',
                     });
                 } else {
-                    scroll_top.css({
+                    scrollTop.css({
                         'left': offset + 'px',
                         'right': 'auto',
                     });
@@ -82,12 +81,12 @@
                 var position = api.get().jp_scroll_top_position;
 
                 if (position === 'right') {
-                    scroll_top.css({
+                    scrollTop.css({
                         'right': value + 'px',
                         'left': 'auto',
                     });
                 } else {
-                    scroll_top.css({
+                    scrollTop.css({
                         'right': 'auto',
                         'left': value + 'px',
                     });
@@ -97,38 +96,38 @@
 
         api('jp_scroll_top_offset_bottom', function (control) {
             control.bind(function (value) {
-                scroll_top.css('bottom', value + 'px');
+                scrollTop.css('bottom', value + 'px');
             })
         });
 
         api('jp_scroll_top_border_width', function (control) {
             control.bind(function (value) {
-                scroll_top.css('border-width', value + 'px');
+                scrollTop.css('border-width', value + 'px');
             })
         });
 
         api('jp_scroll_top_border_color', function (control) {
             control.bind(function (value) {
                 console.log(value.length);
-                scroll_top.css('border-color', value);
+                scrollTop.css('border-color', value);
             })
         });
 
         api('jp_scroll_top_background_color', function (control) {
             control.bind(function (value) {
-                scroll_top.css('background-color', value);
+                scrollTop.css('background-color', value);
             })
         });
 
         api('jp_scroll_top_background_color_hover', function (control) {
             control.bind(function (value) {
-                scroll_top.css('background-color', value);
+                scrollTop.css('background-color', value);
             })
         });
 
         api('jp_scroll_top_arrow_color', function (control) {
             control.bind(function (value) {
-                scroll_top.find('.scroll-top--arrow').css('border-bottom-color', value);
+                scrollTop.find('.scroll-top--arrow').css('border-bottom-color', value);
             })
         });
 

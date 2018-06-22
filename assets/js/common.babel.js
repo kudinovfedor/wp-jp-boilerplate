@@ -69,27 +69,27 @@ if (false && 'serviceWorker' in navigator) {
      * @example
      * hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
      * @author Fedor Kudinov <brothersrabbits@mail.ru>
-     * @param {(string|Object)} menu_element - Selected menu
-     * @param {(string|Object)} hamburger_element - Trigger element for open/close menu
-     * @param {(string|Object)} close_trigger - Trigger element for close opened menu
+     * @param {(string|Object)} menuElement - Selected menu
+     * @param {(string|Object)} hamburgerElement - Trigger element for open/close menu
+     * @param {(string|Object)} closeTrigger - Trigger element for close opened menu
      */
-    const hamburgerMenu = (menu_element, hamburger_element, close_trigger) => {
-        const menu = $(menu_element),
-            close = $(close_trigger),
-            button = $(hamburger_element),
-            menu_button = button.add(menu);
+    const hamburgerMenu = (menuElement, hamburgerElement, closeTrigger) => {
+        const menu = $(menuElement),
+            close = $(closeTrigger),
+            button = $(hamburgerElement),
+            menuButton = button.add(menu);
 
         button.on('click', () => {
-            menu_button.toggleClass('is-active');
+            menuButton.toggleClass('is-active');
         });
 
         close.on('click', () => {
-            menu_button.removeClass('is-active');
+            menuButton.removeClass('is-active');
         });
 
         $(window).on('click', (e) => {
-            if (!$(e.target).closest(menu_button).length) {
-                menu_button.removeClass('is-active');
+            if (!$(e.target).closest(menuButton).length) {
+                menuButton.removeClass('is-active');
             }
         });
     };
@@ -100,10 +100,10 @@ if (false && 'serviceWorker' in navigator) {
      * @example
      * commentValidation('#commentform');
      * @author Fedor Kudinov <brothersrabbits@mail.ru>
-     * @param {(string|Object)} form_id
+     * @param {(string|Object)} formId
      */
-    const commentValidation = form_id => {
-        const form = $(form_id);
+    const commentValidation = formId => {
+        const form = $(formId);
 
         if (form.length && typeof $.fn.validate === 'function') {
 
