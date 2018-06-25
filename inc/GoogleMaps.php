@@ -94,8 +94,6 @@ if (!class_exists('GoogleMaps')) {
                 add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
                 add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
             }
-
-            return $this;
         }
 
         /**
@@ -314,6 +312,12 @@ if (!class_exists('GoogleMaps')) {
             </script>
         <?php }
     }
+
+    /**
+     * @var GoogleMaps $google_map
+     */
+    $google_map = new GoogleMaps;
+    $google_map->init();
 }
 
 if (!function_exists('google_map')) {
@@ -323,8 +327,8 @@ if (!function_exists('google_map')) {
             /**
              * @var GoogleMaps $google_map
              */
-            $google_map = new GoogleMaps;
-            $google_map->init()->htmlMarkup();
+            global $google_map;
+            $google_map->htmlMarkup();
         }
     }
 }
