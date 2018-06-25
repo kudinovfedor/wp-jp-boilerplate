@@ -67,22 +67,22 @@ if (!class_exists('GoogleMaps')) {
                 'styles_themes' => get_theme_mod('google_map_themes_styles', 0),
 
                 // Marker
-                'anchor_point_marker' => get_theme_mod('google_map_marker_anchor_point'),
+                //'anchor_point_marker' => get_theme_mod('google_map_marker_anchor_point'),
                 'animation_marker' => get_theme_mod('google_map_marker_animation', 0),
                 'clickable_marker' => get_theme_mod('google_map_marker_clickable', 1),
                 'cross_drag_marker' => get_theme_mod('google_map_marker_cross_drag', 1),
-                'cursor_marker' => get_theme_mod('google_map_marker_cursor'),
+                'cursor_marker' => get_theme_mod('google_map_marker_cursor', 'pointer'),
                 'draggable_marker' => get_theme_mod('google_map_marker_draggable', 0),
                 'icon_marker' => get_theme_mod('google_map_marker_icon'),
-                'label_marker' => get_theme_mod('google_map_marker_label'),
-                'map_marker' => get_theme_mod('google_map_marker_map'),
+                'label_marker' => get_theme_mod('google_map_marker_label', ''),
+                //'map_marker' => get_theme_mod('google_map_marker_map'),
                 'opacity_marker' => get_theme_mod('google_map_marker_opacity', 1),
                 'optimized_marker' => get_theme_mod('google_map_marker_optimized', 1),
-                'position_marker' => get_theme_mod('google_map_marker_position'),
-                'shape_marker' => get_theme_mod('google_map_marker_shape'),
-                'title_marker' => get_theme_mod('google_map_marker_title'),
+                //'position_marker' => get_theme_mod('google_map_marker_position'),
+                //'shape_marker' => get_theme_mod('google_map_marker_shape'),
+                'title_marker' => get_theme_mod('google_map_marker_title', ''),
                 'visible_marker' => get_theme_mod('google_map_marker_visible', 1),
-                'zindex_marker' => get_theme_mod('google_map_marker_zindex'),
+                'zindex_marker' => get_theme_mod('google_map_marker_zindex', 0),
             );
 
             $this->snazzy_maps = new SnazzyMaps;
@@ -94,6 +94,8 @@ if (!class_exists('GoogleMaps')) {
                 add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
                 add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
             }
+
+            return $this;
         }
 
         /**
@@ -263,6 +265,7 @@ if (!class_exists('GoogleMaps')) {
                         animation: <?php echo $map['animation_marker'] !== 0 ? $map['animation_marker'] : 'null'; ?>,
                         clickable: <?php $this->isOptionEnabled($map['clickable_marker']) ?>,
                         crossOnDrag: <?php $this->isOptionEnabled($map['cross_drag_marker']) ?>,
+                        cursor: "<?php echo $map['cursor_marker'] ?>",
                         draggable: <?php $this->isOptionEnabled($map['draggable_marker']) ?>,
                         icon: {
                             "fillColor": "#ee1c25",
@@ -274,11 +277,14 @@ if (!class_exists('GoogleMaps')) {
                             "origin": {"x": 0, "y": 0},
                             "style": 1
                         },
+                        label: "<?php echo $map['label_marker'] ?>",
                         map: map,
                         opacity: <?php echo $map['opacity_marker'] ?>,
                         optimized: <?php $this->isOptionEnabled($map['optimized_marker']) ?>,
                         position: uluru,
+                        title: "<?php echo $map['title_marker'] ?>",
                         visible: <?php $this->isOptionEnabled($map['visible_marker']) ?>,
+                        zIndex: <?php echo $map['zindex_marker'] ?>,
                     });
 
                     <?php
@@ -308,20 +314,17 @@ if (!class_exists('GoogleMaps')) {
             </script>
         <?php }
     }
-
-    /**
-     * @var GoogleMaps $google_map
-     */
-    $google_map = new GoogleMaps;
-    $google_map->init();
 }
 
 if (!function_exists('google_map')) {
     function google_map()
     {
         if (class_exists('GoogleMaps')) {
+            /**
+             * @var GoogleMaps $google_map
+             */
             $google_map = new GoogleMaps;
-            $google_map->htmlMarkup();
+            $google_map->init()->htmlMarkup();
         }
     }
 }

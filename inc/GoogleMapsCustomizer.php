@@ -597,10 +597,10 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'panel' => 'google_map',
             ));
 
-            $wp_customize->add_setting('google_map_marker_anchor_point', array(
+            /*$wp_customize->add_setting('google_map_marker_anchor_point', array(
                 'default' => '',
                 'sanitize_callback' => '',
-            ));
+            ));*/
             $wp_customize->add_setting('google_map_marker_animation', array(
                 'default' => 0,
                 'sanitize_callback' => 'absint',
@@ -614,7 +614,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_cursor', array(
-                'default' => '',
+                'default' => 'pointer',
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_draggable', array(
@@ -629,10 +629,10 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'default' => '',
                 'sanitize_callback' => '',
             ));
-            $wp_customize->add_setting('google_map_marker_map', array(
+            /*$wp_customize->add_setting('google_map_marker_map', array(
                 'default' => '',
                 'sanitize_callback' => '',
-            ));
+            ));*/
             $wp_customize->add_setting('google_map_marker_opacity', array(
                 'default' => 1,
                 'sanitize_callback' => 'absint',
@@ -641,14 +641,14 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'default' => 1,
                 'sanitize_callback' => '',
             ));
-            $wp_customize->add_setting('google_map_marker_position', array(
+            /*$wp_customize->add_setting('google_map_marker_position', array(
                 'default' => '',
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_shape', array(
                 'default' => '',
                 'sanitize_callback' => '',
-            ));
+            ));*/
             $wp_customize->add_setting('google_map_marker_title', array(
                 'default' => '',
                 'sanitize_callback' => '',
@@ -658,17 +658,17 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'sanitize_callback' => '',
             ));
             $wp_customize->add_setting('google_map_marker_zindex', array(
-                'default' => '',
+                'default' => 0,
                 'sanitize_callback' => 'absint',
             ));
 
-            $wp_customize->add_control('google_map_marker_anchor_point', array(
+            /*$wp_customize->add_control('google_map_marker_anchor_point', array(
                 'label' => 'Anchor Point',
                 'description' => 'The offset from the marker\'s position to the tip of an InfoWindow that has been opened with the marker as anchor.',
                 'section' => 'google_map_marker',
                 'settings' => 'google_map_marker_anchor_point',
                 'type' => 'text',
-            ));
+            ));*/
 
             $wp_customize->add_control('google_map_marker_animation', array(
                 'label' => 'Animation',
@@ -712,7 +712,45 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'description' => 'Mouse cursor to show on hover',
                 'section' => 'google_map_marker',
                 'settings' => 'google_map_marker_cursor',
-                'type' => 'text',
+                'type' => 'select',
+                'choices' => array(
+                    'alias' => 'Alias',
+                    'all-scroll' => 'All-scroll',
+                    'auto' => 'Auto',
+                    'cell' => 'Cell',
+                    'context-menu' => 'Context-menu',
+                    'col-resize' => 'Col-resize',
+                    'copy' => 'Copy',
+                    'crosshair' => 'Crosshair',
+                    'default' => 'Default',
+                    'e-resize' => 'E-resize',
+                    'ew-resize' => 'Ew-resize',
+                    'grab' => 'Grab',
+                    'grabbing' => 'Grabbing',
+                    'help' => 'Help',
+                    'move' => 'Move',
+                    'n-resize' => 'N-resize',
+                    'ne-resize' => 'Ne-resize',
+                    'nesw-resize' => 'Nesw-resize',
+                    'ns-resize' => 'Ns-resize',
+                    'nw-resize' => 'Nw-resize',
+                    'nwse-resize' => 'Nwse-resize',
+                    'no-drop' => 'No-drop',
+                    'none' => 'None',
+                    'not-allowed' => 'Not-allowed',
+                    'pointer' => 'Pointer',
+                    'progress' => 'Progress',
+                    'row-resize' => 'Row-resize',
+                    's-resize' => 'S-resize',
+                    'se-resize' => 'Se-resize',
+                    'sw-resize' => 'Sw-resize',
+                    'text' => 'Text',
+                    'vertical-text' => 'Vertical-text',
+                    'w-resize' => 'W-resize',
+                    'wait' => 'Wait',
+                    'zoom-in' => 'Zoom-in',
+                    'zoom-out' => 'Zoom-out',
+                ),
             ));
 
             $wp_customize->add_control('google_map_marker_draggable', array(
@@ -776,7 +814,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 ),
             ));
 
-            $wp_customize->add_control('google_map_marker_position', array(
+            /*$wp_customize->add_control('google_map_marker_position', array(
                 'label' => 'Position',
                 'description' => 'Marker position. Required.',
                 'section' => 'google_map_marker',
@@ -790,7 +828,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_marker',
                 'settings' => 'google_map_marker_shape',
                 'type' => 'text',
-            ));
+            ));*/
 
             $wp_customize->add_control('google_map_marker_title', array(
                 'label' => 'Title',

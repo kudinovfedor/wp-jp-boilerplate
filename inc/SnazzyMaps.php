@@ -174,6 +174,11 @@ if (!class_exists('SnazzyMaps')) {
             }
         }
 
+        /**
+         * Get Remote Url Snazzy Maps
+         * @param array $query_data
+         * @return string
+         */
         public function getRemoteUrl($query_data = array())
         {
             $query_defaults = array(
@@ -193,6 +198,8 @@ if (!class_exists('SnazzyMaps')) {
         }
 
         /**
+         * Get Response
+         *
          * @param $url
          *
          * @return array|mixed|null|object|WP_Error
@@ -217,6 +224,12 @@ if (!class_exists('SnazzyMaps')) {
 
         }
 
+        /**
+         * Validate fields
+         *
+         * @param $field
+         * @return string
+         */
         public function validate_field($field)
         {
             $field = trim($field);
