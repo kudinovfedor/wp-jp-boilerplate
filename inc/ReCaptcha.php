@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists('ReCaptcha')) {
+if (!class_exists('ReCaptcha')) {
     /**
      * Class ReCaptcha
      */
@@ -15,11 +15,11 @@ if ( ! class_exists('ReCaptcha')) {
          * @var array
          */
         public $error_code = array(
-            'missing-input-secret'   => 'The secret parameter is missing.',
-            'invalid-input-secret'   => 'The secret parameter is invalid or malformed.',
+            'missing-input-secret' => 'The secret parameter is missing.',
+            'invalid-input-secret' => 'The secret parameter is invalid or malformed.',
             'missing-input-response' => 'The response parameter is missing.',
             'invalid-input-response' => 'The response parameter is invalid or malformed.',
-            'bad-request'            => 'The request is invalid or malformed.',
+            'bad-request' => 'The request is invalid or malformed.',
         );
 
         /**
@@ -28,19 +28,19 @@ if ( ! class_exists('ReCaptcha')) {
         public function __construct()
         {
             $this->options = array(
-                'site-key'            => get_theme_mod('jp_recaptcha_site_key'),
-                'secret-key'          => get_theme_mod('jp_recaptcha_secret_key'),
-                'login-form'          => get_theme_mod('jp_recaptcha_login_form'),
-                'registration-form'   => get_theme_mod('jp_recaptcha_registration_form'),
+                'site-key' => get_theme_mod('jp_recaptcha_site_key'),
+                'secret-key' => get_theme_mod('jp_recaptcha_secret_key'),
+                'login-form' => get_theme_mod('jp_recaptcha_login_form'),
+                'registration-form' => get_theme_mod('jp_recaptcha_registration_form'),
                 'reset-password-form' => get_theme_mod('jp_recaptcha_reset_password_form'),
-                'comments-form'       => get_theme_mod('jp_recaptcha_comments_form'),
-                'theme'               => get_theme_mod('jp_recaptcha_theme', 'light'),
-                'size'                => get_theme_mod('jp_recaptcha_size', 'normal'),
-                'language'            => get_theme_mod('jp_recaptcha_language', 0),
-                'tabindex'            => get_theme_mod('jp_recaptcha_tabindex', 0),
-                'callback'            => get_theme_mod('jp_recaptcha_callback'),
-                'expired-callback'    => get_theme_mod('jp_recaptcha_expired_callback'),
-                'error-callback'      => get_theme_mod('jp_recaptcha_error_callback'),
+                'comments-form' => get_theme_mod('jp_recaptcha_comments_form'),
+                'theme' => get_theme_mod('jp_recaptcha_theme', 'light'),
+                'size' => get_theme_mod('jp_recaptcha_size', 'normal'),
+                'language' => get_theme_mod('jp_recaptcha_language', 0),
+                'tabindex' => get_theme_mod('jp_recaptcha_tabindex', 0),
+                'callback' => get_theme_mod('jp_recaptcha_callback'),
+                'expired-callback' => get_theme_mod('jp_recaptcha_expired_callback'),
+                'error-callback' => get_theme_mod('jp_recaptcha_error_callback'),
             );
 
             if ($this->isEnabled()) {
@@ -113,19 +113,19 @@ if ( ! class_exists('ReCaptcha')) {
             $query_data = array(
                 'onload' => '',
                 'render' => '',
-                'hl'     => get_theme_mod('jp_recaptcha_language'),
+                'hl' => get_theme_mod('jp_recaptcha_language'),
             );
 
 
             $query_data = array_filter($query_data, function ($value, $key) {
-                return ! empty($value);
+                return !empty($value);
             }, ARRAY_FILTER_USE_BOTH);
 
             $query = http_build_query($query_data);
 
             $src = 'https://www.google.com/recaptcha/api.js';
 
-            if ( ! empty($query)) {
+            if (!empty($query)) {
                 $src = sprintf($src . '?%s', $query);
             }
 
@@ -188,7 +188,7 @@ if ( ! class_exists('ReCaptcha')) {
             }
 
             $query_data = array(
-                'secret'   => $this->options['secret-key'],
+                'secret' => $this->options['secret-key'],
                 'response' => $g_recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
             );
@@ -242,7 +242,7 @@ if ( ! class_exists('ReCaptcha')) {
             }
 
             $query_data = array(
-                'secret'   => $this->options['secret-key'],
+                'secret' => $this->options['secret-key'],
                 'response' => $g_recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
             );
@@ -296,7 +296,7 @@ if ( ! class_exists('ReCaptcha')) {
             }
 
             $query_data = array(
-                'secret'   => $this->options['secret-key'],
+                'secret' => $this->options['secret-key'],
                 'response' => $g_recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
             );
@@ -344,7 +344,7 @@ if ( ! class_exists('ReCaptcha')) {
             }
 
             $query_data = array(
-                'secret'   => $this->options['secret-key'],
+                'secret' => $this->options['secret-key'],
                 'response' => $g_recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
             );
@@ -385,7 +385,7 @@ if ( ! class_exists('ReCaptcha')) {
             );
 
             foreach ($fields as $ip_field) {
-                if ( ! empty($_SERVER[$ip_field])) {
+                if (!empty($_SERVER[$ip_field])) {
                     return $_SERVER[$ip_field];
                 }
             }

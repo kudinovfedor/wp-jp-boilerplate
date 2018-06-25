@@ -7,7 +7,7 @@
  */
 function jp_login_head()
 {
-    $default    = JP_IMG . '/login-logo.png';
+    $default = JP_IMG . '/login-logo.png';
     $login_logo = get_theme_mod('jp_login_logo', $default);
 
     echo sprintf('<style>.login h1 a{background-image: url("%s"); }</style>', $login_logo);
@@ -70,7 +70,7 @@ function jp_shake_error_codes($shake_error_codes)
     );
 
     foreach ($new_error_codes as $error) {
-        if ( ! in_array($error, $shake_error_codes, true)) {
+        if (!in_array($error, $shake_error_codes, true)) {
             $shake_error_codes[] = $error;
         }
     }

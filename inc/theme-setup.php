@@ -20,34 +20,34 @@ function jp_theme_setup()
         add_theme_support('post-thumbnails');
 
         add_theme_support('custom-background', array(
-            'default-image'          => '',
-            'default-preset'         => 'default',
-            'default-position-x'     => 'center',
-            'default-position-y'     => 'center',
-            'default-size'           => 'cover',
-            'default-repeat'         => 'no-repeat',
-            'default-attachment'     => 'scroll',
-            'default-color'          => '',
-            'wp-head-callback'       => '_custom_background_cb',
-            'admin-head-callback'    => '',
+            'default-image' => '',
+            'default-preset' => 'default',
+            'default-position-x' => 'center',
+            'default-position-y' => 'center',
+            'default-size' => 'cover',
+            'default-repeat' => 'no-repeat',
+            'default-attachment' => 'scroll',
+            'default-color' => '',
+            'wp-head-callback' => '_custom_background_cb',
+            'admin-head-callback' => '',
             'admin-preview-callback' => '',
         ));
 
         add_theme_support('custom-header', array(
-            'default-image'          => '',
-            'random-default'         => false,
-            'width'                  => 0,
-            'height'                 => 0,
-            'flex-height'            => false,
-            'flex-width'             => false,
-            'default-text-color'     => '',
-            'header-text'            => true,
-            'uploads'                => true,
-            'wp-head-callback'       => '',
-            'admin-head-callback'    => '',
+            'default-image' => '',
+            'random-default' => false,
+            'width' => 0,
+            'height' => 0,
+            'flex-height' => false,
+            'flex-width' => false,
+            'default-text-color' => '',
+            'header-text' => true,
+            'uploads' => true,
+            'wp-head-callback' => '',
+            'admin-head-callback' => '',
             'admin-preview-callback' => '',
-            'video'                  => true,
-            'video-active-callback'  => 'is_front_page',
+            'video' => true,
+            'video-active-callback' => 'is_front_page',
         ));
 
         add_theme_support('automatic-feed-links');
@@ -65,9 +65,9 @@ function jp_theme_setup()
                 'blogdescription' => 'JoomPress - WordPress Boilerplate Theme',
                 //'date_format' => 'd.m.Y',
                 //'time_format' => 'H:i',
-                'show_on_front'   => 'posts', // posts, page
-                'page_on_front'   => '{{home}}',
-                'page_for_posts'  => '{{blog}}',
+                'show_on_front' => 'posts', // posts, page
+                'page_on_front' => '{{home}}',
+                'page_for_posts' => '{{blog}}',
                 //'posts_per_page' => '10',
                 //'posts_per_rss' => '10',
                 //'permalink_structure' => '/%postname%/',
@@ -76,28 +76,28 @@ function jp_theme_setup()
             'theme_mods' => array(),
 
             'widgets' => array(
-                'sidebar-left'  => array(),
+                'sidebar-left' => array(),
                 'sidebar-right' => array(),
             ),
 
             'nav_menus' => array(
                 'header_menu' => array(
-                    'name'  => 'Top Menu',
+                    'name' => 'Top Menu',
                     'items' => array(
                         'link_home' => array(
-                            'type'  => 'custom',
+                            'type' => 'custom',
                             'title' => 'Home',
-                            'url'   => home_url('/'),
+                            'url' => home_url('/'),
                         ),
                     ),
                 ),
                 'footer_menu' => array(
-                    'name'  => 'Bottom Menu',
+                    'name' => 'Bottom Menu',
                     'items' => array(
                         'link_home' => array(
-                            'type'  => 'custom',
+                            'type' => 'custom',
                             'title' => 'Home',
-                            'url'   => home_url('/'),
+                            'url' => home_url('/'),
                         ),
                     ),
                 ),
@@ -106,73 +106,73 @@ function jp_theme_setup()
             'attachments' => array(
                 'blog-item-1' => array(
                     'post_title' => 'blog-item-1',
-                    'file'       => 'assets/img/starter-content/blog-item-1.jpg',
+                    'file' => 'assets/img/starter-content/blog-item-1.jpg',
                 ),
                 'blog-item-2' => array(
                     'post_title' => 'blog-item-2',
-                    'file'       => 'assets/img/starter-content/blog-item-2.jpg',
+                    'file' => 'assets/img/starter-content/blog-item-2.jpg',
                 ),
                 'blog-item-3' => array(
                     'post_title' => 'blog-item-3',
-                    'file'       => 'assets/img/starter-content/blog-item-3.jpg',
+                    'file' => 'assets/img/starter-content/blog-item-3.jpg',
                 ),
                 'blog-item-4' => array(
                     'post_title' => 'blog-item-4',
-                    'file'       => 'assets/img/starter-content/blog-item-4.jpg',
+                    'file' => 'assets/img/starter-content/blog-item-4.jpg',
                 ),
                 'blog-item-5' => array(
                     'post_title' => 'blog-item-5',
-                    'file'       => 'assets/img/starter-content/blog-item-5.jpg',
+                    'file' => 'assets/img/starter-content/blog-item-5.jpg',
                 ),
             ),
 
             'posts' => array(
-                'home'        => array(
-                    'post_type'  => 'page',
-                    'post_name'  => 'home',
+                'home' => array(
+                    'post_type' => 'page',
+                    'post_name' => 'home',
                     'post_title' => 'Home',
                     //'template'   => '',
                 ),
-                'blog'        => array(
-                    'post_type'  => 'page',
-                    'post_name'  => 'blog',
+                'blog' => array(
+                    'post_type' => 'page',
+                    'post_name' => 'blog',
                     'post_title' => 'Blog',
                     //'template' => 'page-blog.php',
                 ),
                 'blog-item-1' => array(
-                    'post_type'    => 'post',
-                    'post_title'   => 'Blog title 1',
-                    'post_name'    => 'blog-item-1',
+                    'post_type' => 'post',
+                    'post_title' => 'Blog title 1',
+                    'post_name' => 'blog-item-1',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
-                    'thumbnail'    => '{{blog-item-1}}',
+                    'thumbnail' => '{{blog-item-1}}',
                 ),
                 'blog-item-2' => array(
-                    'post_type'    => 'post',
-                    'post_title'   => 'Blog title 2',
-                    'post_name'    => 'blog-item-2',
+                    'post_type' => 'post',
+                    'post_title' => 'Blog title 2',
+                    'post_name' => 'blog-item-2',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
-                    'thumbnail'    => '{{blog-item-2}}',
+                    'thumbnail' => '{{blog-item-2}}',
                 ),
                 'blog-item-3' => array(
-                    'post_type'    => 'post',
-                    'post_title'   => 'Blog title 3',
-                    'post_name'    => 'blog-item-3',
+                    'post_type' => 'post',
+                    'post_title' => 'Blog title 3',
+                    'post_name' => 'blog-item-3',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
-                    'thumbnail'    => '{{blog-item-3}}',
+                    'thumbnail' => '{{blog-item-3}}',
                 ),
                 'blog-item-4' => array(
-                    'post_type'    => 'post',
-                    'post_title'   => 'Blog title 4',
-                    'post_name'    => 'blog-item-4',
+                    'post_type' => 'post',
+                    'post_title' => 'Blog title 4',
+                    'post_name' => 'blog-item-4',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
-                    'thumbnail'    => '{{blog-item-4}}',
+                    'thumbnail' => '{{blog-item-4}}',
                 ),
                 'blog-item-5' => array(
-                    'post_type'    => 'post',
-                    'post_title'   => 'Blog title 5',
-                    'post_name'    => 'blog-item-5',
+                    'post_type' => 'post',
+                    'post_title' => 'Blog title 5',
+                    'post_name' => 'blog-item-5',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
-                    'thumbnail'    => '{{blog-item-5}}',
+                    'thumbnail' => '{{blog-item-5}}',
                 ),
             ),
 
@@ -186,7 +186,7 @@ function jp_theme_setup()
         'footer_menu' => __('Menu in footer', 'joompress'),
     ));
 
-    if ( ! is_admin()) {
+    if (!is_admin()) {
         add_filter('comment_text', 'do_shortcode');
         add_filter('the_excerpt', 'do_shortcode');
     }
@@ -195,7 +195,7 @@ function jp_theme_setup()
 
 add_action('after_setup_theme', 'jp_theme_setup');
 
-if ( ! isset($content_width)) {
+if (!isset($content_width)) {
     $content_width = 900;
 }
 
@@ -295,7 +295,7 @@ add_filter('nav_menu_css_class', 'jp_nav_menu_css_class', 10, 4);
 function jp_nav_menu_link_attributes($atts, $item, $args, $depth)
 {
     $atts['itemprop'] = 'url';
-    $atts['class']    = $depth > 0 ? 'sub-menu-link' : 'menu-link';
+    $atts['class'] = $depth > 0 ? 'sub-menu-link' : 'menu-link';
 
     return $atts;
 }
@@ -390,8 +390,8 @@ function jp_mce_page_break($mce_buttons)
     $pos = array_search('wp_more', $mce_buttons, true);
 
     if ($pos !== false) {
-        $buttons     = array_slice($mce_buttons, 0, $pos);
-        $buttons[]   = 'wp_page';
+        $buttons = array_slice($mce_buttons, 0, $pos);
+        $buttons[] = 'wp_page';
         $mce_buttons = array_merge($buttons, array_slice($mce_buttons, $pos));
     }
 

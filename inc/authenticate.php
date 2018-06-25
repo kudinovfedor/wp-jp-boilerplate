@@ -41,7 +41,7 @@ function jp_authenticate_username_password($user, $username, $password)
 
     $user = get_user_by('login', $username);
 
-    if ( ! $user) {
+    if (!$user) {
         return new WP_Error('invalid_username',
             sprintf('<strong>ERROR</strong>: Invalid username or password. <a href="%s">%s</a>',
                 wp_lostpassword_url(), 'Lost your password?')
@@ -59,7 +59,7 @@ function jp_authenticate_username_password($user, $username, $password)
         return $user;
     }
 
-    if ( ! wp_check_password($password, $user->user_pass, $user->ID)) {
+    if (!wp_check_password($password, $user->user_pass, $user->ID)) {
         return new WP_Error('incorrect_password',
             sprintf('<strong>ERROR</strong>: Invalid username or password. <a href="%s">%s</a>',
                 wp_lostpassword_url(), 'Lost your password?')
@@ -106,13 +106,13 @@ function jp_authenticate_email_password($user, $email, $password)
         return $error;
     }
 
-    if ( ! is_email($email)) {
+    if (!is_email($email)) {
         return $user;
     }
 
     $user = get_user_by('email', $email);
 
-    if ( ! $user) {
+    if (!$user) {
         return new WP_Error('invalid_email',
             sprintf('<strong>ERROR</strong>: Invalid email address or password. <a href="%s">%s</a>',
                 wp_lostpassword_url(), 'Lost your password?')
@@ -126,7 +126,7 @@ function jp_authenticate_email_password($user, $email, $password)
         return $user;
     }
 
-    if ( ! wp_check_password($password, $user->user_pass, $user->ID)) {
+    if (!wp_check_password($password, $user->user_pass, $user->ID)) {
         return new WP_Error('incorrect_password',
             sprintf('<strong>ERROR</strong>: Invalid email address or password. <a href="%s">%s</a>',
                 wp_lostpassword_url(), 'Lost your password?')

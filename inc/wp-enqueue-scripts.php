@@ -35,7 +35,7 @@ function jp_remove_jquery_migrate($scripts)
         return;
     }
 
-    $suffix         = SCRIPT_DEBUG ? '' : '.min';
+    $suffix = SCRIPT_DEBUG ? '' : '.min';
     $jquery_version = '1.12.4';
 
     $scripts->remove('jquery');

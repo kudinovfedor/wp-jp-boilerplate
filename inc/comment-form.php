@@ -10,18 +10,21 @@
 function jp_comment_fields($fields)
 {
 
-    $req       = get_option('require_name_email');
-    $aria_req  = ($req ? " aria-required='true'" : '');
-    $html_req  = ($req ? " required='required'" : '');
+    $req = get_option('require_name_email');
+    $aria_req = ($req ? " aria-required='true'" : '');
+    $html_req = ($req ? " required='required'" : '');
     $commenter = wp_get_current_commenter();
 
     $fields = array(
-        'author' => '<div class="form-row comment-form-author">' . '<label for="author" class="form-label">' . __('Name', 'joompress') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
-                    '<input id="author" class="form-field" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30" maxlength="245"' . $aria_req . $html_req . '></div>',
-        'email' => '<div class="form-row comment-form-email"><label for="email" class="form-label">' . __('Email', 'joompress') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
-                   '<input id="email" class="form-field" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . $html_req . '></div>',
-        'url' => '<div class="form-row comment-form-url"><label for="url" class="form-label">' . __('Website', 'joompress') . '</label> ' .
-                 '<input id="url" class="form-field" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" maxlength="200"></div>',
+        'author' => '<div class="form-row comment-form-author">' . '<label for="author" class="form-label">' . __('Name',
+                'joompress') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
+            '<input id="author" class="form-field" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30" maxlength="245"' . $aria_req . $html_req . '></div>',
+        'email' => '<div class="form-row comment-form-email"><label for="email" class="form-label">' . __('Email',
+                'joompress') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
+            '<input id="email" class="form-field" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . $html_req . '></div>',
+        'url' => '<div class="form-row comment-form-url"><label for="url" class="form-label">' . __('Website',
+                'joompress') . '</label> ' .
+            '<input id="url" class="form-field" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" maxlength="200"></div>',
     );
 
     if (isset($fields['url'])) {
