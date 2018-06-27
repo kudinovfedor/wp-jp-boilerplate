@@ -45,44 +45,67 @@ if (!class_exists('GoogleMaps')) {
                 'layers' => get_theme_mod('google_map_layers_layer', 'off'),
 
                 // Controls
-                'type_control' => get_theme_mod('google_map_controls_map_type', 1),
-                'zoom_control' => get_theme_mod('google_map_controls_zoom', 1),
-                'gesture_handling_control' => get_theme_mod('google_map_controls_gesture_handling', 'auto'),
-                'full_screen_control' => get_theme_mod('google_map_controls_full_screen', 0),
-                'street_view_control' => get_theme_mod('google_map_controls_street_view', 1),
-                'scale_control' => get_theme_mod('google_map_controls_scale', 1),
-                'clickable_poi_control' => get_theme_mod('google_map_controls_clickable_poi', 0),
-                'draggable' => get_theme_mod('google_map_controls_draggable', 1),
-                'double_click_zoom' => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
-                'scroll_wheel' => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
+                'control' => array(
+                    'type' => get_theme_mod('google_map_controls_map_type', 1),
+                    'zoom' => get_theme_mod('google_map_controls_zoom', 1),
+                    'gesture_handling' => get_theme_mod('google_map_controls_gesture_handling', 'auto'),
+                    'full_screen' => get_theme_mod('google_map_controls_full_screen', 0),
+                    'street_view' => get_theme_mod('google_map_controls_street_view', 1),
+                    'scale' => get_theme_mod('google_map_controls_scale', 1),
+                    'clickable_poi' => get_theme_mod('google_map_controls_clickable_poi', 0),
+                    'draggable' => get_theme_mod('google_map_controls_draggable', 1),
+                    'double_click_zoom' => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
+                    'scroll_wheel' => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
+                ),
 
                 // Positions
-                'type_position' => get_theme_mod('google_map_positions_map_type', 1),
-                'zoom_position' => get_theme_mod('google_map_positions_zoom', 9),
-                'street_view_position' => get_theme_mod('google_map_positions_street_view', 9),
-                'full_screen_position' => get_theme_mod('google_map_positions_full_screen', 3),
+                'position' => array(
+                    'type' => get_theme_mod('google_map_positions_map_type', 1),
+                    'zoom' => get_theme_mod('google_map_positions_zoom', 9),
+                    'street_view' => get_theme_mod('google_map_positions_street_view', 9),
+                    'full_screen' => get_theme_mod('google_map_positions_full_screen', 3),
+                ),
 
                 // Themes
-                'type_themes' => get_theme_mod('google_map_themes_type', 'roadmap'),
-                'styles_themes' => get_theme_mod('google_map_themes_styles', 0),
+                'themes' => array(
+                    'type' => get_theme_mod('google_map_themes_type', 'roadmap'),
+                    'styles' => get_theme_mod('google_map_themes_styles', 0),
+                ),
 
                 // Marker
-                //'anchor_point_marker' => get_theme_mod('google_map_marker_anchor_point'),
-                'animation_marker' => get_theme_mod('google_map_marker_animation', 0),
-                'clickable_marker' => get_theme_mod('google_map_marker_clickable', 1),
-                'cross_drag_marker' => get_theme_mod('google_map_marker_cross_drag', 1),
-                'cursor_marker' => get_theme_mod('google_map_marker_cursor', 'pointer'),
-                'draggable_marker' => get_theme_mod('google_map_marker_draggable', 0),
-                'icon_marker' => get_theme_mod('google_map_marker_icon'),
-                'label_marker' => get_theme_mod('google_map_marker_label', ''),
-                //'map_marker' => get_theme_mod('google_map_marker_map'),
-                'opacity_marker' => get_theme_mod('google_map_marker_opacity', 1),
-                'optimized_marker' => get_theme_mod('google_map_marker_optimized', 1),
-                //'position_marker' => get_theme_mod('google_map_marker_position'),
-                //'shape_marker' => get_theme_mod('google_map_marker_shape'),
-                'title_marker' => get_theme_mod('google_map_marker_title', ''),
-                'visible_marker' => get_theme_mod('google_map_marker_visible', 1),
-                'zindex_marker' => get_theme_mod('google_map_marker_zindex', 0),
+                'marker' => array(
+                    //'anchor_point' => get_theme_mod('google_map_marker_anchor_point'),
+                    'animation' => get_theme_mod('google_map_marker_animation', 0),
+                    'clickable' => get_theme_mod('google_map_marker_clickable', 1),
+                    'cross_drag' => get_theme_mod('google_map_marker_cross_drag', 1),
+                    'cursor' => get_theme_mod('google_map_marker_cursor', 'pointer'),
+                    'draggable' => get_theme_mod('google_map_marker_draggable', 0),
+                    'icon' => get_theme_mod('google_map_marker_icon'),
+                    'label' => get_theme_mod('google_map_marker_label', ''),
+                    //'map_marker' => get_theme_mod('google_map_marker_map'),
+                    'opacity' => get_theme_mod('google_map_marker_opacity', 1),
+                    'optimized' => get_theme_mod('google_map_marker_optimized', 1),
+                    //'position' => get_theme_mod('google_map_marker_position'),
+                    //'shape' => get_theme_mod('google_map_marker_shape'),
+                    'title' => get_theme_mod('google_map_marker_title', ''),
+                    'visible' => get_theme_mod('google_map_marker_visible', 1),
+                    'zindex' => get_theme_mod('google_map_marker_zindex', 0),
+                ),
+
+                // Info Window
+                'info_window' => array(
+                    'enable' => get_theme_mod('google_map_infowindow_display', false),
+                    'name' => get_theme_mod('google_map_infowindow_name', ''),
+                    'address' => get_theme_mod('google_map_infowindow_address', ''),
+                    'phone_number' => get_theme_mod('google_map_infowindow_phone_number', ''),
+                    'website_url' => get_theme_mod('google_map_infowindow_website_url', ''),
+                    'email' => get_theme_mod('google_map_infowindow_email', ''),
+                    'details' => get_theme_mod('google_map_infowindow_details', ''),
+                    'disable_auto_pan' => get_theme_mod('google_map_infowindow_disable_auto_pan', false),
+                    'max_width' => get_theme_mod('google_map_infowindow_max_width', 320),
+                    'zindex' => get_theme_mod('google_map_infowindow_zindex', 0),
+                ),
+
             );
 
             $this->snazzy_maps = new SnazzyMaps;
@@ -202,9 +225,58 @@ if (!class_exists('GoogleMaps')) {
             }
         }
 
+        private function getInfoWindowStyles()
+        { ?>
+            <style>
+                /*.gm-style-iw {text-align: center; top: 0 !important; left: 0 !important;}*/
+                .iw-wrapper {
+                    font: normal 13px/1.2 Arial, Helvetica, sans-serif;
+                    color: #000;
+                    background-color: #fff;
+                    text-align: left;
+                }
+
+                .iw-header {
+                    padding: 10px 15px;
+                    background-color: #4285f4;
+                    color: #fff;
+                    font-size: 16px;
+                }
+
+                .iw-content {
+                    padding: 8px 15px;
+                    border: 1px solid #4285f4;
+                }
+
+                .iw-options {
+                    padding: 3px 0;
+                }
+
+                .iw-details {
+                    border-top: 1px solid #e6e6e6;
+                    padding-top: 8px;
+                    margin-top: 5px;
+                }
+
+                .iw-link {
+                    color: #4285f4;
+                    text-decoration: none;
+                }
+
+                .iw-link:hover {
+                    color: #4285f4;
+                    text-decoration: underline;
+                }
+            </style>
+        <?php }
+
         private function initMapJS()
         {
             $map = $this->options;
+
+            if ($map['info_window']['enable']) {
+                $this->getInfoWindowStyles();
+            }
             ?>
             <script>
                 function <?php echo $map['callback']; ?>() {
@@ -222,67 +294,67 @@ if (!class_exists('GoogleMaps')) {
                         center: uluru,
 
                         zoom: <?php echo $map['zoom'] ?>,
-                        zoomControl: <?php $this->isOptionEnabled($map['zoom_control']) ?>,
+                        zoomControl: <?php $this->isOptionEnabled($map['control']['zoom']) ?>,
                         zoomControlOptions: {
-                            position: <?php echo $map['zoom_position'] ?>,
+                            position: <?php echo $map['position']['zoom'] ?>,
                         },
 
-                        scaleControl: <?php $this->isOptionEnabled($map['scale_control']) ?>,
+                        scaleControl: <?php $this->isOptionEnabled($map['control']['scale']) ?>,
 
-                        gestureHandling: "<?php echo $map['gesture_handling_control'] ?>",
+                        gestureHandling: "<?php echo $map['control']['gesture_handling'] ?>",
 
-                        fullscreenControl: <?php $this->isOptionEnabled($map['full_screen_control']) ?>,
+                        fullscreenControl: <?php $this->isOptionEnabled($map['control']['full_screen']) ?>,
                         fullscreenControlOptions: {
-                            position: <?php echo $map['full_screen_position'] ?>,
+                            position: <?php echo $map['position']['full_screen'] ?>,
                         },
 
-                        mapTypeId: "<?php echo $map['type_themes'] ?>",
-                        mapTypeControl: <?php $this->isOptionEnabled($map['type_control']) ?>,
+                        mapTypeId: "<?php echo $map['themes']['type'] ?>",
+                        mapTypeControl: <?php $this->isOptionEnabled($map['control']['type']) ?>,
                         mapTypeControlOptions: {
-                            style: <?php echo $map['type_control'] ?>,
-                            position: <?php echo $map['type_position'] ?>,
+                            style: <?php echo $map['control']['type'] ?>,
+                            position: <?php echo $map['position']['type'] ?>,
                         },
 
-                        streetViewControl: <?php $this->isOptionEnabled($map['street_view_control']) ?>,
+                        streetViewControl: <?php $this->isOptionEnabled($map['control']['street_view']) ?>,
                         streetViewControlOptions: {
-                            position: <?php echo $map['street_view_position'] ?>,
+                            position: <?php echo $map['position']['street_view'] ?>,
                         },
 
-                        draggable: <?php $this->isOptionEnabled($map['draggable']) ?>,
-                        scrollwheel: <?php $this->isOptionEnabled($map['scroll_wheel']) ?>,
-                        disableDoubleClickZoom: <?php $this->isOptionEnabled($map['double_click_zoom']) ?>,
+                        draggable: <?php $this->isOptionEnabled($map['control']['draggable']) ?>,
+                        scrollwheel: <?php $this->isOptionEnabled($map['control']['scroll_wheel']) ?>,
+                        disableDoubleClickZoom: <?php $this->isOptionEnabled($map['control']['double_click_zoom']) ?>,
 
-                        clickableIcons: <?php $this->isOptionEnabled($map['clickable_poi_control']) ?>,
+                        clickableIcons: <?php $this->isOptionEnabled($map['control']['clickable_poi']) ?>,
 
-                        styles: <?php echo $map['styles_themes'] === 0 ? '[]' : $this->snazzy_maps->getItemJson($map['styles_themes']) ?>,
+                        styles: <?php echo $map['themes']['styles'] === 0 ? '[]' : $this->snazzy_maps->getItemJson($map['themes']['styles']) ?>,
                     };
 
                     map = new google.maps.Map(mapElement, mapOptions);
 
                     mapMarker = new google.maps.Marker({
-                        animation: <?php echo $map['animation_marker'] !== 0 ? $map['animation_marker'] : 'null'; ?>,
-                        clickable: <?php $this->isOptionEnabled($map['clickable_marker']) ?>,
-                        crossOnDrag: <?php $this->isOptionEnabled($map['cross_drag_marker']) ?>,
-                        cursor: "<?php echo $map['cursor_marker'] ?>",
-                        draggable: <?php $this->isOptionEnabled($map['draggable_marker']) ?>,
+                        animation: <?php echo $map['marker']['animation'] !== 0 ? $map['marker']['animation'] : 'null'; ?>,
+                        clickable: <?php $this->isOptionEnabled($map['marker']['clickable']) ?>,
+                        crossOnDrag: <?php $this->isOptionEnabled($map['marker']['cross_drag']) ?>,
+                        cursor: "<?php echo $map['marker']['cursor'] ?>",
+                        draggable: <?php $this->isOptionEnabled($map['marker']['draggable']) ?>,
                         icon: {
-                            "fillColor": "#ee1c25",
-                            "fillOpacity": 1,
-                            "strokeWeight": 0,
-                            "scale": 1.1,
-                            "path": "M10.2,7.4c-6,0-10.9,4.9-10.9,10.9c0,6,10.9,18.4,10.9,18.4s10.9-12.3,10.9-18.4C21.2,12.2,16.3,7.4,10.2,7.4z M10.2,22.9c-2.6,0-4.6-2.1-4.6-4.6s2.1-4.6,4.6-4.6s4.6,2.1,4.6,4.6S12.8,22.9,10.2,22.9z",
-                            "anchor": {"x": 10, "y": 30},
-                            "origin": {"x": 0, "y": 0},
-                            "style": 1
+                            'fillColor': '#ee1c25',
+                            'fillOpacity': 1,
+                            'strokeWeight': 0,
+                            'scale': 1.1,
+                            'path': 'M10.2,7.4c-6,0-10.9,4.9-10.9,10.9c0,6,10.9,18.4,10.9,18.4s10.9-12.3,10.9-18.4C21.2,12.2,16.3,7.4,10.2,7.4z M10.2,22.9c-2.6,0-4.6-2.1-4.6-4.6s2.1-4.6,4.6-4.6s4.6,2.1,4.6,4.6S12.8,22.9,10.2,22.9z',
+                            'anchor': {'x': 10, 'y': 30},
+                            'origin': {'x': 0, 'y': 0},
+                            'style': 1
                         },
-                        label: "<?php echo $map['label_marker'] ?>",
+                        label: "<?php echo $map['marker']['label'] ?>",
                         map: map,
-                        opacity: <?php echo $map['opacity_marker'] ?>,
-                        optimized: <?php $this->isOptionEnabled($map['optimized_marker']) ?>,
+                        opacity: <?php echo $map['marker']['opacity'] ?>,
+                        optimized: <?php $this->isOptionEnabled($map['marker']['optimized']) ?>,
                         position: uluru,
-                        title: "<?php echo $map['title_marker'] ?>",
-                        visible: <?php $this->isOptionEnabled($map['visible_marker']) ?>,
-                        zIndex: <?php echo $map['zindex_marker'] ?>,
+                        title: "<?php echo $map['marker']['title'] ?>",
+                        visible: <?php $this->isOptionEnabled($map['marker']['visible']) ?>,
+                        zIndex: <?php echo $map['marker']['zindex'] ?>,
                     });
 
                     <?php
@@ -291,21 +363,55 @@ if (!class_exists('GoogleMaps')) {
                             $map['layers'], ucfirst($map['layers']));
                     } ?>
 
+                    <?php if ($map['info_window']['enable']) { ?>
+
+                    var iwObj, iwWrapper, iwHeader, iwContent, iwOptions = '';
+
+                    iwObj = {
+                        'name': '<?php echo $map['info_window']['name'] ?>',
+                        'address': '<?php echo $map['info_window']['address'] ?>',
+                        'phone': '<?php echo $map['info_window']['phone_number'] ?>',
+                        'url': '<?php echo $map['info_window']['website_url'] ?>',
+                        'email': '<?php echo $map['info_window']['email'] ?>',
+                        'details': '<?php echo $map['info_window']['details'] ?>',
+                    };
+
+                    iwOptions += iwObj.address ? '<div class="iw-options">' + iwObj.address + '</div>' : '';
+                    iwOptions += iwObj.phone ? '<div class="iw-options"><a class="iw-link" href="tel:' + iwObj.phone + '">' + iwObj.phone + '</a></div>' : '';
+                    iwOptions += iwObj.url ? '<div class="iw-options"><a class="iw-link" href="' + iwObj.url + '" target="_blank" rel="nofollow noopener">' + iwObj.url + '</a></div>' : '';
+                    iwOptions += iwObj.email ? '<div class="iw-options"><a class="iw-link" href="mailto:' + iwObj.email + '">' + iwObj.email + '</a></div>' : '';
+                    iwOptions += iwObj.details ? '<div class="iw-options iw-details">' + iwObj.details + '</div>' : '';
+
+                    iwHeader = iwObj.name ? '<header class="iw-header">' + iwObj.name + '</header>' : '';
+                    iwContent = '<div class="iw-content">' + iwOptions + '</div>';
+
+                    iwWrapper = '<div class="iw-wrapper">' + iwHeader + iwContent + '</div>';
+
                     infoWindow = new google.maps.InfoWindow({
-                        content: 'Hello World',
-                        maxWidth: 320,
+                        content: iwWrapper,
+                        disableAutoPan: <?php $this->isOptionEnabled($map['info_window']['disable_auto_pan']) ?>,
+                        maxWidth: <?php echo $map['info_window']['max_width'] ?>,
+                        zIndex: <?php echo $map['info_window']['zindex'] ?>,
                     });
 
-                    mapMarker.addListener('click', function () {
+                    google.maps.event.addListener(mapMarker, 'click', function () {
                         infoWindow.open(map, mapMarker);
                         console.log('Marker was clicked!');
                     });
 
-                    //infoWindow.open(map, mapMarker);
-
                     google.maps.event.addListener(map, 'click', function () {
                         infoWindow.close();
                     });
+
+                    google.maps.event.addListener(infoWindow, 'domready', function () {
+                        var iwOuter, iwBackground, iwButton;
+                        iwOuter = document.querySelector('.gm-style-iw');
+                        iwBackground = iwOuter.previousElementSibling;
+                        iwButton = iwOuter.nextElementSibling;
+                        console.log(iwOuter, iwBackground, iwButton);
+                    });
+
+                    <?php } ?>
 
                     console.log('Google Maps API version: ' + google.maps.version);
                 }

@@ -858,6 +858,146 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'type' => 'number',
             ));
 
+            // Section Info Window
+            $wp_customize->add_section('google_map_infowindow', array(
+                'title' => 'Info Window',
+                'description' => '',
+                'panel' => 'google_map',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_display', array(
+                'default' => false,
+                'sanitize_callback' => '',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_disable_auto_pan', array(
+                'default' => false,
+                'sanitize_callback' => '',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_max_width', array(
+                'default' => 320,
+                'sanitize_callback' => 'absint',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_zindex', array(
+                'default' => 0,
+                'sanitize_callback' => 'absint',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_name', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_html',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_address', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_html',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_phone_number', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_html',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_website_url', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_url',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_email', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_attr',
+            ));
+
+            $wp_customize->add_setting('google_map_infowindow_details', array(
+                'default' => '',
+                'sanitize_callback' => 'esc_html',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_display', array(
+                'label' => 'Enable/Disable',
+                'description' => 'Enable the Info Window.',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_display',
+                'type' => 'checkbox',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_name', array(
+                'label' => 'Name',
+                'description' => '',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_name',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_address', array(
+                'label' => 'Address',
+                'description' => '',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_address',
+                'type' => 'text',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_phone_number', array(
+                'label' => 'Telephone number',
+                'description' => '',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_phone_number',
+                'type' => 'tel',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_website_url', array(
+                'label' => 'Website URL',
+                'description' => '',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_website_url',
+                'type' => 'url',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_email', array(
+                'label' => 'Email',
+                'description' => '',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_email',
+                'type' => 'email',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_details', array(
+                'label' => 'Details',
+                'description' => 'A text area with a maximum length of <b>150 characters</b>:',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_details',
+                'type' => 'textarea',
+                'input_attrs' => array(
+                    'maxlength' => 150,
+                ),
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_disable_auto_pan', array(
+                'label' => 'Disable Auto Pan',
+                'description' => 'Disable auto-pan on open. By default, the info window will pan the map so that it is fully visible when it opens.',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_disable_auto_pan',
+                'type' => 'checkbox',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_max_width', array(
+                'label' => 'Max Width',
+                'description' => 'Maximum width of the infowindow, regardless of content\'s width. This value is only considered if it is set before a call to open. To change the maximum width when changing content, call close, setOptions, and then open.',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_max_width',
+                'type' => 'number',
+            ));
+
+            $wp_customize->add_control('google_map_infowindow_zindex', array(
+                'label' => 'zIndex',
+                'description' => 'All InfoWindows are displayed on the map in order of their zIndex, with higher values displaying in front of InfoWindows with lower values. By default, InfoWindows are displayed according to their latitude, with InfoWindows of lower latitudes appearing in front of InfoWindows at higher latitudes. InfoWindows are always displayed in front of markers.',
+                'section' => 'google_map_infowindow',
+                'settings' => 'google_map_infowindow_zindex',
+                'type' => 'number',
+            ));
+
         }
     }
 

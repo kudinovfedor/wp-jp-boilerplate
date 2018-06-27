@@ -78,7 +78,7 @@ if (!class_exists('ChangeSiteURL')) {
 
                 $results = $this->wpdb->query("SELECT * FROM `$table` $condition");
 
-                echo sprintf('<p>%d соответствий в таблице <b>%s</b></p>', $results, $table);
+                echo sprintf('<p>%d matches in the table <b>%s</b></p>', $results, $table);
             }
         }
 
@@ -109,11 +109,11 @@ if (!class_exists('ChangeSiteURL')) {
 
                 if (0 === $options && 0 === $posts && 0 === $postmeta) {
 
-                    echo sprintf('<p>Никаких совпадений для замены в таблицах (<i>options, posts, postmeta</i>) <b>не найдено</b>.</p>');
+                    echo sprintf('<p>No match for replacement in the tables (<i>options, posts, postmeta</i>) <b>not found</b>.</p>');
 
                 } else {
 
-                    echo sprintf('<p>Затронуто строк: options - <b>%d</b>, posts - <b>%d</b>, postmeta = <b>%d</b>.</p>',
+                    echo sprintf('<p>Affected rows options - <b>%d</b>, posts - <b>%d</b>, postmeta = <b>%d</b>.</p>',
                         $options, $posts, $postmeta
                     );
 
@@ -121,7 +121,7 @@ if (!class_exists('ChangeSiteURL')) {
 
             } else {
 
-                echo '<p style="color: #f00;"><b>Неправильный один из URL адресов.</b></p>';
+                echo '<p style="color: #f00;"><b>Invalid one of the URL addresses.</b></p>';
 
             }
 
