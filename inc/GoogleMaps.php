@@ -9,7 +9,7 @@ if (!class_exists('GoogleMaps')) {
         /**
          * @var array
          */
-        public $options = array();
+        private $options = array();
 
         /**
          * @var string
@@ -26,7 +26,98 @@ if (!class_exists('GoogleMaps')) {
          */
         public function __construct()
         {
-            $this->options = array(
+            $this->options = $this->getOptions();
+
+            $this->snazzy_maps = new SnazzyMaps;
+        }
+
+        /**
+         * Init Scripts
+         *
+         * @return void
+         */
+        public function init()
+        {
+            if ($this->isEnabled()) {
+                add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
+                add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
+            }
+        }
+
+        /**
+         * Check Enable and Api Key exist
+         *
+         * @return bool
+         */
+        public function isEnabled()
+        {
+            $this->options = $this->getOptions();
+
+            return $this->options['enable'] && !empty($this->options['api_key']);
+        }
+
+        /**
+         * Get Google Maps Api Src
+         *
+         * @return string
+         */
+        public function getGoogleApisSrc()
+        {
+            $query_data = array(
+                'v' => $this->options['version'],
+                'language' => $this->options['language'],
+                'region' => $this->options['region'],
+                'key' => $this->options['api_key'],
+                'callback' => $this->options['callback'],
+            );
+
+            $query_data = array_filter($query_data, array($this, 'isNotEmpty'), ARRAY_FILTER_USE_BOTH);
+
+            $query = http_build_query($query_data);
+
+            $src = sprintf('https://maps.googleapis.com/maps/api/js?%s', $query);
+
+            return $src;
+        }
+
+        /**
+         * Enqueue a script.
+         *
+         * @return void
+         */
+        public function enqueueScripts()
+        {
+            wp_register_script($this->script_handle, $this->getGoogleApisSrc(), array(), null, true);
+            wp_enqueue_script($this->script_handle);
+        }
+
+        /**
+         * Add attributes (async, defer) to script
+         *
+         * @param $tag
+         * @param $handle
+         *
+         * @return mixed
+         */
+        public function addAsyncDeferAttribute($tag, $handle)
+        {
+            if ($this->script_handle === $handle) {
+
+                return str_replace(' src', ' async defer src', $tag);
+
+            }
+
+            return $tag;
+        }
+
+        /**
+         * Get Google Maps options
+         *
+         * @return array
+         */
+        public function getOptions()
+        {
+            return array(
                 // Project Setup
                 'enable' => get_theme_mod('google_map_display', false),
                 'api_key' => get_theme_mod('google_map_project_setup_api_key'),
@@ -107,77 +198,11 @@ if (!class_exists('GoogleMaps')) {
                 ),
 
             );
-
-            $this->snazzy_maps = new SnazzyMaps;
-        }
-
-        public function init()
-        {
-            if ($this->isEnabled()) {
-                add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
-                add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
-            }
         }
 
         /**
-         * @return bool
-         */
-        public function isEnabled()
-        {
-            return $this->options['enable'] && !empty($this->options['api_key']);
-        }
-
-        /**
-         * Get Google Maps Api Src
+         * Check the value is not empty
          *
-         * @return string
-         */
-        public function getGoogleApisSrc()
-        {
-            $query_data = array(
-                'v' => $this->options['version'],
-                'language' => $this->options['language'],
-                'region' => $this->options['region'],
-                'key' => $this->options['api_key'],
-                'callback' => $this->options['callback'],
-            );
-
-            $query_data = array_filter($query_data, array($this, 'isNotEmpty'), ARRAY_FILTER_USE_BOTH);
-
-            $query = http_build_query($query_data);
-
-            $src = sprintf('https://maps.googleapis.com/maps/api/js?%s', $query);
-
-            return $src;
-        }
-
-        /**
-         * @return void
-         */
-        public function enqueueScripts()
-        {
-            wp_register_script($this->script_handle, $this->getGoogleApisSrc(), array(), null, true);
-            wp_enqueue_script($this->script_handle);
-        }
-
-        /**
-         * @param $tag
-         * @param $handle
-         *
-         * @return mixed
-         */
-        public function addAsyncDeferAttribute($tag, $handle)
-        {
-            if ($this->script_handle === $handle) {
-
-                return str_replace(' src', ' async defer src', $tag);
-
-            }
-
-            return $tag;
-        }
-
-        /**
          * @param $value
          * @param $key
          *
@@ -200,6 +225,13 @@ if (!class_exists('GoogleMaps')) {
             echo $option ? 'true' : 'false';
         }
 
+        /**
+         * Output HTML Markup
+         *
+         * @param bool $dimensions
+         *
+         * @return void
+         */
         public function htmlMarkup($dimensions = true)
         {
             if ($this->isEnabled()) {
@@ -225,6 +257,11 @@ if (!class_exists('GoogleMaps')) {
             }
         }
 
+        /**
+         * Outputting styles for Info Window
+         *
+         * @return void
+         */
         private function getInfoWindowStyles()
         { ?>
             <style>
@@ -245,6 +282,11 @@ if (!class_exists('GoogleMaps')) {
             </style>
         <?php }
 
+        /**
+         * Init Google Maps Js
+         *
+         * @return void
+         */
         private function initMapJS()
         {
             $map = $this->options;
@@ -396,14 +438,14 @@ if (!class_exists('GoogleMaps')) {
         <?php }
     }
 
-    /**
-     * @var GoogleMaps $google_map
-     */
     $google_map = new GoogleMaps;
     $google_map->init();
 }
 
 if (!function_exists('google_map')) {
+    /**
+     * Display Google Map (HTML + Script tag with callback function)
+     */
     function google_map()
     {
         if (class_exists('GoogleMaps')) {
