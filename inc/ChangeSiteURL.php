@@ -113,7 +113,7 @@ if (!class_exists('ChangeSiteURL')) {
 
                 } else {
 
-                    echo sprintf('<p>Affected rows options - <b>%d</b>, posts - <b>%d</b>, postmeta = <b>%d</b>.</p>',
+                    echo sprintf('<p>Affected rows: options - <b>%d</b>, posts - <b>%d</b>, postmeta = <b>%d</b>.</p>',
                         $options, $posts, $postmeta
                     );
 

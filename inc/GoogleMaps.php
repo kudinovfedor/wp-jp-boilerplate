@@ -228,45 +228,20 @@ if (!class_exists('GoogleMaps')) {
         private function getInfoWindowStyles()
         { ?>
             <style>
-                /*.gm-style-iw {text-align: center; top: 0 !important; left: 0 !important;}*/
-                .iw-wrapper {
-                    font: normal 13px/1.2 Arial, Helvetica, sans-serif;
-                    color: #000;
-                    background-color: #fff;
-                    text-align: left;
-                }
+                <?php //.gm-style-iw {text-align: center; top: 0 !important; left: 0 !important;} ?>
+                .iw-wrapper { font: normal 13px/1.2 Arial, Helvetica, sans-serif; color: #000; background-color: #fff; text-align: left; }
 
-                .iw-header {
-                    padding: 10px 15px;
-                    background-color: #4285f4;
-                    color: #fff;
-                    font-size: 16px;
-                }
+                .iw-header { padding: 10px 15px; background-color: #4285f4; color: #fff; font-size: 16px; }
 
-                .iw-content {
-                    padding: 8px 15px;
-                    border: 1px solid #4285f4;
-                }
+                .iw-content { padding: 8px 15px; border: 1px solid #4285f4; }
 
-                .iw-options {
-                    padding: 3px 0;
-                }
+                .iw-options { padding: 3px 0; }
 
-                .iw-details {
-                    border-top: 1px solid #e6e6e6;
-                    padding-top: 8px;
-                    margin-top: 5px;
-                }
+                .iw-details { border-top: 1px solid #e6e6e6; padding-top: 8px; margin-top: 5px; }
 
-                .iw-link {
-                    color: #4285f4;
-                    text-decoration: none;
-                }
+                .iw-link { color: #4285f4; text-decoration: none; }
 
-                .iw-link:hover {
-                    color: #4285f4;
-                    text-decoration: underline;
-                }
+                .iw-link:hover { color: #4285f4; text-decoration: underline; }
             </style>
         <?php }
 
@@ -361,9 +336,9 @@ if (!class_exists('GoogleMaps')) {
                     if ('off' !== $map['layers']) {
                         echo sprintf('var %1$sLayer = new google.maps.%2$sLayer(); %1$sLayer.setMap(map);' . PHP_EOL,
                             $map['layers'], ucfirst($map['layers']));
-                    } ?>
+                    }
 
-                    <?php if ($map['info_window']['enable']) { ?>
+                    if ($map['info_window']['enable']) { ?>
 
                     var iwObj, iwWrapper, iwHeader, iwContent, iwOptions = '';
 
@@ -403,6 +378,7 @@ if (!class_exists('GoogleMaps')) {
                         infoWindow.close();
                     });
 
+                    <?php /*
                     google.maps.event.addListener(infoWindow, 'domready', function () {
                         var iwOuter, iwBackground, iwButton;
                         iwOuter = document.querySelector('.gm-style-iw');
@@ -410,6 +386,7 @@ if (!class_exists('GoogleMaps')) {
                         iwButton = iwOuter.nextElementSibling;
                         console.log(iwOuter, iwBackground, iwButton);
                     });
+                    */ ?>
 
                     <?php } ?>
 
