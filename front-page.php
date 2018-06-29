@@ -18,7 +18,7 @@
 
             </div>
 
-            <?php the_posts_pagination(); ?>
+            <?php jp_pagination(); ?>
 
         <?php else : ?>
 

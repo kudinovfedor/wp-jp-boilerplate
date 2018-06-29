@@ -1,0 +1,31 @@
+.pagination {
+
+    &-list,
+    &-item {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &-list {
+        @extend %reset-list;
+        font-size: 0;
+    }
+
+    &-item {
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    &-link {
+        display: block;
+        padding: 2px 10px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+    }
+
+    &-prev {
+    }
+
+    &-next {
+    }
+}
