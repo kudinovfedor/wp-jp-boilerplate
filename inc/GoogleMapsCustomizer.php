@@ -3,6 +3,8 @@
 if (!class_exists('GoogleMapsCustomizer')) {
     /**
      * Class GoogleMapsCustomizer.
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
      */
     class GoogleMapsCustomizer
     {
@@ -98,7 +100,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             $wp_customize->add_panel('google_map', array(
                 'title' => 'Google Maps API',
                 'description' => 'Customizer for Google Map',
-                'priority' => 203,
+                'priority' => 202,
             ));
 
             // Section Project Setup

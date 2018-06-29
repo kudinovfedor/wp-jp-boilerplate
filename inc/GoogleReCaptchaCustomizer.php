@@ -1,10 +1,12 @@
 <?php
 
-if (!class_exists('ReCaptchaCustomizer')) {
+if (!class_exists('GoogleReCaptchaCustomizer')) {
     /**
-     * Class ReCaptchaCustomizer
+     * Class GoogleReCaptchaCustomizer
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
      */
-    class ReCaptchaCustomizer
+    class GoogleReCaptchaCustomizer
     {
         /**
          * @var array
@@ -83,7 +85,7 @@ if (!class_exists('ReCaptchaCustomizer')) {
         );
 
         /**
-         * ReCaptchaCustomizer constructor.
+         * GoogleReCaptchaCustomizer constructor.
          */
         public function __construct()
         {
@@ -101,7 +103,7 @@ if (!class_exists('ReCaptchaCustomizer')) {
             $wp_customize->add_section('jp_recaptcha', array(
                 'title' => 'Google reCAPTCHA v2',
                 'description' => 'Register your website with Google to get required API keys and enter them below. <a target="_blank" rel="nofollow noopener" href="https://www.google.com/recaptcha/admin#list">Get the API Keys</a>',
-                'priority' => 202,
+                'priority' => 203,
                 //'panel' => 'jp_theme_options',
             ));
 
@@ -284,6 +286,6 @@ if (!class_exists('ReCaptchaCustomizer')) {
         }
 
     }
-}
 
-new ReCaptchaCustomizer;
+    new GoogleReCaptchaCustomizer;
+}

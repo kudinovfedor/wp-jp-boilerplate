@@ -71,7 +71,7 @@
             <div style="margin-bottom: 16px;"><?php social(); ?></div>
             <div style="margin-bottom: 16px;"><?php phones(); ?></div>
             <div style="margin-bottom: 16px;"><?php messengers(); ?></div>
-            <div style="margin-bottom: 16px;"><?php (new ReCaptcha)->htmlMarkup(); ?></div>
+            <div style="margin-bottom: 16px;"><?php (new GoogleReCaptcha())->htmlMarkup(); ?></div>
 
             <p>
                 <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>

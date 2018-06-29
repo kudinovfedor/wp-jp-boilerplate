@@ -1,10 +1,12 @@
 <?php
 
-if (!class_exists('ReCaptcha')) {
+if (!class_exists('GoogleReCaptcha')) {
     /**
-     * Class ReCaptcha
+     * Class GoogleReCaptcha
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
      */
-    class ReCaptcha
+    class GoogleReCaptcha
     {
         /**
          * @var array
@@ -23,7 +25,7 @@ if (!class_exists('ReCaptcha')) {
         );
 
         /**
-         * ReCaptcha constructor.
+         * GoogleReCaptcha constructor.
          */
         public function __construct()
         {
@@ -419,5 +421,5 @@ if (!class_exists('ReCaptcha')) {
 
     }
 
-    new ReCaptcha;
+    new GoogleReCaptcha;
 }

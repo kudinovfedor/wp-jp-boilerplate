@@ -3,6 +3,8 @@
 if (!class_exists('SnazzyMaps')) {
     /**
      * Class SnazzyMaps
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
      */
     class SnazzyMaps
     {

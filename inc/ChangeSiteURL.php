@@ -3,6 +3,8 @@
 if (!class_exists('ChangeSiteURL')) {
     /**
      * Class ChangeSiteURL
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
      */
     class ChangeSiteURL
     {

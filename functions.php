@@ -25,7 +25,9 @@ require_once('inc/SnazzyMaps.php');
 require_once('inc/GoogleMaps.php');
 require_once('inc/GoogleMapsCustomizer.php');
 
-require_once('inc/ReCaptcha.php');
-require_once('inc/ReCaptchaCustomizer.php');
+require_once('inc/GoogleTagManager.php');
+
+require_once('inc/GoogleReCaptcha.php');
+require_once('inc/GoogleReCaptchaCustomizer.php');
 
 require_once('inc/ChangeSiteURL.php');
