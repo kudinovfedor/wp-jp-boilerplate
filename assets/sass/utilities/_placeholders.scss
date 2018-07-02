@@ -31,6 +31,10 @@
   padding: 0;
 }
 
+%reset-menu {
+  @extend %reset-list;
+}
+
 // Reset flow
 %flow-root {
   @include flow-root();

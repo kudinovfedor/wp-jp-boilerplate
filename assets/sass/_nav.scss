@@ -1,18 +1,12 @@
-%reset-menu {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.navigation {
+.menu {
     position: relative;
     background-color: #363636;
     color: #fff;
-}
 
-.menu {
-    @extend %reset-menu;
-    font-size: 0;
+    &-list {
+        @extend %reset-menu;
+        font-size: 0;
+    }
 
     &-close {
         cursor: pointer;

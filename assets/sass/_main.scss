@@ -8,19 +8,50 @@
 
     &-list {
         @extend %reset-list;
+        margin: 20px 0;
         font-size: 0;
     }
 
     &-item {
         font-size: 16px;
-        margin: 5px;
+        margin-left: -1px;
     }
 
     &-link {
         display: block;
-        padding: 2px 10px;
-        border: 1px solid #ccc;
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        color: #0056b3;
+        line-height: 1.25;
         text-decoration: none;
+        background-color: #fff;
+        @include transition(.15s ease-in-out);
+
+        &:hover {
+            color: #0056b3;
+            text-decoration: none;
+            border-color: #dee2e6;
+            background-color: #e9ecef;
+        }
+
+        &.is-current {
+            color: #fff;
+            border-color: #007bff;
+            background-color: #007bff;
+        }
+
+        &.disabled {
+            cursor: auto;
+            color: #6c757d;
+            pointer-events: none;
+            border-color: #dee2e6;
+            background-color: #fff;
+        }
+
+        &:not(:disabled),
+        &:not(.disabled) {
+            cursor: pointer;
+        }
     }
 
     &-prev {
