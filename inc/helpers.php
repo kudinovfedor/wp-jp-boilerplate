@@ -801,11 +801,11 @@ if (!function_exists('dump')) {
     /**
      * Dumps information about a variable
      *
-     * @param mixed $expression
+     * @param mixed ...$expression
      *
      * @return void
      */
-    function dump($expression)
+    function dump(...$expression)
     {
         echo '<pre>';
         var_dump($expression);
@@ -817,11 +817,11 @@ if (!function_exists('dd')) {
     /**
      * Dump and die
      *
-     * @param mixed $expression
+     * @param mixed ...$expression
      *
      * @return void
      */
-    function dd($expression)
+    function dd(...$expression)
     {
         dump($expression);
         die();

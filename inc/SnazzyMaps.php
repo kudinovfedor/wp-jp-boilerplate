@@ -109,9 +109,12 @@ if (!class_exists('SnazzyMaps')) {
                   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
                   style_id INT NOT NULL,
                   name VARCHAR(255) NOT NULL,
+                  url VARCHAR(255) NOT NULL,
                   image_url VARCHAR(255) NOT NULL,
                   json TEXT NOT NULL,
                   views INT NOT NULL,
+                  favorites INT NOT NULL,
+                  createdOn INT NOT NULL,
                   PRIMARY KEY (id)
                 ) $this->charset_collate;";
 
@@ -160,15 +163,23 @@ if (!class_exists('SnazzyMaps')) {
                 $maps = array();
 
                 foreach ($this->styles as $key => $item) {
+                    $timestamp = strtotime($item['createdOn']);
                     $maps[$key] = [
                         'style_id' => (int)$item['id'],
                         'name' => htmlspecialchars($this->validate_field($item['name'])),
+                        //'description' => htmlspecialchars($this->validate_field($item['description'])),
+                        'url' => htmlspecialchars($this->validate_field($item['url'])),
                         'image_url' => htmlspecialchars($this->validate_field($item['imageUrl'])),
                         'json' => $this->validate_field($item['json']),
                         'views' => (int)$item['views'],
+                        'favorites' => (int)$item['favorites'],
+                        'createdOn' => (int)$timestamp,
                     ];
 
-                    $this->wpdb->insert($this->table_name, $maps[$key], array('%d', '%s', '%s', '%s', '%d'));
+                    $this->wpdb->insert(
+                        $this->table_name, $maps[$key],
+                        array('%d', '%s', '%s', '%s', '%s', '%d', '%d')
+                    );
                 }
 
                 $this->table_empty = false;
@@ -185,7 +196,7 @@ if (!class_exists('SnazzyMaps')) {
         {
             $query_defaults = array(
                 'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
-                'pageSize' => 500,
+                'pageSize' => 1000,
                 'page' => 1,
                 'sort' => 'popular',
             );
