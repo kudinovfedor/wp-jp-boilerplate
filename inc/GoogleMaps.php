@@ -162,7 +162,7 @@ if (!class_exists('GoogleMaps')) {
                 // Themes
                 'themes' => array(
                     'type' => get_theme_mod('google_map_themes_type', 'roadmap'),
-                    'styles' => get_theme_mod('google_map_themes_styles', 0),
+                    'styling' => get_theme_mod('google_map_themes_styling', ''),
                 ),
 
                 // Marker
@@ -197,6 +197,14 @@ if (!class_exists('GoogleMaps')) {
                     'disable_auto_pan' => get_theme_mod('google_map_infowindow_disable_auto_pan', false),
                     'max_width' => get_theme_mod('google_map_infowindow_max_width', 320),
                     'zindex' => get_theme_mod('google_map_infowindow_zindex', 0),
+                ),
+
+                // Snazzy Maps
+                'snazzy_maps' => array(
+                    'style' => get_theme_mod('snazzy_maps_style', 0),
+                    'sort' => get_theme_mod('snazzy_maps_sort_by', ''),
+                    'filter_tag' => get_theme_mod('snazzy_maps_filter_by_tag', ''),
+                    'filter_color' => get_theme_mod('snazzy_maps_filter_by_color', ''),
                 ),
 
             );
@@ -268,19 +276,44 @@ if (!class_exists('GoogleMaps')) {
         { ?>
             <style>
                 <?php //.gm-style-iw {text-align: center; top: 0 !important; left: 0 !important;} ?>
-                .iw-wrapper { font: normal 13px/1.2 Arial, Helvetica, sans-serif; color: #000; background-color: #fff; text-align: left; }
+                .iw-wrapper {
+                    font: normal 13px/1.2 Arial, Helvetica, sans-serif;
+                    color: #000;
+                    background-color: #fff;
+                    text-align: left;
+                }
 
-                .iw-header { padding: 10px 15px; background-color: #4285f4; color: #fff; font-size: 16px; }
+                .iw-header {
+                    padding: 10px 15px;
+                    background-color: #4285f4;
+                    color: #fff;
+                    font-size: 16px;
+                }
 
-                .iw-content { padding: 8px 15px; border: 1px solid #4285f4; }
+                .iw-content {
+                    padding: 8px 15px;
+                    border: 1px solid #4285f4;
+                }
 
-                .iw-options { padding: 3px 0; }
+                .iw-options {
+                    padding: 3px 0;
+                }
 
-                .iw-details { border-top: 1px solid #e6e6e6; padding-top: 8px; margin-top: 5px; }
+                .iw-details {
+                    border-top: 1px solid #e6e6e6;
+                    padding-top: 8px;
+                    margin-top: 5px;
+                }
 
-                .iw-link { color: #4285f4; text-decoration: none; }
+                .iw-link {
+                    color: #4285f4;
+                    text-decoration: none;
+                }
 
-                .iw-link:hover { color: #4285f4; text-decoration: underline; }
+                .iw-link:hover {
+                    color: #4285f4;
+                    text-decoration: underline;
+                }
             </style>
         <?php }
 
@@ -296,6 +329,15 @@ if (!class_exists('GoogleMaps')) {
             if ($map['info_window']['enable']) {
                 $this->getInfoWindowStyles();
             }
+
+            $style = '[]';
+
+            if (!empty($map['themes']['styling'])) {
+                $style = $map['themes']['styling'];
+            } elseif ($map['snazzy_maps']['style'] !== 0) {
+                $style = $this->snazzy_maps->getItemJson($map['snazzy_maps']['style']);
+            }
+
             ?>
             <script>
                 function <?php echo $map['callback']; ?>() {
@@ -345,7 +387,7 @@ if (!class_exists('GoogleMaps')) {
 
                         clickableIcons: <?php $this->isOptionEnabled($map['control']['clickable_poi']) ?>,
 
-                        styles: <?php echo $map['themes']['styles'] === 0 ? '[]' : $this->snazzy_maps->getItemJson($map['themes']['styles']) ?>,
+                        styles: <?php echo $style ?>,
                     };
 
                     map = new google.maps.Map(mapElement, mapOptions);

@@ -76,6 +76,24 @@ if (!class_exists('GoogleMapsCustomizer')) {
         );
 
         /**
+         * @var array
+         */
+        private $position = array(
+            1 => 'Top Left',
+            2 => 'Top Center',
+            3 => 'Top Right',
+            4 => 'Left Center',
+            5 => 'Left Top',
+            6 => 'Left Bottom',
+            7 => 'Right Top',
+            8 => 'Right Center',
+            9 => 'Right Bottom',
+            10 => 'Bottom Left',
+            11 => 'Bottom Center',
+            12 => 'Bottom Right',
+        );
+
+        /**
          * @var SnazzyMaps
          */
         public $snazzy_maps;
@@ -476,20 +494,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_positions',
                 'settings' => 'google_map_positions_map_type',
                 'type' => 'select',
-                'choices' => array(
-                    1 => 'Top Left',
-                    2 => 'Top Center',
-                    3 => 'Top Right',
-                    4 => 'Left Center',
-                    5 => 'Left Top',
-                    6 => 'Left Bottom',
-                    7 => 'Right Top',
-                    8 => 'Right Center',
-                    9 => 'Right Bottom',
-                    10 => 'Bottom Left',
-                    11 => 'Bottom Center',
-                    12 => 'Bottom Right',
-                ),
+                'choices' => $this->position,
             ));
 
             $wp_customize->add_control('google_map_positions_zoom', array(
@@ -497,20 +502,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_positions',
                 'settings' => 'google_map_positions_zoom',
                 'type' => 'select',
-                'choices' => array(
-                    1 => 'Top Left',
-                    2 => 'Top Center',
-                    3 => 'Top Right',
-                    4 => 'Left Center',
-                    5 => 'Left Top',
-                    6 => 'Left Bottom',
-                    7 => 'Right Top',
-                    8 => 'Right Center',
-                    9 => 'Right Bottom',
-                    10 => 'Bottom Left',
-                    11 => 'Bottom Center',
-                    12 => 'Bottom Right',
-                ),
+                'choices' => $this->position,
             ));
 
             $wp_customize->add_control('google_map_positions_street_view', array(
@@ -518,20 +510,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_positions',
                 'settings' => 'google_map_positions_street_view',
                 'type' => 'select',
-                'choices' => array(
-                    1 => 'Top Left',
-                    2 => 'Top Center',
-                    3 => 'Top Right',
-                    4 => 'Left Center',
-                    5 => 'Left Top',
-                    6 => 'Left Bottom',
-                    7 => 'Right Top',
-                    8 => 'Right Center',
-                    9 => 'Right Bottom',
-                    10 => 'Bottom Left',
-                    11 => 'Bottom Center',
-                    12 => 'Bottom Right',
-                ),
+                'choices' => $this->position,
             ));
 
             $wp_customize->add_control('google_map_positions_full_screen', array(
@@ -539,20 +518,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'section' => 'google_map_positions',
                 'settings' => 'google_map_positions_full_screen',
                 'type' => 'select',
-                'choices' => array(
-                    1 => 'Top Left',
-                    2 => 'Top Center',
-                    3 => 'Top Right',
-                    4 => 'Left Center',
-                    5 => 'Left Top',
-                    6 => 'Left Bottom',
-                    7 => 'Right Top',
-                    8 => 'Right Center',
-                    9 => 'Right Bottom',
-                    10 => 'Bottom Left',
-                    11 => 'Bottom Center',
-                    12 => 'Bottom Right',
-                ),
+                'choices' => $this->position,
             ));
 
             // Section Themes
@@ -565,13 +531,13 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 'default' => 'roadmap',
                 'sanitize_callback' => '',
             ));
-            $wp_customize->add_setting('google_map_themes_styles', array(
-                'default' => 0,
-                'sanitize_callback' => 'absint',
+            $wp_customize->add_setting('google_map_themes_styling', array(
+                'default' => '',
+                'sanitize_callback' => '',
             ));
 
             $wp_customize->add_control('google_map_themes_type', array(
-                'label' => 'Google Maps theme',
+                'label' => 'Map Types',
                 'section' => 'google_map_themes',
                 'settings' => 'google_map_themes_type',
                 'type' => 'select',
@@ -583,13 +549,114 @@ if (!class_exists('GoogleMapsCustomizer')) {
                 ),
             ));
 
-            $wp_customize->add_control('google_map_themes_styles', array(
-                'label' => 'Shazzy Maps theme',
+            $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'google_map_themes_styling',
+                array(
+                    'label' => 'Styling a Map',
+                    'description' => 'Javascript code (array), <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank" rel="nofollow noopener">Example</a>.',
+                    'section' => 'google_map_themes',
+                    'settings' => 'google_map_themes_styling',
+                    'code_type' => 'text/javascript',
+                    'input_attrs' => array(
+                        'placeholder' => '',
+                    ),
+                )));
+
+            // Section Snazzy Maps
+            $wp_customize->add_section('snazzy_maps', array(
+                'title' => 'Snazzy Maps',
+                'description' => 'To apply the selected filters and sorting, select them and click the Publish button, then reload the page.',
+                'description_hidden' => true,
+                'panel' => 'google_map',
+            ));
+
+            $wp_customize->add_setting('snazzy_maps_style', array(
+                'default' => 0,
+                'sanitize_callback' => 'absint',
+            ));
+            $wp_customize->add_setting('snazzy_maps_limit', array(
+                'default' => 100,
+                'sanitize_callback' => 'absint',
+            ));
+            $wp_customize->add_setting('snazzy_maps_sort_by', array(
+                'default' => '',
+                'sanitize_callback' => '',
+            ));
+            $wp_customize->add_setting('snazzy_maps_filter_by_tag', array(
+                'default' => '',
+                'sanitize_callback' => '',
+            ));
+            $wp_customize->add_setting('snazzy_maps_filter_by_color', array(
+                'default' => '',
+                'sanitize_callback' => '',
+            ));
+
+            $wp_customize->add_control('snazzy_maps_style', array(
+                'label' => 'Style',
                 'description' => '<a href="https://snazzymaps.com/" target="_blank" rel="nofollow noopener">Snazzy Maps</a> is a repository of different styles for Google Maps aimed towards web designers and developers.',
-                'section' => 'google_map_themes',
-                'settings' => 'google_map_themes_styles',
+                'section' => 'snazzy_maps',
+                'settings' => 'snazzy_maps_style',
                 'type' => 'select',
                 'choices' => array_replace(array(0 => 'Default'), $this->snazzy_maps->getMapStyles()),
+            ));
+            $wp_customize->add_control('snazzy_maps_limit', array(
+                'label' => 'Limit',
+                'section' => 'snazzy_maps',
+                'settings' => 'snazzy_maps_limit',
+                'type' => 'number',
+                'input_attrs' => array(
+                    'min' => 1,
+                    'max' => 1000,
+                    'step' => 1,
+                ),
+            ));
+            $wp_customize->add_control('snazzy_maps_sort_by', array(
+                'label' => 'Sort by...',
+                'section' => 'snazzy_maps',
+                'settings' => 'snazzy_maps_sort_by',
+                'type' => 'select',
+                'choices' => array(
+                    '' => 'Sort by...',
+                    'name' => 'Name',
+                    'popular' => 'Popular',
+                    'recent' => 'Recent',
+                ),
+            ));
+            $wp_customize->add_control('snazzy_maps_filter_by_tag', array(
+                'label' => 'Filter by Tag',
+                'section' => 'snazzy_maps',
+                'settings' => 'snazzy_maps_filter_by_tag',
+                'type' => 'select',
+                'choices' => array(
+                    '' => 'Filter by Tag',
+                    'colorful' => 'Colorful',
+                    'complex' => 'Complex',
+                    'dark' => 'Dark',
+                    'greyscale' => 'Greyscale',
+                    'light' => 'Light',
+                    'monochrome' => 'Monochrome',
+                    'no-labels' => 'No Labels',
+                    'simple' => 'Simple',
+                    'two-tone' => 'Two Tone',
+                ),
+            ));
+            $wp_customize->add_control('snazzy_maps_filter_by_color', array(
+                'label' => 'Filter by Color',
+                'section' => 'snazzy_maps',
+                'settings' => 'snazzy_maps_filter_by_color',
+                'type' => 'select',
+                'choices' => array(
+                    '' => 'Filter by Color',
+                    'black' => 'Black',
+                    'blue' => 'Blue',
+                    'gray' => 'Gray',
+                    'green' => 'Green',
+                    'multi' => 'Multi',
+                    'orange' => 'Orange',
+                    'purple' => 'Purple',
+                    'red' => 'Red',
+                    'white' => 'White',
+                    'yellow' => 'Yellow',
+                ),
             ));
 
             // Section Marker

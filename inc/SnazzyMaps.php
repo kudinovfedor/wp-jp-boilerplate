@@ -49,6 +49,16 @@ if (!class_exists('SnazzyMaps')) {
         private $pagination = array();
 
         /**
+         * @var int
+         */
+        private $page_size = 500;
+
+        /**
+         * @var int
+         */
+        private $total_pages = 0;
+
+        /**
          * SnazzyMaps constructor.
          */
         public function __construct()
@@ -66,8 +76,8 @@ if (!class_exists('SnazzyMaps')) {
             $this->isTableExist();
             $this->isTableEmpty();
 
-            $this->createTable();
-            $this->fillTable();
+            //$this->createTable();
+            //$this->fillTable();
         }
 
         /**
@@ -114,7 +124,9 @@ if (!class_exists('SnazzyMaps')) {
                   json TEXT NOT NULL,
                   views INT NOT NULL,
                   favorites INT NOT NULL,
-                  createdOn INT NOT NULL,
+                  created_on INT NOT NULL,
+                  tags VARCHAR(255) NOT NULL,
+                  colors VARCHAR(255) NOT NULL,
                   PRIMARY KEY (id)
                 ) $this->charset_collate;";
 
@@ -157,29 +169,48 @@ if (!class_exists('SnazzyMaps')) {
 
                 if (null !== $response) {
                     $this->pagination = $response['pagination'];
-                    $this->styles = $response['styles'];
+                    $this->total_pages = $this->pagination['totalPages'];
                 }
 
-                $maps = array();
+                for ($i = 1; $i <= $this->total_pages; $i++) {
+                    $url = $this->getRemoteUrl(array(
+                        'pageSize' => $this->page_size,
+                        'page' => $i,
+                    ));
 
-                foreach ($this->styles as $key => $item) {
-                    $timestamp = strtotime($item['createdOn']);
-                    $maps[$key] = [
-                        'style_id' => (int)$item['id'],
-                        'name' => htmlspecialchars($this->validate_field($item['name'])),
-                        //'description' => htmlspecialchars($this->validate_field($item['description'])),
-                        'url' => htmlspecialchars($this->validate_field($item['url'])),
-                        'image_url' => htmlspecialchars($this->validate_field($item['imageUrl'])),
-                        'json' => $this->validate_field($item['json']),
-                        'views' => (int)$item['views'],
-                        'favorites' => (int)$item['favorites'],
-                        'createdOn' => (int)$timestamp,
-                    ];
+                    $response = $this->getResponse($url);
 
-                    $this->wpdb->insert(
-                        $this->table_name, $maps[$key],
-                        array('%d', '%s', '%s', '%s', '%s', '%d', '%d')
-                    );
+                    if (null !== $response) {
+                        $this->styles = $response['styles'];
+
+                        $maps = array();
+
+                        foreach ($this->styles as $key => $item) {
+                            $timestamp = strtotime($item['createdOn']);
+                            $tags = join('|', $item['tags']);
+                            $colors = join('|', $item['colors']);
+
+                            $maps[$key] = [
+                                'style_id' => (int)$item['id'],
+                                'name' => htmlspecialchars($this->validate_field($item['name'])),
+                                //'description' => htmlspecialchars($this->validate_field($item['description'])),
+                                'url' => htmlspecialchars($this->validate_field($item['url'])),
+                                'image_url' => htmlspecialchars($this->validate_field($item['imageUrl'])),
+                                'json' => $this->validate_field($item['json']),
+                                'views' => (int)$item['views'],
+                                'favorites' => (int)$item['favorites'],
+                                'created_on' => (int)$timestamp,
+                                'tags' => htmlspecialchars($this->validate_field($tags)),
+                                'colors' => htmlspecialchars($this->validate_field($colors)),
+                            ];
+
+                            $this->wpdb->insert(
+                                $this->table_name, $maps[$key],
+                                array('%d', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s')
+                            );
+                        }
+                    }
+
                 }
 
                 $this->table_empty = false;
@@ -196,7 +227,7 @@ if (!class_exists('SnazzyMaps')) {
         {
             $query_defaults = array(
                 'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
-                'pageSize' => 1000,
+                'pageSize' => $this->page_size,
                 'page' => 1,
                 'sort' => 'popular',
             );
@@ -255,20 +286,57 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * Get Snazzy Maps Items
          *
-         * @param int $limit
-         *
+         * @param array $options
          * @return array|null|object
          */
-        public function getItems($limit = 100)
+        public function getItems($options = array())
         {
-            $limit_value = (int)$limit;
+            $default = array(
+                'sort' => get_theme_mod('snazzy_maps_sort_by', ''),
+                'tag' => get_theme_mod('snazzy_maps_filter_by_tag', ''),
+                'color' => get_theme_mod('snazzy_maps_filter_by_color', ''),
+                'limit' => get_theme_mod('snazzy_maps_limit', 100),
+            );
 
             $results = array();
 
             if ($this->table_exists && !$this->table_empty) {
 
+                $options = array_merge($default, $options);
+
+                $conditions = array();
+                $condition = '';
+
+                if (!empty($tag = $options['tag'])) {
+                    $conditions[] = "`tags` LIKE '%{$tag}%'";
+                }
+
+                if (!empty($color = $options['color'])) {
+                    $conditions[] = "`colors` LIKE '%{$color}%'";
+                }
+
+                if (!empty($conditions)) {
+                    $condition = 'WHERE ' . join(' AND ', $conditions);
+                }
+
+                switch ($options['sort']) {
+                    case 'name':
+                        $order_by = 'ORDER BY `name` ASC';
+                        break;
+                    case 'recent':
+                        $order_by = 'ORDER BY `created_on` DESC';
+                        break;
+                    case 'popular':
+                    default:
+                        $order_by = 'ORDER BY `views` DESC';
+                        break;
+                }
+
+                $limit_val = $options['limit'] < 1000 ? (int)$options['limit'] : 1000;
+                $limit = sprintf('LIMIT %d', $limit_val);
+
                 $results = $this->wpdb->get_results(
-                    "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name ORDER BY `views` DESC LIMIT $limit_value;",
+                    "SELECT `style_id`, `name`, `image_url`, `json` FROM $this->table_name $condition $order_by $limit;",
                     ARRAY_A
                 );
 
@@ -307,22 +375,18 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * Get Snazzy Maps Styles
          *
-         * @param int $limit
-         *
+         * @param array $options
          * @return array
          */
-        public function getMapStyles($limit = 100)
+        public function getMapStyles($options = array())
         {
-            $limit = (int)$limit;
-            $items = $this->getItems($limit);
+            $items = $this->getItems($options);
 
             $styles = array();
 
             foreach ($items as $item) {
                 $styles[$item['style_id']] = ucfirst($item['name']);
             }
-
-            asort($styles, SORT_STRING);
 
             return $styles;
         }
