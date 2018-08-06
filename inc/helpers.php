@@ -67,6 +67,22 @@ if (!function_exists('logo')) {
     }
 }
 
+if (!function_exists('get_logo_url')) {
+    /**
+     * Returns a logo url
+     *
+     * @return string
+     */
+    function get_logo_url()
+    {
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $custom_logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : '';
+        $logo_url = $custom_logo_url ?: get_template_directory_uri() . '/assets/img/logo.png';
+
+        return $logo_url;
+    }
+}
+
 if (!function_exists('get_logo')) {
     /**
      * Returns a logo, linked to home.
@@ -93,7 +109,7 @@ if (!function_exists('get_logo')) {
                 list($width, $height) = getimagesize($src);
 
                 $logo_img = sprintf(
-                    '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s" itemprop="logo">',
+                    '<img class="logo-img" src="%s" width="%s" height="%s" alt="%s">',
                     esc_url($src),
                     esc_attr($width),
                     esc_attr($height),
@@ -102,12 +118,12 @@ if (!function_exists('get_logo')) {
 
             } else {
 
-                $fill = isset($attr['fill']) ? $attr['fill'] : '#000';
-                $width = isset($attr['width']) ? $attr['width'] : 100;
-                $height = isset($attr['height']) ? $attr['height'] : 50;
+                $fill = $attr['fill'] ?: '#000';
+                $width = $attr['width'] ?: 100;
+                $height = $attr['height'] ?: 50;
 
                 $logo_img = sprintf(
-                    '<svg class="logo-img" width="%s" height="%s" fill="%s" aria-label="%s" itemprop="logo"><use xlink:href="#%s"></use></svg>',
+                    '<svg class="logo-img" width="%s" height="%s" fill="%s" aria-label="%s"><use xlink:href="#%s"></use></svg>',
                     esc_attr($width),
                     esc_attr($height),
                     esc_attr($fill),
@@ -118,7 +134,7 @@ if (!function_exists('get_logo')) {
             }
 
             $html = sprintf(
-                '<a class="logo-link" href="%s" itemprop="url">%s</a>',
+                '<a class="logo-link" href="%s">%s</a>',
                 esc_url(home_url('/')),
                 $logo_img
             );

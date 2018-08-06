@@ -26,9 +26,99 @@
 
 <?php skip_to_content('content'); ?>
 
+<?php /** Sitelinks searchbox */
+if (is_front_page()) { ?>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "<?php echo home_url('/'); ?>",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<?php echo home_url('/') . '?s={s}'; ?>",
+            "query-input": "required name=s"
+        }
+    }
+    </script>
+<?php } ?>
+
+<?php /** Logo */ ?>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "url": "<?php echo home_url('/'); ?>",
+        "logo": "<?php echo get_logo_url(); ?>"
+    }
+</script>
+
+<?php /**
+ Person - _e('Kudinov Fedor', 'joompress')
+ or
+ Organization - get_bloginfo('name')
+ */ ?>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Person",
+        "name": "<?php _e('Kudinov Fedor', 'joompress'); ?>",
+        "url": "<?php echo home_url('/'); ?>",
+        "sameAs": [
+            "https://www.facebook.com/your-profile"
+            "https://twitter.com/your-profile"
+            "https://plus.google.com/your-profile"
+            "https://www.instagram.com/your-profile"
+            "https://www.youtube.com/your-profile"
+            "https://www.linkedin.com/your-profile"
+            "https://myspace.com/your-profile"
+            "https://ru.pinterest.com/your-profile"
+            "https://soundcloud.com/your-profile"
+            "https://www.tumblr.com/your-profile"
+        ]
+    }
+</script>
+
+<?php /** Article */
+if (is_single()) {
+    global $post;
+    setup_postdata($post);
+    $image = wp_get_attachment_image_url(get_post_thumbnail_id($post->ID), 'full');
+    ?>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "NewsArticle",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "<?php the_permalink(); ?>"
+            },
+            "headline": "<?php the_title(); ?>",
+            "image": [
+                "<?php echo $image; ?>"
+            ],
+            "datePublished": "<?php the_date('c'); ?>",
+            "dateModified": "<?php the_modified_date('c'); ?>",
+            "author": {
+                "@type": "Person",
+                "name": "<?php the_author(); ?>"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "<?php bloginfo('name'); ?>",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "<?php echo get_logo_url(); ?>"
+                }
+            },
+            "description": "<?php the_excerpt(); ?>",
+            "articleBody": "<?php the_content(); ?>"
+        }
+    </script>
+<?php } ?>
+
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
     <div class="container">
-        <div class="logo header-logo" itemscope itemtype="http://schema.org/Organization">
+        <div class="logo header-logo">
             <?php if (has_custom_logo()) {
                 the_custom_logo();
             } else {
@@ -43,21 +133,6 @@
 </header>
 
 <?php get_template_part('template-parts/navigation/menu', 'header'); ?>
-
-<span class="screen-reader-text" itemscope itemtype="http://schema.org/Person">
-    <link itemprop="url" href="<?php echo esc_url(home_url('/')); ?>">
-    <meta itemprop="name" content="<?php _e('Kudinov Fedor', 'joompress'); ?>">
-    <a itemprop="sameAs" href="https://www.facebook.com/">Facebook</a>
-    <a itemprop="sameAs" href="https://twitter.com/">Twitter</a>
-    <a itemprop="sameAs" href="https://plus.google.com/">Google+</a>
-    <a itemprop="sameAs" href="https://www.instagram.com/">Instagram</a>
-    <a itemprop="sameAs" href="https://www.youtube.com/">Youtube</a>
-    <a itemprop="sameAs" href="https://www.linkedin.com/">LinkedIn</a>
-    <a itemprop="sameAs" href="https://myspace.com/">Myspace</a>
-    <a itemprop="sameAs" href="https://ru.pinterest.com/">Pinterest</a>
-    <a itemprop="sameAs" href="https://soundcloud.com/">SoundCloud</a>
-    <a itemprop="sameAs" href="https://www.tumblr.com/">Tumblr</a>
-</span>
 
 <div class="wrapper">
 
