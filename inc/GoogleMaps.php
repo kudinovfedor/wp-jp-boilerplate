@@ -29,8 +29,6 @@ if (!class_exists('GoogleMaps')) {
         public function __construct()
         {
             $this->options = $this->getOptions();
-
-            $this->snazzy_maps = new SnazzyMaps;
         }
 
         /**
@@ -335,6 +333,7 @@ if (!class_exists('GoogleMaps')) {
             if (!empty($map['themes']['styling'])) {
                 $style = $map['themes']['styling'];
             } elseif ($map['snazzy_maps']['style'] !== 0) {
+                $this->snazzy_maps = new SnazzyMaps;
                 $style = $this->snazzy_maps->getItemJson($map['snazzy_maps']['style']);
             }
 
