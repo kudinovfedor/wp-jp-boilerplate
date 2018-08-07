@@ -134,7 +134,7 @@ if (!class_exists('SnazzyMaps')) {
                   tags VARCHAR(255) NOT NULL,
                   colors VARCHAR(255) NOT NULL,
                   PRIMARY KEY (id)
-                ) $this->charset_collate;";
+                ) ENGINE=InnoDB $this->charset_collate;";
 
                 $this->wpdb->query($sql);
 
