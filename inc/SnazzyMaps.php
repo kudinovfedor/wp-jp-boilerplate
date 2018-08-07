@@ -56,6 +56,11 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * @var int
          */
+        private $total_items = 0;
+
+        /**
+         * @var int
+         */
         private $total_pages = 0;
 
         /**
@@ -100,7 +105,8 @@ if (!class_exists('SnazzyMaps')) {
         public function isTableEmpty()
         {
             if ($this->table_exists) {
-                $this->table_empty = false === (bool)$this->wpdb->get_var("SELECT COUNT(*) FROM `$this->table_name`;");
+                $this->total_items = $this->wpdb->get_var("SELECT COUNT(*) FROM `$this->table_name`;");
+                $this->table_empty = false === (bool)$this->total_items;
             }
 
             return $this->table_empty;
@@ -190,7 +196,7 @@ if (!class_exists('SnazzyMaps')) {
                             $tags = join('|', $item['tags']);
                             $colors = join('|', $item['colors']);
 
-                            $maps[$key] = [
+                            $maps[$key] = array(
                                 'style_id' => (int)$item['id'],
                                 'name' => htmlspecialchars($this->validate_field($item['name'])),
                                 //'description' => htmlspecialchars($this->validate_field($item['description'])),
@@ -202,7 +208,7 @@ if (!class_exists('SnazzyMaps')) {
                                 'created_on' => (int)$timestamp,
                                 'tags' => htmlspecialchars($this->validate_field($tags)),
                                 'colors' => htmlspecialchars($this->validate_field($colors)),
-                            ];
+                            );
 
                             $this->wpdb->insert(
                                 $this->table_name, $maps[$key],
@@ -389,6 +395,16 @@ if (!class_exists('SnazzyMaps')) {
             }
 
             return $styles;
+        }
+
+        /**
+         * Get the total number of items
+         *
+         * @return int
+         */
+        public function countItems()
+        {
+            return $this->total_items;
         }
     }
 }

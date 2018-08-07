@@ -285,13 +285,13 @@ if (!function_exists('get_phones')) {
      */
     function get_phones()
     {
-        $_phones = [
+        $_phones = array(
             get_theme_mod('jp_phone_one'),
             get_theme_mod('jp_phone_two'),
             get_theme_mod('jp_phone_three'),
             get_theme_mod('jp_phone_four'),
             get_theme_mod('jp_phone_five'),
-        ];
+        );
 
         $phones = array_filter($_phones, function ($value) {
             return !empty($value);
@@ -361,28 +361,28 @@ if (!function_exists('get_messengers')) {
      */
     function get_messengers()
     {
-        $_messengers = [
-            'skype' => [
+        $_messengers = array(
+            'skype' => array(
                 'tel' => get_theme_mod('jp_messenger_skype'),
                 'text' => 'Skype',
                 'icon' => 'fab fa-skype',
-            ],
-            'viber' => [
+            ),
+            'viber' => array(
                 'tel' => get_theme_mod('jp_messenger_viber'),
                 'text' => 'Viber',
                 'icon' => 'fab fa-viber',
-            ],
-            'whatsapp' => [
+            ),
+            'whatsapp' => array(
                 'tel' => get_theme_mod('jp_messenger_whatsapp'),
                 'text' => 'WhatsApp',
                 'icon' => 'fab fa-whatsapp',
-            ],
-            'telegram' => [
+            ),
+            'telegram' => array(
                 'tel' => get_theme_mod('jp_messenger_telegram'),
                 'text' => 'Telegram',
                 'icon' => 'fab fa-telegram-plane',
-            ],
-        ];
+            ),
+        );
 
         $messengers = array_filter($_messengers, function ($value) {
             return !empty($value['tel']);
@@ -456,73 +456,73 @@ if (!function_exists('get_social')) {
      */
     function get_social()
     {
-        $_socials = [
-            'vk' => [
+        $_socials = array(
+            'vk' => array(
                 'url' => get_theme_mod('jp_social_vk'),
                 'text' => 'Vk',
                 'icon' => 'fab fa-vk',
-            ],
-            'twitter' => [
+            ),
+            'twitter' => array(
                 'url' => get_theme_mod('jp_social_twitter'),
                 'text' => 'Twitter',
                 'icon' => 'fab fa-twitter',
-            ],
-            'facebook' => [
+            ),
+            'facebook' => array(
                 'url' => get_theme_mod('jp_social_facebook'),
                 'text' => 'Facebook',
                 'icon' => 'fab fa-facebook-f',
-            ],
-            'odnoklassniki' => [
+            ),
+            'odnoklassniki' => array(
                 'url' => get_theme_mod('jp_social_odnoklassniki'),
                 'text' => 'Odnoklassniki',
                 'icon' => 'fab fa-odnoklassniki',
-            ],
-            'linkedin' => [
+            ),
+            'linkedin' => array(
                 'url' => get_theme_mod('jp_social_linkedin'),
                 'text' => 'Linkedin',
                 'icon' => 'fab fa-linkedin-in',
-            ],
-            'instagram' => [
+            ),
+            'instagram' => array(
                 'url' => get_theme_mod('jp_social_instagram'),
                 'text' => 'Instagram',
                 'icon' => 'fab fa-instagram',
-            ],
-            'google-plus' => [
+            ),
+            'google-plus' => array(
                 'url' => get_theme_mod('jp_social_google_plus'),
                 'text' => 'Google Plus',
                 'icon' => 'fab fa-google-plus-g',
-            ],
-            'youtube' => [
+            ),
+            'youtube' => array(
                 'url' => get_theme_mod('jp_social_youtube'),
                 'text' => 'YouTube',
                 'icon' => 'fab fa-youtube',
-            ],
-            'pinterest' => [
+            ),
+            'pinterest' => array(
                 'url' => get_theme_mod('jp_social_pinterest'),
                 'text' => 'Pinterest',
                 'icon' => 'fab fa-pinterest-p',
-            ],
-            'tumblr' => [
+            ),
+            'tumblr' => array(
                 'url' => get_theme_mod('jp_social_tumblr'),
                 'text' => 'Tumblr',
                 'icon' => 'fab fa-tumblr',
-            ],
-            'flickr' => [
+            ),
+            'flickr' => array(
                 'url' => get_theme_mod('jp_social_flickr'),
                 'text' => 'Flickr',
                 'icon' => 'fab fa-flickr',
-            ],
-            'reddit' => [
+            ),
+            'reddit' => array(
                 'url' => get_theme_mod('jp_social_reddit'),
                 'text' => 'Reddit',
                 'icon' => 'fab fa-reddit-alien',
-            ],
-            'rss' => [
+            ),
+            'rss' => array(
                 'url' => get_theme_mod('jp_social_rss'),
                 'text' => 'RSS',
                 'icon' => 'fas fa-rss',
-            ],
-        ];
+            ),
+        );
 
         $socials = array_filter($_socials, function ($value) {
             return $value['url'] !== '#' && !empty($value['url']) && filter_var($value['url'], FILTER_VALIDATE_URL);
@@ -608,8 +608,6 @@ if (!function_exists('get_scroll_top')) {
     function get_scroll_top()
     {
         if (has_scroll_top()) {
-
-            $shape = '';
 
             switch (get_theme_mod('jp_scroll_top_shape')) {
                 case 'circle':

@@ -96,14 +96,13 @@ if (!class_exists('GoogleMapsCustomizer')) {
         /**
          * @var SnazzyMaps
          */
-        public $snazzy_maps;
+        private $snazzy_maps;
 
         /**
          * GoogleMapsCustomizer constructor.
          */
         public function __construct()
         {
-            $this->snazzy_maps = new SnazzyMaps;
             add_action('customize_register', array($this, 'customizer'));
         }
 
@@ -114,6 +113,8 @@ if (!class_exists('GoogleMapsCustomizer')) {
          */
         public function customizer($wp_customize)
         {
+            $this->snazzy_maps = new SnazzyMaps;
+
             // Panel Google Maps API
             $wp_customize->add_panel('google_map', array(
                 'title' => 'Google Maps API',
@@ -600,6 +601,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_control('snazzy_maps_limit', array(
                 'label' => 'Limit',
+                'description' => sprintf('Total qty. <b>%s</b>, maximum limit is 1000 items.', $this->snazzy_maps->countItems()),
                 'section' => 'snazzy_maps',
                 'settings' => 'snazzy_maps_limit',
                 'type' => 'number',
