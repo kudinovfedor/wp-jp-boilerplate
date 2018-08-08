@@ -1,11 +1,19 @@
 </div><!-- .wrapper -->
 
-<footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<footer class="footer">
     <div class="container">
         <?php get_template_part('template-parts/navigation/menu', 'footer'); ?>
         <div class="copyright text-center"><?php copyright(); ?></div>
     </div>
 </footer>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WPFooter",
+        "copyrightYear": "<?php echo date('Y'); ?>",
+        "copyrightHolder": "<?php bloginfo('name'); ?>"
+    }
+</script>
 
 <?php scroll_top(); ?>
 

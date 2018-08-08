@@ -32,7 +32,9 @@ if (is_front_page()) { ?>
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
+        "name": "<?php bloginfo('name'); ?>",
         "url": "<?php echo home_url('/'); ?>",
+        "description": "<?php bloginfo('description'); ?>",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "<?php echo home_url('/') . '?s={s}'; ?>",
@@ -42,21 +44,30 @@ if (is_front_page()) { ?>
     </script>
 <?php } ?>
 
-<?php /** Logo */ ?>
+<?php /** Organization + Logo */ ?>
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "Organization",
+        "name": "<?php bloginfo('name'); ?>",
         "url": "<?php echo home_url('/'); ?>",
-        "logo": "<?php echo get_logo_url(); ?>"
+        "logo": "<?php echo get_logo_url(); ?>",
+        "sameAs": [
+            "https://www.facebook.com/organization-profile",
+            "https://twitter.com/organization-profile",
+            "https://plus.google.com/organization-profile",
+            "https://www.instagram.com/organization-profile",
+            "https://www.youtube.com/organization-profile",
+            "https://www.linkedin.com/organization-profile",
+            "https://myspace.com/organization-profile",
+            "https://ru.pinterest.com/organization-profile",
+            "https://soundcloud.com/organization-profile",
+            "https://www.tumblr.com/organization-profile"
+        ]
     }
 </script>
 
-<?php /**
- Person - _e('Kudinov Fedor', 'joompress')
- or
- Organization - get_bloginfo('name')
- */ ?>
+<?php /** Person */ ?>
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -64,15 +75,15 @@ if (is_front_page()) { ?>
         "name": "<?php _e('Kudinov Fedor', 'joompress'); ?>",
         "url": "<?php echo home_url('/'); ?>",
         "sameAs": [
-            "https://www.facebook.com/your-profile"
-            "https://twitter.com/your-profile"
-            "https://plus.google.com/your-profile"
-            "https://www.instagram.com/your-profile"
-            "https://www.youtube.com/your-profile"
-            "https://www.linkedin.com/your-profile"
-            "https://myspace.com/your-profile"
-            "https://ru.pinterest.com/your-profile"
-            "https://soundcloud.com/your-profile"
+            "https://www.facebook.com/your-profile",
+            "https://twitter.com/your-profile",
+            "https://plus.google.com/your-profile",
+            "https://www.instagram.com/your-profile",
+            "https://www.youtube.com/your-profile",
+            "https://www.linkedin.com/your-profile",
+            "https://myspace.com/your-profile",
+            "https://ru.pinterest.com/your-profile",
+            "https://soundcloud.com/your-profile",
             "https://www.tumblr.com/your-profile"
         ]
     }
@@ -93,9 +104,7 @@ if (is_single()) {
                 "@id": "<?php the_permalink(); ?>"
             },
             "headline": "<?php the_title(); ?>",
-            "image": [
-                "<?php echo $image; ?>"
-            ],
+            "image": <?php echo $image; ?>,
             "datePublished": "<?php the_date('c'); ?>",
             "dateModified": "<?php the_modified_date('c'); ?>",
             "author": {

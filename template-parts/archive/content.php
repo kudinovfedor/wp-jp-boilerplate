@@ -1,13 +1,34 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>
-         itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-
-    <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage"
-          itemid="<?php the_permalink(); ?>" content="<?php the_title(); ?>">
-
-    <meta itemprop="author" content="<?php the_author(); ?>">
-
-    <meta itemprop="image" content="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'medium')[0]; ?>">
-
+<?php $image = wp_get_attachment_image_url(get_post_thumbnail_id(get_the_ID()), 'full'); ?>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "<?php the_permalink(); ?>"
+        },
+        "headline": "<?php the_title(); ?>",
+        "image": "<?php echo $image; ?>",
+        "datePublished": "<?php echo get_the_date('c'); ?>",
+        "dateModified": "<?php the_modified_date('c'); ?>",
+        "author": {
+            "@type": "Person",
+            "name": "<?php the_author(); ?>"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "<?php bloginfo('name'); ?>",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "<?php echo get_logo_url(); ?>"
+            }
+        },
+        "articleSection": "<?php the_category(', '); ?>",
+        "description": "<?php the_excerpt(); ?>",
+        "articleBody": "<?php the_content(); ?>"
+    }
+</script>
+<article id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>>
     <?php edit_post_link(); ?>
     <?php delete_post_link(); ?>
 
@@ -22,37 +43,14 @@
     <?php } ?>
 
     <p>
-        <time itemprop="datePublished" datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
-        <meta itemprop="dateModified" content="<?php the_modified_date('c'); ?>">
+        <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date('d.m.Y'); ?></time>
         <br>
-        <span itemprop="articleSection"><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
+        <span><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
         <br>
         <?php the_tags(sprintf('<span>%s: ', __('Tags', 'joompress')), ', ', '</span>'); ?>
     </p>
 
-    <?php /*
-    $id    = get_post_thumbnail_id(get_the_ID());
-    $image = wp_get_attachment_image_src($id, 'medium');
-    list($src, $width, $height) = $image;
-    $alt = trim(strip_tags(get_post_meta($id, '_wp_attachment_image_alt', true)));
-    ?>
-
-    <?php if (has_post_thumbnail()) {
-        //the_post_thumbnail('medium');
-        ?>
-        <figure itemscope itemtype="https://schema.org/ImageObject">
-            <img itemprop="image" alt="<?php echo $alt; ?>" src=<?php echo $src; ?>>
-            <meta itemprop="width" content="<?php echo $width; ?>">
-            <meta itemprop="height" content="<?php echo $height; ?>">
-            <?php if ( ! empty($alt)) { ?>
-                <figcaption class="screen-reader-text" itemprop="caption"><?php echo $alt; ?></figcaption>
-            <?php } ?>
-        </figure>
-    <?php } */?>
-
-    <div itemprop="description"><?php the_excerpt(); ?></div>
-
-    <?php /* <div itemprop="articleBody"><?php the_content(); ?></div> */ ?>
+    <div><?php the_excerpt(); ?></div>
 
     <p>
         <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>

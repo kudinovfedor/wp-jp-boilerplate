@@ -9,9 +9,40 @@
             <?php the_archive_title('<h1 class="text-center">', '</h1>'); ?>
             <?php the_archive_description('<p class="text-center">', '</p>'); ?>
 
-            <div class="row">
+            <div class="row" itemscope itemtype="http://schema.org/Blog">
 
                 <?php while (have_posts()) : the_post(); ?>
+
+                    <?php $image = wp_get_attachment_image_url(get_post_thumbnail_id(get_the_ID()), 'full'); ?>
+                    <script type="application/ld+json">
+                        {
+                            "@context": "http://schema.org",
+                            "@type": "BlogPosting",
+                            "mainEntityOfPage": {
+                                "@type": "WebPage",
+                                "@id": "<?php the_permalink(); ?>"
+                            },
+                            "headline": "<?php the_title(); ?>",
+                            "image": "<?php echo $image; ?>",
+                            "datePublished": "<?php echo get_the_date('c'); ?>",
+                            "dateModified": "<?php the_modified_date('c'); ?>",
+                            "author": {
+                                "@type": "Person",
+                                "name": "<?php the_author(); ?>"
+                            },
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "<?php bloginfo('name'); ?>",
+                                "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "<?php echo get_logo_url(); ?>"
+                                }
+                            },
+                            "articleSection": "<?php the_category(', '); ?>",
+                            "description": "<?php the_excerpt(); ?>",
+                            "articleBody": "<?php the_content(); ?>"
+                        }
+                    </script>
 
                     <section id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>>
 
@@ -29,7 +60,7 @@
                         <?php } ?>
 
                         <p>
-                            <time datetime="<?php the_time('c'); ?>"><?php the_time('d.m.Y'); ?></time>
+                            <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date('d.m.Y'); ?></time>
                             <br>
                             <span><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
                             <br>

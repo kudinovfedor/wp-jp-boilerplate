@@ -761,7 +761,7 @@ if (!function_exists('get_copyright')) {
     function get_copyright()
     {
         return sprintf(
-            __('Copyright &copy; <span itemprop="copyrightYear">%d</span> %s. %s.', 'joompress'),
+            __('Copyright &copy; %d %s. %s.', 'joompress'),
             date('Y'),
             get_bloginfo('name'),
             __('All rights reserved', 'joompress')
