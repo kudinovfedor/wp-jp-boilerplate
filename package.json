@@ -1,7 +1,7 @@
 {
-  "name": "fk-template",
+  "name": "joompress",
   "version": "1.0.0",
-  "description": "Workpieces code and structure that I use in every project",
+  "description": "Wordpress theme JoomPress",
   "main": "gulpfile.babel.js",
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.56",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kudinovfedor/fk-template.git"
+    "url": "git+https://github.com/kudinovfedor/joompress.git"
   },
   "keywords": [
     "HTML5",
@@ -44,7 +44,7 @@
   "author": "Kudinov Fedor <admin@joompress.biz>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kudinovfedor/fk-template/issues"
+    "url": "https://github.com/kudinovfedor/joompress/issues"
   },
-  "homepage": "https://github.com/kudinovfedor/fk-template#readme"
+  "homepage": "https://github.com/kudinovfedor/joompress#readme"
 }
