@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 13:54+0000\n"
+"POT-Creation-Date: 2018-08-09 10:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -22,26 +22,26 @@ msgstr ""
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: archive.php:34 template-parts/archive/content.php:28
+#: archive.php:65 template-parts/archive/content.php:48
 #: template-parts/page/content-page.php:13 template-parts/post/content.php:11
 msgid "Categories"
 msgstr ""
 
-#: archive.php:36 template-parts/archive/content.php:30
+#: archive.php:67 template-parts/archive/content.php:50
 #: template-parts/post/content.php:12
 msgid "Tags"
 msgstr ""
 
-#: archive.php:42 search.php:32 template-parts/archive/content.php:58
+#: archive.php:73 search.php:32 template-parts/archive/content.php:56
 msgid "Read more"
 msgstr ""
 
-#: archive.php:55 front-page.php:27 search.php:45
+#: archive.php:86 front-page.php:27 search.php:45
 #: template-parts/post/content-none.php:2
 msgid "Nothing Found"
 msgstr ""
 
-#: archive.php:56 template-parts/post/content-none.php:3
+#: archive.php:87 template-parts/post/content-none.php:3
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
@@ -72,15 +72,15 @@ msgid ""
 msgstr ""
 
 #. Author of the theme
-#: header.php:49 inc/admin.php:57
+#: header.php:77 inc/admin.php:57
 msgid "Kudinov Fedor"
 msgstr ""
 
-#: header.php:91
+#: header.php:167
 msgid "Edit Analytics Tracking Code"
 msgstr ""
 
-#: header.php:94
+#: header.php:170
 msgid "Edit Login Logo"
 msgstr ""
 
@@ -101,17 +101,17 @@ msgstr ""
 msgid "Search Results for: %s"
 msgstr ""
 
-#: searchform.php:8
+#: searchform.php:4
 msgctxt "label"
 msgid "Search for:"
 msgstr ""
 
-#: searchform.php:10
+#: searchform.php:6
 msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr ""
 
-#: searchform.php:12
+#: searchform.php:8
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Using %d Mb memory (including unused pages %d Mb)."
 msgstr ""
 
-#: inc/admin.php:62 inc/comment-form.php:21
+#: inc/admin.php:62 inc/comment-form.php:22
 msgid "Email"
 msgstr ""
 
@@ -163,42 +163,46 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: inc/comment-form.php:23
+#: inc/comment-form.php:25
 msgid "Website"
 msgstr ""
 
-#: inc/comment-form.php:46 inc/comment-form.php:50
+#: inc/comment-form.php:49 inc/comment-form.php:53
 msgctxt "noun"
 msgid "Comment"
 msgstr ""
 
-#: inc/helpers.php:152
+#: inc/helpers.php:168
 msgid "Trigger mobile menu."
 msgstr ""
 
-#: inc/helpers.php:182
+#: inc/helpers.php:198
 msgid "Close mobile menu."
 msgstr ""
 
-#: inc/helpers.php:200
+#: inc/helpers.php:216
 msgid "Skip to content"
 msgstr ""
 
-#: inc/helpers.php:611
+#: inc/helpers.php:630
 msgid "Scroll to top"
 msgstr ""
 
-#: inc/helpers.php:745
+#: inc/helpers.php:764
 #, php-format
-msgid "Copyright &copy; <span itemprop=\"copyrightYear\">%d</span> %s. %s."
+msgid "Copyright &copy; %d %s. %s."
 msgstr ""
 
-#: inc/helpers.php:748
+#: inc/helpers.php:767
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:777
+#: inc/helpers.php:796
 msgid "Delete This"
+msgstr ""
+
+#: inc/helpers.php:992
+msgid "&hellip;"
 msgstr ""
 
 #: inc/theme-setup.php:185

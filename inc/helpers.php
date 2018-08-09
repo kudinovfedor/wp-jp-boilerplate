@@ -989,7 +989,7 @@ if (!function_exists('jp_pagination')) {
                             $link)) . "'>" . $args['before_page_number'] . number_format_i18n($n) . $args['after_page_number'] . "</a>";
                     $dots = true;
                 elseif ($dots && !$args['show_all']) :
-                    $page_links[] = '<span class="pagination-link pagination-dots">' . __('&hellip;') . '</span>';
+                    $page_links[] = '<span class="pagination-link pagination-dots">' . __('&hellip;', 'joompress') . '</span>';
                     $dots = false;
                 endif;
             endif;

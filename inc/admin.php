@@ -96,3 +96,13 @@ function jp_php_version($content)
 }
 
 add_filter('update_right_now_text', 'jp_php_version');
+
+/**
+ * Admin Enqueue Script
+ */
+function jp_admin_enqueue_script()
+{
+    wp_add_inline_script('postbox', '(function($){$(function(){var customFields=$("#postcustom-hide");if(customFields.length&&customFields.prop("checked")){setTimeout(function(){customFields.trigger("click.postboxes");},100);}});})(jQuery);');
+}
+
+//add_action('admin_enqueue_scripts', 'jp_admin_enqueue_script');
