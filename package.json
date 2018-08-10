@@ -4,9 +4,9 @@
   "description": "Wordpress theme JoomPress",
   "main": "gulpfile.babel.js",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.56",
-    "@babel/preset-env": "^7.0.0-beta.56",
-    "@babel/register": "^7.0.0-beta.56",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/register": "^7.0.0-rc.1",
     "browser-sync": "^2.24.6",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0-beta.2",

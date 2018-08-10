@@ -1,6 +1,4 @@
-<?php
-
-if (has_nav_menu('header_menu')) { ?>
+<?php if (has_nav_menu('header_menu')) { ?>
     <nav class="menu" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
         <?php btn_close_menu('js-menu-close'); ?>
         <div class="container">

@@ -32,7 +32,7 @@
     <?php edit_post_link(); ?>
     <?php delete_post_link(); ?>
 
-    <h2 itemprop="headline">
+    <h2>
         <a href="<?php the_permalink(); ?>">
             <?php the_title(); ?>
         </a>
