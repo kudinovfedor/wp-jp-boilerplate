@@ -12,19 +12,19 @@
         color: #000;
         background-color: #fff;
         border: 1px solid #ced4da;
-        @include transition(.15s ease-in-out);
+        transition: .15s ease-in-out;
 
         &:focus {
             color: #495057;
             background-color: #fff;
             border-color: #80bdff;
             outline: 0;
-            @include box-shadow(0 0 0 .2rem rgba(#007bff, .25));
+            box-shadow: 0 0 0 .2rem rgba(#007bff, .25);
         }
     }
 
     &-search {
-        @include flexbox(flex);
+        display: flex;
     }
 }
 

@@ -9,8 +9,8 @@
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
-    @include user-select(none);
-    @include transition(.15s ease-in-out);
+    user-select: none;
+    transition: .15s ease-in-out;
 
     &:hover {
         text-decoration: none;
@@ -27,12 +27,12 @@
     &:focus,
     &.focus {
         outline: 0;
-        @include box-shadow(0 0 0 .2rem rgba(#007bff, .25));
+        box-shadow: 0 0 0 .2rem rgba(#007bff, .25);
     }
 
     &.disabled,
     &:disabled {
-        @include opacity(.65);
+        opacity: .65;
     }
 
     &-sm {

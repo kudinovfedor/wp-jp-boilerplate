@@ -17,11 +17,11 @@ if (!class_exists('GoogleReCaptcha')) {
          * @var array
          */
         public $error_code = array(
-            'missing-input-secret' => 'The secret parameter is missing.',
-            'invalid-input-secret' => 'The secret parameter is invalid or malformed.',
-            'missing-input-response' => 'The response parameter is missing.',
-            'invalid-input-response' => 'The response parameter is invalid or malformed.',
-            'bad-request' => 'The request is invalid or malformed.',
+            'missing-input-secret' => 'ReCaptcha: The secret parameter is missing.',
+            'invalid-input-secret' => 'ReCaptcha: The secret parameter is invalid or malformed.',
+            'missing-input-response' => 'ReCaptcha: The response parameter is missing.',
+            'invalid-input-response' => 'ReCaptcha: The response parameter is invalid or malformed.',
+            'bad-request' => 'ReCaptcha: The request is invalid or malformed.',
         );
 
         /**
@@ -57,7 +57,7 @@ if (!class_exists('GoogleReCaptcha')) {
 
                 if ($this->isReCaptchaRequired('registration')) {
                     add_action('register_form', array($this, 'htmlMarkup'));
-                    add_filter('registration_errors', array($this, 'checkRegistrationForm'));
+                    add_filter('registration_errors', array($this, 'checkRegistrationForm'), 10, 3);
                 }
 
                 if ($this->isReCaptchaRequired('reset-password')) {
@@ -108,6 +108,8 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Registers the script and enqueues it.
+         *
          * @return void
          */
         public function enqueueScripts()
@@ -140,6 +142,8 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Displays HTML Markup
+         *
          * @return void
          */
         public function htmlMarkup()
@@ -163,6 +167,32 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Get Response from ReCaptcha API
+         *
+         * @param string $recaptcha
+         * @return array|WP_Error
+         */
+        public function getResponse($recaptcha)
+        {
+            $query_data = array(
+                'secret' => $this->options['secret-key'],
+                'response' => $recaptcha,
+                'remoteip' => $this->getIP() || '127.0.0.1',
+            );
+
+            $query = http_build_query($query_data);
+
+            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
+
+            $response = wp_remote_post($url, array(
+                'timeout' => 30,
+                'sslverify' => true,
+            ));
+
+            return json_decode($response['body'], true);
+        }
+
+        /**
          * Authenticate a user on Login form, confirming the reCAPTCHA are valid.
          *
          * @param WP_User|WP_Error|null $user - WP_User or WP_Error object from a previous callback. Default null.
@@ -177,33 +207,19 @@ if (!class_exists('GoogleReCaptcha')) {
                 return $user;
             }
 
-            $error = new WP_Error();
+            $errors = new WP_Error();
 
-            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+            $g_recaptcha = $_POST['g-recaptcha-response'] ?: '';
 
             if (empty($g_recaptcha)) {
 
-                $error->add('recaptcha_empty_input_response',
+                $errors->add('recaptcha_empty_input_response',
                     '<strong>ERROR</strong>: reCAPTCHA checkbox should be marked.');
 
-                return $error;
+                return $errors;
             }
 
-            $query_data = array(
-                'secret' => $this->options['secret-key'],
-                'response' => $g_recaptcha,
-                'remoteip' => $this->getIP() || '127.0.0.1',
-            );
-
-            $query = http_build_query($query_data);
-
-            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
-
-            $response = wp_remote_post($url, array(
-                'timeout' => 30,
-                'sslverify' => true,
-            ));
-            $response = json_decode($response['body'], true);
+            $response = $this->getResponse($g_recaptcha);
 
             if (true === $response['success']) {
 
@@ -213,105 +229,82 @@ if (!class_exists('GoogleReCaptcha')) {
 
                 foreach ($response['error-codes'] as $item) {
                     if (array_key_exists($item, $this->error_code)) {
-                        $error->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
+                        $errors->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
                     } else {
-                        $error->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
+                        $errors->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
                     }
                 }
 
-                return $error;
+                return $errors;
 
             }
         }
 
         /**
-         * @param $allow
+         * Check Registration Form
+         *
+         * @param WP_Error $errors A WP_Error object containing any errors encountered during registration.
+         * @param string $sanitized_user_login User's username after it has been sanitized.
+         * @param string $user_email User's email.
          *
          * @return WP_Error
          */
-        public function checkRegistrationForm($allow)
+        public function checkRegistrationForm($errors, $sanitized_user_login, $user_email)
         {
-            $error = new WP_Error();
-
-            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+            $g_recaptcha = $_POST['g-recaptcha-response'] ?: '';
 
             if (empty($g_recaptcha)) {
 
-                $error->add('recaptcha_empty_input_response',
+                /** @var WP_Error $errors */
+                $errors->add('recaptcha_empty_input_response',
                     '<strong>ERROR</strong>: reCAPTCHA checkbox should be marked.');
 
-                return $error;
+                return $errors;
             }
 
-            $query_data = array(
-                'secret' => $this->options['secret-key'],
-                'response' => $g_recaptcha,
-                'remoteip' => $this->getIP() || '127.0.0.1',
-            );
-
-            $query = http_build_query($query_data);
-
-            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
-
-            $response = wp_remote_post($url, array(
-                'timeout' => 30,
-                'sslverify' => true,
-            ));
-            $response = json_decode($response['body'], true);
+            $response = $this->getResponse($g_recaptcha);
 
             if (true === $response['success']) {
 
-                return $allow;
+                return $errors;
 
             } else {
 
                 foreach ($response['error-codes'] as $item) {
                     if (array_key_exists($item, $this->error_code)) {
-                        $error->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
+                        $errors->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
                     } else {
-                        $error->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
+                        $errors->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
                     }
                 }
 
-                return $error;
+                return $errors;
 
             }
         }
 
         /**
-         * @param $allow
+         * Check Reset Password Form
          *
-         * @return WP_Error
+         * @param bool $allow
+         *
+         * @return bool|WP_Error
          */
         public function checkResetPasswordForm($allow)
         {
-            $error = new WP_Error();
+            $errors = new WP_Error();
 
-            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+            $g_recaptcha = $_POST['g-recaptcha-response'] ?: '';
 
             if (empty($g_recaptcha)) {
 
-                $error->add('recaptcha_empty_input_response',
+                $errors->add('recaptcha_empty_input_response',
                     '<strong>ERROR</strong>: reCAPTCHA checkbox should be marked.');
 
-                return $error;
+                return $errors;
             }
 
-            $query_data = array(
-                'secret' => $this->options['secret-key'],
-                'response' => $g_recaptcha,
-                'remoteip' => $this->getIP() || '127.0.0.1',
-            );
-
-            $query = http_build_query($query_data);
-
-            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
-
-            $response = wp_remote_post($url, array(
-                'timeout' => 30,
-                'sslverify' => true,
-            ));
-            $response = json_decode($response['body'], true);
+            $response = $this->getResponse($g_recaptcha);
 
             if (true === $response['success']) {
 
@@ -321,23 +314,23 @@ if (!class_exists('GoogleReCaptcha')) {
 
                 foreach ($response['error-codes'] as $item) {
                     if (array_key_exists($item, $this->error_code)) {
-                        $error->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
+                        $errors->add($item, '<strong>ERROR</strong>: ' . $this->error_code[$item]);
                     } else {
-                        $error->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
+                        $errors->add('recaptcha_error', '<strong>ERROR</strong>: Please try again.');
                     }
                 }
 
-                return $error;
+                return $errors;
 
             }
         }
 
         /**
-         *
+         * Check Comments Form
          */
         public function checkCommentsForm()
         {
-            $g_recaptcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+            $g_recaptcha = $_POST['g-recaptcha-response'] ?: '';
 
             if (empty($g_recaptcha)) {
 
@@ -345,21 +338,7 @@ if (!class_exists('GoogleReCaptcha')) {
 
             }
 
-            $query_data = array(
-                'secret' => $this->options['secret-key'],
-                'response' => $g_recaptcha,
-                'remoteip' => $this->getIP() || '127.0.0.1',
-            );
-
-            $query = http_build_query($query_data);
-
-            $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
-
-            $response = wp_remote_post($url, array(
-                'timeout' => 30,
-                'sslverify' => true,
-            ));
-            $response = json_decode($response['body'], true);
+            $response = $this->getResponse($g_recaptcha);
 
             if (false === $response['success']) {
 
@@ -396,6 +375,8 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Get options
+         *
          * @return array
          */
         public function getOptions()
@@ -404,6 +385,8 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Checking is the login page
+         *
          * @return bool
          */
         public function is_login_page()
@@ -412,6 +395,8 @@ if (!class_exists('GoogleReCaptcha')) {
         }
 
         /**
+         * Checking allowed comments
+         *
          * @return bool
          */
         public function is_comments()

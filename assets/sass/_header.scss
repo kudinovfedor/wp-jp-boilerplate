@@ -48,8 +48,8 @@
         line-height: 30px;
         text-align: center;
         background-color: #efefef;
-        @include border-radius(50%);
-        @include transition(.15s ease-in-out);
+        border-radius: 50%;
+        transition: .15s ease-in-out;
     }
 }
 
@@ -76,8 +76,8 @@
         line-height: 30px;
         text-align: center;
         background-color: #efefef;
-        @include border-radius(50%);
-        @include transition(.15s ease-in-out);
+        border-radius: 50%;
+        transition: .15s ease-in-out;
     }
 }
 
@@ -99,6 +99,6 @@
 
     &-link {
         display: block;
-        @include transition(.15s ease-in-out);
+        transition: .15s ease-in-out;
     }
 }

@@ -15,10 +15,10 @@ $scroll-color: #000;
   z-index: $scroll-zindex;
   background-color: $scroll-color;
   visibility: hidden;
-  @include opacity(0);
-  @include transition(none);
-  @include touch-action(manipulation);
-  @include box-shadow(0 5px 10px rgba(#000, .3));
+  opacity: 0;
+  transition: none;
+  touch-action: manipulation;
+  box-shadow: 0 5px 10px rgba(#000, .3);
 
   &.is-right {
     right: $scroll-offset;
@@ -31,11 +31,11 @@ $scroll-color: #000;
   }
 
   &.is-rounded {
-    @include border-radius(4px);
+    border-radius: 4px;
   }
 
   &.is-circle {
-    @include border-radius(50%);
+    border-radius: 50%;
   }
 
   @at-root {
@@ -68,12 +68,12 @@ $scroll-color: #000;
   &.is-visible,
   .no-js & {
     visibility: visible;
-    @include opacity(1);
+    opacity: 1;
   }
 
   .js &,
   .no-js & {
     display: block;
-    @include transition(.2s ease-out);
+    transition: .2s ease-out;
   }
 }
