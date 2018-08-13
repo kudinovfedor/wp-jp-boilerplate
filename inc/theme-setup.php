@@ -1,5 +1,35 @@
 <?php
 
+function jp_switch_theme()
+{
+    $options = array(
+        'timezone_string' => 'Europe/Kiev',
+        'date_format' => 'd M Y',
+        'time_format' => 'H:i',
+        'uploads_use_yearmonth_folders' => '',
+        'permalink_structure' => '/%postname%/',
+    );
+
+    foreach ($options as $option => $value) {
+        update_option($option, $value);
+    }
+
+    update_option('sidebars_widgets', array(
+        'wp_inactive_widgets' => array(),
+        'sidebar-left' => array(),
+        'sidebar-right' => array(),
+        'array_version' => 3
+    ));
+
+    $post_ids = array(1, 2, 3);
+
+    foreach ($post_ids as $id) {
+        wp_delete_post($id, true);
+    }
+}
+
+add_action('after_switch_theme', 'jp_switch_theme');
+
 function jp_theme_setup()
 {
     load_theme_textdomain('joompress', get_template_directory() . '/languages');
