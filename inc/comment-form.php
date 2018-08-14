@@ -12,7 +12,7 @@ function jp_comment_fields($fields)
 
     $req = get_option('require_name_email');
     $aria_req = ($req ? " aria-required='true'" : '');
-    $html_req = ($req ? " required='required'" : '');
+    $html_req = ($req ? " required" : '');
     $commenter = wp_get_current_commenter();
 
     $fields = array(
@@ -49,7 +49,7 @@ function jp_comment_form_defaults($defaults)
     $label = sprintf('<label for="comment" class="screen-reader-text">%s</label>', _x('Comment', 'noun', 'joompress'));
 
     $textarea = sprintf(
-        '<textarea id="comment" class="form-field" name="comment" cols="45" rows="8" maxlength="65525" placeholder="%s" required aria-required="true"></textarea>',
+        '<textarea id="comment" class="form-field" name="comment" cols="45" rows="8" maxlength="65525" placeholder="%s" required></textarea>',
         _x('Comment', 'noun', 'joompress')
     );
 
@@ -59,3 +59,22 @@ function jp_comment_form_defaults($defaults)
 }
 
 add_filter('comment_form_defaults', 'jp_comment_form_defaults');
+
+/**
+ * Update the comment reply link.
+ *
+ * @param string $link The HTML markup for the comment reply link.
+ * @param array $args An array of arguments overriding the defaults.
+ * @param object $comment The object of the comment being replied.
+ * @param WP_Post $post The WP_Post object.
+ *
+ * @return mixed|string
+ */
+function jp_comment_reply_link($link, $args, $comment, $post)
+{
+    $link = str_replace('comment-reply-link', 'btn btn-default btn-sm comment-reply-link', $link);
+
+    return $link;
+}
+
+add_filter('comment_reply_link', 'jp_comment_reply_link', 10, 4);

@@ -871,6 +871,10 @@ if (!function_exists('jp_get_ip')) {
 
 
 if (!function_exists('jp_pagination')) {
+    /**
+     * @param array $args
+     * @return array
+     */
     function jp_pagination($args = array())
     {
         global $wp_query, $wp_rewrite;
@@ -1022,5 +1026,50 @@ if (!function_exists('jp_pagination')) {
         }
 
         echo $r;
+    }
+}
+
+if (!function_exists('jp_comments_pagination')) {
+    /**
+     * @param array $args
+     *
+     * @return void
+     */
+    function jp_comments_pagination($args = array())
+    {
+
+        if (isset($args['type']) && 'array' == $args['type']) {
+            $args['type'] = 'plain';
+        }
+
+        global $wp_rewrite;
+
+        if (!is_singular()) {
+            return;
+        }
+
+        $page = get_query_var('cpage');
+        if (!$page) {
+            $page = 1;
+        }
+        $max_page = get_comment_pages_count();
+        $defaults = array(
+            'base' => add_query_arg('cpage', '%#%'),
+            'format' => '',
+            'total' => $max_page,
+            'current' => $page,
+            'echo' => true,
+            'add_fragment' => '#comments',
+            'prev_text' => __('&laquo; Previous', 'joompress'),
+            'next_text' => __('Next &raquo;', 'joompress'),
+        );
+        if ($wp_rewrite->using_permalinks()) {
+            $defaults['base'] = user_trailingslashit(trailingslashit(get_permalink()) . $wp_rewrite->comments_pagination_base . '-%#%',
+                'commentpaged');
+        }
+
+        $args = wp_parse_args($args, $defaults);
+
+        jp_pagination($args);
     }
 }

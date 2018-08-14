@@ -2,11 +2,11 @@
     return;
 } ?>
 
-<div id="comments" class="">
+<div id="comments" class="comments">
 
     <?php if (have_comments()) : ?>
 
-        <h2 class="">
+        <h2 class="comments-title">
             <?php
             $comments_number = get_comments_number();
             if ('1' === $comments_number) {
@@ -27,22 +27,26 @@
             ?>
         </h2>
 
-        <ul class="">
+        <ul class="comment-list">
             <?php wp_list_comments(array(
+                'walker' => new JPWalkerComment,
+                'style' => 'ul',
                 'avatar_size' => 40,
+                'short_ping' => true,
             )); ?>
         </ul>
 
-        <?php the_comments_pagination(); ?>
+        <div class="text-center"><?php jp_comments_pagination(); ?></div>
 
     <?php endif; ?>
 
-    <?php if ( ! comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) : ?>
+    <?php if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) : ?>
         <p class="no-comments"><?php _e('Comments are closed.', 'joompress'); ?></p>
     <?php endif; ?>
 
     <?php comment_form(array(
         'class_submit' => 'btn btn-default',
+        'submit_button' => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
     )); ?>
 
 </div>
