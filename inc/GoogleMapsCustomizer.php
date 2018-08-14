@@ -134,7 +134,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_display', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
             $wp_customize->add_setting('google_map_project_setup_api_key', array(
                 'default' => '',
@@ -146,7 +146,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_project_setup_language', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_project_setup_region', array(
                 'default' => '',
@@ -291,7 +291,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_layers_layer', array(
                 'default' => 'off',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_radio',
             ));
 
             $wp_customize->add_control('google_map_layers_layer', array(
@@ -315,7 +315,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_controls_map_type', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_zoom', array(
                 'default' => 1,
@@ -327,31 +327,31 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_controls_full_screen', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_street_view', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_scale', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_clickable_poi', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_draggable', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_double_click_to_zoom', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_mouse_wheel_to_zoom', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
 
             $wp_customize->add_control('google_map_controls_map_type', array(
@@ -475,19 +475,19 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_positions_map_type', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_positions_zoom', array(
                 'default' => 9,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_positions_street_view', array(
                 'default' => 9,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_positions_full_screen', array(
                 'default' => 3,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
 
             $wp_customize->add_control('google_map_positions_map_type', array(
@@ -530,7 +530,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_themes_type', array(
                 'default' => 'roadmap',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_themes_styling', array(
                 'default' => '',
@@ -580,15 +580,15 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('snazzy_maps_sort_by', array(
                 'default' => '',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('snazzy_maps_filter_by_tag', array(
                 'default' => '',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('snazzy_maps_filter_by_color', array(
                 'default' => '',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
 
             $wp_customize->add_control('snazzy_maps_style', array(
@@ -678,19 +678,19 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_marker_clickable', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_marker_cross_drag', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_marker_cursor', array(
                 'default' => 'pointer',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_marker_draggable', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_marker_icon', array(
                 'default' => '',
@@ -710,7 +710,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_marker_optimized', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             /*$wp_customize->add_setting('google_map_marker_position', array(
                 'default' => '',
@@ -726,7 +726,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_marker_visible', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_marker_zindex', array(
                 'default' => 0,
@@ -938,12 +938,12 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_infowindow_display', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
 
             $wp_customize->add_setting('google_map_infowindow_disable_auto_pan', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
 
             $wp_customize->add_setting('google_map_infowindow_max_width', array(
@@ -973,12 +973,12 @@ if (!class_exists('GoogleMapsCustomizer')) {
 
             $wp_customize->add_setting('google_map_infowindow_website_url', array(
                 'default' => '',
-                'sanitize_callback' => 'esc_url',
+                'sanitize_callback' => 'esc_url_raw',
             ));
 
             $wp_customize->add_setting('google_map_infowindow_email', array(
                 'default' => '',
-                'sanitize_callback' => 'esc_attr',
+                'sanitize_callback' => 'sanitize_email',
             ));
 
             $wp_customize->add_setting('google_map_infowindow_details', array(

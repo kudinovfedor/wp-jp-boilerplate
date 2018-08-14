@@ -49,73 +49,73 @@ function jp_customize_register($wp_customize)
 
     $wp_customize->add_setting('jp_scroll_top_enable', array(
         'default' => true,
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_checkbox',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_width', array(
         'default' => '55',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'absint',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_height', array(
         'default' => '55',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'absint',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_shape', array(
         'default' => 'circle',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_select',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_position', array(
         'default' => 'right',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_select',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_offset_left_right', array(
         'default' => '20',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'absint',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_offset_bottom', array(
         'default' => '20',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'absint',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_border_width', array(
         'default' => '1',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'absint',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_border_color', array(
         'default' => '#000000',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_hex_color',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_background_color', array(
         'default' => '#000000',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_hex_color',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_background_color_hover', array(
         'default' => '#000000',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_hex_color',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_arrow_color', array(
         'default' => '#ffffff',
         'transport' => 'postMessage',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'sanitize_hex_color',
     ));
 
     $wp_customize->add_control('jp_scroll_top_enable', array(
@@ -223,13 +223,22 @@ function jp_customize_register($wp_customize)
         'panel' => 'jp_theme_options',
     ));
 
-    $wp_customize->add_setting('jp_analytics_google_placed', array('default' => 'body', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_analytics_yandex_placed', array('default' => 'body', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_analytics_custom_placed', array('default' => 'body', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_google_placed', array(
+        'default' => 'body',
+        'sanitize_callback' => 'sanitize_select',
+    ));
+    $wp_customize->add_setting('jp_analytics_yandex_placed', array(
+        'default' => 'body',
+        'sanitize_callback' => 'sanitize_select',
+    ));
+    $wp_customize->add_setting('jp_analytics_custom_placed', array(
+        'default' => 'body',
+        'sanitize_callback' => 'sanitize_select',
+    ));
 
-    $wp_customize->add_setting('jp_analytics_google', array('sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_analytics_yandex', array('sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_analytics_custom', array('sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_analytics_google', array('sanitize_callback' => 'esc_js',));
+    $wp_customize->add_setting('jp_analytics_yandex', array('sanitize_callback' => 'esc_js',));
+    $wp_customize->add_setting('jp_analytics_custom', array('sanitize_callback' => 'esc_js',));
 
     $wp_customize->add_control('jp_analytics_google_placed', array(
         'label' => 'Google Analytics',
@@ -306,7 +315,7 @@ function jp_customize_register($wp_customize)
 
     $wp_customize->add_setting('jp_login_logo', array(
         'default' => JP_IMG . '/login-logo.png',
-        'sanitize_callback' => '',
+        'sanitize_callback' => 'esc_url_raw',
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'jp_login_logo', array(
@@ -367,19 +376,19 @@ function jp_customize_register($wp_customize)
         'panel' => 'jp_theme_options',
     ));
 
-    $wp_customize->add_setting('jp_social_vk', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_twitter', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_facebook', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_linkedin', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_instagram', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_odnoklassniki', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_google_plus', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_youtube', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_pinterest', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_tumblr', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_flickr', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_reddit', array('default' => '', 'sanitize_callback' => '',));
-    $wp_customize->add_setting('jp_social_rss', array('default' => '', 'sanitize_callback' => '',));
+    $wp_customize->add_setting('jp_social_vk', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_twitter', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_facebook', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_linkedin', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_instagram', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_odnoklassniki', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_google_plus', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_youtube', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_pinterest', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_tumblr', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_flickr', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_reddit', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_rss', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
 
     $wp_customize->selective_refresh->add_partial('jp_social_vk', array(
         'selector' => '.social',

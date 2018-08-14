@@ -117,31 +117,31 @@ if (!class_exists('GoogleReCaptchaCustomizer')) {
             ));
             $wp_customize->add_setting('jp_recaptcha_login_form', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
             $wp_customize->add_setting('jp_recaptcha_registration_form', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
             $wp_customize->add_setting('jp_recaptcha_reset_password_form', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
             $wp_customize->add_setting('jp_recaptcha_comments_form', array(
                 'default' => false,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_checkbox',
             ));
             $wp_customize->add_setting('jp_recaptcha_theme', array(
                 'default' => 'light',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('jp_recaptcha_size', array(
                 'default' => 'normal',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('jp_recaptcha_language', array(
                 'default' => 0,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('jp_recaptcha_tabindex', array(
                 'default' => 0,

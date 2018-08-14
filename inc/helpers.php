@@ -1073,3 +1073,46 @@ if (!function_exists('jp_comments_pagination')) {
         jp_pagination($args);
     }
 }
+
+if (!function_exists('sanitize_checkbox')) {
+    /**
+     * @param $input
+     * @return bool
+     */
+    function sanitize_checkbox($input)
+    {
+        return (isset($input) ? true : false);
+    }
+}
+
+if (!function_exists('sanitize_select')) {
+    /**
+     * @param $input
+     * @param WP_Customize_Setting $setting
+     * @return string
+     */
+    function sanitize_select($input, $setting)
+    {
+        $input = sanitize_key($input);
+
+        $choices = $setting->manager->get_control($setting->id)->choices;
+
+        return (array_key_exists($input, $choices) ? $input : $setting->default);
+    }
+}
+
+if (!function_exists('sanitize_radio')) {
+    /**
+     * @param $input
+     * @param WP_Customize_Setting $setting
+     * @return string
+     */
+    function sanitize_radio($input, $setting)
+    {
+        $input = sanitize_key($input);
+
+        $choices = $setting->manager->get_control($setting->id)->choices;
+
+        return (array_key_exists($input, $choices) ? $input : $setting->default);
+    }
+}
