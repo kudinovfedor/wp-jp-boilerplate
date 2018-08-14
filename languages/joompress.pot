@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-09 10:26+0000\n"
+"POT-Creation-Date: 2018-08-14 09:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -61,7 +61,7 @@ msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:41
+#: comments.php:44
 msgid "Comments are closed."
 msgstr ""
 
@@ -72,15 +72,15 @@ msgid ""
 msgstr ""
 
 #. Author of the theme
-#: header.php:77 inc/admin.php:57
+#: header.php:75 inc/admin.php:57
 msgid "Kudinov Fedor"
 msgstr ""
 
-#: header.php:167
+#: header.php:163
 msgid "Edit Analytics Tracking Code"
 msgstr ""
 
-#: header.php:170
+#: header.php:166
 msgid "Edit Login Logo"
 msgstr ""
 
@@ -201,15 +201,45 @@ msgstr ""
 msgid "Delete This"
 msgstr ""
 
-#: inc/helpers.php:992
+#: inc/helpers.php:996
 msgid "&hellip;"
 msgstr ""
 
-#: inc/theme-setup.php:185
+#: inc/helpers.php:1063
+msgid "&laquo; Previous"
+msgstr ""
+
+#: inc/helpers.php:1064
+msgid "Next &raquo;"
+msgstr ""
+
+#: inc/JPWalkerComment.php:71
+msgid "Pingback"
+msgstr ""
+
+#: inc/JPWalkerComment.php:72 inc/JPWalkerComment.php:107
+msgid "Edit"
+msgstr ""
+
+#: inc/JPWalkerComment.php:98
+#, php-format
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: inc/JPWalkerComment.php:104
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: inc/JPWalkerComment.php:110
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/theme-setup.php:215
 msgid "Menu in header"
 msgstr ""
 
-#: inc/theme-setup.php:186
+#: inc/theme-setup.php:216
 msgid "Menu in footer"
 msgstr ""
 
