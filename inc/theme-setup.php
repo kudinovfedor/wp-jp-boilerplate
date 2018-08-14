@@ -212,6 +212,12 @@ function jp_theme_setup()
             ),
 
         ));
+
+        add_theme_support('woocommerce');
+
+        add_theme_support('wc-product-gallery-zoom');
+        add_theme_support('wc-product-gallery-lightbox');
+        add_theme_support('wc-product-gallery-slider');
     }
 
     add_editor_style(JP_CSS . '/editor-style.css');
@@ -480,3 +486,25 @@ function jp_upload_types($mimes = array())
 }
 
 add_filter('upload_mimes', 'jp_upload_types');
+
+/**
+ * Remove rel="category tag" from category list
+ * @param $output
+ * @return mixed
+ */
+function jp_remove_category_list_rel($output)
+{
+    $output = str_replace('rel="category tag"', '', $output);
+    return $output;
+}
+
+add_filter('the_category', 'jp_remove_category_list_rel');
+add_filter('wp_list_categories', 'jp_remove_category_list_rel');
+
+function jp_embed_html($html)
+{
+    return '<div class="embed-responsive embed-responsive-16by9">' . $html . '</div>';
+}
+
+add_filter('video_embed_html', 'jp_embed_html');
+add_filter('embed_oembed_html', 'jp_embed_html', 10, 3);
