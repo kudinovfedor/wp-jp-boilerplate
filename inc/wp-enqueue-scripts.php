@@ -7,14 +7,22 @@ function jp_enqueue_style_script()
 {
     $suffix = SCRIPT_DEBUG ? '' : '.min';
 
+    $libs = array(
+        'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
+    );
+
     wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', array(), null);
 
-    wp_register_script('jp-validate',
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
-        array('jquery'), null, true);
+    wp_register_script('jp-validate', $libs['validate'], array('jquery'), null, true);
 
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);
+    wp_register_script('jp-skip-link-focus-fix', JP_JS . '/skip-link-focus-fix.js', array(), null, true);
+
     wp_enqueue_script('jp-common');
+
+    if (is_ie()) {
+        wp_enqueue_script('jp-skip-link-focus-fix');
+    }
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');

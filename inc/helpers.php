@@ -993,7 +993,8 @@ if (!function_exists('jp_pagination')) {
                             $link)) . "'>" . $args['before_page_number'] . number_format_i18n($n) . $args['after_page_number'] . "</a>";
                     $dots = true;
                 elseif ($dots && !$args['show_all']) :
-                    $page_links[] = '<span class="pagination-link pagination-dots">' . __('&hellip;', 'joompress') . '</span>';
+                    $page_links[] = '<span class="pagination-link pagination-dots">' . __('&hellip;',
+                            'joompress') . '</span>';
                     $dots = false;
                 endif;
             endif;
@@ -1114,5 +1115,27 @@ if (!function_exists('sanitize_radio')) {
         $choices = $setting->manager->get_control($setting->id)->choices;
 
         return (array_key_exists($input, $choices) ? $input : $setting->default);
+    }
+}
+
+if (!function_exists('is_ie')) {
+    /**
+     * Test if the current browser MSIE or Trident
+     *
+     * @return bool
+     */
+    function is_ie()
+    {
+        $is_ie = false;
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (isset($user_agent)) {
+            $msie = strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE');
+            $trident = strpos($_SERVER['HTTP_USER_AGENT'], 'Trident');
+            if ($msie !== false || $trident !== false) {
+                $is_ie = true;
+            }
+        }
+
+        return $is_ie;
     }
 }

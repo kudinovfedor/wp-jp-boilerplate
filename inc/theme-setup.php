@@ -57,7 +57,7 @@ function jp_theme_setup()
             'default-size' => 'cover',
             'default-repeat' => 'no-repeat',
             'default-attachment' => 'scroll',
-            'default-color' => '',
+            'default-color' => 'ffffff',
             'wp-head-callback' => '_custom_background_cb',
             'admin-head-callback' => '',
             'admin-preview-callback' => '',
@@ -86,7 +86,12 @@ function jp_theme_setup()
 
         add_theme_support('title-tag');
 
-        add_theme_support('custom-logo');
+        add_theme_support('custom-logo', array(
+            'height' => 60,
+            'width' => 200,
+            'flex-height' => true,
+            'flex-width' => true,
+        ));
 
         add_theme_support('customize-selective-refresh-widgets');
 

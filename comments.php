@@ -36,7 +36,9 @@
             )); ?>
         </ul>
 
-        <div class="text-center"><?php jp_comments_pagination(); ?></div>
+        <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : ?>
+            <div class="text-center"><?php jp_comments_pagination(); ?></div>
+        <?php endif; ?>
 
     <?php endif; ?>
 
