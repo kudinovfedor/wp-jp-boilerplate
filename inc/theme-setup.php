@@ -489,7 +489,9 @@ add_filter('upload_mimes', 'jp_upload_types');
 
 /**
  * Remove rel="category tag" from category list
+ *
  * @param $output
+ *
  * @return mixed
  */
 function jp_remove_category_list_rel($output)
@@ -501,6 +503,11 @@ function jp_remove_category_list_rel($output)
 add_filter('the_category', 'jp_remove_category_list_rel');
 add_filter('wp_list_categories', 'jp_remove_category_list_rel');
 
+/**
+ * @param $html
+ *
+ * @return string
+ */
 function jp_embed_html($html)
 {
     return '<div class="embed-responsive embed-responsive-16by9">' . $html . '</div>';
@@ -508,3 +515,19 @@ function jp_embed_html($html)
 
 add_filter('video_embed_html', 'jp_embed_html');
 add_filter('embed_oembed_html', 'jp_embed_html', 10, 3);
+
+/**
+ * Removed width and height attributes from image elements in WordPress
+ *
+ * @param $html
+ *
+ * @return null|string|string[]
+ */
+function jp_remove_width_height_attribute($html)
+{
+    $html = preg_replace('/(width|height)="\d*"\s/', "", $html);
+    return $html;
+}
+
+add_filter('post_thumbnail_html', 'jp_remove_width_height_attribute');
+add_filter('image_send_to_editor', 'jp_remove_width_height_attribute');

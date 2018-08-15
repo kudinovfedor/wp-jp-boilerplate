@@ -9,9 +9,24 @@ function jp_enqueue_style_script()
 
     $libs = array(
         'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
+        'html5shiv' => 'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js',
+        'respond' => 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
     );
 
     wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', array(), null);
+
+    wp_register_script('jp-style-ie', JP_CSS . "/ie.css", array('jp-style'), null);
+
+    wp_register_script('jp-html5shiv', $libs['html5shiv'], array(), null, false);
+    wp_register_script('jp-respond', $libs['respond'], array(), null, false);
+
+    wp_style_add_data('jp-style-ie', 'conditional', 'lt IE 9');
+    wp_script_add_data('jp-html5shiv', 'conditional', 'lt IE 9');
+    wp_script_add_data('jp-respond', 'conditional', 'lt IE 9');
+
+    wp_enqueue_style('jp-style-ie');
+    wp_enqueue_script('jp-html5shiv');
+    wp_enqueue_script('jp-respond');
 
     wp_register_script('jp-validate', $libs['validate'], array('jquery'), null, true);
 

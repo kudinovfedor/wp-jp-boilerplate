@@ -1,11 +1,12 @@
-</div><!-- .wrapper -->
-
+</div><!-- /END WRAPPER -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
         <?php get_template_part('template-parts/navigation/menu', 'footer'); ?>
         <div class="copyright text-center"><?php copyright(); ?></div>
     </div>
 </footer>
+<!-- /END FOOTER -->
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",

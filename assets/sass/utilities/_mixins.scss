@@ -1,4 +1,12 @@
 // MIXINS
+//@import "math";
+//
+//@mixin ieRotate($degrees) {
+//    filter: progid:DXImageTransform.Microsoft.matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+//    -ms-filter: "progid:DXImageTransform.Microsoft.matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+//    zoom: 1;
+//}
+
 @mixin clearfix() {
     &::after {
         clear: both;
@@ -32,7 +40,6 @@
     }
 }
 
-
 @mixin responsive-headers() {
 
     @each $name, $value in $headers-map {
@@ -51,7 +58,7 @@
 
                 $fallback: map-get($value, font-size-fallback);
 
-                @if($fallback != null and $fallback != "") {
+                @if ($fallback != null and $fallback != "") {
                     font-size: $fallback;
                 }
 
@@ -69,4 +76,3 @@
         }
     }
 }
-

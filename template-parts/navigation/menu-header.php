@@ -1,4 +1,5 @@
 <?php if (has_nav_menu('header_menu')) { ?>
+    <!-- HEADER MENU -->
     <nav class="menu" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
         <?php btn_close_menu('js-menu-close'); ?>
         <div class="container">
@@ -14,4 +15,5 @@
             )); ?>
         </div>
     </nav>
+    <!-- /END HEADER MENU -->
 <?php } ?>

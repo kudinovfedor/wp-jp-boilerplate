@@ -1,0 +1,66 @@
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.container:after {
+  clear: both;
+  content: ' ';
+  display: table;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn:disabled, .btn.disabled {
+  cursor: default;
+}
+
+.menu-close:before, .menu-close:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #199ec7;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.menu-close:after {
+  width: 2px;
+  height: 100%;
+}
+
+.hamburger-inner, .hamburger-inner:before, .hamburger-inner:after {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #199ec7;
+}
+
+.hamburger-inner:before, .hamburger-inner:after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.hamburger-inner:before {
+  bottom: 8px;
+}
+
+.hamburger-inner:after {
+  top: 8px;
+}
+
+.is-active .hamburger-inner, .is-active .hamburger-inner:before, .is-active .hamburger-inner:after {
+  background-color: #137a9a;
+}

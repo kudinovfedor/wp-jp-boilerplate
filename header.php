@@ -125,7 +125,7 @@ if (is_single()) {
         }
     </script>
 <?php } ?>
-
+<!-- HEADER -->
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
     <div class="container">
         <div class="logo header-logo">
@@ -141,9 +141,9 @@ if (is_single()) {
         <?php hamburger('js-hamburger'); ?>
     </div>
 </header>
-
+<!-- /END HEADER -->
 <?php get_template_part('template-parts/navigation/menu', 'header'); ?>
-
+<!-- WRAPPER -->
 <div class="wrapper">
 
     <div class="container">

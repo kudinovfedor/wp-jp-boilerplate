@@ -24,34 +24,34 @@ Tags: one-column
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrapper {
-  padding: 15px 0 30px;
-  flex: 1;
+    padding: 15px 0 30px;
+    flex: 1;
 }
 
 .container {
-  //padding-left: 15px;
-  //padding-right: 15px;
-  //margin-left: auto;
-  //margin-right: auto;
-  @extend %clearfix;
+    //padding-left: 15px;
+    //padding-right: 15px;
+    //margin-left: auto;
+    //margin-right: auto;
+    @extend %clearfix;
 
-  //@media only screen and (min-width: 1200px) {
-  //  width: 1200px;
-  //}
+    //@media only screen and (min-width: 1200px) {
+    //  width: 1200px;
+    //}
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 @import "variables";
