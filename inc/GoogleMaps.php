@@ -41,6 +41,7 @@ if (!class_exists('GoogleMaps')) {
             if ($this->isEnabled()) {
                 add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
                 add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
+                add_action('wp_ajax_snazzy_map', array($this, 'ajaxSnazzyMaps'));
             }
         }
 
@@ -236,13 +237,15 @@ if (!class_exists('GoogleMaps')) {
         /**
          * Output HTML Markup
          *
-         * @param bool $dimensions
+         * @param array $options
          *
          * @return void
          */
-        public function htmlMarkup($dimensions = true)
+        public function htmlMarkup($options = array())
         {
             if ($this->isEnabled()) {
+
+                $dimensions = isset($options['dimensions']) ? (bool)$options['dimensions'] : true;
 
                 $style = sprintf(
                     'style="width: %spx; height: %spx;"',
@@ -261,7 +264,7 @@ if (!class_exists('GoogleMaps')) {
 
                 echo $markup;
 
-                $this->initMapJS();
+                $this->initMapJS($options);
             }
         }
 
@@ -318,11 +321,13 @@ if (!class_exists('GoogleMaps')) {
         /**
          * Init Google Maps Js
          *
+         * @param array $options
+         *
          * @return void
          */
-        private function initMapJS()
+        private function initMapJS($options = array())
         {
-            $map = $this->options;
+            $map = array_replace_recursive($this->options, $options);
 
             if ($map['info_window']['enable']) {
                 $this->getInfoWindowStyles();
@@ -479,6 +484,18 @@ if (!class_exists('GoogleMaps')) {
                 }
             </script>
         <?php }
+
+        /**
+         *
+         */
+        public function ajaxSnazzyMaps()
+        {
+            $id = intval($_POST['id']);
+            $this->snazzy_maps = new SnazzyMaps;
+            $image = $this->snazzy_maps->getItemImage($id);
+            echo $image;
+            die();
+        }
     }
 
     $google_map = new GoogleMaps;
@@ -488,15 +505,23 @@ if (!class_exists('GoogleMaps')) {
 if (!function_exists('google_map')) {
     /**
      * Display Google Map (HTML + Script tag with callback function)
+     *
+     * @example
+     * google_map(array('latitude' => 46.651, 'longitude' => 32.654, 'zoom' => 17, dimensions' => false,
+     * 'marker' => array('icon' => get_template_directory_uri() . '/assets/img/marker.png')));
+     *
+     * @author Kudinov Fedor <admin@joompress.biz>
+     *
+     * @param array $options
      */
-    function google_map()
+    function google_map($options = array())
     {
         if (class_exists('GoogleMaps')) {
             /**
              * @var GoogleMaps $google_map
              */
             global $google_map;
-            $google_map->htmlMarkup();
+            $google_map->htmlMarkup($options);
         }
     }
 }

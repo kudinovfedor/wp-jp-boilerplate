@@ -117,19 +117,19 @@ if (!class_exists('GoogleReCaptchaCustomizer')) {
             ));
             $wp_customize->add_setting('jp_recaptcha_login_form', array(
                 'default' => false,
-                'sanitize_callback' => 'sanitize_checkbox',
+                'sanitize_callback' => 'wp_validate_boolean',
             ));
             $wp_customize->add_setting('jp_recaptcha_registration_form', array(
                 'default' => false,
-                'sanitize_callback' => 'sanitize_checkbox',
+                'sanitize_callback' => 'wp_validate_boolean',
             ));
             $wp_customize->add_setting('jp_recaptcha_reset_password_form', array(
                 'default' => false,
-                'sanitize_callback' => 'sanitize_checkbox',
+                'sanitize_callback' => 'wp_validate_boolean',
             ));
             $wp_customize->add_setting('jp_recaptcha_comments_form', array(
                 'default' => false,
-                'sanitize_callback' => 'sanitize_checkbox',
+                'sanitize_callback' => 'wp_validate_boolean',
             ));
             $wp_customize->add_setting('jp_recaptcha_theme', array(
                 'default' => 'light',

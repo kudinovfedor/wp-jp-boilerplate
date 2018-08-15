@@ -49,7 +49,7 @@ function jp_customize_register($wp_customize)
 
     $wp_customize->add_setting('jp_scroll_top_enable', array(
         'default' => true,
-        'sanitize_callback' => 'sanitize_checkbox',
+        'sanitize_callback' => 'wp_validate_boolean',
     ));
 
     $wp_customize->add_setting('jp_scroll_top_width', array(

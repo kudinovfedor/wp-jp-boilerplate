@@ -1082,7 +1082,15 @@ if (!function_exists('sanitize_checkbox')) {
      */
     function sanitize_checkbox($input)
     {
-        return (isset($input) ? true : false);
+        if (is_bool($input)) {
+            return $input;
+        }
+
+        if (is_string($input) && 'false' === strtolower($input)) {
+            return false;
+        }
+
+        return (bool)$input;
     }
 }
 

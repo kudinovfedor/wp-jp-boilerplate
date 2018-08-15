@@ -131,6 +131,46 @@
             })
         });
 
+        api('snazzy_maps_style', function (control) {
+            control.bind(function (value) {
+                $.ajax({
+                    'url': jp_ajax_obj.ajax_url,
+                    'method': 'POST',
+                    'data': {
+                        'action': 'snazzy_map',
+                        'nonce': jp_ajax_obj.nonce,
+                        'id': value,
+                    },
+                    'dataType': 'text',
+                    'success': function (response) {
+                        var img = document.querySelector('#snazzy-map-style');
+                        if (img) {
+                            img.src = response;
+                        } else {
+                            createImage(response, document.getElementById('_customize-input-snazzy_maps_style'));
+                        }
+                        console.log(response);
+                    },
+                    'error': function (err) {
+                        console.log(err);
+                    }
+                });
+                console.log(value);
+            });
+        });
+
     });
+
+    function createImage(src, element) {
+        var img = document.createElement('img');
+        img.id = 'snazzy-map-style';
+        img.alt = '';
+        img.src = src;
+
+        console.log(element);
+        console.log(element.parentNode);
+
+        element.parentNode.appendChild(img);
+    }
 
 })(jQuery);

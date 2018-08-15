@@ -356,10 +356,10 @@ if (!class_exists('SnazzyMaps')) {
          *
          * @param int $id
          *
+         * @param string $field
          * @return string
          */
-        public function getItemJson($id)
-        {
+        public function getItem($id, $field = 'json') {
             $id = (int)$id;
 
             $result = '';
@@ -367,15 +367,39 @@ if (!class_exists('SnazzyMaps')) {
             if ($this->table_exists && !$this->table_empty) {
 
                 $result = $this->wpdb->get_row(
-                    "SELECT `json` FROM `$this->table_name` WHERE `style_id` = $id LIMIT 1;",
+                    "SELECT `$field` FROM `$this->table_name` WHERE `style_id` = $id LIMIT 1;",
                     ARRAY_A
                 );
 
-                return $result['json'];
+                return $result[$field];
 
             }
 
             return $result;
+        }
+
+        /**
+         * Get json Snazzy Map Style item By ID
+         *
+         * @param int $id
+         *
+         * @return string
+         */
+        public function getItemJson($id)
+        {
+            return $this->getItem($id, 'json');
+        }
+
+        /**
+         * Get image Snazzy Map Style item By ID
+         *
+         * @param int $id
+         *
+         * @return string
+         */
+        public function getItemImage($id)
+        {
+            return $this->getItem($id, 'image_url');
         }
 
         /**
