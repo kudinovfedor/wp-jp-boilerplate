@@ -1,7 +1,7 @@
 (function ($, d) {
     'use strict';
 
-    document.addEventListener('DOMContentLoaded', function () {
+    d.addEventListener('DOMContentLoaded', function () {
         var img, link, select = d.querySelector('[data-customize-setting-link="snazzy_maps_style"]');
 
         select.addEventListener('change', function () {

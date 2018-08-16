@@ -325,6 +325,102 @@ function jp_customize_register($wp_customize)
         'settings' => 'jp_login_logo',
     )));
 
+    $wp_customize->add_setting('jp_login_background_color', array(
+        'default' => '',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color_no_hash',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'jp_login_background_color', array(
+        'label' => 'Background Color',
+        'section' => 'jp_login',
+    )));
+
+    $wp_customize->add_setting('jp_login_background_image', array(
+        'default' => '',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_background_setting',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'jp_login_background_image', array(
+        'label' => 'Background Image',
+        'section' => 'jp_login',
+    )));
+
+    $wp_customize->add_setting('jp_login_background_position', array(
+        'default' => 'left top',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_background_setting',
+    ));
+
+    $wp_customize->add_control('jp_login_background_position', array(
+        'label' => 'Image Position',
+        'section' => 'jp_login',
+        'type' => 'select',
+        'choices' => array(
+            'left top' => 'Top Left',
+            'center top' => 'Top Center',
+            'right top' => 'Top Right',
+            'left center' => 'Center Left',
+            'center center' => 'Center Center',
+            'right center' => 'Center Right',
+            'left bottom' => 'Bottom Left',
+            'center bottom' => 'Bottom Center',
+            'right bottom' => 'Bottom Right',
+        ),
+    ));
+
+    $wp_customize->add_setting('jp_login_background_size', array(
+        'default' => 'auto',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_background_setting',
+    ));
+
+    $wp_customize->add_control('jp_login_background_size', array(
+        'label' => 'Image Size',
+        'section' => 'jp_login',
+        'type' => 'select',
+        'choices' => array(
+            'auto' => 'Original (auto)',
+            'contain' => 'Fit to Screen (contain)',
+            'cover' => 'Fill Screen (cover)',
+        ),
+    ));
+
+    $wp_customize->add_setting('jp_login_background_repeat', array(
+        'default' => 'repeat',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_background_setting',
+    ));
+
+    $wp_customize->add_control('jp_login_background_repeat', array(
+        'label' => 'Repeat Background Image',
+        'section' => 'jp_login',
+        'type' => 'select',
+        'choices' => array(
+            'repeat' => 'repeat',
+            'repeat-x' => 'repeat-x',
+            'repeat-y' => 'repeat-y',
+            'no-repeat' => 'no-repeat',
+        ),
+    ));
+
+    $wp_customize->add_setting('jp_login_background_attachment', array(
+        'default' => 'scroll',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_background_setting',
+    ));
+
+    $wp_customize->add_control('jp_login_background_attachment', array(
+        'label' => 'Scroll with Page',
+        'section' => 'jp_login',
+        'type' => 'select',
+        'choices' => array(
+            'scroll' => 'Scroll',
+            'fixed' => 'Fixed',
+        ),
+    ));
+
     // Section Messenger
     $wp_customize->add_section('jp_messenger', array(
         'title' => 'Messenger',
@@ -381,7 +477,8 @@ function jp_customize_register($wp_customize)
     $wp_customize->add_setting('jp_social_facebook', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
     $wp_customize->add_setting('jp_social_linkedin', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
     $wp_customize->add_setting('jp_social_instagram', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
-    $wp_customize->add_setting('jp_social_odnoklassniki', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
+    $wp_customize->add_setting('jp_social_odnoklassniki',
+        array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
     $wp_customize->add_setting('jp_social_google_plus', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
     $wp_customize->add_setting('jp_social_youtube', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));
     $wp_customize->add_setting('jp_social_pinterest', array('default' => '', 'sanitize_callback' => 'esc_url_raw',));

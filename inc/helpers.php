@@ -1126,6 +1126,49 @@ if (!function_exists('sanitize_radio')) {
     }
 }
 
+if (!function_exists('sanitize_background_setting')) {
+    /**
+     * @param $value
+     * @param $setting
+     * @return string|WP_Error
+     */
+    function sanitize_background_setting($value, $setting)
+    {
+        if ('jp_login_background_repeat' === $setting->id) {
+            if (!in_array($value, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'))) {
+                return new WP_Error('invalid_value', __('Invalid value for background repeat.'));
+            }
+        } elseif ('jp_login_background_attachment' === $setting->id) {
+            if (!in_array($value, array('fixed', 'scroll'))) {
+                return new WP_Error('invalid_value', __('Invalid value for background attachment.'));
+            }
+        } elseif ('jp_login_background_position' === $setting->id) {
+            if (!in_array($value, array(
+                'left top',
+                'center top',
+                'right top',
+                'left center',
+                'center center',
+                'right center',
+                'left bottom',
+                'center bottom',
+                'right bottom'
+            ), true)) {
+                return new WP_Error('invalid_value', __('Invalid value for background position X.'));
+            }
+        } elseif ('jp_login_background_size' === $setting->id) {
+            if (!in_array($value, array('auto', 'contain', 'cover'), true)) {
+                return new WP_Error('invalid_value', __('Invalid value for background size.'));
+            }
+        } elseif ('jp_login_background_image' === $setting->id || 'jp_login_background_image_thumb' === $setting->id) {
+            $value = empty($value) ? '' : esc_url_raw($value);
+        } else {
+            return new WP_Error('unrecognized_setting', __('Unrecognized background setting.'));
+        }
+        return $value;
+    }
+}
+
 if (!function_exists('is_ie')) {
     /**
      * Test if the current browser MSIE or Trident
@@ -1145,5 +1188,71 @@ if (!function_exists('is_ie')) {
         }
 
         return $is_ie;
+    }
+}
+
+if (!function_exists('get_background_login_page')) {
+    /**
+     * Get Background style for Login Page
+     *
+     * @return string
+     */
+    function get_background_login_page()
+    {
+        $background = get_theme_mod('jp_login_background_image');
+        $color = get_theme_mod('jp_login_background_color');
+
+        $style = $color ? "background-color: #$color;" : '';
+
+        if ($background) {
+            $image = ' background-image: url("' . esc_url_raw($background) . '");';
+
+            $position = get_theme_mod('jp_login_background_position');
+
+            if (!in_array($position, array(
+                'left top',
+                'center top',
+                'right top',
+                'left center',
+                'center center',
+                'right center',
+                'left bottom',
+                'center bottom',
+                'right bottom'
+            ), true)) {
+                $position = 'left top';
+            }
+
+            $position = " background-position: $position;";
+
+            $size = get_theme_mod('jp_login_background_size');
+
+            if (!in_array($size, array('auto', 'contain', 'cover'), true)) {
+                $size = 'auto';
+            }
+
+            $size = " background-size: $size;";
+
+            $repeat = get_theme_mod('jp_login_background_repeat');
+
+            if (!in_array($repeat, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'), true)) {
+                $repeat = 'repeat';
+            }
+
+            $repeat = " background-repeat: $repeat;";
+
+            $attachment = get_theme_mod('background_attachment');
+
+            if ('fixed' !== $attachment) {
+                $attachment = 'scroll';
+            }
+
+            $attachment = " background-attachment: $attachment;";
+
+            $style .= $image . $position . $size . $repeat . $attachment;
+
+        }
+
+        return trim($style);
     }
 }

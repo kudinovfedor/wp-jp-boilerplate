@@ -89,8 +89,12 @@ if (!class_exists('GoogleMaps')) {
          */
         public function adminEnqueueScripts()
         {
-            wp_register_script('snazzy-maps', JP_JS . '/admin/snazzy-maps.js', array('jQuery'), null, true);
-            wp_enqueue_script('snazzy-maps');
+            wp_register_script('snazzy-maps', JP_JS . '/admin/snazzy-maps.js', array('jquery'), null, true);
+
+            if (is_customize_preview()) {
+                wp_enqueue_script('snazzy-maps');
+            }
+
         }
 
         /**

@@ -9,8 +9,9 @@ function jp_login_head()
 {
     $default = JP_IMG . '/login-logo.png';
     $login_logo = get_theme_mod('jp_login_logo', $default);
+    $login_background = get_background_login_page();
 
-    echo sprintf('<style>.login h1 a{background-image: url("%s"); }</style>', $login_logo);
+    echo sprintf('<style>.login{%s}.login h1 a{background-image: url("%s"); }</style>', $login_background, $login_logo);
 }
 
 add_action('login_head', 'jp_login_head');

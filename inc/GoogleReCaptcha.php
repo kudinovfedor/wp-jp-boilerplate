@@ -47,8 +47,10 @@ if (!class_exists('GoogleReCaptcha')) {
 
             if ($this->isEnabled()) {
 
-                add_action('login_enqueue_scripts', array($this, 'cssLogin'));
-                add_action('login_enqueue_scripts', array($this, 'enqueueScripts'));
+                if ($this->isReCaptchaRequired('login') || $this->isReCaptchaRequired('registration') || $this->isReCaptchaRequired('reset-password')) {
+                    add_action('login_enqueue_scripts', array($this, 'cssLogin'));
+                    add_action('login_enqueue_scripts', array($this, 'enqueueScripts'));
+                }
 
                 if ($this->isReCaptchaRequired('login')) {
                     add_action('login_form', array($this, 'htmlMarkup'));
