@@ -41,6 +41,7 @@ if (!class_exists('GoogleMaps')) {
             if ($this->isEnabled()) {
                 add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
                 add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
+                add_action('admin_enqueue_scripts', array($this, 'adminEnqueueScripts'));
                 add_action('wp_ajax_snazzy_map', array($this, 'ajaxSnazzyMaps'));
             }
         }
@@ -79,6 +80,17 @@ if (!class_exists('GoogleMaps')) {
             $src = sprintf('https://maps.googleapis.com/maps/api/js?%s', $query);
 
             return $src;
+        }
+
+        /**
+         * Admin Enqueue a script.
+         *
+         * @return void
+         */
+        public function adminEnqueueScripts()
+        {
+            wp_register_script('snazzy-maps', JP_JS . '/admin/snazzy-maps.js', array('jQuery'), null, true);
+            wp_enqueue_script('snazzy-maps');
         }
 
         /**
@@ -486,15 +498,23 @@ if (!class_exists('GoogleMaps')) {
         <?php }
 
         /**
+         * Get SnazzyMaps style image
          *
+         * @return void
          */
         public function ajaxSnazzyMaps()
         {
             $id = intval($_POST['id']);
-            $this->snazzy_maps = new SnazzyMaps;
-            $image = $this->snazzy_maps->getItemImage($id);
+            $image = '';
+
+            if (0 !== $id) {
+                $this->snazzy_maps = new SnazzyMaps;
+                $image = $this->snazzy_maps->getItemImageUrl($id);
+            }
+
             echo $image;
             die();
+
         }
     }
 

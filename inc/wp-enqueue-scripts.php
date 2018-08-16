@@ -33,12 +33,6 @@ function jp_enqueue_style_script()
     wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);
     wp_register_script('jp-skip-link-focus-fix', JP_JS . '/skip-link-focus-fix.js', array(), null, true);
 
-    $nonce = wp_create_nonce('ajax_nonce');
-    wp_localize_script('jp-common', 'jp_ajax_obj', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => $nonce,
-    ));
-
     wp_enqueue_script('jp-common');
 
     if (is_ie()) {

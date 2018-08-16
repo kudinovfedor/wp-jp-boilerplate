@@ -397,7 +397,7 @@ if (!class_exists('SnazzyMaps')) {
          *
          * @return string
          */
-        public function getItemImage($id)
+        public function getItemImageUrl($id)
         {
             return $this->getItem($id, 'image_url');
         }

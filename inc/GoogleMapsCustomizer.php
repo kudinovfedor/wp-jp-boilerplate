@@ -319,11 +319,11 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_setting('google_map_controls_zoom', array(
                 'default' => 1,
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'absint',
             ));
             $wp_customize->add_setting('google_map_controls_gesture_handling', array(
                 'default' => 'auto',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'sanitize_select',
             ));
             $wp_customize->add_setting('google_map_controls_full_screen', array(
                 'default' => 0,
@@ -566,30 +566,33 @@ if (!class_exists('GoogleMapsCustomizer')) {
             $wp_customize->add_section('snazzy_maps', array(
                 'title' => 'Snazzy Maps',
                 'description' => 'To apply the selected filters and sorting, select them and click the Publish button, then reload the page.',
-                'description_hidden' => true,
+                'description_hidden' => false,
                 'panel' => 'google_map',
             ));
 
             $wp_customize->add_setting('snazzy_maps_style', array(
                 'default' => 0,
                 'sanitize_callback' => 'absint',
-                'transport' => 'postMessage',
             ));
             $wp_customize->add_setting('snazzy_maps_limit', array(
                 'default' => 100,
                 'sanitize_callback' => 'absint',
+                'transport' => 'postMessage',
             ));
             $wp_customize->add_setting('snazzy_maps_sort_by', array(
                 'default' => '',
                 'sanitize_callback' => 'sanitize_select',
+                'transport' => 'postMessage',
             ));
             $wp_customize->add_setting('snazzy_maps_filter_by_tag', array(
                 'default' => '',
                 'sanitize_callback' => 'sanitize_select',
+                'transport' => 'postMessage',
             ));
             $wp_customize->add_setting('snazzy_maps_filter_by_color', array(
                 'default' => '',
                 'sanitize_callback' => 'sanitize_select',
+                'transport' => 'postMessage',
             ));
 
             $wp_customize->add_control('snazzy_maps_style', array(
@@ -602,7 +605,8 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));
             $wp_customize->add_control('snazzy_maps_limit', array(
                 'label' => 'Limit',
-                'description' => sprintf('Total qty. <b>%s</b>, maximum limit is 1000 items.', $this->snazzy_maps->countItems()),
+                'description' => sprintf('Total qty. <b>%s</b>, maximum limit is 1000 items.',
+                    $this->snazzy_maps->countItems()),
                 'section' => 'snazzy_maps',
                 'settings' => 'snazzy_maps_limit',
                 'type' => 'number',
@@ -723,7 +727,7 @@ if (!class_exists('GoogleMapsCustomizer')) {
             ));*/
             $wp_customize->add_setting('google_map_marker_title', array(
                 'default' => '',
-                'sanitize_callback' => '',
+                'sanitize_callback' => 'wp_strip_all_tags',
             ));
             $wp_customize->add_setting('google_map_marker_visible', array(
                 'default' => 1,
