@@ -290,6 +290,19 @@ if (!class_exists('SnazzyMaps')) {
         }
 
         /**
+         * Minify JSON String
+         *
+         * @param string $subject
+         * @return string
+         */
+        public function minifyString($subject)
+        {
+            $subject = preg_replace("/[\r\n\t\s]+/i", '', $subject);
+
+            return trim($subject);
+        }
+
+        /**
          * Get Snazzy Maps Items
          *
          * @param array $options
@@ -359,7 +372,8 @@ if (!class_exists('SnazzyMaps')) {
          * @param string $field
          * @return string
          */
-        public function getItem($id, $field = 'json') {
+        public function getItem($id, $field = 'json')
+        {
             $id = (int)$id;
 
             $result = '';
