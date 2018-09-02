@@ -61,7 +61,7 @@ if (!function_exists('logo')) {
      * @see get_logo()
      *
      */
-    function logo($file_name = 'logo.png', $attr = array())
+    function logo($file_name = 'logo.png', $attr = [])
     {
         echo get_logo($file_name, $attr);
     }
@@ -93,7 +93,7 @@ if (!function_exists('get_logo')) {
      *
      * @return string Logo markup.
      */
-    function get_logo($file_name = 'logo.png', $attr = array())
+    function get_logo($file_name = 'logo.png', $attr = [])
     {
         $src_dir = get_template_directory() . '/assets/img/' . $file_name;
 
@@ -259,7 +259,7 @@ if (!function_exists('get_phone_number')) {
      */
     function get_phone_number($phone_number)
     {
-        return str_replace(array('-', '(', ')', ' '), '', $phone_number);
+        return str_replace(['-', '(', ')', ' '], '', $phone_number);
     }
 }
 
@@ -285,13 +285,13 @@ if (!function_exists('get_phones')) {
      */
     function get_phones()
     {
-        $_phones = array(
+        $_phones = [
             get_theme_mod('jp_phone_one'),
             get_theme_mod('jp_phone_two'),
             get_theme_mod('jp_phone_three'),
             get_theme_mod('jp_phone_four'),
             get_theme_mod('jp_phone_five'),
-        );
+        ];
 
         $phones = array_filter($_phones, function ($value) {
             return !empty($value);
@@ -361,28 +361,28 @@ if (!function_exists('get_messengers')) {
      */
     function get_messengers()
     {
-        $_messengers = array(
-            'skype' => array(
+        $_messengers = [
+            'skype' => [
                 'tel' => get_theme_mod('jp_messenger_skype'),
                 'text' => 'Skype',
                 'icon' => 'fab fa-skype',
-            ),
-            'viber' => array(
+            ],
+            'viber' => [
                 'tel' => get_theme_mod('jp_messenger_viber'),
                 'text' => 'Viber',
                 'icon' => 'fab fa-viber',
-            ),
-            'whatsapp' => array(
+            ],
+            'whatsapp' => [
                 'tel' => get_theme_mod('jp_messenger_whatsapp'),
                 'text' => 'WhatsApp',
                 'icon' => 'fab fa-whatsapp',
-            ),
-            'telegram' => array(
+            ],
+            'telegram' => [
                 'tel' => get_theme_mod('jp_messenger_telegram'),
                 'text' => 'Telegram',
                 'icon' => 'fab fa-telegram-plane',
-            ),
-        );
+            ],
+        ];
 
         $messengers = array_filter($_messengers, function ($value) {
             return !empty($value['tel']);
@@ -456,73 +456,73 @@ if (!function_exists('get_social')) {
      */
     function get_social()
     {
-        $_socials = array(
-            'vk' => array(
+        $_socials = [
+            'vk' => [
                 'url' => get_theme_mod('jp_social_vk'),
                 'text' => 'Vk',
                 'icon' => 'fab fa-vk',
-            ),
-            'twitter' => array(
+            ],
+            'twitter' => [
                 'url' => get_theme_mod('jp_social_twitter'),
                 'text' => 'Twitter',
                 'icon' => 'fab fa-twitter',
-            ),
-            'facebook' => array(
+            ],
+            'facebook' => [
                 'url' => get_theme_mod('jp_social_facebook'),
                 'text' => 'Facebook',
                 'icon' => 'fab fa-facebook-f',
-            ),
-            'odnoklassniki' => array(
+            ],
+            'odnoklassniki' => [
                 'url' => get_theme_mod('jp_social_odnoklassniki'),
                 'text' => 'Odnoklassniki',
                 'icon' => 'fab fa-odnoklassniki',
-            ),
-            'linkedin' => array(
+            ],
+            'linkedin' => [
                 'url' => get_theme_mod('jp_social_linkedin'),
                 'text' => 'Linkedin',
                 'icon' => 'fab fa-linkedin-in',
-            ),
-            'instagram' => array(
+            ],
+            'instagram' => [
                 'url' => get_theme_mod('jp_social_instagram'),
                 'text' => 'Instagram',
                 'icon' => 'fab fa-instagram',
-            ),
-            'google-plus' => array(
+            ],
+            'google-plus' => [
                 'url' => get_theme_mod('jp_social_google_plus'),
                 'text' => 'Google Plus',
                 'icon' => 'fab fa-google-plus-g',
-            ),
-            'youtube' => array(
+            ],
+            'youtube' => [
                 'url' => get_theme_mod('jp_social_youtube'),
                 'text' => 'YouTube',
                 'icon' => 'fab fa-youtube',
-            ),
-            'pinterest' => array(
+            ],
+            'pinterest' => [
                 'url' => get_theme_mod('jp_social_pinterest'),
                 'text' => 'Pinterest',
                 'icon' => 'fab fa-pinterest-p',
-            ),
-            'tumblr' => array(
+            ],
+            'tumblr' => [
                 'url' => get_theme_mod('jp_social_tumblr'),
                 'text' => 'Tumblr',
                 'icon' => 'fab fa-tumblr',
-            ),
-            'flickr' => array(
+            ],
+            'flickr' => [
                 'url' => get_theme_mod('jp_social_flickr'),
                 'text' => 'Flickr',
                 'icon' => 'fab fa-flickr',
-            ),
-            'reddit' => array(
+            ],
+            'reddit' => [
                 'url' => get_theme_mod('jp_social_reddit'),
                 'text' => 'Reddit',
                 'icon' => 'fab fa-reddit-alien',
-            ),
-            'rss' => array(
+            ],
+            'rss' => [
                 'url' => get_theme_mod('jp_social_rss'),
                 'text' => 'RSS',
                 'icon' => 'fas fa-rss',
-            ),
-        );
+            ],
+        ];
 
         $socials = array_filter($_socials, function ($value) {
             return $value['url'] !== '#' && !empty($value['url']) && filter_var($value['url'], FILTER_VALIDATE_URL);
@@ -709,12 +709,12 @@ if (!function_exists('get_analytics_tracking_code')) {
      */
     function get_analytics_tracking_code($placed = 'body')
     {
-        $tracking_code = array();
+        $tracking_code = [];
         $tracking_code['google'] = get_theme_mod('jp_analytics_google');
         $tracking_code['yandex'] = get_theme_mod('jp_analytics_yandex');
         $tracking_code['custom'] = get_theme_mod('jp_analytics_custom');
 
-        $tracking_placed = array();
+        $tracking_placed = [];
         $tracking_placed['google'] = get_theme_mod('jp_analytics_google_placed', 'body');
         $tracking_placed['yandex'] = get_theme_mod('jp_analytics_yandex_placed', 'body');
         $tracking_placed['custom'] = get_theme_mod('jp_analytics_custom_placed', 'body');
@@ -850,14 +850,14 @@ if (!function_exists('jp_get_ip')) {
      */
     function jp_get_ip()
     {
-        $fields = array(
+        $fields = [
             'HTTP_CLIENT_IP',
             'HTTP_X_FORWARDED_FOR',
             'HTTP_X_FORWARDED',
             'HTTP_FORWARDED_FOR',
             'HTTP_FORWARDED',
             'REMOTE_ADDR',
-        );
+        ];
 
         foreach ($fields as $ip_field) {
             if (!empty($_SERVER[$ip_field])) {
@@ -875,7 +875,7 @@ if (!function_exists('jp_pagination')) {
      * @param array $args
      * @return array
      */
-    function jp_pagination($args = array())
+    function jp_pagination($args = [])
     {
         global $wp_query, $wp_rewrite;
 
@@ -895,7 +895,7 @@ if (!function_exists('jp_pagination')) {
         $format .= $wp_rewrite->using_permalinks() ? user_trailingslashit($wp_rewrite->pagination_base . '/%#%',
             'paged') : '?paged=%#%';
 
-        $defaults = array(
+        $defaults = [
             'base' => $pagenum_link, // http://example.com/all_posts.php%_% : %_% is replaced by format (below)
             'format' => $format, // ?page=%#% : %#% is replaced by the page number
             'total' => $total,
@@ -908,16 +908,16 @@ if (!function_exists('jp_pagination')) {
             'end_size' => 1,
             'mid_size' => 1,
             'type' => 'list',
-            'add_args' => array(), // array of query args to add
+            'add_args' => [], // array of query args to add
             'add_fragment' => '',
             'before_page_number' => '',
             'after_page_number' => '',
-        );
+        ];
 
         $args = wp_parse_args($args, $defaults);
 
         if (!is_array($args['add_args'])) {
-            $args['add_args'] = array();
+            $args['add_args'] = [];
         }
 
         // Merge additional query vars found in the original URL into 'add_args' array.
@@ -954,7 +954,7 @@ if (!function_exists('jp_pagination')) {
         }
         $add_args = $args['add_args'];
         $r = '';
-        $page_links = array();
+        $page_links = [];
         $dots = false;
 
         if ($args['prev_next'] && $current && 1 < $current) :
@@ -1036,7 +1036,7 @@ if (!function_exists('jp_comments_pagination')) {
      *
      * @return void
      */
-    function jp_comments_pagination($args = array())
+    function jp_comments_pagination($args = [])
     {
 
         if (isset($args['type']) && 'array' == $args['type']) {
@@ -1054,7 +1054,7 @@ if (!function_exists('jp_comments_pagination')) {
             $page = 1;
         }
         $max_page = get_comment_pages_count();
-        $defaults = array(
+        $defaults = [
             'base' => add_query_arg('cpage', '%#%'),
             'format' => '',
             'total' => $max_page,
@@ -1063,7 +1063,7 @@ if (!function_exists('jp_comments_pagination')) {
             'add_fragment' => '#comments',
             'prev_text' => __('&laquo; Previous', 'joompress'),
             'next_text' => __('Next &raquo;', 'joompress'),
-        );
+        ];
         if ($wp_rewrite->using_permalinks()) {
             $defaults['base'] = user_trailingslashit(trailingslashit(get_permalink()) . $wp_rewrite->comments_pagination_base . '-%#%',
                 'commentpaged');
@@ -1135,15 +1135,15 @@ if (!function_exists('sanitize_background_setting')) {
     function sanitize_background_setting($value, $setting)
     {
         if ('jp_login_background_repeat' === $setting->id) {
-            if (!in_array($value, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'))) {
+            if (!in_array($value, ['repeat-x', 'repeat-y', 'repeat', 'no-repeat'])) {
                 return new WP_Error('invalid_value', __('Invalid value for background repeat.'));
             }
         } elseif ('jp_login_background_attachment' === $setting->id) {
-            if (!in_array($value, array('fixed', 'scroll'))) {
+            if (!in_array($value, ['fixed', 'scroll'])) {
                 return new WP_Error('invalid_value', __('Invalid value for background attachment.'));
             }
         } elseif ('jp_login_background_position' === $setting->id) {
-            if (!in_array($value, array(
+            if (!in_array($value, [
                 'left top',
                 'center top',
                 'right top',
@@ -1153,11 +1153,11 @@ if (!function_exists('sanitize_background_setting')) {
                 'left bottom',
                 'center bottom',
                 'right bottom'
-            ), true)) {
+            ], true)) {
                 return new WP_Error('invalid_value', __('Invalid value for background position X.'));
             }
         } elseif ('jp_login_background_size' === $setting->id) {
-            if (!in_array($value, array('auto', 'contain', 'cover'), true)) {
+            if (!in_array($value, ['auto', 'contain', 'cover'], true)) {
                 return new WP_Error('invalid_value', __('Invalid value for background size.'));
             }
         } elseif ('jp_login_background_image' === $setting->id || 'jp_login_background_image_thumb' === $setting->id) {
@@ -1209,7 +1209,7 @@ if (!function_exists('get_background_login_page')) {
 
             $position = get_theme_mod('jp_login_background_position');
 
-            if (!in_array($position, array(
+            if (!in_array($position, [
                 'left top',
                 'center top',
                 'right top',
@@ -1219,7 +1219,7 @@ if (!function_exists('get_background_login_page')) {
                 'left bottom',
                 'center bottom',
                 'right bottom'
-            ), true)) {
+            ], true)) {
                 $position = 'left top';
             }
 
@@ -1227,7 +1227,7 @@ if (!function_exists('get_background_login_page')) {
 
             $size = get_theme_mod('jp_login_background_size');
 
-            if (!in_array($size, array('auto', 'contain', 'cover'), true)) {
+            if (!in_array($size, ['auto', 'contain', 'cover'], true)) {
                 $size = 'auto';
             }
 
@@ -1235,7 +1235,7 @@ if (!function_exists('get_background_login_page')) {
 
             $repeat = get_theme_mod('jp_login_background_repeat');
 
-            if (!in_array($repeat, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'), true)) {
+            if (!in_array($repeat, ['repeat-x', 'repeat-y', 'repeat', 'no-repeat'], true)) {
                 $repeat = 'repeat';
             }
 

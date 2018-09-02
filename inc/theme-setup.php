@@ -2,26 +2,26 @@
 
 function jp_switch_theme()
 {
-    $options = array(
+    $options = [
         'timezone_string' => 'Europe/Kiev',
         'date_format' => 'd M Y',
         'time_format' => 'H:i',
         'uploads_use_yearmonth_folders' => '',
         'permalink_structure' => '/%postname%/',
-    );
+    ];
 
     foreach ($options as $option => $value) {
         update_option($option, $value);
     }
 
-    update_option('sidebars_widgets', array(
-        'wp_inactive_widgets' => array(),
-        'sidebar-left' => array(),
-        'sidebar-right' => array(),
+    update_option('sidebars_widgets', [
+        'wp_inactive_widgets' => [],
+        'sidebar-left' => [],
+        'sidebar-right' => [],
         'array_version' => 3
-    ));
+    ]);
 
-    $post_ids = array(1, 2, 3);
+    $post_ids = [1, 2, 3];
 
     foreach ($post_ids as $id) {
         wp_delete_post($id, true);
@@ -35,7 +35,7 @@ function jp_theme_setup()
     load_theme_textdomain('joompress', get_template_directory() . '/languages');
 
     if (function_exists('add_theme_support')) {
-        add_theme_support('post-formats', array(
+        add_theme_support('post-formats', [
             'aside',
             'gallery',
             'link',
@@ -45,11 +45,11 @@ function jp_theme_setup()
             'video',
             'audio',
             'chat',
-        ));
+        ]);
 
         add_theme_support('post-thumbnails');
 
-        add_theme_support('custom-background', array(
+        add_theme_support('custom-background', [
             'default-image' => '',
             'default-preset' => 'default',
             'default-position-x' => 'center',
@@ -61,9 +61,9 @@ function jp_theme_setup()
             'wp-head-callback' => '_custom_background_cb',
             'admin-head-callback' => '',
             'admin-preview-callback' => '',
-        ));
+        ]);
 
-        add_theme_support('custom-header', array(
+        add_theme_support('custom-header', [
             'default-image' => '',
             'random-default' => false,
             'width' => 0,
@@ -78,25 +78,25 @@ function jp_theme_setup()
             'admin-preview-callback' => '',
             'video' => true,
             'video-active-callback' => 'is_front_page',
-        ));
+        ]);
 
         add_theme_support('automatic-feed-links');
 
-        add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption'));
+        add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
 
         add_theme_support('title-tag');
 
-        add_theme_support('custom-logo', array(
+        add_theme_support('custom-logo', [
             'height' => 60,
             'width' => 200,
             'flex-height' => true,
             'flex-width' => true,
-        ));
+        ]);
 
         add_theme_support('customize-selective-refresh-widgets');
 
-        add_theme_support('starter-content', array(
-            'options' => array(
+        add_theme_support('starter-content', [
+            'options' => [
                 'blogdescription' => 'JoomPress - WordPress Boilerplate Theme',
                 //'date_format' => 'd.m.Y',
                 //'time_format' => 'H:i',
@@ -106,112 +106,112 @@ function jp_theme_setup()
                 //'posts_per_page' => '10',
                 //'posts_per_rss' => '10',
                 //'permalink_structure' => '/%postname%/',
-            ),
+            ],
 
-            'theme_mods' => array(),
+            'theme_mods' => [],
 
-            'widgets' => array(
-                'sidebar-left' => array(),
-                'sidebar-right' => array(),
-            ),
+            'widgets' => [
+                'sidebar-left' => [],
+                'sidebar-right' => [],
+            ],
 
-            'nav_menus' => array(
-                'header_menu' => array(
+            'nav_menus' => [
+                'header_menu' => [
                     'name' => 'Top Menu',
-                    'items' => array(
-                        'link_home' => array(
+                    'items' => [
+                        'link_home' => [
                             'type' => 'custom',
                             'title' => 'Home',
                             'url' => home_url('/'),
-                        ),
-                    ),
-                ),
-                'footer_menu' => array(
+                        ],
+                    ],
+                ],
+                'footer_menu' => [
                     'name' => 'Bottom Menu',
-                    'items' => array(
-                        'link_home' => array(
+                    'items' => [
+                        'link_home' => [
                             'type' => 'custom',
                             'title' => 'Home',
                             'url' => home_url('/'),
-                        ),
-                    ),
-                ),
-            ),
+                        ],
+                    ],
+                ],
+            ],
 
-            'attachments' => array(
-                'blog-item-1' => array(
+            'attachments' => [
+                'blog-item-1' => [
                     'post_title' => 'blog-item-1',
                     'file' => 'assets/img/starter-content/blog-item-1.jpg',
-                ),
-                'blog-item-2' => array(
+                ],
+                'blog-item-2' => [
                     'post_title' => 'blog-item-2',
                     'file' => 'assets/img/starter-content/blog-item-2.jpg',
-                ),
-                'blog-item-3' => array(
+                ],
+                'blog-item-3' => [
                     'post_title' => 'blog-item-3',
                     'file' => 'assets/img/starter-content/blog-item-3.jpg',
-                ),
-                'blog-item-4' => array(
+                ],
+                'blog-item-4' => [
                     'post_title' => 'blog-item-4',
                     'file' => 'assets/img/starter-content/blog-item-4.jpg',
-                ),
-                'blog-item-5' => array(
+                ],
+                'blog-item-5' => [
                     'post_title' => 'blog-item-5',
                     'file' => 'assets/img/starter-content/blog-item-5.jpg',
-                ),
-            ),
+                ],
+            ],
 
-            'posts' => array(
-                'home' => array(
+            'posts' => [
+                'home' => [
                     'post_type' => 'page',
                     'post_name' => 'home',
                     'post_title' => 'Home',
                     //'template'   => '',
-                ),
-                'blog' => array(
+                ],
+                'blog' => [
                     'post_type' => 'page',
                     'post_name' => 'blog',
                     'post_title' => 'Blog',
                     //'template' => 'page-blog.php',
-                ),
-                'blog-item-1' => array(
+                ],
+                'blog-item-1' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 1',
                     'post_name' => 'blog-item-1',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail' => '{{blog-item-1}}',
-                ),
-                'blog-item-2' => array(
+                ],
+                'blog-item-2' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 2',
                     'post_name' => 'blog-item-2',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail' => '{{blog-item-2}}',
-                ),
-                'blog-item-3' => array(
+                ],
+                'blog-item-3' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 3',
                     'post_name' => 'blog-item-3',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail' => '{{blog-item-3}}',
-                ),
-                'blog-item-4' => array(
+                ],
+                'blog-item-4' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 4',
                     'post_name' => 'blog-item-4',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail' => '{{blog-item-4}}',
-                ),
-                'blog-item-5' => array(
+                ],
+                'blog-item-5' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 5',
                     'post_name' => 'blog-item-5',
                     'post_content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     'thumbnail' => '{{blog-item-5}}',
-                ),
-            ),
+                ],
+            ],
 
-        ));
+        ]);
 
         add_theme_support('woocommerce');
 
@@ -222,10 +222,10 @@ function jp_theme_setup()
 
     add_editor_style(JP_CSS . '/editor-style.css');
 
-    register_nav_menus(array(
+    register_nav_menus([
         'header_menu' => __('Menu in header', 'joompress'),
         'footer_menu' => __('Menu in footer', 'joompress'),
-    ));
+    ]);
 
     if (!is_admin()) {
         add_filter('comment_text', 'do_shortcode');
@@ -249,7 +249,7 @@ if (!isset($content_width)) {
  */
 function jp_post_class($classes)
 {
-    $classes = array_diff($classes, array('hentry'));
+    $classes = array_diff($classes, ['hentry']);
 
     return $classes;
 }
@@ -411,7 +411,7 @@ add_action('template_redirect', 'jp_search_single_result');
 function jp_search_all($query)
 {
     if ($query->is_search) {
-        $query->set('post_type', array());
+        $query->set('post_type', []);
     }
 
     return $query;
@@ -478,7 +478,7 @@ add_action('pre_get_posts', 'jp_posts_per_page');
  *
  * @return array
  */
-function jp_upload_types($mimes = array())
+function jp_upload_types($mimes = [])
 {
     $mimes['svg'] = 'image/svg+xml';
 

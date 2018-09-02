@@ -65,10 +65,10 @@ add_filter('login_errors', 'jp_login_error');
  */
 function jp_shake_error_codes($shake_error_codes)
 {
-    $new_error_codes = array(
+    $new_error_codes = [
         'recaptcha_empty_input_response',
         'recaptcha_error',
-    );
+    ];
 
     foreach ($new_error_codes as $error) {
         if (!in_array($error, $shake_error_codes, true)) {

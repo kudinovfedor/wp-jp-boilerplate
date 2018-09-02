@@ -11,7 +11,7 @@ if (!class_exists('GoogleMaps')) {
         /**
          * @var array
          */
-        private $options = array();
+        private $options = [];
 
         /**
          * @var string
@@ -39,10 +39,10 @@ if (!class_exists('GoogleMaps')) {
         public function init()
         {
             if ($this->isEnabled()) {
-                add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
-                add_filter('script_loader_tag', array($this, 'addAsyncDeferAttribute'), 10, 2);
-                add_action('admin_enqueue_scripts', array($this, 'adminEnqueueScripts'));
-                add_action('wp_ajax_snazzy_map', array($this, 'ajaxSnazzyMaps'));
+                add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+                add_filter('script_loader_tag', [$this, 'addAsyncDeferAttribute'], 10, 2);
+                add_action('admin_enqueue_scripts', [$this, 'adminEnqueueScripts']);
+                add_action('wp_ajax_snazzy_map', [$this, 'ajaxSnazzyMaps']);
             }
         }
 
@@ -65,15 +65,15 @@ if (!class_exists('GoogleMaps')) {
          */
         public function getGoogleApisSrc()
         {
-            $query_data = array(
+            $query_data = [
                 'v' => $this->options['version'],
                 'language' => $this->options['language'],
                 'region' => $this->options['region'],
                 'key' => $this->options['api_key'],
                 'callback' => $this->options['callback'],
-            );
+            ];
 
-            $query_data = array_filter($query_data, array($this, 'isNotEmpty'), ARRAY_FILTER_USE_BOTH);
+            $query_data = array_filter($query_data, [$this, 'isNotEmpty'], ARRAY_FILTER_USE_BOTH);
 
             $query = http_build_query($query_data);
 
@@ -89,7 +89,7 @@ if (!class_exists('GoogleMaps')) {
          */
         public function adminEnqueueScripts()
         {
-            wp_register_script('snazzy-maps', JP_JS . '/admin/snazzy-maps.js', array('jquery'), null, true);
+            wp_register_script('snazzy-maps', JP_JS . '/admin/snazzy-maps.js', ['jquery'], null, true);
 
             if (is_customize_preview()) {
                 wp_enqueue_script('snazzy-maps');
@@ -104,7 +104,7 @@ if (!class_exists('GoogleMaps')) {
          */
         public function enqueueScripts()
         {
-            wp_register_script($this->script_handle, $this->getGoogleApisSrc(), array(), null, true);
+            wp_register_script($this->script_handle, $this->getGoogleApisSrc(), [], null, true);
             wp_enqueue_script($this->script_handle);
         }
 
@@ -134,7 +134,7 @@ if (!class_exists('GoogleMaps')) {
          */
         public function getOptions()
         {
-            return array(
+            return [
                 // Project Setup
                 'enable' => get_theme_mod('google_map_display', false),
                 'api_key' => get_theme_mod('google_map_project_setup_api_key'),
@@ -153,7 +153,7 @@ if (!class_exists('GoogleMaps')) {
                 'layers' => get_theme_mod('google_map_layers_layer', 'off'),
 
                 // Controls
-                'control' => array(
+                'control' => [
                     'type' => get_theme_mod('google_map_controls_map_type', 1),
                     'zoom' => get_theme_mod('google_map_controls_zoom', 1),
                     'gesture_handling' => get_theme_mod('google_map_controls_gesture_handling', 'auto'),
@@ -164,24 +164,24 @@ if (!class_exists('GoogleMaps')) {
                     'draggable' => get_theme_mod('google_map_controls_draggable', 1),
                     'double_click_zoom' => get_theme_mod('google_map_controls_double_click_to_zoom', 1),
                     'scroll_wheel' => get_theme_mod('google_map_controls_mouse_wheel_to_zoom', 1),
-                ),
+                ],
 
                 // Positions
-                'position' => array(
+                'position' => [
                     'type' => get_theme_mod('google_map_positions_map_type', 1),
                     'zoom' => get_theme_mod('google_map_positions_zoom', 9),
                     'street_view' => get_theme_mod('google_map_positions_street_view', 9),
                     'full_screen' => get_theme_mod('google_map_positions_full_screen', 3),
-                ),
+                ],
 
                 // Themes
-                'themes' => array(
+                'themes' => [
                     'type' => get_theme_mod('google_map_themes_type', 'roadmap'),
                     'styling' => get_theme_mod('google_map_themes_styling', ''),
-                ),
+                ],
 
                 // Marker
-                'marker' => array(
+                'marker' => [
                     //'anchor_point' => get_theme_mod('google_map_marker_anchor_point'),
                     'animation' => get_theme_mod('google_map_marker_animation', 0),
                     'clickable' => get_theme_mod('google_map_marker_clickable', 1),
@@ -198,10 +198,10 @@ if (!class_exists('GoogleMaps')) {
                     'title' => get_theme_mod('google_map_marker_title', ''),
                     'visible' => get_theme_mod('google_map_marker_visible', 1),
                     'zindex' => get_theme_mod('google_map_marker_zindex', 0),
-                ),
+                ],
 
                 // Info Window
-                'info_window' => array(
+                'info_window' => [
                     'enable' => get_theme_mod('google_map_infowindow_display', false),
                     'name' => get_theme_mod('google_map_infowindow_name', ''),
                     'address' => get_theme_mod('google_map_infowindow_address', ''),
@@ -212,17 +212,17 @@ if (!class_exists('GoogleMaps')) {
                     'disable_auto_pan' => get_theme_mod('google_map_infowindow_disable_auto_pan', false),
                     'max_width' => get_theme_mod('google_map_infowindow_max_width', 320),
                     'zindex' => get_theme_mod('google_map_infowindow_zindex', 0),
-                ),
+                ],
 
                 // Snazzy Maps
-                'snazzy_maps' => array(
+                'snazzy_maps' => [
                     'style' => get_theme_mod('snazzy_maps_style', 0),
                     'sort' => get_theme_mod('snazzy_maps_sort_by', ''),
                     'filter_tag' => get_theme_mod('snazzy_maps_filter_by_tag', ''),
                     'filter_color' => get_theme_mod('snazzy_maps_filter_by_color', ''),
-                ),
+                ],
 
-            );
+            ];
         }
 
         /**
@@ -257,7 +257,7 @@ if (!class_exists('GoogleMaps')) {
          *
          * @return void
          */
-        public function htmlMarkup($options = array())
+        public function htmlMarkup($options = [])
         {
             if ($this->isEnabled()) {
 
@@ -341,7 +341,7 @@ if (!class_exists('GoogleMaps')) {
          *
          * @return void
          */
-        private function initMapJS($options = array())
+        private function initMapJS($options = [])
         {
             $map = array_replace_recursive($this->options, $options);
 
@@ -531,14 +531,14 @@ if (!function_exists('google_map')) {
      * Display Google Map (HTML + Script tag with callback function)
      *
      * @example
-     * google_map(array('latitude' => 46.651, 'longitude' => 32.654, 'zoom' => 17, dimensions' => false,
-     * 'marker' => array('icon' => get_template_directory_uri() . '/assets/img/marker.png')));
+     * google_map(['latitude' => 46.651, 'longitude' => 32.654, 'zoom' => 17, dimensions' => false,
+     * 'marker' => array['icon' => get_template_directory_uri() . '/assets/img/marker.png']]);
      *
      * @author Kudinov Fedor <admin@joompress.biz>
      *
      * @param array $options
      */
-    function google_map($options = array())
+    function google_map($options = [])
     {
         if (class_exists('GoogleMaps')) {
             /**

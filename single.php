@@ -14,10 +14,10 @@
                     comments_template();
                 } ?>
 
-                <?php the_post_navigation(array(
+                <?php the_post_navigation([
                     'prev_text' => __('Previous Post', 'joompress'),
                     'next_text' => __('Next Post', 'joompress'),
-                )); ?>
+                ]); ?>
 
             <?php endwhile; ?>
 

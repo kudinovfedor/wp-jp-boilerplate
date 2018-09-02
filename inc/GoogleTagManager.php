@@ -22,11 +22,11 @@ if (!class_exists('GoogleTagManager')) {
         {
             $this->id = $this->getId();
 
-            add_action('customize_register', array($this, 'customizer'));
+            add_action('customize_register', [$this, 'customizer']);
 
             if ($this->getId()) {
-                add_action('wp_head', array($this, 'printHead'));
-                add_action('wp_body', array($this, 'printBody'));
+                add_action('wp_head',[$this, 'printHead']);
+                add_action('wp_body', [$this, 'printBody']);
             }
         }
 
@@ -50,8 +50,8 @@ if (!class_exists('GoogleTagManager')) {
             return explode(
                 ',',
                 str_replace(
-                    array(';', ' '),
-                    array(',', ''),
+                    [';', ' '],
+                    [',', ''],
                     $this->getId()
                 )
             );
@@ -107,29 +107,29 @@ if (!class_exists('GoogleTagManager')) {
         public function customizer($wp_customize)
         {
             // Section reCAPTCHA
-            $wp_customize->add_section('jp_google_tag_manager', array(
+            $wp_customize->add_section('jp_google_tag_manager', [
                 'title' => 'Google Tag Manager',
                 'description' => '',
                 'priority' => 204,
                 //'panel' => 'jp_theme_options',
-            ));
+            ]);
 
-            $wp_customize->add_setting('jp_google_tag_manager_id', array(
+            $wp_customize->add_setting('jp_google_tag_manager_id', [
                 'default' => '',
                 'sanitize_callback' => 'esc_attr',
-            ));
+            ]);
 
-            $wp_customize->add_control('jp_google_tag_manager_id', array(
+            $wp_customize->add_control('jp_google_tag_manager_id', [
                 'label' => 'Google Tag Manager ID',
                 'description' => 'You can get yours <b>container ID</b> <a href="https://www.google.com/analytics/tag-manager/" target="_blank">here</a>! 
                 Use comma without space (,) to enter multiple IDs. <br> Add a hook <b><code>do_action(\'wp_body\')</code></b> after opening tag <b>&lt;body&gt;</b> if not added.',
                 'section' => 'jp_google_tag_manager',
                 'settings' => 'jp_google_tag_manager_id',
                 'type' => 'text',
-                'input_attrs' => array(
+                'input_attrs' => [
                     'placeholder' => 'GTM-XXXXXXX',
-                ),
-            ));
+                ],
+            ]);
         }
     }
 

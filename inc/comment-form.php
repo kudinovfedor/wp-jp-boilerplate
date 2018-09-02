@@ -15,7 +15,7 @@ function jp_comment_fields($fields)
     $html_req = ($req ? " required" : '');
     $commenter = wp_get_current_commenter();
 
-    $fields = array(
+    $fields = [
         'author' => '<div class="form-row comment-form-author">' . '<label for="author" class="form-label">' . __('Name',
                 'joompress') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
             '<input id="author" class="form-field" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30" maxlength="245"' . $aria_req . $html_req . '></div>',
@@ -25,7 +25,7 @@ function jp_comment_fields($fields)
         'url' => '<div class="form-row comment-form-url"><label for="url" class="form-label">' . __('Website',
                 'joompress') . '</label> ' .
             '<input id="url" class="form-field" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" maxlength="200"></div>',
-    );
+    ];
 
     if (isset($fields['url'])) {
         unset($fields['url']);

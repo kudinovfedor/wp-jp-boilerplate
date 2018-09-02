@@ -28,12 +28,12 @@
         </h2>
 
         <ul class="comment-list">
-            <?php wp_list_comments(array(
+            <?php wp_list_comments([
                 'walker' => new JPWalkerComment,
                 'style' => 'ul',
                 'avatar_size' => 40,
                 'short_ping' => true,
-            )); ?>
+            ]); ?>
         </ul>
 
         <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : ?>
@@ -46,9 +46,9 @@
         <p class="no-comments"><?php _e('Comments are closed.', 'joompress'); ?></p>
     <?php endif; ?>
 
-    <?php comment_form(array(
+    <?php comment_form([
         'class_submit' => 'btn btn-default',
         'submit_button' => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
-    )); ?>
+    ]); ?>
 
 </div>

@@ -21,12 +21,12 @@ if (!class_exists('ChangeSiteURL')) {
         /**
          * @var array
          */
-        public $tables = array();
+        public $tables = [];
 
         /**
          * @var array
          */
-        public $tables_columns = array();
+        public $tables_columns = [];
 
         /**
          * @var string
@@ -58,7 +58,7 @@ if (!class_exists('ChangeSiteURL')) {
 
         public function getWhereOrLike($table)
         {
-            $arr = array();
+            $arr = [];
             $query = '';
 
             if (!empty($this->tables_columns[$table])) {

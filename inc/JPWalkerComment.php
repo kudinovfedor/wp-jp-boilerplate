@@ -24,7 +24,7 @@ if (!class_exists('JPWalkerComment')) {
          *
          * @see Walker::$db_fields
          */
-        public $db_fields = array('parent' => 'comment_parent', 'id' => 'comment_ID');
+        public $db_fields = ['parent' => 'comment_parent', 'id' => 'comment_ID'];
 
         /**
          * Starts the list before the elements are added.
@@ -36,7 +36,7 @@ if (!class_exists('JPWalkerComment')) {
          * @param int $depth Optional. Depth of the current comment. Default 0.
          * @param array $args Optional. Uses 'style' argument for type of HTML list. Default empty array.
          */
-        public function start_lvl(&$output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = [])
         {
             $GLOBALS['comment_depth'] = $depth + 1;
 
@@ -88,7 +88,7 @@ if (!class_exists('JPWalkerComment')) {
             $tag = ('div' === $args['style']) ? 'div' : 'li';
             ?>
             <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>"
-            <?php comment_class(array('comment-item', $this->has_children ? 'parent' : ''), $comment); ?>>
+            <?php comment_class(['comment-item', $this->has_children ? 'parent' : ''], $comment); ?>>
             <div id="div-comment-<?php comment_ID(); ?>" class="comment-body">
                 <div class="comment-meta">
                     <div class="comment-author">
@@ -112,13 +112,13 @@ if (!class_exists('JPWalkerComment')) {
                     <?php endif; ?>
                 </div>
                 <div class="comment-content"><?php comment_text(); ?></div>
-                <?php comment_reply_link(array_merge($args, array(
+                <?php comment_reply_link(array_merge($args, [
                     'add_below' => 'div-comment',
                     'depth' => $depth,
                     'max_depth' => $args['max_depth'],
                     'before' => '<div class="comment-reply">',
                     'after' => '</div>'
-                ))); ?>
+                ])); ?>
             </div>
             <?php
         }

@@ -11,25 +11,25 @@ if (!class_exists('GoogleReCaptcha')) {
         /**
          * @var array
          */
-        public $options = array();
+        public $options = [];
 
         /**
          * @var array
          */
-        public $error_code = array(
+        public $error_code = [
             'missing-input-secret' => 'ReCaptcha: The secret parameter is missing.',
             'invalid-input-secret' => 'ReCaptcha: The secret parameter is invalid or malformed.',
             'missing-input-response' => 'ReCaptcha: The response parameter is missing.',
             'invalid-input-response' => 'ReCaptcha: The response parameter is invalid or malformed.',
             'bad-request' => 'ReCaptcha: The request is invalid or malformed.',
-        );
+        ];
 
         /**
          * GoogleReCaptcha constructor.
          */
         public function __construct()
         {
-            $this->options = array(
+            $this->options = [
                 'site-key' => get_theme_mod('jp_recaptcha_site_key'),
                 'secret-key' => get_theme_mod('jp_recaptcha_secret_key'),
                 'login-form' => get_theme_mod('jp_recaptcha_login_form'),
@@ -43,38 +43,38 @@ if (!class_exists('GoogleReCaptcha')) {
                 'callback' => get_theme_mod('jp_recaptcha_callback'),
                 'expired-callback' => get_theme_mod('jp_recaptcha_expired_callback'),
                 'error-callback' => get_theme_mod('jp_recaptcha_error_callback'),
-            );
+            ];
 
             if ($this->isEnabled()) {
 
                 if ($this->isReCaptchaRequired('login') || $this->isReCaptchaRequired('registration') || $this->isReCaptchaRequired('reset-password')) {
-                    add_action('login_enqueue_scripts', array($this, 'cssLogin'));
-                    add_action('login_enqueue_scripts', array($this, 'enqueueScripts'));
+                    add_action('login_enqueue_scripts', [$this, 'cssLogin']);
+                    add_action('login_enqueue_scripts', [$this, 'enqueueScripts']);
                 }
 
                 if ($this->isReCaptchaRequired('login')) {
-                    add_action('login_form', array($this, 'htmlMarkup'));
-                    add_filter('authenticate', array($this, 'checkLoginForm'), 20, 3);
+                    add_action('login_form', [$this, 'htmlMarkup']);
+                    add_filter('authenticate', [$this, 'checkLoginForm'], 20, 3);
                 }
 
                 if ($this->isReCaptchaRequired('registration')) {
-                    add_action('register_form', array($this, 'htmlMarkup'));
-                    add_filter('registration_errors', array($this, 'checkRegistrationForm'), 10, 3);
+                    add_action('register_form', [$this, 'htmlMarkup']);
+                    add_filter('registration_errors', [$this, 'checkRegistrationForm'], 10, 3);
                 }
 
                 if ($this->isReCaptchaRequired('reset-password')) {
-                    add_action('lostpassword_form', array($this, 'htmlMarkup'));
-                    add_filter('allow_password_reset', array($this, 'checkResetPasswordForm'));
+                    add_action('lostpassword_form', [$this, 'htmlMarkup']);
+                    add_filter('allow_password_reset', [$this, 'checkResetPasswordForm']);
                 }
 
                 if ($this->isReCaptchaRequired('comments') || is_customize_preview()) {
 
-                    add_action('comment_form_after_fields', array($this, 'htmlMarkup'));
-                    add_action('comment_form_logged_in_after', array($this, 'htmlMarkup'));
+                    add_action('comment_form_after_fields', [$this, 'htmlMarkup']);
+                    add_action('comment_form_logged_in_after', [$this, 'htmlMarkup']);
 
-                    add_action('pre_comment_on_post', array($this, 'checkCommentsForm'));
+                    add_action('pre_comment_on_post', [$this, 'checkCommentsForm']);
 
-                    add_action('wp_enqueue_scripts', array($this, 'enqueueScripts'));
+                    add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
 
                 }
 
@@ -116,11 +116,11 @@ if (!class_exists('GoogleReCaptcha')) {
          */
         public function enqueueScripts()
         {
-            $query_data = array(
+            $query_data = [
                 'onload' => '',
                 'render' => '',
                 'hl' => get_theme_mod('jp_recaptcha_language'),
-            );
+            ];
 
 
             $query_data = array_filter($query_data, function ($value, $key) {
@@ -135,7 +135,7 @@ if (!class_exists('GoogleReCaptcha')) {
                 $src = sprintf($src . '?%s', $query);
             }
 
-            wp_register_script('jp_recaptcha', $src, array(), null, false);
+            wp_register_script('jp_recaptcha', $src, [], null, false);
 
             if ($this->is_comments() || $this->is_login_page() || is_customize_preview()) {
                 wp_enqueue_script('jp_recaptcha');
@@ -176,20 +176,20 @@ if (!class_exists('GoogleReCaptcha')) {
          */
         public function getResponse($recaptcha)
         {
-            $query_data = array(
+            $query_data = [
                 'secret' => $this->options['secret-key'],
                 'response' => $recaptcha,
                 'remoteip' => $this->getIP() || '127.0.0.1',
-            );
+            ];
 
             $query = http_build_query($query_data);
 
             $url = sprintf('https://www.google.com/recaptcha/api/siteverify?%s', $query);
 
-            $response = wp_remote_post($url, array(
+            $response = wp_remote_post($url, [
                 'timeout' => 30,
                 'sslverify' => true,
-            ));
+            ]);
 
             return json_decode($response['body'], true);
         }
@@ -358,14 +358,14 @@ if (!class_exists('GoogleReCaptcha')) {
          */
         public function getIP()
         {
-            $fields = array(
+            $fields = [
                 'HTTP_CLIENT_IP',
                 'HTTP_X_FORWARDED_FOR',
                 'HTTP_X_FORWARDED',
                 'HTTP_FORWARDED_FOR',
                 'HTTP_FORWARDED',
                 'REMOTE_ADDR',
-            );
+            ];
 
             foreach ($fields as $ip_field) {
                 if (!empty($_SERVER[$ip_field])) {
@@ -393,7 +393,7 @@ if (!class_exists('GoogleReCaptcha')) {
          */
         public function is_login_page()
         {
-            return in_array($GLOBALS['pagenow'], array('wp-login.php'));
+            return in_array($GLOBALS['pagenow'], ['wp-login.php']);
         }
 
         /**

@@ -12,12 +12,12 @@
                 comments_template();
             } ?>
 
-            <?php wp_link_pages(array(
+            <?php wp_link_pages([
                 'before'           => '<p>' . __('Pages:', 'joompress'),
                 'after'            => '</p>',
                 'nextpagelink'     => __('Next page', 'joompress'),
                 'previouspagelink' => __('Previous page', 'joompress'),
-            )); ?>
+            ]); ?>
 
         <?php endwhile; ?>
 

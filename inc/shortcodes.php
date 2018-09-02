@@ -12,7 +12,7 @@ if (!function_exists('jp_polylang_shortcode')) {
     {
         // Attributes
         $atts = shortcode_atts(
-            array(
+            [
                 'dropdown' => 0, // display as list and not as dropdown
                 'echo' => 0, // echoes the list
                 'hide_if_empty' => 1, // hides languages with no posts ( or pages )
@@ -26,7 +26,7 @@ if (!function_exists('jp_polylang_shortcode')) {
                 'post_id' => null, // if not null, link to translations of post defined by post_id
                 'raw' => 0, // set this to true to build your own custom language switcher
                 'item_spacing' => 'preserve', // 'preserve' or 'discard' whitespace between list items
-            ),
+            ],
             $atts
         );
 
@@ -60,7 +60,7 @@ if (!function_exists('jp_social_shortcode')) {
 
         // Attributes
         $atts = shortcode_atts(
-            array(),
+            [],
             $atts
         );
 
@@ -108,7 +108,7 @@ if (!function_exists('jp_phones_shortcode')) {
 
         // Attributes
         $atts = shortcode_atts(
-            array(),
+            [],
             $atts
         );
 
@@ -154,7 +154,7 @@ if (!function_exists('jp_messengers_shortcode')) {
 
         // Attributes
         $atts = shortcode_atts(
-            array(),
+            [],
             $atts
         );
 
@@ -203,28 +203,28 @@ if (!function_exists('jp_sitemap_shortcode')) {
     function jp_sitemap_shortcode($atts)
     {
         $output = '';
-        $args = array(
+        $args = [
             'public' => 1,
-        );
+        ];
 
         // If you would like to ignore some post types just add them to the array below
-        $ignoreposttypes = array(
+        $ignoreposttypes = [
             'attachment',
             'popup',
-        );
+        ];
 
         $post_types = get_post_types($args, 'objects');
 
         foreach ($post_types as $post_type) {
             if (!in_array($post_type->name, $ignoreposttypes)) {
                 $output .= '<h2 class="sitemap-headline">' . $post_type->labels->name . '</h2>';
-                $args = array(
+                $args = [
                     'posts_per_page' => -1,
                     'post_type' => $post_type->name,
                     'post_status' => 'publish',
                     'orderby' => 'title',
                     'order' => 'ASC',
-                );
+                ];
                 $posts_array = get_posts($args);
                 $output .= '<ul class="sitemap-list">';
                 foreach ($posts_array as $pst) {

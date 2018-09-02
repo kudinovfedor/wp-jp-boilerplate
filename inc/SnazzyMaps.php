@@ -41,12 +41,12 @@ if (!class_exists('SnazzyMaps')) {
         /**
          * @var array
          */
-        private $styles = array();
+        private $styles = [];
 
         /**
          * @var array
          */
-        private $pagination = array();
+        private $pagination = [];
 
         /**
          * @var int
@@ -179,24 +179,24 @@ if (!class_exists('SnazzyMaps')) {
                 }
 
                 for ($i = 1; $i <= $this->total_pages; $i++) {
-                    $url = $this->getRemoteUrl(array(
+                    $url = $this->getRemoteUrl([
                         'pageSize' => $this->page_size,
                         'page' => $i,
-                    ));
+                    ]);
 
                     $response = $this->getResponse($url);
 
                     if (null !== $response) {
                         $this->styles = $response['styles'];
 
-                        $maps = array();
+                        $maps = [];
 
                         foreach ($this->styles as $key => $item) {
                             $timestamp = strtotime($item['createdOn']);
                             $tags = join('|', $item['tags']);
                             $colors = join('|', $item['colors']);
 
-                            $maps[$key] = array(
+                            $maps[$key] = [
                                 'style_id' => (int)$item['id'],
                                 'name' => htmlspecialchars($this->validate_field($item['name'])),
                                 //'description' => htmlspecialchars($this->validate_field($item['description'])),
@@ -208,11 +208,11 @@ if (!class_exists('SnazzyMaps')) {
                                 'created_on' => (int)$timestamp,
                                 'tags' => htmlspecialchars($this->validate_field($tags)),
                                 'colors' => htmlspecialchars($this->validate_field($colors)),
-                            );
+                            ];
 
                             $this->wpdb->insert(
                                 $this->table_name, $maps[$key],
-                                array('%d', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s')
+                                ['%d', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s']
                             );
                         }
                     }
@@ -229,14 +229,14 @@ if (!class_exists('SnazzyMaps')) {
          * @param array $query_data
          * @return string
          */
-        public function getRemoteUrl($query_data = array())
+        public function getRemoteUrl($query_data = [])
         {
-            $query_defaults = array(
+            $query_defaults = [
                 'key' => 'ecaccc3c-44fa-486c-9503-5d473587a493',
                 'pageSize' => $this->page_size,
                 'page' => 1,
                 'sort' => 'popular',
-            );
+            ];
 
             $query_data = array_merge($query_defaults, $query_data);
 
@@ -256,10 +256,10 @@ if (!class_exists('SnazzyMaps')) {
          */
         public function getResponse($url)
         {
-            $response = wp_remote_get($url, array(
+            $response = wp_remote_get($url, [
                 'timeout' => 30,
                 'sslverify' => true,
-            ));
+            ]);
 
             if (is_object($response)) {
                 return null;
@@ -308,22 +308,22 @@ if (!class_exists('SnazzyMaps')) {
          * @param array $options
          * @return array|null|object
          */
-        public function getItems($options = array())
+        public function getItems($options = [])
         {
-            $default = array(
+            $default = [
                 'sort' => get_theme_mod('snazzy_maps_sort_by', ''),
                 'tag' => get_theme_mod('snazzy_maps_filter_by_tag', ''),
                 'color' => get_theme_mod('snazzy_maps_filter_by_color', ''),
                 'limit' => get_theme_mod('snazzy_maps_limit', 100),
-            );
+            ];
 
-            $results = array();
+            $results = [];
 
             if ($this->table_exists && !$this->table_empty) {
 
                 $options = array_merge($default, $options);
 
-                $conditions = array();
+                $conditions = [];
                 $condition = '';
 
                 if (!empty($tag = $options['tag'])) {
@@ -422,11 +422,11 @@ if (!class_exists('SnazzyMaps')) {
          * @param array $options
          * @return array
          */
-        public function getMapStyles($options = array())
+        public function getMapStyles($options = [])
         {
             $items = $this->getItems($options);
 
-            $styles = array();
+            $styles = [];
 
             foreach ($items as $item) {
                 $styles[$item['style_id']] = ucfirst($item['name']);

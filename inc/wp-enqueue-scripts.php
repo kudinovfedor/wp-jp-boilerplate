@@ -7,18 +7,18 @@ function jp_enqueue_style_script()
 {
     $suffix = SCRIPT_DEBUG ? '' : '.min';
 
-    $libs = array(
+    $libs = [
         'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
         'html5shiv' => 'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js',
         'respond' => 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
-    );
+    ];
 
-    wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', array(), null);
+    wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', [], null);
 
-    wp_register_script('jp-style-ie', JP_CSS . "/ie.css", array('jp-style'), null);
+    wp_register_script('jp-style-ie', JP_CSS . "/ie.css", ['jp-style'], null);
 
-    wp_register_script('jp-html5shiv', $libs['html5shiv'], array(), null, false);
-    wp_register_script('jp-respond', $libs['respond'], array(), null, false);
+    wp_register_script('jp-html5shiv', $libs['html5shiv'], [], null, false);
+    wp_register_script('jp-respond', $libs['respond'], [], null, false);
 
     wp_style_add_data('jp-style-ie', 'conditional', 'lt IE 9');
     wp_script_add_data('jp-html5shiv', 'conditional', 'lt IE 9');
@@ -28,10 +28,10 @@ function jp_enqueue_style_script()
     wp_enqueue_script('jp-html5shiv');
     wp_enqueue_script('jp-respond');
 
-    wp_register_script('jp-validate', $libs['validate'], array('jquery'), null, true);
+    wp_register_script('jp-validate', $libs['validate'], ['jquery'], null, true);
 
-    wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', array('jquery'), null, true);
-    wp_register_script('jp-skip-link-focus-fix', JP_JS . '/skip-link-focus-fix.js', array(), null, true);
+    wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', ['jquery'], null, true);
+    wp_register_script('jp-skip-link-focus-fix', JP_JS . '/skip-link-focus-fix.js', [], null, true);
 
     wp_enqueue_script('jp-common');
 
@@ -62,13 +62,13 @@ function jp_remove_jquery_migrate($scripts)
     $jquery_version = '1.12.4';
 
     $scripts->remove('jquery');
-    $scripts->add('jquery', false, array('jquery-core'), $jquery_version);
+    $scripts->add('jquery', false, ['jquery-core'], $jquery_version);
 
     $scripts->remove('jquery-core');
     $scripts->add('jquery-core',
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $jquery_version . '/jquery' . $suffix . '.js', array(),
-        $jquery_version, array('in_footer' => true));
-    //$scripts->add('jquery-core', JP_JS . '/libs/jquery' . $suffix . '.js', array(), null, 1);
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $jquery_version . '/jquery' . $suffix . '.js', [],
+        $jquery_version, ['in_footer' => true]);
+    //$scripts->add('jquery-core', JP_JS . '/libs/jquery' . $suffix . '.js', [], null, 1);
 
     $scripts->add_data('jquery', 'group', 1);
     $scripts->add_data('jquery-core', 'group', 1);
@@ -82,10 +82,10 @@ add_action('wp_default_scripts', 'jp_remove_jquery_migrate', 11);
  */
 function jp_customizer_preview()
 {
-    wp_register_script('jp_customizer_preview', JP_JS . '/customizer-preview.js', array(
+    wp_register_script('jp_customizer_preview', JP_JS . '/customizer-preview.js', [
         'jquery',
         'customize-preview'
-    ), null, true);
+    ], null, true);
 
     wp_enqueue_script('jp_customizer_preview');
 }
@@ -97,10 +97,10 @@ add_action('customize_preview_init', 'jp_customizer_preview');
  */
 function jp_customize_controls_enqueue_scripts()
 {
-    wp_register_script('jp_customizer_control', JP_JS . '/customizer-control.js', array(
+    wp_register_script('jp_customizer_control', JP_JS . '/customizer-control.js', [
         'jquery',
         'customize-controls'
-    ), null, true);
+    ], null, true);
 
     wp_enqueue_script('jp_customizer_control');
 }
@@ -139,7 +139,7 @@ add_action('wp_footer', 'jp_wp_footer', 20);
  */
 function jp_add_async_attribute($tag, $handle)
 {
-    $scripts_to_async = array('jp-js-handle');
+    $scripts_to_async = ['jp-js-handle'];
 
     foreach ($scripts_to_async as $async_script) {
 
@@ -165,7 +165,7 @@ add_filter('script_loader_tag', 'jp_add_async_attribute', 10, 2);
  */
 function jp_add_defer_attribute($tag, $handle)
 {
-    $scripts_to_defer = array('jp-js-handle');
+    $scripts_to_defer = ['jp-js-handle'];
 
     foreach ($scripts_to_defer as $defer_script) {
 
@@ -190,7 +190,7 @@ add_filter('script_loader_tag', 'jp_add_defer_attribute', 10, 2);
  */
 function jp_add_async_defer_attribute($tag, $handle)
 {
-    $scripts = array('jp-js-handle');
+    $scripts = ['jp-js-handle'];
 
     foreach ($scripts as $script) {
 
