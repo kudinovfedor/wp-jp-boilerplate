@@ -53,6 +53,140 @@
     };
 
     /**
+     * Scroll Top Native JS
+     *
+     * @example
+     * scrollTopNative('.js-scroll-top', 600, 'linear', 200});
+     * @author Fedor Kudinov <brothersrabbits@mail.ru>
+     * @param {(string|Object)} element -
+     * @param {number} [duration] -
+     * @param {string} [easing] -
+     * @param {number} [offset] -
+     * @param {function} [callback] -
+     * @return {*}
+     */
+    const scrollTopNative = (element, duration, easing, offset, callback) => {
+
+        const options = {
+            'element': null,
+            'duration': duration || 600,
+            'easing': easing || 'linear',
+            'offset': offset || 200,
+        };
+
+        const easings = {
+            linear(t) {
+                return t;
+            },
+            easeInQuad(t) {
+                return t * t;
+            },
+            easeOutQuad(t) {
+                return t * (2 - t);
+            },
+            easeInOutQuad(t) {
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            },
+            easeInCubic(t) {
+                return t * t * t;
+            },
+            easeOutCubic(t) {
+                return (--t) * t * t + 1;
+            },
+            easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+            },
+            easeInQuart(t) {
+                return t * t * t * t;
+            },
+            easeOutQuart(t) {
+                return 1 - (--t) * t * t * t;
+            },
+            easeInOutQuart(t) {
+                return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t;
+            },
+            easeInQuint(t) {
+                return t * t * t * t * t;
+            },
+            easeOutQuint(t) {
+                return 1 + (--t) * t * t * t * t;
+            },
+            easeInOutQuint(t) {
+                return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * (--t) * t * t * t * t;
+            }
+        };
+
+        const scrollToOptions = {
+            'behavior': 'smooth',
+            'left': 0,
+            'top': 0,
+        };
+
+        const isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
+
+        const d = document, html = d.documentElement, el = d.querySelector(element), classList = el.classList;
+
+        el.addEventListener('click', event => {
+            event.preventDefault();
+
+            const start = window.pageYOffset || html.scrollTop,
+                startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+
+            const scroll = () => {
+                const now = 'now' in window.performance ? performance.now() : new Date().getTime();
+                const time = Math.min(1, ((now - startTime) / options.duration));
+                const timeFunction = easings[options.easing](time);
+
+                window.scrollTo(scrollToOptions.left, Math.ceil((timeFunction * (scrollToOptions.top - start)) + start));
+
+                if (window.pageYOffset === scrollToOptions.top) {
+                    if (callback && typeof(callback) === 'function') {
+                        callback();
+                    }
+
+                    return;
+                }
+
+                requestAnimationFrame(scroll);
+            };
+
+            if (isSmoothScrollSupported) {
+
+                window.scrollTo(scrollToOptions);
+                console.log('[scrollBehavior]');
+
+            } else {
+
+                if ('requestAnimationFrame' in window === false) {
+                    console.log('[scrollTo]');
+                    window.scrollTo(scrollToOptions.left, scrollToOptions.top);
+
+                    if (callback && typeof(callback) === 'function') {
+                        callback();
+                    }
+
+                    return;
+                }
+
+                console.log('[requestAnimationFrame]');
+                scroll();
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset || html.scrollTop;
+
+            if (scrollPosition > options.offset) {
+                if (!classList.contains('is-visible')) {
+                    classList.add('is-visible');
+                }
+            } else {
+                classList.remove('is-visible');
+            }
+        });
+    };
+
+    /**
      * Hamburger Menu
      *
      * @example
