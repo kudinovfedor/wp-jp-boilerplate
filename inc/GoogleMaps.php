@@ -105,7 +105,10 @@ if (!class_exists('GoogleMaps')) {
         public function enqueueScripts()
         {
             wp_register_script($this->script_handle, $this->getGoogleApisSrc(), [], null, true);
-            wp_enqueue_script($this->script_handle);
+
+            if (is_front_page()) {
+                wp_enqueue_script($this->script_handle);
+            }
         }
 
         /**

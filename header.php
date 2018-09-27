@@ -41,6 +41,7 @@ if (is_front_page()) { ?>
             "query-input": "required name=s"
         }
     }
+
     </script>
 <?php } ?>
 
@@ -65,6 +66,7 @@ if (is_front_page()) { ?>
             "https://www.tumblr.com/organization-profile"
         ]
     }
+
 </script>
 
 <?php /** Person */ ?>
@@ -87,6 +89,7 @@ if (is_front_page()) { ?>
             "https://www.tumblr.com/your-profile"
         ]
     }
+
 </script>
 
 <?php /** Article */
@@ -123,6 +126,7 @@ if (is_single()) {
             "description": "<?php the_excerpt(); ?>",
             "articleBody": "<?php the_content(); ?>"
         }
+
     </script>
 <?php } ?>
 <!-- HEADER -->
@@ -147,25 +151,28 @@ if (is_single()) {
 <div class="wrapper">
 
     <div class="container">
-        <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
-        <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
 
-        <div style="margin-bottom: 16px;"><?php google_map(); ?></div>
+        <?php if (is_front_page()) { ?>
+            <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
+            <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
 
-        <?php if (is_customize_preview()) { ?>
-            <div style="margin-bottom: 16px;"><?php social(); ?></div>
-            <div style="margin-bottom: 16px;"><?php phones(); ?></div>
-            <div style="margin-bottom: 16px;"><?php messengers(); ?></div>
-            <div style="margin-bottom: 16px;"><?php (new GoogleReCaptcha())->htmlMarkup(); ?></div>
+            <div style="margin-bottom: 16px;"><?php google_map(); ?></div>
 
-            <p>
-                <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
-                    <?php esc_html_e('Edit Analytics Tracking Code', 'joompress'); ?>
-                </button>
-                <button class="btn customizer-edit" data-control='{ "name":"jp_login_logo" }'>
-                    <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
-                </button>
-            </p>
+            <?php if (is_customize_preview()) { ?>
+                <div style="margin-bottom: 16px;"><?php social(); ?></div>
+                <div style="margin-bottom: 16px;"><?php phones(); ?></div>
+                <div style="margin-bottom: 16px;"><?php messengers(); ?></div>
+                <div style="margin-bottom: 16px;"><?php (new GoogleReCaptcha())->htmlMarkup(); ?></div>
+
+                <p>
+                    <button class="btn customizer-edit" data-control='{ "name":"jp_analytics_google_placed" }'>
+                        <?php esc_html_e('Edit Analytics Tracking Code', 'joompress'); ?>
+                    </button>
+                    <button class="btn customizer-edit" data-control='{ "name":"jp_login_logo" }'>
+                        <?php esc_html_e('Edit Login Logo', 'joompress'); ?>
+                    </button>
+                </p>
+            <?php } ?>
         <?php } ?>
 
     </div>
