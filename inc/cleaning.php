@@ -118,7 +118,7 @@ add_filter('script_loader_src', 'jp_remove_wp_ver_css_js');
  */
 function jp_remove_type_attr($tag)
 {
-    return preg_replace("/type=['\"]text\/(javascript|css)['\"]/", '', $tag);
+    return preg_replace("/ type=['\"]text\/(javascript|css)['\"]/", '', $tag);
 }
 
 add_filter('style_loader_tag', 'jp_remove_type_attr');

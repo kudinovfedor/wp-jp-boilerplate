@@ -63,3 +63,36 @@
     BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   </IfModule>
 </IfModule>
+
+### Secure
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|xml|gz|html)$">
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+    # HTTP Strict Transport Security (HSTS)
+    #Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+    # Content Security Policy (CSP)
+    # [Content-Security-Policy || Content-Security-Policy-Report-Only]
+    Header always set Content-Security-Policy-Report-Only "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; form-action 'self'; frame-src 'self'; report-uri /csp-report.php"
+    # HTTP Public Key Pinning (HPKP)
+    #Header always set Public-Key-Pins "pin-sha256=''; pin-sha256=''; pin-sha256=''; includeSubdomains; max-age=2592000"
+    # X-Frame-Options
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Site Scripting Protection (X-XSS)
+    Header always set X-Xss-Protection "1; mode=block"
+    # X-Content-Type-Options
+    Header always set X-Content-Type-Options "nosniff"
+    # Referrer-Policy
+    Header always set Referrer-Policy "no-referrer"
+    # Expect-CT [enforce]
+    #Header always set Expect-CT 'max-age=0, report-uri="https://joompress.biz/expect-ct-report.php"'
+    # Feature-Policy
+    Header always set Feature-Policy "accelerometer 'self'; ambient-light-sensor 'self'; animations 'self'; autoplay 'self'; camera 'self'; document-write 'self'; encrypted-media 'self'; fullscreen 'self'; geolocation 'self'; gyroscope 'self'; image-compression 'self'; legacy-image-formats 'self'; magnetometer 'self'; max-downscaling-image 'self'; microphone 'self'; midi 'self'; payment 'self'; picture-in-picture *; speaker 'self'; sync-xhr 'self'; unsized-media 'self'; usb 'self'; vertical-scroll 'self'; vr 'self'"
+    # Removing Headers
+    Header unset Server
+    Header unset "X-Pingback"
+    Header unset "X-Powered-By"
+    Header unset "X-CF-Powered-By"
+    Header unset "X-Mod-Pagespeed"
+    Header always unset "X-Powered-By"
+</IfModule>

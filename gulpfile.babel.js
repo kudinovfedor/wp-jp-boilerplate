@@ -10,18 +10,18 @@ import plumber from 'gulp-plumber';
 import svgstore from 'gulp-svgstore';
 import cleancss from 'gulp-clean-css';
 import browser_sync from 'browser-sync';
-import sourcemaps from 'gulp-sourcemaps';
+//import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 
 const browserSync = browser_sync.create();
 
 gulp.task('svg', () => {
-    return gulp.src(`assets/img/svg/*.svg`)
+    return gulp.src('assets/img/svg/*.svg')
         .pipe(plumber())
         .pipe(svgmin({js2svg: {pretty: false}}))
         .pipe(svgstore({inlineSvg: true}))
         .pipe(rename({basename: 'svg', prefix: '', suffix: '-sprite', extname: '.svg'}))
-        .pipe(gulp.dest(`assets/img/`));
+        .pipe(gulp.dest('assets/img/'));
 });
 
 gulp.task('sass', () => {
@@ -29,9 +29,12 @@ gulp.task('sass', () => {
         .pipe(plumber())
         //.pipe(sourcemaps.init())
         .pipe(sass({
+            includePaths: ['assets/sass'],
+            indentType: 'space',
+            indentWidth: 2,
+            linefeed: 'crlf',
             outputStyle: 'expanded', // nested, expanded, compact, compressed
             precision: 5,
-            linefeed: 'crlf',
             sourceComments: false
         }).on('error', sass.logError))
         .pipe(autoprefixer({
@@ -76,17 +79,17 @@ gulp.task('js', () => {
 gulp.task('min', gulp.parallel('css', 'js'));
 
 gulp.task('watch', () => {
-    gulp.watch(`assets/img/svg/*.svg`, gulp.series('svg'));
-    gulp.watch(`assets/js/common.babel.js`, gulp.series('babel'));
+    gulp.watch('assets/img/svg/*.svg', gulp.series('svg'));
+    gulp.watch('assets/js/common.babel.js', gulp.series('babel'));
     gulp.watch('assets/sass/**/*.scss', gulp.series('sass'));
 });
 
 gulp.task('default', () => {
     browserSync.init({
-        proxy: "http://sites.local/brainworks",
+        proxy: 'http://sites.local/brainworks',
     });
     gulp.watch('assets/sass/**/*.scss', gulp.series('sass'));
-    gulp.watch(`assets/img/svg/*.svg`, gulp.series('svg'));
+    gulp.watch('assets/img/svg/*.svg', gulp.series('svg'));
     //gulp.watch('style.css', gulp.series('css'));
     //gulp.watch('assets/js/common.js', gulp.series('js'));
     gulp.watch('style.css').on('change', browserSync.reload);

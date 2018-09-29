@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 09:27+0000\n"
+"POT-Creation-Date: 2018-09-29 23:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -61,7 +61,7 @@ msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:44
+#: comments.php:46
 msgid "Comments are closed."
 msgstr ""
 
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Kudinov Fedor"
 msgstr ""
 
-#: header.php:163
+#: header.php:165
 msgid "Edit Analytics Tracking Code"
 msgstr ""
 
-#: header.php:166
+#: header.php:168
 msgid "Edit Login Logo"
 msgstr ""
 
@@ -159,6 +159,18 @@ msgstr ""
 msgid "Tel"
 msgstr ""
 
+#: inc/ajax-contact-form.php:79
+msgid "Feedback"
+msgstr ""
+
+#: inc/ajax-contact-form.php:96
+msgid "Message sent successfully."
+msgstr ""
+
+#: inc/ajax-contact-form.php:100
+msgid "Failed to send message."
+msgstr ""
+
 #: inc/comment-form.php:19
 msgid "Name"
 msgstr ""
@@ -205,11 +217,11 @@ msgstr ""
 msgid "&hellip;"
 msgstr ""
 
-#: inc/helpers.php:1063
+#: inc/helpers.php:1064
 msgid "&laquo; Previous"
 msgstr ""
 
-#: inc/helpers.php:1064
+#: inc/helpers.php:1065
 msgid "Next &raquo;"
 msgstr ""
 
@@ -235,11 +247,11 @@ msgstr ""
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/theme-setup.php:215
+#: inc/theme-setup.php:226
 msgid "Menu in header"
 msgstr ""
 
-#: inc/theme-setup.php:216
+#: inc/theme-setup.php:227
 msgid "Menu in footer"
 msgstr ""
 

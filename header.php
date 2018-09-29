@@ -41,7 +41,6 @@ if (is_front_page()) { ?>
             "query-input": "required name=s"
         }
     }
-
     </script>
 <?php } ?>
 
@@ -66,7 +65,6 @@ if (is_front_page()) { ?>
             "https://www.tumblr.com/organization-profile"
         ]
     }
-
 </script>
 
 <?php /** Person */ ?>
@@ -89,7 +87,6 @@ if (is_front_page()) { ?>
             "https://www.tumblr.com/your-profile"
         ]
     }
-
 </script>
 
 <?php /** Article */
@@ -126,7 +123,6 @@ if (is_single()) {
             "description": "<?php the_excerpt(); ?>",
             "articleBody": "<?php the_content(); ?>"
         }
-
     </script>
 <?php } ?>
 <!-- HEADER -->
