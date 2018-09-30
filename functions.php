@@ -35,4 +35,6 @@ require_once 'inc/GoogleReCaptchaCustomizer.php';
 
 require_once 'inc/ChangeSiteURL.php';
 
+require_once 'inc/SRI.php';
+
 require_once 'inc/JPWalkerComment.php';
