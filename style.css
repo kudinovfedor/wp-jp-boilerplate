@@ -7006,6 +7006,14 @@ img {
   color: #333;
 }
 
+.btn-default:hover, .btn-default:focus {
+  background-color: #bfc7cf;
+}
+
+.btn-default:active {
+  background-color: #b1bbc4;
+}
+
 .header {
   padding: 10px 0;
 }

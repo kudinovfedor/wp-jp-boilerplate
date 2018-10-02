@@ -20,6 +20,10 @@
 
             <?php jp_pagination(); ?>
 
+            <div class="text-center">
+                <button class="btn btn-default js-load-more" type="button"><?php _e('Load more...') ?></button>
+            </div>
+
         <?php else : ?>
 
             <article>

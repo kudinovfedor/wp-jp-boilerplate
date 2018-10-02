@@ -101,6 +101,8 @@
                 }
             });
 
+            data = this._getParams(data);
+
             self.send(data);
         },
 
@@ -142,6 +144,30 @@
         post: function (url, data, done, fail) {
             this.request('POST', url, data, done, fail);
         },
+
+        /**
+         * String Params
+         *
+         * @description
+         * Get string of params from object.
+         *
+         * @param {Object} object - Object for converted into the string.
+         * @returns {string} - String with parameters.
+         */
+        _getParams: function (object) {
+            var encodedString = '', prop;
+
+            for (prop in object) {
+                if (object.hasOwnProperty(prop)) {
+                    if (encodedString.length > 0) {
+                        encodedString += '&';
+                    }
+                    encodedString += encodeURI(prop + '=' + object[prop]);
+                }
+            }
+
+            return encodedString;
+        }
     };
 
     d.addEventListener('DOMContentLoaded', function () {
@@ -244,30 +270,6 @@
                     elem.parentNode.removeChild(elem);
                 });
             }, timeout || 5000);
-        }
-
-        /**
-         * String Params
-         *
-         * @description
-         * Get string of params from object.
-         *
-         * @param {Object} object - Object for converted into the string.
-         * @returns {string} - String with parameters.
-         */
-        function getParams(object) {
-            var encodedString = '', prop;
-
-            for (prop in object) {
-                if (object.hasOwnProperty(prop)) {
-                    if (encodedString.length > 0) {
-                        encodedString += '&';
-                    }
-                    encodedString += encodeURI(prop + '=' + object[prop]);
-                }
-            }
-
-            return encodedString;
         }
     }
 

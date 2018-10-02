@@ -11,7 +11,7 @@ add_action('wp_enqueue_scripts', function () {
         'url' => admin_url('admin-ajax.php'),
     ]);
 
-    if (is_archive()) {
+    if (is_front_page() || is_archive()) {
         wp_enqueue_script('load-more-posts');
     }
 });
