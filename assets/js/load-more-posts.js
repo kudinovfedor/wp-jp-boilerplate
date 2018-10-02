@@ -151,6 +151,9 @@
          * @description
          * Get string of params from object.
          *
+         * @example
+         * this._getParams(data);
+         *
          * @param {Object} object - Object for converted into the string.
          * @returns {string} - String with parameters.
          */
@@ -186,10 +189,10 @@
             btn.addEventListener('click', function (event) {
                 console.log('Button Load More clicked!!!');
 
-                Ajax.post(ajax.url, data, function (success) {
-                    console.log('Success');
-                }, function (error) {
-                    console.log('Error');
+                Ajax.post(ajax.url, data, function (response, status) {
+                    console.log(JSON.parse(response), status);
+                }, function (error, status) {
+                    console.log(error, status);
                 });
             });
         }

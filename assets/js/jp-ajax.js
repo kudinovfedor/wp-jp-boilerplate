@@ -143,6 +143,8 @@ var AjaxJP = (function () {
                 }
             });
 
+            data = this._getParams(data);
+
             self.send(data);
         },
 
@@ -186,6 +188,33 @@ var AjaxJP = (function () {
         post: function (url, data, done, fail, always) {
             this.request('POST', url, data, done, fail, always);
         },
+
+        /**
+         * String Params
+         *
+         * @description
+         * Get string of params from object.
+         *
+         * @example
+         * this._getParams(data);
+         *
+         * @param {Object} object - Object for converted into the string.
+         * @returns {string} - String with parameters.
+         */
+        _getParams: function (object) {
+            var encodedString = '', prop;
+
+            for (prop in object) {
+                if (object.hasOwnProperty(prop)) {
+                    if (encodedString.length > 0) {
+                        encodedString += '&';
+                    }
+                    encodedString += encodeURI(prop + '=' + object[prop]);
+                }
+            }
+
+            return encodedString;
+        }
     };
 
     return Ajax;

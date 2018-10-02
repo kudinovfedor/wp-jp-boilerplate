@@ -20,8 +20,8 @@ require_once 'inc/login.php';
 
 require_once 'inc/customizer.php';
 
-require_once 'inc/ajax-contact-form.php';
-require_once 'inc/ajax-load-more-posts.php';
+require_once 'inc/ajax/contact-form.php';
+require_once 'inc/ajax/load-more-posts.php';
 
 require_once 'inc/SnazzyMaps.php';
 

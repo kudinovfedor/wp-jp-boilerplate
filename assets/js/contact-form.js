@@ -13,8 +13,8 @@
         /**
          * @type {XMLHttpRequest}
          */
-
         'xhr': null,
+
         /**
          * @callback doneCallback
          * @param response -
@@ -150,6 +150,9 @@
          *
          * @description
          * Get string of params from object.
+         *
+         * @example
+         * this._getParams(data);
          *
          * @param {Object} object - Object for converted into the string.
          * @returns {string} - String with parameters.

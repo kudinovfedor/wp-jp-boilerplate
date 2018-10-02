@@ -12,15 +12,17 @@
 
                 <?php while (have_posts()) : the_post(); ?>
 
+                    <?php //dump($post); ?>
+
                     <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
 
                 <?php endwhile; ?>
 
             </div>
 
-            <?php jp_pagination(); ?>
-
             <div class="text-center">
+                <?php jp_pagination(); ?>
+                <br>
                 <button class="btn btn-default js-load-more" type="button"><?php _e('Load more...') ?></button>
             </div>
 
