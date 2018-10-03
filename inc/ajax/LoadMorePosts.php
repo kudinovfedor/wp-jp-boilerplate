@@ -46,14 +46,20 @@ if (!class_exists('LoadMorePosts')) {
         {
             check_ajax_referer('load_more_posts_action', 'nonce');
 
+            //var_dump($_POST);
+
             $data = [];
+
+            //$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $paged = empty($_POST['paged']) ? 1 : $_POST['paged'] + 1;
 
             $args = [
                 'post_type' => 'post',
                 'post_status' => 'publish',
                 'posts_per_page' => get_option('posts_per_page'),
-                'order' => 'DESC',
+                'order' => 'DES',
                 'orderby' => 'date',
+                'paged' => $paged,
             ];
 
             $query = new WP_Query($args);
@@ -81,10 +87,16 @@ if (!class_exists('LoadMorePosts')) {
             }
 
             if (empty($data)) {
-                wp_send_json_error($data, 404);
+                $data = false;
             }
 
             wp_send_json_success($data, 200);
+
+            /*if (empty($data)) {
+                wp_send_json_error($data, 404);
+            }*/
+
+            //wp_send_json_success($data, 200);
         }
 
         /**

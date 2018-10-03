@@ -184,13 +184,31 @@
             var data = {
                 'action': ajax.action,
                 'nonce': ajax.nonce,
+                'paged': 1,
             };
 
             btn.addEventListener('click', function (event) {
                 console.log('Button Load More clicked!!!');
 
+                var self = this;
+
                 Ajax.post(ajax.url, data, function (response, status) {
+                    var posts = JSON.parse(response).data;
+                    var articles, article;
+
+                    data.paged += 1;
+
+                    if (posts === false) {
+                        btn.parentNode.removeChild(btn);
+                        return;
+                    }
+
+                    posts.forEach(function (post, index, array) {
+                        console.log(post, index, array);
+                    });
+
                     console.log(JSON.parse(response), status);
+
                 }, function (error, status) {
                     console.log(error, status);
                 });
