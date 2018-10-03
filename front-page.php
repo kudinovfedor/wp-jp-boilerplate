@@ -12,8 +12,6 @@
 
                 <?php while (have_posts()) : the_post(); ?>
 
-                    <?php //dump($post); ?>
-
                     <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
 
                 <?php endwhile; ?>

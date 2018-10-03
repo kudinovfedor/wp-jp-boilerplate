@@ -1169,6 +1169,21 @@ if (!function_exists('sanitize_background_setting')) {
     }
 }
 
+if (!function_exists('sanitize_phone')) {
+    /**
+     * Sanitizes a phone number.
+     *
+     * @param string $phone Phone to sanitize.
+     * @return string Sanitized string.
+     */
+    function sanitize_phone($phone)
+    {
+        $phone = preg_replace('/^[0-9+-]$/', '', $phone);
+
+        return $phone;
+    }
+}
+
 if (!function_exists('is_ie')) {
     /**
      * Test if the current browser MSIE or Trident
