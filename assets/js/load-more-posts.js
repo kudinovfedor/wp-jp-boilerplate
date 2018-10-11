@@ -174,45 +174,97 @@
     };
 
     d.addEventListener('DOMContentLoaded', function () {
-        ajaxLoadMorePosts('.js-load-more');
+        ajaxLoadMorePosts('.js-load-more', '.js-ajax-posts');
     });
 
-    function ajaxLoadMorePosts(selector) {
-        var btn = d.querySelector(selector);
+    function ajaxLoadMorePosts(selector, container) {
+        var btn, data, storage, ajaxStart;
 
-        if (btn) {
-            var data = {
-                'action': ajax.action,
-                'nonce': ajax.nonce,
-                'paged': 1,
-            };
+        btn = d.querySelector(selector);
+        storage = d.querySelector(container);
 
-            btn.addEventListener('click', function (event) {
-                console.log('Button Load More clicked!!!');
+        if (!btn || !storage) return;
 
-                var self = this;
+        data = {
+            'action': ajax.action,
+            'nonce': ajax.nonce,
+            'paged': 1,
+            'query': {},
+        };
 
-                Ajax.post(ajax.url, data, function (response, status) {
-                    var posts = JSON.parse(response).data;
-                    var articles, article;
+        btn.addEventListener('click', function (event) {
+            if (ajaxStart) return;
 
-                    data.paged += 1;
+            ajaxStart = true;
 
-                    if (posts === false) {
-                        btn.parentNode.removeChild(btn);
-                        return;
+            btn.classList.add('is-loading');
+
+            Ajax.post(ajax.url, data, function (response, status) {
+                var result, posts, section, article = '', thumbnail, categories = [], tags = [];
+
+                response = JSON.parse(response);
+                result = response.data;
+                posts = result.posts;
+
+                data.paged += 1;
+
+                posts.forEach(function (post, index, array) {
+
+                    section = d.createElement('section');
+                    section.className = 'col-sm-6 col-md-4';
+                    section.id = `post-${post.id}`;
+
+                    article += `<h2><a href="${post.link}">${post.title}</a></h2>`;
+
+                    if (post.attachment.length) {
+                        thumbnail = post.attachment.medium;
+                        article += `<figure><img src="${thumbnail.src}" alt="${thumbnail.alt}"></figure>`;
                     }
 
-                    posts.forEach(function (post, index, array) {
-                        console.log(post, index, array);
-                    });
+                    article += `<p>`;
+                    article += `<time datetime="${post.datetime}">${post.date}</time>`;
 
-                    console.log(JSON.parse(response), status);
+                    if (post.categories.length) {
+                        post.categories.forEach(function (category, index, array) {
+                            categories.push(`<a href="${category.link}">${category.name}</a>`);
+                        });
+                        article += `<br><span>Categories: ${categories.join(', ')}</span>`;
+                    }
 
-                }, function (error, status) {
-                    console.log(error, status);
+                    if (post.tags.length) {
+                        post.tags.forEach(function (tag, index, array) {
+                            tags.push(`<a href="${tag.link}">${tag.name}</a>`);
+                        });
+                        article += `<br><span>Tags: ${tags.join(', ')}</span>`;
+                    }
+
+                    article += `</p>`;
+
+                    article += `<p>${post.excerpt}</p>`;
+
+                    article += `<p><a class="btn btn-default btn-sm" href="${post.link}">Read more</a></p>`;
+
+                    section.innerHTML = article;
+
+                    storage.appendChild(section);
+
+                    article = '';
                 });
+
+                ajaxStart = false;
+
+                btn.classList.remove('is-loading');
+
+                if (result.posts_count !== result.posts_per_page) {
+                    btn.parentNode.removeChild(btn);
+                }
+
+            }, function (error, status) {
+                console.log(error, status);
+
+                ajaxStart = false;
             });
-        }
+
+        });
     }
 })(document, window.jpAjax);

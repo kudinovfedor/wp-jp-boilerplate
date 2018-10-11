@@ -1,4 +1,4 @@
-<?php $image = wp_get_attachment_image_url(get_post_thumbnail_id(get_the_ID()), 'full'); ?>
+<?php $image = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",

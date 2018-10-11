@@ -9,11 +9,11 @@
             <?php the_archive_title('<h1 class="text-center">', '</h1>'); ?>
             <?php the_archive_description('<p class="text-center">', '</p>'); ?>
 
-            <div class="row" itemscope itemtype="http://schema.org/Blog">
+            <div class="row js-ajax-posts" itemscope itemtype="http://schema.org/Blog">
 
                 <?php while (have_posts()) : the_post(); ?>
 
-                    <?php $image = wp_get_attachment_image_url(get_post_thumbnail_id(get_the_ID()), 'full'); ?>
+                    <?php $image = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
                     <script type="application/ld+json">
                         {
                             "@context": "http://schema.org",
@@ -79,7 +79,11 @@
 
             </div>
 
-            <?php jp_pagination(); ?>
+            <div class="text-center">
+                <?php jp_pagination(); ?>
+                <br>
+                <button class="btn btn-default js-load-more" data-paged="1" type="button"><?php _e('Load more posts...') ?></button>
+            </div>
 
         <?php else : ?>
 

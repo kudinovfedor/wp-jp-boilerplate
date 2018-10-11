@@ -116,3 +116,27 @@
 .is-error {
     color: #f00;
 }
+
+.is-loading {
+    &::before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: -4px;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border-radius: 50%;
+        border: 2px solid #888;
+        border-top-color: #333;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

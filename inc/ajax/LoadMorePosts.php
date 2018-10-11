@@ -46,29 +46,31 @@ if (!class_exists('LoadMorePosts')) {
         {
             check_ajax_referer('load_more_posts_action', 'nonce');
 
-            //var_dump($_POST);
-
-            $data = [];
-
-            //$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
             $paged = empty($_POST['paged']) ? 1 : $_POST['paged'] + 1;
 
             $args = [
                 'post_type' => 'post',
                 'post_status' => 'publish',
                 'posts_per_page' => get_option('posts_per_page'),
-                'order' => 'DES',
+                'order' => 'DESC', // ASC, DESC
                 'orderby' => 'date',
                 'paged' => $paged,
             ];
 
             $query = new WP_Query($args);
 
+            $data = [
+                'posts' => [],
+                'posts_count' => $query->post_count,
+                'posts_per_page' => intval($args['posts_per_page']),
+                'query_vars' => $args,
+            ];
+
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
 
-                    $data[] = [
+                    $data['posts'][] = [
                         'id' => get_the_ID(),
                         'date' => get_the_date(),
                         'link' => get_permalink(),
@@ -77,6 +79,7 @@ if (!class_exists('LoadMorePosts')) {
                         'author' => $this->getAuthor(),
                         'excerpt' => get_the_excerpt(),
                         'content' => get_the_content(),
+                        'datetime' => get_the_date('c'),
                         'comments' => $this->getCommentsInfo(),
                         'categories' => $this->getCategories(),
                         'attachment' => $this->getAttachmentImageSizes(),
@@ -86,17 +89,11 @@ if (!class_exists('LoadMorePosts')) {
                 wp_reset_postdata();
             }
 
-            if (empty($data)) {
-                $data = false;
-            }
-
             wp_send_json_success($data, 200);
 
             /*if (empty($data)) {
                 wp_send_json_error($data, 404);
             }*/
-
-            //wp_send_json_success($data, 200);
         }
 
         /**

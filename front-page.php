@@ -8,7 +8,7 @@
 
         <?php if (have_posts()) : ?>
 
-            <div class="row">
+            <div class="row js-ajax-posts">
 
                 <?php while (have_posts()) : the_post(); ?>
 
