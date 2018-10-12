@@ -82,7 +82,7 @@
             <div class="text-center">
                 <?php jp_pagination(); ?>
                 <br>
-                <button class="btn btn-default js-load-more" data-paged="1" type="button"><?php _e('Load more posts...') ?></button>
+                <button class="btn btn-default js-load-more" type="button"><?php _e('Load more posts...') ?></button>
             </div>
 
         <?php else : ?>
