@@ -1,0 +1,166 @@
+# AddDefaultCharset UTF-8
+#
+#### The browser cache
+#<IfModule mod_expires.c>
+#  <IfModule mod_headers.c>
+#    Header append Cache-Control "public"
+#  </IfModule>
+#  #FileETag MTime Size
+#  ExpiresActive On
+#  ExpiresDefault "access plus 0 minutes"
+#  #ExpiresByType text/html "access plus 3600 seconds"
+#  #ExpiresByType application/xhtml+xml "access plus 3600 seconds"
+#  ExpiresByType text/css "access plus 1 month"
+#  ExpiresByType text/javascript "access plus 1 month"
+#  ExpiresByType application/javascript "access plus 1 month"
+#  ExpiresByType application/x-javascript "access plus 1 month"
+#  ExpiresByType application/json "access plus 1 month"
+#  ExpiresByType text/cache-manifest "access plus 0 seconds"
+#  #ExpiresByType application/x-shockwave-flash "access plus 1 month"
+#  ExpiresByType image/jpeg "access plus 1 month"
+#  ExpiresByType image/png "access plus 1 month"
+#  ExpiresByType image/gif "access plus 1 month"
+#  ExpiresByType image/x-icon "access plus 1 month"
+#  ExpiresByType image/ico "access plus 1 month"
+#  ExpiresByType image/svg+xml "access plus 1 month"
+#  ExpiresByType font/opentype "access plus 1 month"
+#  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+#  ExpiresByType application/x-font-ttf "access plus 1 month"
+#  ExpiresByType application/font-woff "access plus 1 month"
+#  ExpiresByType application/font-woff2 "access plus 1 month"
+#</IfModule>
+#
+#### Compression
+#<IfModule mod_deflate.c>
+#  <IfModule mod_setenvif.c>
+#    <IfModule mod_headers.c>
+#      SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+#      RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+#    </IfModule>
+#  </IfModule>
+#  <IfModule mod_filter.c>
+#    AddOutputFilterByType DEFLATE text/html text/plain
+#    AddOutputFilterByType DEFLATE text/xml application/xml
+#    AddOutputFilterByType DEFLATE text/css text/javascript
+#    AddOutputFilterByType DEFLATE application/json application/javascript application/x-javascript
+#    ### Images
+#    AddOutputFilterByType DEFLATE image/jpeg image/png image/gif image/x-icon image/svg+xml
+#    ### Web fonts
+#    AddOutputFilterByType DEFLATE font/opentype application/vnd.ms-fontobject application/x-font-ttf application/font-woff application/font-woff2
+#  </IfModule>
+#  <IfModule !mod_filter.c>
+#    <FilesMatch "\.(css|js|xhtml|html)$">
+#      SetOutputFilter DEFLATE
+#    </FilesMatch>
+#    <FilesMatch "\.(ttf|otf|eot|woff|woff2|svg|svgz)$">
+#      SetOutputFilter DEFLATE
+#    </FilesMatch>
+#    <FilesMatch "\.(jpg|jpeg|png|gif|ico)$">
+#      SetOutputFilter DEFLATE
+#    </FilesMatch>
+#  </IfModule>
+#  <IfModule mod_setenvif.c>
+#    BrowserMatch ^Mozilla/4 gzip-only-text/html
+#    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+#  </IfModule>
+#</IfModule>
+#
+#### Secure
+#<IfModule mod_headers.c>
+#    <FilesMatch "\.(js|css|xml|gz|html)$">
+#        Header append Vary Accept-Encoding
+#    </FilesMatch>
+#    # HTTP Strict Transport Security (HSTS)
+#    #Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+#    # Content Security Policy (CSP)
+#    # [Content-Security-Policy || Content-Security-Policy-Report-Only]
+#    Header always set Content-Security-Policy-Report-Only "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; form-action 'self'; frame-src 'self'; report-uri /csp-report.php"
+#    # HTTP Public Key Pinning (HPKP)
+#    #Header always set Public-Key-Pins "pin-sha256=''; pin-sha256=''; pin-sha256=''; includeSubdomains; max-age=2592000"
+#    # X-Frame-Options
+#    Header always set X-Frame-Options "SAMEORIGIN"
+#    # Site Scripting Protection (X-XSS)
+#    Header always set X-Xss-Protection "1; mode=block"
+#    # X-Content-Type-Options
+#    Header always set X-Content-Type-Options "nosniff"
+#    # Referrer-Policy
+#    Header always set Referrer-Policy "no-referrer"
+#    # Expect-CT [enforce]
+#    #Header always set Expect-CT 'max-age=0, report-uri="https://joompress.biz/expect-ct-report.php"'
+#    # Feature-Policy
+#    Header always set Feature-Policy "accelerometer 'self'; ambient-light-sensor 'self'; animations 'self'; autoplay 'self'; camera 'self'; document-write 'self'; encrypted-media 'self'; fullscreen 'self'; geolocation 'self'; gyroscope 'self'; image-compression 'self'; legacy-image-formats 'self'; magnetometer 'self'; max-downscaling-image 'self'; microphone 'self'; midi 'self'; payment 'self'; picture-in-picture *; speaker 'self'; sync-xhr 'self'; unsized-media 'self'; usb 'self'; vertical-scroll 'self'; vr 'self'"
+#    # Removing Headers
+#    Header unset Server
+#    Header unset "X-Pingback"
+#    Header unset "X-Powered-By"
+#    Header unset "X-CF-Powered-By"
+#    Header unset "X-Mod-Pagespeed"
+#    Header always unset "X-Powered-By"
+#</IfModule>
+#
+#### Protect files and folders
+## Disable directory browsing
+#<IfModule mod_autoindex.c>
+#    Options All -Indexes
+#</IfModule>
+## Deny access to wp-config.php file
+#<Files wp-config.php>
+#    Order allow,deny
+#    Deny from all
+#</Files>
+## Deny access to debug.log file
+#<Files debug.log>
+#    Order allow,deny
+#    Deny from all
+#</Files>
+## Block WordPress xmlrpc.php requests
+#<Files xmlrpc.php>
+#    Order deny,allow
+#    Deny from all
+#</Files>
+## Deny access to all .htaccess files
+#<Files ~ "^.*\.([Hh][Tt][Aa])">
+#    Order allow,deny
+#    Deny from all
+#    Satisfy all
+#</Files>
+## Block cross-site scripting (XSS)
+#<IfModule mod_rewrite.c>
+#    RewriteCond %{QUERY_STRING} (\|%3E) [NC,OR]
+#    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+#    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+#    RewriteRule .* index.php [F,L]
+#</IfModule>
+## Block wp-includes folder and files
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteBase /
+#    RewriteRule ^wp-admin/includes/ - [F,L]
+#    RewriteRule !^wp-includes/ - [S=3]
+#    # If you run multisite, comment the next line (see note above)
+#    RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+#    RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+#    RewriteRule ^wp-includes/theme-compat/ - [F,L]
+#</IfModule>
+## Block author scans
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteBase /
+#    RewriteCond %{QUERY_STRING} (author=\d+) [NC]
+#    RewriteRule .* - [F]
+#</IfModule>
+## Deny Image Hotlinking
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{HTTP_REFERER} !^$
+#    RewriteCond %{REQUEST_FILENAME} -f
+#    RewriteCond %{REQUEST_FILENAME} \.(jpg|jpeg|png|gif|bmp|svg)$ [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?joompress.biz [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?bing.com [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yahoo.com [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?facebook.com [NC]
+#    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?twitter.com [NC]
+#    RewriteRule \.(jpg|jpeg|png|gif|bmp|svg)$ https://i.imgur.com/MlQAH71.jpg [F,NC,L]
+#</IfModule>

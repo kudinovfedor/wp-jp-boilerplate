@@ -1,0 +1,12 @@
+Wp-contents is the folder in your WordPress directory that contains files of your themes, plugins,
+media and cached files. That’s why this directory is the main target for hackers and spammers.
+Create a separate .htaccess file. Copy and paste the snippet below, in that file.
+
+# Protect /wp-content Directory
+# Allow Only Selected Files from /wp-content Directory
+Order deny,allow
+Deny from all
+# Other MIME types (xml|css|js|jpe?g|png|gif|pdf|docx|rtf|odf|zip|rar)
+<Files ~ ".(css|js|jpe?g|png|gif|)$">
+    Allow from all
+</Files>

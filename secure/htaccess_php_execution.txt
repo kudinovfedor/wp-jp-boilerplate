@@ -1,0 +1,8 @@
+You will need to create a blank .htaccess file on your computer and then paste the following code inside it.
+
+# Kill PHP Execution
+<Files *.php>
+    Deny from all
+</Files>
+
+Save the file and then upload it to your /wp-content/uploads/ and /wp-includes/ directories.
