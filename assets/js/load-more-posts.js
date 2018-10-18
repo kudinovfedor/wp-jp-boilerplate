@@ -177,6 +177,22 @@
         ajaxLoadMorePosts('.js-load-more', '.js-ajax-posts');
     });
 
+    function getDataAttrs(element) {
+        var i, name, value, obj = {}, attrs = element.attributes, length = attrs.length;
+
+        for (i = 0; i < length; i++) {
+            name = attrs[i].name;
+            value = attrs[i].value;
+
+            if(name.indexOf('data-') !== -1) {
+                obj[name] = value;
+            }
+        }
+
+        return obj;
+
+    }
+
     function ajaxLoadMorePosts(selector, container) {
         var btn, data, storage, ajaxStart;
 
@@ -196,6 +212,20 @@
             if (ajaxStart) return;
 
             ajaxStart = true;
+
+            var key, value, prop, query = {}, dataObj;
+
+            dataObj = getDataAttrs(btn);
+
+            for (prop in dataObj) {
+                if (dataObj.hasOwnProperty(prop)) {
+                    value = dataObj[prop];
+                    key = prop.replace('data-', '');
+                    query[key] = value;
+                }
+            }
+
+            data.query = query;
 
             btn.classList.add('is-loading');
 

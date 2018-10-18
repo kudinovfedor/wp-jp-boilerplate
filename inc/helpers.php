@@ -1271,3 +1271,40 @@ if (!function_exists('get_background_login_page')) {
         return trim($style);
     }
 }
+
+if (!function_exists('jp_load_more')) {
+    /**
+     * @param bool $echo
+     * @return string
+     */
+    function jp_load_more($echo = true)
+    {
+        /*$categories = get_the_category();
+        $category = $categories[0];
+        $current_category = get_queried_object();*/
+
+        $attrs = [];
+
+        $data = [
+            'post-type' => get_post_type(),
+            //'category-id' => $category->term_id,
+            //'category-name' => $category->name,
+            //'category-slug' => $category->slug,
+        ];
+
+        foreach ($data as $attr => $value) {
+            $attrs[] = sprintf('data-%s="%s"', $attr, esc_attr($value));
+        }
+
+        $output = sprintf(
+            '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
+            join($attrs, ' '), __('Load more posts...')
+        );
+
+        if ($echo) {
+            echo $output;
+        }
+
+        return $output;
+    }
+}
