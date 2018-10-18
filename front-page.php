@@ -1,28 +1,44 @@
 <?php get_header(); ?>
 
-<main id="content" class="main" itemscope itemtype="http://schema.org/Blog">
-
-    <meta itemprop="description" content="<?php bloginfo('description'); ?>">
+<main id="content" class="main">
 
     <div class="container">
 
         <?php if (have_posts()) : ?>
 
-            <div class="row js-ajax-posts">
+            <?php if (is_singular()) {
 
-                <?php while (have_posts()) : the_post(); ?>
+                while (have_posts()) : the_post();
 
-                    <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
+                    get_template_part('template-parts/page/content', 'page');
 
-                <?php endwhile; ?>
+                endwhile;
 
-            </div>
+            } else { ?>
 
-            <div class="text-center">
-                <?php jp_pagination(); ?>
-                <br>
-                <button class="btn btn-default js-load-more" type="button"><?php _e('Load more posts...') ?></button>
-            </div>
+                <div itemscope itemtype="http://schema.org/Blog">
+                    <meta itemprop="description" content="<?php bloginfo('description'); ?>">
+
+                    <div class="row js-ajax-posts">
+
+                        <?php while (have_posts()) : the_post(); ?>
+
+                            <?php get_template_part('template-parts/archive/content', get_post_format()); ?>
+
+                        <?php endwhile; ?>
+
+                    </div>
+
+                    <div class="text-center">
+                        <?php jp_pagination(); ?>
+                        <br>
+                        <button class="btn btn-default js-load-more" type="button">
+                            <?php _e('Load more posts...') ?>
+                        </button>
+                    </div>
+                </div>
+
+            <?php } ?>
 
         <?php else : ?>
 

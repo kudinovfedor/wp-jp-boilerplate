@@ -9,8 +9,6 @@
     <p>
         <time itemprop="datePublished" datetime="<?php the_time( 'c' ); ?>"><?php the_time( 'd.m.Y' ) ?></time>
         <meta itemprop="dateModified" content="<?php the_modified_date( 'c' ); ?>">
-
-        <span itemprop="articleSection"><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
     </p>
 
     <?php if (has_post_thumbnail()) { ?>
