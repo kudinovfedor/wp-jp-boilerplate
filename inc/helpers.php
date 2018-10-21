@@ -672,7 +672,7 @@ if (!function_exists('get_svg_sprite')) {
      */
     function get_svg_sprite()
     {
-        $svg_file = get_template_directory() . '/assets/img/svg-sprite.svg';
+        $svg_file = get_template_directory() . '/assets/img/sprite.svg';
 
         ob_start();
 

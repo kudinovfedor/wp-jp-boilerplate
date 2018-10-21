@@ -20,7 +20,7 @@ gulp.task('svg', () => {
         .pipe(plumber())
         .pipe(svgmin({js2svg: {pretty: false}}))
         .pipe(svgstore({inlineSvg: true}))
-        .pipe(rename({basename: 'svg', prefix: '', suffix: '-sprite', extname: '.svg'}))
+        .pipe(rename({basename: 'sprite', extname: '.svg'}))
         .pipe(gulp.dest('assets/img/'));
 });
 

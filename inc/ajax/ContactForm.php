@@ -34,11 +34,9 @@ if (!class_exists('ContactForm')) {
                 'url' => admin_url('admin-ajax.php'),
             ]);
 
-            if (
-                is_front_page()
-                || is_page('contact')
-                || is_page_template('page-contact.php')
-            ) {
+            $condition = is_page('contact') || is_page_template('page-contact.php');
+
+            if ($condition) {
                 wp_enqueue_script('contact-form');
             }
         }

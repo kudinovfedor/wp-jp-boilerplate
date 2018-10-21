@@ -23,18 +23,18 @@ require_once 'inc/customizer.php';
 require_once 'inc/ajax/ContactForm.php';
 require_once 'inc/ajax/LoadMorePosts.php';
 
-require_once 'inc/SnazzyMaps.php';
+require_once 'inc/class/SnazzyMaps.php';
 
-require_once 'inc/GoogleMaps.php';
-require_once 'inc/GoogleMapsCustomizer.php';
+require_once 'inc/class/GoogleMaps.php';
+require_once 'inc/class/GoogleMapsCustomizer.php';
 
-require_once 'inc/GoogleTagManager.php';
+require_once 'inc/class/GoogleTagManager.php';
 
-require_once 'inc/GoogleReCaptcha.php';
-require_once 'inc/GoogleReCaptchaCustomizer.php';
+require_once 'inc/class/GoogleReCaptcha.php';
+require_once 'inc/class/GoogleReCaptchaCustomizer.php';
 
-require_once 'inc/ChangeSiteURL.php';
+require_once 'inc/class/ChangeSiteURL.php';
 
-require_once 'inc/SRI.php';
+require_once 'inc/class/SRI.php';
 
-require_once 'inc/JPWalkerComment.php';
+require_once 'inc/class/JPWalkerComment.php';
