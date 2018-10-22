@@ -1,6 +1,9 @@
 {
+    "dir": "auto",
+    "lang": "en-US",
     "name": "JoomPress",
-    "short_name": "JoomPress",
+    "short_name": "JP",
+    "description": "JoomPress - information IT portal.",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -15,7 +18,7 @@
     ],
     "theme_color": "#146994",
     "background_color": "#146994",
-    "start_url": "https://joompress.biz",
+    "start_url": ".",
     "orientation": "portrait",
     "display": "standalone"
 }
