@@ -13,54 +13,29 @@ Domain Path: /languages
 Tags: one-column
 */
 
-@import "bootstrap/bootstrap";
-
-@import "utilities/variables";
-@import "utilities/mixins";
-@import "utilities/functions";
-@import "utilities/placeholders";
-
-@import "vendors/font-awesome/font-awesome";
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-.wrapper {
-    padding: 15px 0 30px;
-    flex: 1;
-}
-
-.container {
-    //padding-left: 15px;
-    //padding-right: 15px;
-    //margin-left: auto;
-    //margin-right: auto;
-    @extend %clearfix;
-
-    //@media only screen and (min-width: 1200px) {
-    //  width: 1200px;
-    //}
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
+//@import "bootstrap/bootstrap";
 
 @import "variables";
-@import "helpers";
-@import "form";
-@import "button";
-@import "header";
-@import "nav";
-@import "footer";
-@import "scroll-top";
-@import "main";
+@import "functions";
+@import "mixins";
+@import "placeholders";
+
+//@import "vendors/font-awesome/font-awesome";
+
+@import "base-normalize";
+@import "base-general";
+
+@import "module-bootstrap-grid";
+@import "module-helpers";
+@import "module-button";
+@import "module-form";
+@import "module-scroll-top";
+
+@import "layout-header";
+@import "layout-nav";
+@import "layout-main";
+@import "layout-footer";
+
 @import "comments";
+
+@import "responsive";

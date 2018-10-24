@@ -38,8 +38,8 @@ gulp.task('sass', () => {
             sourceComments: false
         }).on('error', sass.logError))
         .pipe(autoprefixer({
-           browsers: ['last 5 versions'],
-           cascade: false
+            browsers: ['last 5 versions'],
+            cascade: false
         }))
         //.pipe(sourcemaps.write('/'))
         .pipe(gulp.dest('./'));

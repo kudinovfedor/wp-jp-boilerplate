@@ -1,3 +1,6 @@
+@import "variables";
+@import "placeholders";
+
 .menu {
     position: relative;
     background-color: #363636;
@@ -11,7 +14,8 @@
     &-close {
         cursor: pointer;
         position: relative;
-        display: none;
+        display: inline-block;
+        vertical-align: middle;
         width: $menu-close-size;
         height: $menu-close-size;
         border: 0;
@@ -128,7 +132,7 @@
 }
 
 .hamburger {
-    display: none;
+    display: inline-block;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
@@ -202,21 +206,5 @@
             top: 0;
             transform: rotate(-45deg);
         }
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .hamburger {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-    .menu-close {
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
     }
 }

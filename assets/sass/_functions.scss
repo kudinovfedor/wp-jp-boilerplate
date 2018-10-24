@@ -1,8 +1,9 @@
 // FUNCTIONS
+@import "variables";
+
 @function font-url($url) {
     @return url("#{$font-url-path}#{$url}");
 }
-
 
 @function image-url($url) {
     @return url("#{$image-url-path}#{$url}");
@@ -40,4 +41,3 @@
         @return ($letter-spacing / 1000) * 1em;
     }
 }
-
