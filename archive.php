@@ -62,7 +62,13 @@
                         <p>
                             <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date('d.m.Y'); ?></time>
                             <br>
-                            <span><?php _e('Categories', 'joompress'); ?>: <?php the_category(', '); ?></span>
+                            <span><?php _e('Categories', 'joompress'); ?>:
+                                <?php if ('post' === get_post_type()) {
+                                    the_category(', ');
+                                } else {
+                                    the_custom_category(', ', 'portfolio_category');
+                                } ?>
+                            </span>
                             <br>
                             <?php the_tags(sprintf('<span>%s: ', __('Tags', 'joompress')), ', ', '</span>'); ?>
                         </p>
