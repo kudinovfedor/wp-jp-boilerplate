@@ -6,6 +6,8 @@
 
     <div class="container">
 
+        <h1 class="text-center"><?php single_post_title(); ?></h1>
+
         <?php if (have_posts()) : ?>
 
             <div class="row js-ajax-posts">

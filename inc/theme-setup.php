@@ -119,10 +119,33 @@ function jp_theme_setup()
                 'header_menu' => [
                     'name' => 'Top Menu',
                     'items' => [
-                        'link_home' => [
-                            'type' => 'custom',
+                        'page_home' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{home}}',
                             'title' => 'Home',
-                            'url' => home_url('/'),
+                            //'url' => home_url('/'),
+                        ],
+                        'page_about' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{about}}',
+                            'title' => 'About',
+                            //'url' => site_url('/'),
+                        ],
+                        'page_contacts' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{contacts}}',
+                            'title' => 'Contacts',
+                            //'url' => site_url('/contacts'),
+                        ],
+                        'page_blog' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{blog}}',
+                            'title' => 'Blog',
+                            //'url' => site_url('/blog'),
                         ],
                     ],
                 ],
@@ -166,7 +189,22 @@ function jp_theme_setup()
                     'post_type' => 'page',
                     'post_name' => 'home',
                     'post_title' => 'Home',
+                    'post_content' => 'Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time.',
                     //'template'   => '',
+                ],
+                'about' => [
+                    'post_type' => 'page',
+                    'post_name' => 'about',
+                    'post_title' => 'About',
+                    'post-content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
+                    //'template' => 'page-about.php',
+                ],
+                'contacts' => [
+                    'post_type' => 'page',
+                    'post_name' => 'contacts',
+                    'post_title' => 'Contacts',
+                    'post_content' => 'This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form.',
+                    //'template' => 'page-contacts.php',
                 ],
                 'blog' => [
                     'post_type' => 'page',

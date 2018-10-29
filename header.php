@@ -20,7 +20,7 @@
     <?php } ?>
     <?php wp_head(); ?>
 </head>
-<body id="top" <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+<body id="top" <?php body_class(); ?>>
 
 <?php wp_body(); ?>
 
