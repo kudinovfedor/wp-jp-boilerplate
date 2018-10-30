@@ -19,7 +19,7 @@
 
         scrollTop('.js-scroll-top');
 
-        hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
+        //hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
 
         commentValidation('#commentform');
 
@@ -366,7 +366,7 @@
      * @param {(string|Object)} hamburgerElement - Trigger element for open/close menu
      * @param {(string|Object)} closeTrigger - Trigger element for close opened menu
      */
-    const hamburgerMenu = (menuElement, hamburgerElement, closeTrigger) => {
+    /*const hamburgerMenu = (menuElement, hamburgerElement, closeTrigger) => {
         const menu = $(menuElement),
             close = $(closeTrigger),
             button = $(hamburgerElement),
@@ -385,7 +385,7 @@
                 menuButton.removeClass('is-active');
             }
         });
-    };
+    };*/
 
     /**
      * Comment Validation

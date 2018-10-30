@@ -14,7 +14,6 @@
         mobileMenu();
         stickyHeader();
         scrollTop(".js-scroll-top");
-        hamburgerMenu(".js-menu", ".js-hamburger", ".js-menu-close");
         commentValidation("#commentform");
         if (Modernizr) {
             console.info("Modernizr is loaded.");
@@ -150,20 +149,6 @@
                 }
             } else {
                 el.removeClass("is-visible");
-            }
-        });
-    };
-    var hamburgerMenu = function hamburgerMenu(menuElement, hamburgerElement, closeTrigger) {
-        var menu = $(menuElement), close = $(closeTrigger), button = $(hamburgerElement), menuButton = button.add(menu);
-        button.on("click", function() {
-            menuButton.toggleClass("is-active");
-        });
-        close.on("click", function() {
-            menuButton.removeClass("is-active");
-        });
-        $(window).on("click", function(e) {
-            if (!$(e.target).closest(menuButton).length) {
-                menuButton.removeClass("is-active");
             }
         });
     };
