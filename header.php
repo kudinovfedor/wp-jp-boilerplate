@@ -127,7 +127,7 @@ if (is_single()) {
 <?php } ?>
 <!-- HEADER -->
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-    <div class="container">
+    <div class="container header-wrap">
         <div class="logo header-logo">
             <?php if (has_custom_logo()) {
                 the_custom_logo();
@@ -135,10 +135,8 @@ if (is_single()) {
                 logo('logo.png');
             } ?>
         </div>
-        <div class="header-search">
-            <?php get_search_form(); ?>
-        </div>
-        <?php hamburger('js-hamburger'); ?>
+        <div class="header-search"><?php get_search_form(); ?></div>
+        <?php hamburger('js-hamburger header-hamburger'); ?>
     </div>
 </header>
 <!-- /END HEADER -->

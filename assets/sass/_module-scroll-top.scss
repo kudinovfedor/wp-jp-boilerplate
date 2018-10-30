@@ -1,79 +1,79 @@
-$scroll-size: 55px;
+$scroll-size: 50px;
 $scroll-offset: 20px;
 $scroll-zindex: 100;
 $scroll-color: #000;
 
 .scroll-top {
-  display: none;
-  cursor: pointer;
-  width: $scroll-size;
-  height: $scroll-size;
-  border: 1px solid transparent;
-  position: fixed;
-  right: $scroll-offset;
-  bottom: $scroll-offset;
-  z-index: $scroll-zindex;
-  background-color: $scroll-color;
-  visibility: hidden;
-  opacity: 0;
-  transition: none;
-  touch-action: manipulation;
-  box-shadow: 0 5px 10px rgba(#000, .3);
-
-  &.is-right {
+    display: none;
+    cursor: pointer;
+    width: $scroll-size;
+    height: $scroll-size;
+    border: 1px solid transparent;
+    position: fixed;
     right: $scroll-offset;
-    left: auto;
-  }
+    bottom: $scroll-offset;
+    z-index: $scroll-zindex;
+    background-color: $scroll-color;
+    visibility: hidden;
+    opacity: 0;
+    transition: none;
+    touch-action: manipulation;
+    box-shadow: 0 5px 10px rgba(#000, .3);
 
-  &.is-left {
-    right: auto;
-    left: $scroll-offset;
-  }
-
-  &.is-rounded {
-    border-radius: 4px;
-  }
-
-  &.is-circle {
-    border-radius: 50%;
-  }
-
-  @at-root {
-    .scroll-top--arrow,
-    .scroll-top:after {
-      content: ' ';
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
-      border: 6px solid transparent;
-      border-top: 0;
-      border-bottom: 10px solid #fff;
+    &.is-right {
+        right: $scroll-offset;
+        left: auto;
     }
 
-    .scroll-top:after {
-      content: none;
+    &.is-left {
+        right: auto;
+        left: $scroll-offset;
     }
-  }
 
-  &:hover,
-  &:focus {
-    background-color: lighten($scroll-color, 5%);
-  }
+    &.is-rounded {
+        border-radius: 4px;
+    }
 
-  &.is-visible,
-  .no-js & {
-    visibility: visible;
-    opacity: 1;
-  }
+    &.is-circle {
+        border-radius: 50%;
+    }
 
-  .js &,
-  .no-js & {
-    display: block;
-    transition: .2s ease-out;
-  }
+    @at-root {
+        .scroll-top--arrow,
+        .scroll-top:after {
+            content: ' ';
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border: 6px solid transparent;
+            border-top: 0;
+            border-bottom: 10px solid #fff;
+        }
+
+        .scroll-top:after {
+            content: none;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($scroll-color, 5%);
+    }
+
+    &.is-visible,
+    .no-js & {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .js &,
+    .no-js & {
+        display: block;
+        transition: .2s ease-out;
+    }
 }

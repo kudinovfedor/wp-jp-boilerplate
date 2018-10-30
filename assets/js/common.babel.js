@@ -4,9 +4,15 @@
     html.className = html.className.replace(/\bno-js\b/, 'js');
 })(document.documentElement);
 
-(($, Modernizr) => {
+((w, d, $, Modernizr) => {
 
     $(() => {
+
+        formInline({
+            form: '.search-form',
+            input: '.search-field',
+            button: '.search-btn',
+        });
 
         scrollTop('.js-scroll-top');
 
@@ -22,6 +28,66 @@
 
     });
 
+    const extend = function () {
+        let i = 0, prop, deep = false, length = arguments.length, extended = {};
+
+        if (typeof (arguments[0]) === 'boolean') {
+            deep = arguments[0];
+            i++;
+        }
+
+        const merge = (object) => {
+            for (prop in object) {
+                if (object.hasOwnProperty(prop)) {
+                    if (deep && Object.prototype.toString.call(object[prop]) === '[object Object]') {
+                        extended[prop] = extend(true, extended[prop], object[prop]);
+                    } else {
+                        extended[prop] = object[prop];
+                    }
+                }
+            }
+        };
+
+        for (; i < length; i++) {
+            merge(arguments[i]);
+        }
+
+        return extended;
+    };
+
+    /**
+     * Inline Form
+     *
+     * @param {Object} [options]
+     * @returns {void}
+     */
+    const formInline = (options) => {
+        const defaults = {
+            form: '.form-inline',
+            input: '.form-field',
+            button: '.form-btn',
+        };
+
+        const settings = extend(defaults, options);
+
+        const form = d.querySelector(settings.form);
+
+        if (!form) return;
+
+        const display = w.getComputedStyle(form, null).getPropertyValue('display');
+
+        if (display === 'block') {
+            const field = form.querySelector(settings.input);
+            const button = form.querySelector(settings.button);
+
+            if (!field && !button) return;
+
+            const buttonWidth = Math.ceil(button.getBoundingClientRect().width + button.clientLeft * 2);
+            field.style.display = 'inline-block';
+            field.style.width = `calc(100% - ${buttonWidth}px)`;
+        }
+    };
+
     /**
      * Scroll Top
      *
@@ -30,7 +96,7 @@
      * @author Fedor Kudinov <brothersrabbits@mail.ru>
      * @param {(string|Object)} element - selected element
      */
-    const scrollTop = element => {
+    const scrollTop = (element) => {
         const el = $(element);
 
         el.on('click touchend', () => {
@@ -65,7 +131,7 @@
      * @param {function} [callback] -
      * @return {*}
      */
-    const scrollTopNative = (element, duration, easing, offset, callback) => {
+    /*const scrollTopNative = (element, duration, easing, offset, callback) => {
 
         const options = {
             'element': null,
@@ -184,7 +250,7 @@
                 classList.remove('is-visible');
             }
         });
-    };
+    };*/
 
     /**
      * Hamburger Menu
@@ -284,9 +350,9 @@
 
     };
 
-})(jQuery, window.Modernizr);
+})(window, document, jQuery, window.Modernizr);
 
-if (false && 'serviceWorker' in navigator) {
+/*if (false && 'serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.js', {scope: './'})
         .then(registration => {
@@ -295,4 +361,4 @@ if (false && 'serviceWorker' in navigator) {
         .catch(error => {
             console.log(`[ServiceWorker] Failed to Register with ${error}`);
         });
-}
+}*/

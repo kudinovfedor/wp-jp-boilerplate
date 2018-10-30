@@ -9,7 +9,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: joompress
 Domain Path: /languages
-Tags: one-column
+Tags: one-column, flexible-header, custom-background, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-image-header, featured-images, full-width-template, microformats, post-formats, theme-options, threaded-comments, translation-ready
 */
 .menu-list, .sub-menu, .social, .messenger, .phone, .pagination-list {
   list-style: none;
@@ -1034,7 +1034,9 @@ label {
 
 .form-field {
   display: block;
+  vertical-align: middle;
   width: 100%;
+  height: 38px;
   padding: 6px 12px;
   font-size: 16px;
   line-height: 1.5;
@@ -1055,10 +1057,20 @@ label {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.form-search {
+textarea.form-field {
+  height: auto;
+}
+
+.search-form {
+  font-size: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.search-field {
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
 }
 
 .required {
@@ -1068,8 +1080,8 @@ label {
 .scroll-top {
   display: none;
   cursor: pointer;
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border: 1px solid transparent;
   position: fixed;
   right: 20px;
@@ -1156,12 +1168,42 @@ label {
 }
 
 .header {
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
   padding: 10px 0;
+  background-color: #fff;
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out;
+  -o-transition: box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
 }
 
-.header-search {
-  float: right;
-  padding-top: 5px;
+.header.is-fixed {
+  position: fixed;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header-logo {
+  margin-right: auto;
+}
+
+.header-hamburger {
+  margin-left: 20px;
 }
 
 .logo, .logo-link, .logo-img {
@@ -1335,6 +1377,7 @@ label {
   display: block;
   padding: 10px 15px;
   color: #fff;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -1594,6 +1637,30 @@ label {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 12px;
+}
+
+.blackout {
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.65);
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+  -o-transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+}
+
+.blackout.is-active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .comment-list, .comment-children {

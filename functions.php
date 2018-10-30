@@ -20,21 +20,21 @@ require_once 'inc/login.php';
 
 require_once 'inc/customizer.php';
 
-require_once 'inc/ajax/ContactForm.php';
-require_once 'inc/ajax/LoadMorePosts.php';
+require_once 'classes/ajax/ContactForm.php';
+require_once 'classes/ajax/LoadMorePosts.php';
 
-require_once 'inc/class/SnazzyMaps.php';
+require_once 'classes/SnazzyMaps.php';
 
-require_once 'inc/class/GoogleMaps.php';
-require_once 'inc/class/GoogleMapsCustomizer.php';
+require_once 'classes/GoogleMaps.php';
+require_once 'classes/GoogleMapsCustomizer.php';
 
-require_once 'inc/class/GoogleTagManager.php';
+require_once 'classes/GoogleTagManager.php';
 
-require_once 'inc/class/GoogleReCaptcha.php';
-require_once 'inc/class/GoogleReCaptchaCustomizer.php';
+require_once 'classes/GoogleReCaptcha.php';
+require_once 'classes/GoogleReCaptchaCustomizer.php';
 
-require_once 'inc/class/ChangeSiteURL.php';
+require_once 'classes/ChangeSiteURL.php';
 
-require_once 'inc/class/SRI.php';
+require_once 'classes/SRI.php';
 
-require_once 'inc/class/JPWalkerComment.php';
+require_once 'classes/JPWalkerComment.php';

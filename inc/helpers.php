@@ -1136,11 +1136,11 @@ if (!function_exists('sanitize_background_setting')) {
     {
         if ('jp_login_background_repeat' === $setting->id) {
             if (!in_array($value, ['repeat-x', 'repeat-y', 'repeat', 'no-repeat'])) {
-                return new WP_Error('invalid_value', __('Invalid value for background repeat.'));
+                return new WP_Error('invalid_value', 'Invalid value for background repeat.');
             }
         } elseif ('jp_login_background_attachment' === $setting->id) {
             if (!in_array($value, ['fixed', 'scroll'])) {
-                return new WP_Error('invalid_value', __('Invalid value for background attachment.'));
+                return new WP_Error('invalid_value', 'Invalid value for background attachment.');
             }
         } elseif ('jp_login_background_position' === $setting->id) {
             if (!in_array($value, [
@@ -1154,16 +1154,16 @@ if (!function_exists('sanitize_background_setting')) {
                 'center bottom',
                 'right bottom'
             ], true)) {
-                return new WP_Error('invalid_value', __('Invalid value for background position X.'));
+                return new WP_Error('invalid_value', 'Invalid value for background position X.');
             }
         } elseif ('jp_login_background_size' === $setting->id) {
             if (!in_array($value, ['auto', 'contain', 'cover'], true)) {
-                return new WP_Error('invalid_value', __('Invalid value for background size.'));
+                return new WP_Error('invalid_value', 'Invalid value for background size.');
             }
         } elseif ('jp_login_background_image' === $setting->id || 'jp_login_background_image_thumb' === $setting->id) {
             $value = empty($value) ? '' : esc_url_raw($value);
         } else {
-            return new WP_Error('unrecognized_setting', __('Unrecognized background setting.'));
+            return new WP_Error('unrecognized_setting', 'Unrecognized background setting.');
         }
         return $value;
     }
@@ -1298,7 +1298,7 @@ if (!function_exists('jp_load_more')) {
 
         $output = sprintf(
             '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
-            join($attrs, ' '), __('Load more posts...')
+            join($attrs, ' '), __('Load more posts...', 'joompress')
         );
 
         if ($echo) {
@@ -1363,7 +1363,7 @@ if (!function_exists('get_the_custom_category_list')) {
 
         if (empty($categories)) {
             /** This filter is documented in wp-includes/category-template.php */
-            return apply_filters('the_custom_category', __('Uncategorized'), $separator, $parents);
+            return apply_filters('the_custom_category', __('Uncategorized', 'joompress'), $separator, $parents);
         }
 
         $rel = (is_object($wp_rewrite) && $wp_rewrite->using_permalinks()) ? 'rel="category tag"' : 'rel="category"';

@@ -68,8 +68,8 @@ function jp_theme_setup()
             'random-default' => false,
             'width' => 0,
             'height' => 0,
-            'flex-height' => false,
-            'flex-width' => false,
+            'flex-height' => true,
+            'flex-width' => true,
             'default-text-color' => '',
             'header-text' => true,
             'uploads' => true,
@@ -100,7 +100,7 @@ function jp_theme_setup()
                 'blogdescription' => 'JoomPress - WordPress Boilerplate Theme',
                 //'date_format' => 'd.m.Y',
                 //'time_format' => 'H:i',
-                'show_on_front' => 'posts', // posts, page
+                'show_on_front' => 'page', // posts, page
                 'page_on_front' => '{{home}}',
                 'page_for_posts' => '{{blog}}',
                 //'posts_per_page' => '10',
@@ -110,6 +110,7 @@ function jp_theme_setup()
 
             'theme_mods' => [],
 
+            // [text_business_info, text_about, archives, calendar, categories, meta, recent-comments, recent-posts, search]
             'widgets' => [
                 'sidebar-left' => [],
                 'sidebar-right' => [],
@@ -124,28 +125,24 @@ function jp_theme_setup()
                             'object' => 'page',
                             'object_id' => '{{home}}',
                             'title' => 'Home',
-                            //'url' => home_url('/'),
                         ],
                         'page_about' => [
                             'type' => 'post_type',
                             'object' => 'page',
                             'object_id' => '{{about}}',
                             'title' => 'About',
-                            //'url' => site_url('/'),
-                        ],
-                        'page_contacts' => [
-                            'type' => 'post_type',
-                            'object' => 'page',
-                            'object_id' => '{{contacts}}',
-                            'title' => 'Contacts',
-                            //'url' => site_url('/contacts'),
                         ],
                         'page_blog' => [
                             'type' => 'post_type',
                             'object' => 'page',
                             'object_id' => '{{blog}}',
                             'title' => 'Blog',
-                            //'url' => site_url('/blog'),
+                        ],
+                        'page_contact' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{contact}}',
+                            'title' => 'Contact',
                         ],
                     ],
                 ],
@@ -153,44 +150,57 @@ function jp_theme_setup()
                     'name' => 'Bottom Menu',
                     'items' => [
                         'link_home' => [
-                            'type' => 'custom',
                             'title' => 'Home',
+                            'type' => 'custom',
                             'url' => home_url('/'),
                         ],
                     ],
                 ],
             ],
 
+            // ['post_excerpt' => 'caption', 'post_content' => 'description']
             'attachments' => [
                 'blog-item-1' => [
-                    'post_title' => 'blog-item-1',
+                    'post_title' => 'Blog item 1 title',
+                    'post_excerpt' => '',
+                    'post_content' => '',
                     'file' => 'assets/img/starter-content/blog-item-1.jpg',
                 ],
                 'blog-item-2' => [
                     'post_title' => 'blog-item-2',
+                    'post_excerpt' => '',
+                    'post_content' => '',
                     'file' => 'assets/img/starter-content/blog-item-2.jpg',
                 ],
                 'blog-item-3' => [
                     'post_title' => 'blog-item-3',
+                    'post_excerpt' => '',
+                    'post_content' => '',
                     'file' => 'assets/img/starter-content/blog-item-3.jpg',
                 ],
                 'blog-item-4' => [
                     'post_title' => 'blog-item-4',
+                    'post_excerpt' => '',
+                    'post_content' => '',
                     'file' => 'assets/img/starter-content/blog-item-4.jpg',
                 ],
                 'blog-item-5' => [
                     'post_title' => 'blog-item-5',
+                    'post_excerpt' => '',
+                    'post_content' => '',
                     'file' => 'assets/img/starter-content/blog-item-5.jpg',
                 ],
             ],
 
+            // ['post_type', 'post_name', 'post_title', 'post_excerpt', 'post_content', 'menu_order', 'comment_status', 'thumbnail', 'template']
             'posts' => [
+                // Page
                 'home' => [
                     'post_type' => 'page',
                     'post_name' => 'home',
                     'post_title' => 'Home',
                     'post_content' => 'Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time.',
-                    //'template'   => '',
+                    //'template'   => 'page-home.php',
                 ],
                 'about' => [
                     'post_type' => 'page',
@@ -199,12 +209,12 @@ function jp_theme_setup()
                     'post-content' => 'You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.',
                     //'template' => 'page-about.php',
                 ],
-                'contacts' => [
+                'contact' => [
                     'post_type' => 'page',
-                    'post_name' => 'contacts',
-                    'post_title' => 'Contacts',
+                    'post_name' => 'contact',
+                    'post_title' => 'Contact',
                     'post_content' => 'This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form.',
-                    //'template' => 'page-contacts.php',
+                    //'template' => 'page-contact.php',
                 ],
                 'blog' => [
                     'post_type' => 'page',
@@ -212,6 +222,7 @@ function jp_theme_setup()
                     'post_title' => 'Blog',
                     //'template' => 'page-blog.php',
                 ],
+                // Post
                 'blog-item-1' => [
                     'post_type' => 'post',
                     'post_title' => 'Blog title 1',
@@ -251,6 +262,15 @@ function jp_theme_setup()
 
         ]);
 
+        add_theme_support('editor-styles');
+        add_theme_support('dark-editor-style');
+
+        add_theme_support('align-wide');
+        add_theme_support('wp-block-styles');
+        add_theme_support('responsive-embeds');
+        //add_theme_support('disable-custom-colors');
+        //add_theme_support('disable-custom-font-sizes');
+
         add_theme_support('woocommerce');
 
         add_theme_support('wc-product-gallery-zoom');
@@ -259,6 +279,7 @@ function jp_theme_setup()
     }
 
     add_editor_style(JP_CSS . '/editor-style.css');
+
 
     register_nav_menus([
         'header_menu' => __('Menu in header', 'joompress'),

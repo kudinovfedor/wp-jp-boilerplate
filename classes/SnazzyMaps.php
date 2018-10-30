@@ -121,6 +121,8 @@ if (!class_exists('SnazzyMaps')) {
         {
             if (!$this->table_exists) {
 
+                // ENGINE=MyISAM | InnoDB
+
                 $sql = "CREATE TABLE $this->table_name (
                   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
                   style_id INT NOT NULL,
@@ -134,7 +136,7 @@ if (!class_exists('SnazzyMaps')) {
                   tags VARCHAR(255) NOT NULL,
                   colors VARCHAR(255) NOT NULL,
                   PRIMARY KEY (id)
-                ) ENGINE=InnoDB $this->charset_collate;";
+                ) ENGINE=MyISAM $this->charset_collate;";
 
                 $this->wpdb->query($sql);
 

@@ -23,7 +23,7 @@
             <div class="text-center">
                 <?php jp_pagination(); ?>
                 <br>
-                <button class="btn btn-default js-load-more" type="button"><?php _e('Load more posts...') ?></button>
+                <?php jp_load_more(); ?>
             </div>
 
         <?php else : ?>
