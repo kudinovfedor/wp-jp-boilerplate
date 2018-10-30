@@ -11,6 +11,8 @@
             input: ".search-field",
             button: ".search-btn"
         });
+        mobileMenu();
+        stickyHeader();
         scrollTop(".js-scroll-top");
         hamburgerMenu(".js-menu", ".js-hamburger", ".js-menu-close");
         commentValidation("#commentform");
@@ -42,6 +44,28 @@
         }
         return extended;
     };
+    var stickyHeader = function stickyHeader() {
+        var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ".js-header";
+        var space = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ".js-header-space";
+        var className = "is-sticky";
+        var header = d.querySelector(element);
+        var headerSpace = d.querySelector(space);
+        var headerHeight = header.offsetHeight;
+        var scrollTop = 0;
+        var hasClass = false;
+        w.addEventListener("scroll", function() {
+            scrollTop = w.scrollY || w.pageYOffset;
+            hasClass = header.classList.contains(className);
+            if (scrollTop > headerHeight + 50 && !hasClass) {
+                headerSpace.style.height = "".concat(headerHeight, "px");
+                header.classList.add(className);
+            }
+            if (scrollTop <= 1 && hasClass) {
+                headerSpace.style.height = 0;
+                header.classList.remove(className);
+            }
+        });
+    };
     var formInline = function formInline(options) {
         var defaults = {
             form: ".form-inline",
@@ -60,6 +84,55 @@
             field.style.display = "inline-block";
             field.style.width = "calc(100% - ".concat(buttonWidth, "px)");
         }
+    };
+    var mobileMenu = function mobileMenu(options) {
+        var defaults = {
+            menu: ".js-menu",
+            close: ".js-menu-close",
+            trigger: ".js-hamburger",
+            blackout: ".js-blackout"
+        };
+        var settings = extend(defaults, options);
+        var menu = d.querySelector(settings.menu);
+        var trigger = d.querySelector(settings.trigger);
+        if (!menu || !trigger) return;
+        var close = d.querySelector(settings.close);
+        var blackout = d.querySelector(settings.blackout);
+        var event = "ontouchstart" in window ? "touchstart" : "click";
+        trigger.addEventListener(event, function() {
+            menu.classList.toggle("is-opened");
+            trigger.classList.toggle("is-opened");
+            if (blackout) {
+                blackout.classList.toggle("is-active");
+            }
+        });
+        if (close) {
+            close.addEventListener(event, function() {
+                menu.classList.remove("is-opened");
+                trigger.classList.remove("is-opened");
+                if (blackout) {
+                    blackout.classList.remove("is-active");
+                }
+            });
+        }
+        if (blackout) {
+            blackout.addEventListener(event, function() {
+                menu.classList.remove("is-opened");
+                trigger.classList.remove("is-opened");
+                blackout.classList.remove("is-active");
+            });
+        }
+        if (!("closest" in d.documentElement)) return;
+        w.addEventListener(event, function(e) {
+            var selectors = "".concat(settings.menu, ", ").concat(settings.trigger, ", ").concat(settings.blackout);
+            if (!e.target.closest(selectors)) {
+                menu.classList.remove("is-opened");
+                trigger.classList.remove("is-opened");
+                if (blackout) {
+                    blackout.classList.remove("is-active");
+                }
+            }
+        });
     };
     var scrollTop = function scrollTop(element) {
         var el = $(element);

@@ -126,7 +126,8 @@ if (is_single()) {
     </script>
 <?php } ?>
 <!-- HEADER -->
-<header class="header" itemscope itemtype="http://schema.org/WPHeader">
+<span class="empty-space js-header-space" aria-hidden="true"></span>
+<header class="header js-header" itemscope itemtype="http://schema.org/WPHeader">
     <div class="container header-wrap">
         <div class="logo header-logo">
             <?php if (has_custom_logo()) {

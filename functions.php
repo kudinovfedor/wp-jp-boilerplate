@@ -1,6 +1,6 @@
 <?php
 
-//show_admin_bar(false);
+show_admin_bar(false);
 
 require_once 'inc/helpers.php';
 require_once 'inc/config.php';

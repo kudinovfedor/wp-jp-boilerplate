@@ -1,17 +1,24 @@
 @import "placeholders";
 
+.empty-space {
+    display: block;
+    flex-shrink: 0;
+}
+
 .header {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 10;
+    z-index: 11;
     padding: 10px 0;
     background-color: #fff;
+    will-change: transform;
     transition: box-shadow .2s ease-in-out;
 
-    &.is-fixed {
+    &.is-sticky {
         position: fixed;
         box-shadow: 0 5px 10px rgba(#000, .2);
+        animation: smooth-scroll .5s linear forwards;
     }
 
     &-wrap {
@@ -28,7 +35,7 @@
     }
 
     &-hamburger {
-        margin-left: 20px;
+        margin-left: auto;
     }
 }
 
@@ -125,5 +132,15 @@
     &-link {
         display: block;
         transition: .15s ease-in-out;
+    }
+}
+
+@keyframes smooth-scroll {
+    0% {
+        transform: translateY(-80px);
+    }
+
+    100% {
+        transform: translateY(0px);
     }
 }

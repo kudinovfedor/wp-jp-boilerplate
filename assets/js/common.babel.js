@@ -14,6 +14,9 @@
             button: '.search-btn',
         });
 
+        mobileMenu();
+        stickyHeader();
+
         scrollTop('.js-scroll-top');
 
         hamburgerMenu('.js-menu', '.js-hamburger', '.js-menu-close');
@@ -56,6 +59,38 @@
     };
 
     /**
+     * Sticky Header
+     *
+     * @param {string} [element=.js-header]
+     * @param {string} [space=.js-header-space]
+     * @returns {void}
+     */
+    const stickyHeader = (element = '.js-header', space = '.js-header-space') => {
+        const className = 'is-sticky';
+        const header = d.querySelector(element);
+        const headerSpace = d.querySelector(space);
+        const headerHeight = header.offsetHeight;
+
+        let scrollTop = 0;
+        let hasClass = false;
+
+        w.addEventListener('scroll', () => {
+            scrollTop = w.scrollY || w.pageYOffset;
+            hasClass = header.classList.contains(className);
+
+            if (scrollTop > headerHeight + 50 && !hasClass) {
+                headerSpace.style.height = `${headerHeight}px`;
+                header.classList.add(className);
+            }
+
+            if (scrollTop <= 1 && hasClass) {
+                headerSpace.style.height = 0;
+                header.classList.remove(className);
+            }
+        });
+    };
+
+    /**
      * Inline Form
      *
      * @param {Object} [options]
@@ -86,6 +121,75 @@
             field.style.display = 'inline-block';
             field.style.width = `calc(100% - ${buttonWidth}px)`;
         }
+    };
+
+    /**
+     *  Mobile Menu
+     *
+     * @param {Object} [options]
+     * @returns {void}
+     */
+    const mobileMenu = (options) => {
+        const defaults = {
+            menu: '.js-menu',
+            close: '.js-menu-close',
+            trigger: '.js-hamburger',
+            blackout: '.js-blackout',
+        };
+
+        const settings = extend(defaults, options);
+
+        const menu = d.querySelector(settings.menu);
+        const trigger = d.querySelector(settings.trigger);
+
+        if (!menu || !trigger) return;
+
+        const close = d.querySelector(settings.close);
+        const blackout = d.querySelector(settings.blackout);
+        const event = ('ontouchstart' in window ? 'touchstart' : 'click');
+
+        trigger.addEventListener(event, () => {
+            menu.classList.toggle('is-opened');
+            trigger.classList.toggle('is-opened');
+
+            if (blackout) {
+                blackout.classList.toggle('is-active');
+            }
+        });
+
+        if (close) {
+            close.addEventListener(event, () => {
+                menu.classList.remove('is-opened');
+                trigger.classList.remove('is-opened');
+
+                if (blackout) {
+                    blackout.classList.remove('is-active');
+                }
+            });
+        }
+
+        if (blackout) {
+            blackout.addEventListener(event, () => {
+                menu.classList.remove('is-opened');
+                trigger.classList.remove('is-opened');
+                blackout.classList.remove('is-active');
+            });
+        }
+
+        if (!('closest' in d.documentElement)) return;
+
+        w.addEventListener(event, function (e) {
+            const selectors = `${settings.menu}, ${settings.trigger}, ${settings.blackout}`;
+
+            if (!e.target.closest(selectors)) {
+                menu.classList.remove('is-opened');
+                trigger.classList.remove('is-opened');
+
+                if (blackout) {
+                    blackout.classList.remove('is-active');
+                }
+            }
+        });
     };
 
     /**
