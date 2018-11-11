@@ -1,9 +1,9 @@
 <?php
 
-show_admin_bar(false);
+//show_admin_bar(false);
 
-require_once 'inc/helpers.php';
 require_once 'inc/config.php';
+require_once 'inc/helpers.php';
 
 require_once 'inc/theme-setup.php';
 require_once 'inc/widgets-init.php';

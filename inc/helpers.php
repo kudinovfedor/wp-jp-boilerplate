@@ -821,7 +821,7 @@ if (!function_exists('dump')) {
      */
     function dump(...$expression)
     {
-        echo '<pre>';
+        echo '<pre style="flex-shrink: 0;">';
         var_dump($expression);
         echo '</pre>';
     }
@@ -1454,7 +1454,7 @@ if (!function_exists('get_the_custom_category')) {
     {
         $categories = get_the_terms($id, $taxonomy);
         if (!$categories || is_wp_error($categories)) {
-            $categories = array();
+            $categories = [];
         }
 
         $categories = array_values($categories);
@@ -1497,7 +1497,7 @@ if (!function_exists('get_custom_category_parents')) {
         $separator = '/',
         $taxonomy = 'category',
         $nicename = false,
-        $deprecated = array()
+        $deprecated = []
     ) {
 
         if (!empty($deprecated)) {
@@ -1506,11 +1506,11 @@ if (!function_exists('get_custom_category_parents')) {
 
         $format = $nicename ? 'slug' : 'name';
 
-        $args = array(
+        $args = [
             'separator' => $separator,
             'link' => $link,
             'format' => $format,
-        );
+        ];
 
         return get_term_parents_list($id, $taxonomy, $args);
     }

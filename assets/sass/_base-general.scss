@@ -4,11 +4,16 @@ body {
 }
 
 body {
-    font: 400 16px/1.5 "Arial", "Helvetica", sans-serif;
-    color: #000;
-    background-color: #fff;
+    position: relative;
     display: flex;
     flex-direction: column;
+    min-width: 320px;
+    color: #000;
+    font: 400 16px/1.5 "Arial", "Helvetica", sans-serif;
+    background-color: #fff;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -70,4 +75,16 @@ img {
 label {
     display: inline-block;
     margin-bottom: 5px;
+}
+
+a,
+area,
+button,
+[role="button"],
+input,
+label,
+select,
+summary,
+textarea {
+    touch-action: manipulation;
 }

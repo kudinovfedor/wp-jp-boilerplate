@@ -65,9 +65,7 @@ gulp.task('css', () => {
 gulp.task('babel', () => {
     return gulp.src('assets/js/common.babel.js')
         .pipe(plumber())
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        .pipe(babel())
         .pipe(uglify({
             mangle: false,
             compress: false,

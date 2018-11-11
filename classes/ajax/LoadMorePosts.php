@@ -34,7 +34,9 @@ if (!class_exists('LoadMorePosts')) {
                 'url' => admin_url('admin-ajax.php'),
             ]);
 
-            if (is_front_page() || is_archive()) {
+            $condition = is_front_page() || is_home() || is_archive();
+
+            if ($condition) {
                 wp_enqueue_script('load-more-posts');
             }
         }
