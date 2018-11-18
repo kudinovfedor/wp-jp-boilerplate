@@ -1432,6 +1432,9 @@ textarea.form-field {
   color: #fff;
   text-align: center;
   text-decoration: none;
+  -webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  -o-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
 }
 
 .sub-menu {
@@ -1462,6 +1465,10 @@ textarea.form-field {
   display: block;
   padding: 10px 15px;
   color: #fff;
+  text-decoration: none;
+  -webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  -o-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
 }
 
 .sub-menu .sub-menu {
@@ -1805,5 +1812,53 @@ textarea.form-field {
 @media only screen and (min-width: 1200px) {
   .container {
     max-width: 1140px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .menu {
+    padding: 45px 0;
+    position: fixed;
+    top: 125px;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+    width: 300px;
+    will-change: transform;
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+    -webkit-transition: -webkit-transform .2s ease-in-out;
+    transition: -webkit-transform .2s ease-in-out;
+    -o-transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  }
+  .menu .container {
+    padding: 0;
+  }
+  .menu.is-opened {
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+  .menu-item {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 1px;
+  }
+  .menu-link {
+    text-align: left;
+    padding-left: 20px;
+  }
+  .sub-menu {
+    display: block;
+    position: static;
+    width: auto;
+    padding-left: 20px;
+    background-color: #666;
+  }
+  .sub-menu-item {
+    margin-bottom: 1px;
   }
 }

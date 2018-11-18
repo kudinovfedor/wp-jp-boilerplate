@@ -87,6 +87,7 @@
         color: #fff;
         text-align: center;
         text-decoration: none;
+        transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
     }
 }
 
@@ -126,6 +127,8 @@
         display: block;
         padding: 10px 15px;
         color: #fff;
+        text-decoration: none;
+        transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
     }
 
     .sub-menu {
