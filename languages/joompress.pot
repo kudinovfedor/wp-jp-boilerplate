@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-29 23:04+0000\n"
+"POT-Creation-Date: 2018-12-14 15:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -23,25 +23,25 @@ msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
 #: archive.php:65 template-parts/archive/content.php:48
-#: template-parts/page/content-page.php:13 template-parts/post/content.php:11
+#: template-parts/post/content.php:38
 msgid "Categories"
 msgstr ""
 
-#: archive.php:67 template-parts/archive/content.php:50
-#: template-parts/post/content.php:12
+#: archive.php:73 template-parts/archive/content.php:50
+#: template-parts/post/content.php:39
 msgid "Tags"
 msgstr ""
 
-#: archive.php:73 search.php:32 template-parts/archive/content.php:56
+#: archive.php:79 search.php:32 template-parts/archive/content.php:56
 msgid "Read more"
 msgstr ""
 
-#: archive.php:86 front-page.php:27 search.php:45
+#: archive.php:96 front-page.php:45 home.php:33 search.php:45
 #: template-parts/post/content-none.php:2
 msgid "Nothing Found"
 msgstr ""
 
-#: archive.php:87 template-parts/post/content-none.php:3
+#: archive.php:97 template-parts/post/content-none.php:3
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
@@ -65,7 +65,7 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: front-page.php:28 search.php:46
+#: front-page.php:46 home.php:34 search.php:46
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Kudinov Fedor"
 msgstr ""
 
-#: header.php:165
+#: header.php:164
 msgid "Edit Analytics Tracking Code"
 msgstr ""
 
-#: header.php:168
+#: header.php:167
 msgid "Edit Login Logo"
 msgstr ""
 
@@ -124,6 +124,28 @@ msgstr ""
 msgid "Next Post"
 msgstr ""
 
+#: classes/JPWalkerComment.php:71
+msgid "Pingback"
+msgstr ""
+
+#: classes/JPWalkerComment.php:72 classes/JPWalkerComment.php:107
+msgid "Edit"
+msgstr ""
+
+#: classes/JPWalkerComment.php:98
+#, php-format
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: classes/JPWalkerComment.php:104
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: classes/JPWalkerComment.php:110
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
 #: inc/admin.php:12
 msgid "Developed by"
 msgstr ""
@@ -159,18 +181,6 @@ msgstr ""
 msgid "Tel"
 msgstr ""
 
-#: inc/ajax-contact-form.php:79
-msgid "Feedback"
-msgstr ""
-
-#: inc/ajax-contact-form.php:96
-msgid "Message sent successfully."
-msgstr ""
-
-#: inc/ajax-contact-form.php:100
-msgid "Failed to send message."
-msgstr ""
-
 #: inc/comment-form.php:19
 msgid "Name"
 msgstr ""
@@ -202,7 +212,7 @@ msgstr ""
 
 #: inc/helpers.php:764
 #, php-format
-msgid "Copyright &copy; %d %s. %s."
+msgid "Copyright &copy; %d %s. %s"
 msgstr ""
 
 #: inc/helpers.php:767
@@ -225,33 +235,19 @@ msgstr ""
 msgid "Next &raquo;"
 msgstr ""
 
-#: inc/JPWalkerComment.php:71
-msgid "Pingback"
+#: inc/helpers.php:1301
+msgid "Load more posts..."
 msgstr ""
 
-#: inc/JPWalkerComment.php:72 inc/JPWalkerComment.php:107
-msgid "Edit"
+#: inc/helpers.php:1366
+msgid "Uncategorized"
 msgstr ""
 
-#: inc/JPWalkerComment.php:98
-#, php-format
-msgid "%s <span class=\"says\">says:</span>"
-msgstr ""
-
-#: inc/JPWalkerComment.php:104
-#, php-format
-msgid "%1$s at %2$s"
-msgstr ""
-
-#: inc/JPWalkerComment.php:110
-msgid "Your comment is awaiting moderation."
-msgstr ""
-
-#: inc/theme-setup.php:226
+#: inc/theme-setup.php:304
 msgid "Menu in header"
 msgstr ""
 
-#: inc/theme-setup.php:227
+#: inc/theme-setup.php:305
 msgid "Menu in footer"
 msgstr ""
 
@@ -261,6 +257,18 @@ msgstr ""
 
 #: inc/widgets-init.php:19 inc/widgets-init.php:21
 msgid "Sidebar Right"
+msgstr ""
+
+#: classes/ajax/ContactForm.php:99
+msgid "Feedback"
+msgstr ""
+
+#: classes/ajax/ContactForm.php:116
+msgid "Message sent successfully."
+msgstr ""
+
+#: classes/ajax/ContactForm.php:121
+msgid "Failed to send message."
 msgstr ""
 
 #. Name of the theme

@@ -149,10 +149,29 @@ function jp_theme_setup()
                 'footer_menu' => [
                     'name' => 'Bottom Menu',
                     'items' => [
-                        'link_home' => [
+                        'page_home' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{home}}',
                             'title' => 'Home',
-                            'type' => 'custom',
-                            'url' => home_url('/'),
+                        ],
+                        'page_about' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{about}}',
+                            'title' => 'About',
+                        ],
+                        'page_blog' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{blog}}',
+                            'title' => 'Blog',
+                        ],
+                        'page_contact' => [
+                            'type' => 'post_type',
+                            'object' => 'page',
+                            'object_id' => '{{contact}}',
+                            'title' => 'Contact',
                         ],
                     ],
                 ],

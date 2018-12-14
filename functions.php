@@ -35,6 +35,6 @@ require_once 'classes/GoogleReCaptchaCustomizer.php';
 
 require_once 'classes/ChangeSiteURL.php';
 
-require_once 'classes/SRI.php';
+//require_once 'classes/SRI.php';
 
 require_once 'classes/JPWalkerComment.php';
