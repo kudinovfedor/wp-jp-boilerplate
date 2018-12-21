@@ -3,7 +3,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2018-12-21 13:16+0000\n"
+=======
+"POT-Creation-Date: 2018-12-14 15:49+0000\n"
+>>>>>>> d22814e654cd4d535db210bf8530c77e7f8ccbf1
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -212,7 +216,7 @@ msgstr ""
 
 #: inc/helpers.php:764
 #, php-format
-msgid "Copyright &copy; %d %s. %s."
+msgid "Copyright &copy; %d %s. %s"
 msgstr ""
 
 #: inc/helpers.php:767
@@ -235,6 +239,7 @@ msgstr ""
 msgid "Next &raquo;"
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/helpers.php:1306
 msgid "Load more posts..."
 msgstr ""
@@ -248,6 +253,21 @@ msgid "Menu in header"
 msgstr ""
 
 #: inc/theme-setup.php:304
+=======
+#: inc/helpers.php:1301
+msgid "Load more posts..."
+msgstr ""
+
+#: inc/helpers.php:1366
+msgid "Uncategorized"
+msgstr ""
+
+#: inc/theme-setup.php:304
+msgid "Menu in header"
+msgstr ""
+
+#: inc/theme-setup.php:305
+>>>>>>> d22814e654cd4d535db210bf8530c77e7f8ccbf1
 msgid "Menu in footer"
 msgstr ""
 
