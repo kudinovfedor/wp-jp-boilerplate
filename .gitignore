@@ -2,7 +2,17 @@
 .DS_Store
 
 node_modules
+bower_components
+package-lock.json
 
+*.zip
+*.rar
+*.log
+*.map
+*.po~
 *.pot~
 style.min.css
 common.min.js
+
+deploy.php
+assets/img/starter-content/original

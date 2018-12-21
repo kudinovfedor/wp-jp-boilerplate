@@ -1279,6 +1279,11 @@ if (!function_exists('jp_load_more')) {
      */
     function jp_load_more($echo = true)
     {
+        global $wp_query;
+
+        $total = isset($wp_query->max_num_pages) ? intval($wp_query->max_num_pages) : 1;
+        $current = get_query_var('paged') ? intval(get_query_var('paged')) : 1;
+
         /*$categories = get_the_category();
         $category = $categories[0];
         $current_category = get_queried_object();*/
@@ -1300,6 +1305,10 @@ if (!function_exists('jp_load_more')) {
             '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
             join($attrs, ' '), __('Load more posts...', 'joompress')
         );
+
+        if ($total < 2) {
+            return;
+        }
 
         if ($echo) {
             echo $output;

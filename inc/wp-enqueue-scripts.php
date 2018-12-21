@@ -48,6 +48,24 @@ function jp_enqueue_style_script()
 add_action('wp_enqueue_scripts', 'jp_enqueue_style_script');
 
 /**
+ * WP Default Styles
+ *
+ * @param WP_Styles $styles
+ * @return void
+ */
+function jp_wp_default_styles($styles)
+{
+    $editor = get_option('classic-editor-replace');
+
+    if ($editor === 'classic') {
+        $styles->remove('wp-block-library-theme');
+        $styles->remove('wp-block-library');
+    }
+}
+
+add_action('wp_default_styles', 'jp_wp_default_styles', 11);
+
+/**
  * Remove Jquery Migrate
  *
  * @param WP_Scripts $scripts WP_Scripts object.

@@ -10,7 +10,7 @@
                 'link_before' => '<span itemprop="name">',
                 'link_after' => '</span>',
                 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                'fallback_cb' => '',
+                'fallback_cb' => false,
             ]); ?>
             <?php btn_close_menu('js-menu-close'); ?>
         </div>

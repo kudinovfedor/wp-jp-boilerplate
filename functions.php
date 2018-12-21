@@ -1,6 +1,6 @@
 <?php
 
-//show_admin_bar(false);
+show_admin_bar(false);
 
 require_once 'inc/config.php';
 require_once 'inc/helpers.php';
@@ -12,7 +12,7 @@ require_once 'inc/cleaning.php';
 require_once 'inc/shortcodes.php';
 require_once 'inc/comment-form.php';
 
-require_once 'inc/rss-turbo.php';
+//require_once 'inc/rss-turbo.php';
 
 require_once 'inc/authenticate.php';
 require_once 'inc/admin.php';
@@ -33,8 +33,8 @@ require_once 'classes/GoogleTagManager.php';
 require_once 'classes/GoogleReCaptcha.php';
 require_once 'classes/GoogleReCaptchaCustomizer.php';
 
-require_once 'classes/ChangeSiteURL.php';
+//require_once 'classes/ChangeSiteURL.php';
 
-require_once 'classes/SRI.php';
+//require_once 'classes/SRI.php';
 
 require_once 'classes/JPWalkerComment.php';
