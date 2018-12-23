@@ -574,69 +574,6 @@ if (!function_exists('social')) {
     }
 }
 
-if (!function_exists('scroll_top')) {
-    /**
-     * Display scroll top
-     *
-     * @see get_scroll_top()
-     * @return void
-     */
-    function scroll_top()
-    {
-        echo get_scroll_top();
-    }
-}
-
-if (!function_exists('has_scroll_top')) {
-    /**
-     * Determines whether the site has a enable scroll top.
-     *
-     * @return string
-     */
-    function has_scroll_top()
-    {
-        return (bool)get_theme_mod('jp_scroll_top_enable');
-    }
-}
-
-if (!function_exists('get_scroll_top')) {
-    /**
-     * Return html markup for scroll top
-     *
-     * @return bool|string
-     */
-    function get_scroll_top()
-    {
-        if (has_scroll_top()) {
-
-            switch (get_theme_mod('jp_scroll_top_shape')) {
-                case 'circle':
-                    $shape = 'is-circle';
-                    break;
-                case 'rounded':
-                    $shape = 'is-rounded';
-                    break;
-                default:
-                    $shape = '';
-                    break;
-            }
-
-            $position = get_theme_mod('jp_scroll_top_position', 'right');
-
-            $output = sprintf(
-                '<a href="#top" class="scroll-top js-scroll-top %s %s" role="button"><span class="screen-reader-text">%s</span><i class="scroll-top--arrow"></i></a>',
-                $shape,
-                $position === 'right' ? 'is-right' : 'is-left',
-                __('Scroll to top', 'joompress')
-            );
-
-            return $output;
-        }
-
-        return false;
-    }
-}
-
 if (!function_exists('svg_sprite')) {
     /**
      * Display svg sprite markup

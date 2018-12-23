@@ -12,6 +12,7 @@ if (!class_exists('LoadMorePosts')) {
         public function __construct()
         {
             add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+            add_action('customize_register', [$this, 'customizeRegister']);
 
             if (wp_doing_ajax()) {
                 add_action('wp_ajax_load_more_posts', [$this, 'ajaxCallback']);
@@ -39,6 +40,46 @@ if (!class_exists('LoadMorePosts')) {
             if (get_theme_mod('jp_load_more_enable') && $condition) {
                 wp_enqueue_script('load-more-posts');
             }
+        }
+
+        /**
+         * Customize
+         *
+         * @param $wp_customize WP_Customize_Manager
+         * @return void
+         */
+        public function customizeRegister($wp_customize)
+        {
+            // Section Load More
+            $wp_customize->add_section('jp_load_more', [
+                'title' => 'Load More',
+                'description' => 'If this function enabled, the pagination will ignore.',
+                'panel' => 'jp_theme_options',
+            ]);
+
+            $wp_customize->add_setting('jp_load_more_enable', [
+                'default' => 0,
+                'sanitize_callback' => 'wp_validate_boolean',
+            ]);
+
+            $wp_customize->add_setting('jp_load_more_label', [
+                'default' => 'Load more posts...',
+                'sanitize_callback' => '',
+            ]);
+
+            $wp_customize->add_control('jp_load_more_enable', [
+                'label' => 'Enable/Disable',
+                'section' => 'jp_load_more',
+                'settings' => 'jp_load_more_enable',
+                'type' => 'checkbox',
+            ]);
+
+            $wp_customize->add_control('jp_load_more_label', [
+                'label' => 'Button Label',
+                'section' => 'jp_load_more',
+                'settings' => 'jp_load_more_label',
+                'type' => 'text',
+            ]);
         }
 
         /**
