@@ -229,6 +229,8 @@ if (!class_exists('LoadMorePosts')) {
                 }
             }
 
+            $thumbnails['length'] = count($thumbnails);
+
             return $thumbnails;
         }
 
@@ -249,4 +251,51 @@ if (!class_exists('LoadMorePosts')) {
     }
 
     new LoadMorePosts();
+}
+
+if (!function_exists('jp_load_more')) {
+    /**
+     * @param bool $echo
+     * @return string
+     */
+    function jp_load_more($echo = true)
+    {
+        /** @var WP_Query $wp_query */
+        global $wp_query;
+
+        $total = isset($wp_query->max_num_pages) ? intval($wp_query->max_num_pages) : 1;
+        $current = get_query_var('paged') ? intval(get_query_var('paged')) : 1;
+
+        /*$categories = get_the_category();
+        $category = $categories[0];
+        $current_category = get_queried_object();*/
+
+        $attrs = [];
+
+        $data = [
+            'post-type' => get_post_type(),
+            //'category-id' => $category->term_id,
+            //'category-name' => $category->name,
+            //'category-slug' => $category->slug,
+        ];
+
+        foreach ($data as $attr => $value) {
+            $attrs[] = sprintf('data-%s="%s"', $attr, esc_attr($value));
+        }
+
+        $output = sprintf(
+            '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
+            join($attrs, ' '), __('Load more posts...', 'joompress')
+        );
+
+        if ($total < 2) {
+            return;
+        }
+
+        if ($echo) {
+            echo $output;
+        }
+
+        return $output;
+    }
 }

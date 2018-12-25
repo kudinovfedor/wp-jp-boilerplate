@@ -259,6 +259,7 @@
                             categories.push(`<a href="${category.link}">${category.name}</a>`);
                         });
                         article += `<br><span>Categories: ${categories.join(', ')}</span>`;
+                        categories = [];
                     }
 
                     if (post.tags.length) {
@@ -266,6 +267,7 @@
                             tags.push(`<a href="${tag.link}">${tag.name}</a>`);
                         });
                         article += `<br><span>Tags: ${tags.join(', ')}</span>`;
+                        tags = [];
                     }
 
                     article += `</p>`;

@@ -814,6 +814,8 @@ if (!function_exists('jp_pagination')) {
      */
     function jp_pagination($args = [])
     {
+        /** @var WP_Rewrite $wp_rewrite */
+        /** @var WP_Query $wp_query */
         global $wp_query, $wp_rewrite;
 
         // Setting up default values based on the current URL.
@@ -980,6 +982,7 @@ if (!function_exists('jp_comments_pagination')) {
             $args['type'] = 'plain';
         }
 
+        /** @var WP_Rewrite $wp_rewrite */
         global $wp_rewrite;
 
         if (!is_singular()) {
@@ -1209,52 +1212,6 @@ if (!function_exists('get_background_login_page')) {
     }
 }
 
-if (!function_exists('jp_load_more')) {
-    /**
-     * @param bool $echo
-     * @return string
-     */
-    function jp_load_more($echo = true)
-    {
-        global $wp_query;
-
-        $total = isset($wp_query->max_num_pages) ? intval($wp_query->max_num_pages) : 1;
-        $current = get_query_var('paged') ? intval(get_query_var('paged')) : 1;
-
-        /*$categories = get_the_category();
-        $category = $categories[0];
-        $current_category = get_queried_object();*/
-
-        $attrs = [];
-
-        $data = [
-            'post-type' => get_post_type(),
-            //'category-id' => $category->term_id,
-            //'category-name' => $category->name,
-            //'category-slug' => $category->slug,
-        ];
-
-        foreach ($data as $attr => $value) {
-            $attrs[] = sprintf('data-%s="%s"', $attr, esc_attr($value));
-        }
-
-        $output = sprintf(
-            '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
-            join($attrs, ' '), __('Load more posts...', 'joompress')
-        );
-
-        if ($total < 2) {
-            return;
-        }
-
-        if ($echo) {
-            echo $output;
-        }
-
-        return $output;
-    }
-}
-
 if (!function_exists('the_custom_category')) {
     /**
      * Display category list for a post in either HTML list or custom format.
@@ -1290,6 +1247,7 @@ if (!function_exists('get_the_custom_category_list')) {
      */
     function get_the_custom_category_list($separator = '', $taxonomy = 'category', $parents = '', $post_id = false)
     {
+        /** @var WP_Rewrite $wp_rewrite */
         global $wp_rewrite;
         if (!is_object_in_taxonomy(get_post_type($post_id), $taxonomy)) {
             /** This filter is documented in wp-includes/category-template.php */
