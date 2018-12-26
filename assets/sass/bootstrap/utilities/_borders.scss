@@ -1,4 +1,4 @@
-// stylelint-disable declaration-no-important
+// stylelint-disable property-blacklist, declaration-no-important
 
 //
 // Border
@@ -52,6 +52,10 @@
 
 .rounded-circle {
   border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: $rounded-pill !important;
 }
 
 .rounded-0 {

@@ -284,7 +284,7 @@ if (!function_exists('jp_load_more')) {
         }
 
         $output = sprintf(
-            '<button class="btn btn-default js-load-more" %s type="button">%s</button>',
+            '<button class="btn btn-primary js-load-more" %s type="button">%s</button>',
             join($attrs, ' '), __('Load more posts...', 'joompress')
         );
 

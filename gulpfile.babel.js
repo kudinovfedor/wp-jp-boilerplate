@@ -63,7 +63,7 @@ gulp.task('css', () => {
 });
 
 gulp.task('babel', () => {
-    return gulp.src('assets/js/common.babel.js')
+    return gulp.src('assets/js/es6/**/*.js')
         .pipe(plumber())
         .pipe(babel())
         .pipe(uglify({
@@ -73,7 +73,6 @@ gulp.task('babel', () => {
                 beautify: true,
             },
         }))
-        .pipe(rename({basename: 'common'}))
         .pipe(gulp.dest('assets/js'));
 });
 

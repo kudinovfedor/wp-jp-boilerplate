@@ -72,7 +72,7 @@ add_filter('comment_form_defaults', 'jp_comment_form_defaults');
  */
 function jp_comment_reply_link($link, $args, $comment, $post)
 {
-    $link = str_replace('comment-reply-link', 'btn btn-default btn-sm comment-reply-link', $link);
+    $link = str_replace('comment-reply-link', 'btn btn-primary btn-sm comment-reply-link', $link);
 
     return $link;
 }

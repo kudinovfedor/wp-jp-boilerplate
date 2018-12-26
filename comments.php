@@ -47,7 +47,7 @@
     <?php endif; ?>
 
     <?php comment_form([
-        'class_submit' => 'btn btn-default',
+        'class_submit' => 'btn btn-primary',
         'submit_button' => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
     ]); ?>
 

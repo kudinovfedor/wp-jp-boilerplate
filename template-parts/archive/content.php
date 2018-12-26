@@ -53,7 +53,7 @@
     <div><?php the_excerpt(); ?></div>
 
     <p>
-        <a class="btn btn-default btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
+        <a class="btn btn-primary btn-sm" href="<?php the_permalink(); ?>"><?php _e('Read more', 'joompress'); ?></a>
     </p>
 
 </article>

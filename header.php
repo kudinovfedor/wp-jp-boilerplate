@@ -29,18 +29,18 @@
 <?php /** Sitelinks searchbox */
 if (is_front_page()) { ?>
     <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "name": "<?php bloginfo('name'); ?>",
-        "url": "<?php echo home_url('/'); ?>",
-        "description": "<?php bloginfo('description'); ?>",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "<?php echo home_url('/') . '?s={s}'; ?>",
-            "query-input": "required name=s"
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "<?php bloginfo('name'); ?>",
+            "url": "<?php echo home_url('/'); ?>",
+            "description": "<?php bloginfo('description'); ?>",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "<?php echo home_url('/') . '?s={s}'; ?>",
+                "query-input": "required name=s"
+            }
         }
-    }
     </script>
 <?php } ?>
 
