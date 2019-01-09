@@ -43,6 +43,27 @@
         }
         return extended;
     };
+    var selector = function selector(element) {
+        var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+        if (context instanceof Element) {
+            return context.querySelector(element);
+        }
+        return d.querySelector(element);
+    };
+    var selectorAll = function selectorAll(elements) {
+        var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+        var items;
+        if (context instanceof Element) {
+            items = context.querySelectorAll(elements);
+        } else {
+            items = d.querySelectorAll(elements);
+        }
+        var index = 0, length = items.length, itemsArray = [];
+        for (;index < length; index++) {
+            itemsArray.push(items[index]);
+        }
+        return itemsArray;
+    };
     var stickyHeader = function stickyHeader() {
         var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ".js-header";
         var space = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ".js-header-space";

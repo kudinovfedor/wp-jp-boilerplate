@@ -39,3 +39,6 @@ require_once 'classes/GoogleReCaptchaCustomizer.php';
 //require_once 'classes/SRI.php';
 
 require_once 'classes/JPWalkerComment.php';
+
+require_once 'classes/OpenGraph.php';
+require_once 'classes/AutoPosting.php';

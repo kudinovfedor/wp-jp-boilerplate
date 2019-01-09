@@ -59,6 +59,60 @@
     };
 
     /**
+     * Selector
+     *
+     * @description
+     * Returns the first element that is a descendant of node that matches selectors.
+     *
+     * @example
+     * selector('div');
+     * selector('div', document);
+     *
+     * @param {string} element
+     * @param {Element} [context]
+     * @returns {*}
+     */
+    const selector = (element, context = null) => {
+        if (context instanceof Element) {
+            return context.querySelector(element);
+        }
+
+        return d.querySelector(element);
+    };
+
+
+    /**
+     * Selector All
+     *
+     * @description Returns all element descendants of node that match selectors.
+     *
+     * @example
+     * selectorAll('div');
+     * selectorAll('div', document);
+     *
+     * @param {string} elements
+     * @param {Element} [context]
+     * @returns {Array<Element>}
+     */
+    const selectorAll = (elements, context = null) => {
+        let items;
+
+        if (context instanceof Element) {
+            items = context.querySelectorAll(elements);
+        } else {
+            items = d.querySelectorAll(elements);
+        }
+
+        let index = 0, length = items.length, itemsArray = [];
+
+        for (; index < length; index++) {
+            itemsArray.push(items[index]);
+        }
+
+        return itemsArray;
+    };
+
+    /**
      * Sticky Header
      *
      * @param {string} [element=.js-header]
