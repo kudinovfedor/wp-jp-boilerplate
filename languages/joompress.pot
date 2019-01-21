@@ -3,11 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2018-12-21 13:16+0000\n"
-=======
-"POT-Creation-Date: 2018-12-14 15:49+0000\n"
->>>>>>> d22814e654cd4d535db210bf8530c77e7f8ccbf1
+"POT-Creation-Date: 2019-01-21 15:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -150,6 +146,10 @@ msgstr ""
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
+#: classes/ScrollTop.php:303
+msgid "Scroll to top"
+msgstr ""
+
 #: inc/admin.php:12
 msgid "Developed by"
 msgstr ""
@@ -210,64 +210,40 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/helpers.php:630
-msgid "Scroll to top"
-msgstr ""
-
-#: inc/helpers.php:764
+#: inc/helpers.php:736
 #, php-format
-msgid "Copyright &copy; %d %s. %s"
+msgid "&copy; %d %s. %s"
 msgstr ""
 
-#: inc/helpers.php:767
+#: inc/helpers.php:739
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:796
+#: inc/helpers.php:768
 msgid "Delete This"
 msgstr ""
 
-#: inc/helpers.php:996
+#: inc/helpers.php:970
 msgid "&hellip;"
 msgstr ""
 
-#: inc/helpers.php:1064
+#: inc/helpers.php:1039
 msgid "&laquo; Previous"
 msgstr ""
 
-#: inc/helpers.php:1065
+#: inc/helpers.php:1040
 msgid "Next &raquo;"
 msgstr ""
 
-<<<<<<< HEAD
-#: inc/helpers.php:1306
-msgid "Load more posts..."
-msgstr ""
-
-#: inc/helpers.php:1375
+#: inc/helpers.php:1305
 msgid "Uncategorized"
 msgstr ""
 
-#: inc/theme-setup.php:303
+#: inc/theme-setup.php:322
 msgid "Menu in header"
 msgstr ""
 
-#: inc/theme-setup.php:304
-=======
-#: inc/helpers.php:1301
-msgid "Load more posts..."
-msgstr ""
-
-#: inc/helpers.php:1366
-msgid "Uncategorized"
-msgstr ""
-
-#: inc/theme-setup.php:304
-msgid "Menu in header"
-msgstr ""
-
-#: inc/theme-setup.php:305
->>>>>>> d22814e654cd4d535db210bf8530c77e7f8ccbf1
+#: inc/theme-setup.php:323
 msgid "Menu in footer"
 msgstr ""
 
@@ -289,6 +265,10 @@ msgstr ""
 
 #: classes/ajax/ContactForm.php:121
 msgid "Failed to send message."
+msgstr ""
+
+#: classes/ajax/LoadMorePosts.php:288
+msgid "Load more posts..."
 msgstr ""
 
 #. Name of the theme

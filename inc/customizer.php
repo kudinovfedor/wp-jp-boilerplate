@@ -309,6 +309,7 @@ function jp_customize_register($wp_customize)
     $wp_customize->add_setting('jp_social_flickr', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
     $wp_customize->add_setting('jp_social_reddit', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
     $wp_customize->add_setting('jp_social_rss', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
+    $wp_customize->add_setting('jp_social_foursquare', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
 
     $wp_customize->selective_refresh->add_partial('jp_social_vk', [
         'selector' => '.social',
@@ -402,6 +403,13 @@ function jp_customize_register($wp_customize)
         'label' => 'RSS',
         'section' => 'jp_social',
         'settings' => 'jp_social_rss',
+        'type' => 'url',
+    ]);
+
+    $wp_customize->add_control('jp_social_foursquare', [
+        'label' => 'Foursquare',
+        'section' => 'jp_social',
+        'settings' => 'jp_social_foursquare',
         'type' => 'url',
     ]);
 

@@ -456,29 +456,49 @@ if (!function_exists('get_social')) {
      */
     function get_social()
     {
+        /** @var WP_Post $post */
+        global $post;
+
+        $url = get_the_permalink();
+        $title = get_the_title();
+        $desc = has_excerpt() ? get_the_excerpt() : wp_trim_words($post->post_content, 55);
+        $thumbnail = has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url()) : '';
+
+        $not_share = ['instagram', 'youtube', 'flickr', 'rss', 'foursquare'];
+
         $_socials = [
             'vk' => [
                 'url' => get_theme_mod('jp_social_vk'),
+                // https://vk.com/dev/widget_share
+                'share' => sprintf('https://vk.com/share.php?url=%s&title=%s', $url, $title),
                 'text' => 'Vk',
                 'icon' => 'fab fa-vk',
             ],
             'twitter' => [
                 'url' => get_theme_mod('jp_social_twitter'),
+                // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
+                'share' => sprintf('https://twitter.com/intent/tweet?url=%s&text=%s', $url, $desc),
                 'text' => 'Twitter',
                 'icon' => 'fab fa-twitter',
             ],
             'facebook' => [
                 'url' => get_theme_mod('jp_social_facebook'),
+                // https://developers.facebook.com/docs/plugins/share-button
+                'share' => sprintf('https://www.facebook.com/sharer/sharer.php?u=%s', $url),
                 'text' => 'Facebook',
                 'icon' => 'fab fa-facebook-f',
             ],
             'odnoklassniki' => [
                 'url' => get_theme_mod('jp_social_odnoklassniki'),
+                // https://apiok.ru/ext/like
+                'share' => sprintf('https://connect.ok.ru/offer?url=%s&title=%s', $url, $title),
                 'text' => 'Odnoklassniki',
                 'icon' => 'fab fa-odnoklassniki',
             ],
             'linkedin' => [
                 'url' => get_theme_mod('jp_social_linkedin'),
+                // https://developer.linkedin.com/docs/share-on-linkedin
+                'share' => sprintf('https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s&summary=%s', $url, $title, $desc),
                 'text' => 'Linkedin',
                 'icon' => 'fab fa-linkedin-in',
             ],
@@ -489,6 +509,8 @@ if (!function_exists('get_social')) {
             ],
             'google-plus' => [
                 'url' => get_theme_mod('jp_social_google_plus'),
+                // https://developers.google.com/+/web/share/
+                'share' => sprintf('https://plus.google.com/share?url=%s', $url),
                 'text' => 'Google Plus',
                 'icon' => 'fab fa-google-plus-g',
             ],
@@ -499,11 +521,15 @@ if (!function_exists('get_social')) {
             ],
             'pinterest' => [
                 'url' => get_theme_mod('jp_social_pinterest'),
+                // https://developers.pinterest.com/tools/widget-builder
+                'share' => sprintf('https://www.pinterest.com/pin/create/button/?url=%s&description=%s&media=%s', $url, $desc, $thumbnail),
                 'text' => 'Pinterest',
                 'icon' => 'fab fa-pinterest-p',
             ],
             'tumblr' => [
                 'url' => get_theme_mod('jp_social_tumblr'),
+                // https://www.tumblr.com/docs/ru/share_button
+                'share' => sprintf('https://www.tumblr.com/widgets/share/tool?canonicalUrl=%s&title=%s', $url, $title),
                 'text' => 'Tumblr',
                 'icon' => 'fab fa-tumblr',
             ],
@@ -514,6 +540,8 @@ if (!function_exists('get_social')) {
             ],
             'reddit' => [
                 'url' => get_theme_mod('jp_social_reddit'),
+                // https://www.reddit.com/wiki/submitting
+                'share' => sprintf('https://www.reddit.com/submit?url=%s&title=%s', $url, $title),
                 'text' => 'Reddit',
                 'icon' => 'fab fa-reddit-alien',
             ],
@@ -521,6 +549,11 @@ if (!function_exists('get_social')) {
                 'url' => get_theme_mod('jp_social_rss'),
                 'text' => 'RSS',
                 'icon' => 'fas fa-rss',
+            ],
+            'foursquare' => [
+                'url' => get_theme_mod('jp_social_foursquare'),
+                'text' => 'Foursquare',
+                'icon' => 'fab fa-foursquare',
             ],
         ];
 
@@ -698,7 +731,7 @@ if (!function_exists('get_copyright')) {
     function get_copyright()
     {
         return sprintf(
-            __('Copyright &copy; %d %s. %s', 'joompress'),
+            __('&copy; %d %s. %s', 'joompress'),
             date('Y'),
             get_bloginfo('name'),
             __('All rights reserved', 'joompress')
