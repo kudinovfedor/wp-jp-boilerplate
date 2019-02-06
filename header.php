@@ -50,7 +50,7 @@ if (is_front_page()) { ?>
         "@context": "http://schema.org",
         "@type": "Organization",
         "name": "<?php bloginfo('name'); ?>",
-        "url": "<?php echo home_url('/'); ?>",
+        "url": "<?php echo esc_url(home_url('/')); ?>",
         "logo": "<?php echo get_logo_url(); ?>",
         "sameAs": [
             "https://www.facebook.com/organization-profile",
@@ -73,7 +73,7 @@ if (is_front_page()) { ?>
         "@context": "http://schema.org",
         "@type": "Person",
         "name": "<?php _e('Kudinov Fedor', 'joompress'); ?>",
-        "url": "<?php echo home_url('/'); ?>",
+        "url": "<?php echo esc_url(home_url('/')); ?>",
         "sameAs": [
             "https://www.facebook.com/your-profile",
             "https://twitter.com/your-profile",
@@ -120,8 +120,7 @@ if (is_single()) {
                     "url": "<?php echo get_logo_url(); ?>"
                 }
             },
-            "description": "<?php the_excerpt(); ?>",
-            "articleBody": "<?php the_content(); ?>"
+            "description": "<?php echo strip_tags(get_the_excerpt()); ?>"
         }
     </script>
 <?php } ?>

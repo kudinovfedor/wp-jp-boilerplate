@@ -1,34 +1,45 @@
-<?php $image = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
-<script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "<?php the_permalink(); ?>"
-        },
-        "headline": "<?php the_title(); ?>",
-        "image": "<?php echo $image; ?>",
-        "datePublished": "<?php echo get_the_date('c'); ?>",
-        "dateModified": "<?php the_modified_date('c'); ?>",
-        "author": {
-            "@type": "Person",
-            "name": "<?php the_author(); ?>"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "<?php bloginfo('name'); ?>",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "<?php echo get_logo_url(); ?>"
-            }
-        },
-        "articleSection": "<?php the_category(', '); ?>",
-        "description": "<?php the_excerpt(); ?>",
-        "articleBody": "<?php the_content(); ?>"
-    }
-</script>
 <article id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6 col-md-4'); ?>>
+    <?php
+    $categories = get_the_terms(get_the_ID(), 'category');
+
+    $sections = [];
+
+    foreach ($categories as $category) {
+        $sections[] = $category->name;
+    }
+
+    $section = esc_html(join(', ', $sections));
+    $image = esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full'));
+    ?>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "<?php the_permalink(); ?>"
+            },
+            "headline": "<?php the_title(); ?>",
+            "image": "<?php echo $image; ?>",
+            "datePublished": "<?php echo get_the_date('c'); ?>",
+            "dateModified": "<?php the_modified_date('c'); ?>",
+            "author": {
+                "@type": "Person",
+                "name": "<?php the_author(); ?>"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "<?php bloginfo('name'); ?>",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "<?php echo get_logo_url(); ?>"
+                }
+            },
+            "articleSection": "<?php echo $section; ?>",
+            "description": "<?php echo strip_tags(get_the_excerpt()); ?>"
+        }
+    </script>
+
     <?php edit_post_link(); ?>
     <?php delete_post_link(); ?>
 

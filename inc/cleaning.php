@@ -3,7 +3,7 @@
 /**
  * Disable the Emoji
  *
- * r@return void
+ * @return void
  */
 function jp_disable_emojis()
 {

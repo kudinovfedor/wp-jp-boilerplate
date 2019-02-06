@@ -75,7 +75,7 @@
 #    #Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
 #    # Content Security Policy (CSP)
 #    # [Content-Security-Policy || Content-Security-Policy-Report-Only]
-#    Header always set Content-Security-Policy-Report-Only "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; form-action 'self'; frame-src 'self'; report-uri /csp-report.php"
+#    Header always set Content-Security-Policy-Report-Only "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'; font-src 'self'; form-action 'self'; child-src 'self'; report-uri /csp-report.php"
 #    # HTTP Public Key Pinning (HPKP)
 #    #Header always set Public-Key-Pins "pin-sha256=''; pin-sha256=''; pin-sha256=''; includeSubdomains; max-age=2592000"
 #    # X-Frame-Options

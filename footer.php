@@ -1,28 +1,30 @@
-</div><!-- /END WRAPPER -->
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <?php get_template_part('template-parts/navigation/menu', 'footer'); ?>
-        <div class="copyright text-center"><?php copyright(); ?></div>
-    </div>
-</footer>
-<!-- /END FOOTER -->
-<script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WPFooter",
-        "copyrightYear": "<?php echo date('Y'); ?>",
-        "copyrightHolder": "<?php bloginfo('name'); ?>"
-    }
-</script>
+    </div><!-- /END WRAPPER -->
 
-<?php scroll_top(); ?>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <?php get_template_part('template-parts/navigation/menu', 'footer'); ?>
+            <div class="copyright text-center"><?php copyright(); ?></div>
+        </div>
+    </footer>
+    <!-- /END FOOTER -->
 
-<span class="blackout js-blackout"></span>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WPFooter",
+            "copyrightYear": "<?php echo date('Y'); ?>",
+            "copyrightHolder": "<?php bloginfo('name'); ?>"
+        }
+    </script>
 
-<div class="is-hide"><?php svg_sprite(); ?></div>
+    <?php scroll_top(); ?>
 
-<?php wp_footer(); ?>
+    <span class="blackout js-blackout"></span>
 
-</body>
+    <div class="is-hide"><?php svg_sprite(); ?></div>
+
+    <?php wp_footer(); ?>
+
+    </body>
 </html>

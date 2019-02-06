@@ -187,9 +187,9 @@ if (!class_exists('OpenGraph')) {
 
                 if (has_post_thumbnail()) {
                     $attachmentId = get_post_thumbnail_id($post->ID);
-                    $attachmentImage = wp_get_attachment_image_src($attachmentId, 'full');
+                    $attachmentImageUrl = wp_get_attachment_image_url($attachmentId, 'full');
 
-                    $output .= '<meta name="twitter:image" content="' . $attachmentImage[0] . '">';
+                    $output .= '<meta name="twitter:image" content="' . $attachmentImageUrl . '">';
                 }
 
                 if ($creator = get_the_author_meta('twitter', $post->post_author)) {

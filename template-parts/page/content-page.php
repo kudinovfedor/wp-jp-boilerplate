@@ -9,7 +9,7 @@
         },
         "headline": "<?php the_title(); ?>",
         "image": "<?php echo $image; ?>",
-        "datePublished": "<?php echo get_the_date('c'); ?>",
+        "datePublished": "<?php the_date('c'); ?>",
         "dateModified": "<?php the_modified_date('c'); ?>",
         "author": {
             "@type": "Person",
@@ -23,9 +23,7 @@
                 "url": "<?php echo get_logo_url(); ?>"
             }
         },
-        "articleSection": "<?php the_category(', '); ?>",
-        "description": "<?php the_excerpt(); ?>",
-        "articleBody": "<?php the_content(); ?>"
+        "description": "<?php echo strip_tags(get_the_excerpt()); ?>"
     }
 </script>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
