@@ -118,7 +118,7 @@
         if (!menu || !trigger) return;
         var close = d.querySelector(settings.close);
         var blackout = d.querySelector(settings.blackout);
-        var event = "ontouchstart" in window ? "touchstart" : "click";
+        var event = "ontouchend" in window ? "touchend" : "click";
         trigger.addEventListener(event, function() {
             menu.classList.toggle("is-opened");
             trigger.classList.toggle("is-opened");

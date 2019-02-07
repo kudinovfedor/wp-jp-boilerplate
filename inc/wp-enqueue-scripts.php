@@ -7,13 +7,16 @@ function jp_enqueue_style_script()
 {
     $suffix = SCRIPT_DEBUG ? '' : '.min';
 
+    $styleCss = JP_TEMPLATE . "/style{$suffix}.css";
+    $commonJS = JP_JS . "/common{$suffix}.js";
+
     $libs = [
         'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
         'html5shiv' => 'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js',
         'respond' => 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
     ];
 
-    wp_enqueue_style('jp-style', JP_TEMPLATE . '/style' . $suffix . '.css', [], null);
+    wp_enqueue_style('jp-style', $styleCss, [], null);
 
     wp_register_script('jp-style-ie', JP_CSS . "/ie.css", ['jp-style'], null);
 
@@ -30,7 +33,7 @@ function jp_enqueue_style_script()
 
     wp_register_script('jp-validate', $libs['validate'], ['jquery'], null, true);
 
-    wp_register_script('jp-common', JP_JS . '/common' . $suffix . '.js', ['jquery'], null, true);
+    wp_register_script('jp-common', $commonJS, ['jquery'], null, true);
     wp_register_script('jp-skip-link-focus-fix', JP_JS . '/skip-link-focus-fix.js', [], null, true);
 
     wp_enqueue_script('jp-common');
@@ -43,6 +46,9 @@ function jp_enqueue_style_script()
         wp_enqueue_script('comment-reply');
         wp_enqueue_script('jp-validate');
     }
+
+    pushPreloadFile($styleCss, 'style');
+    pushPreloadFile($commonJS, 'script');
 }
 
 add_action('wp_enqueue_scripts', 'jp_enqueue_style_script');
@@ -77,16 +83,16 @@ function jp_remove_jquery_migrate($scripts)
     }
 
     $suffix = SCRIPT_DEBUG ? '' : '.min';
-    $jquery_version = '1.12.4';
+    $jquery_version = '3.3.1';
 
     $scripts->remove('jquery');
     $scripts->add('jquery', false, ['jquery-core'], $jquery_version);
 
     $scripts->remove('jquery-core');
+    //$scripts->add('jquery-core', JP_JS . '/libs/jquery' . $suffix . '.js', [], null, 1);
     $scripts->add('jquery-core',
         'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $jquery_version . '/jquery' . $suffix . '.js', [],
         $jquery_version, ['in_footer' => true]);
-    //$scripts->add('jquery-core', JP_JS . '/libs/jquery' . $suffix . '.js', [], null, 1);
 
     $scripts->add_data('jquery', 'group', 1);
     $scripts->add_data('jquery-core', 'group', 1);

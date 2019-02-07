@@ -150,42 +150,31 @@ if (!function_exists('get_logo')) {
     }
 }
 
-if (!function_exists('get_hamburger')) {
+if (!function_exists('hamburger')) {
     /**
-     * Return Hamburger HTML Markup
+     * Hamburger HTML Markup
      *
      * @param string $class
+     * @param bool $echo
      *
-     * @return string
+     * @return string|void
      */
-    function get_hamburger($class = 'js-hamburger')
+    function hamburger($class = 'js-hamburger', $echo = true)
     {
-        $hamburger_box = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
+        $box = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
 
-        $hamburger_markup = sprintf(
+        $html = sprintf(
             '<button class="hamburger %s" type="button" tabindex="0" aria-label="%s">%s</button>',
             esc_attr($class),
             __('Trigger mobile menu.', 'joompress'),
-            $hamburger_box
+            $box
         );
 
-        return $hamburger_markup;
-    }
-}
-
-if (!function_exists('hamburger')) {
-    /**
-     * Display Hamburger HTML Markup
-     *
-     * @see get_hamburger()
-     *
-     * @param string $class
-     *
-     * @return void
-     */
-    function hamburger($class = 'js-hamburger')
-    {
-        echo get_hamburger($class);
+        if ($echo) {
+            echo $html;
+        } else {
+            return $html;
+        }
     }
 }
 
@@ -200,37 +189,28 @@ if (!function_exists('btn_close_menu')) {
     }
 }
 
-if (!function_exists('get_skip_to_content')) {
+if (!function_exists('skip_to_content')) {
     /**
-     * Return Skip To Content HTML Markup
+     * Skip To Content HTML Markup
      *
      * @param string $id
+     * @param bool $echo
      *
-     * @return string
+     * @return string|void
      */
-    function get_skip_to_content($id = 'content')
+    function skip_to_content($id = 'content', $echo = true)
     {
-        return sprintf(
+        $html = sprintf(
             '<a class="skip-link screen-reader-text" href="#%s" tabindex="0">%s</a>',
             esc_attr($id),
             __('Skip to content', 'joompress')
         );
-    }
-}
 
-if (!function_exists('skip_to_content')) {
-    /**
-     * Display Skip To Content HTML Markup
-     *
-     * @see get_skip_to_content()
-     *
-     * @param string $id
-     *
-     * @return void
-     */
-    function skip_to_content($id = 'content')
-    {
-        echo get_skip_to_content($id);
+        if ($echo) {
+            echo $html;
+        } else {
+            return $html;
+        }
     }
 }
 
@@ -340,317 +320,127 @@ if (!function_exists('phones')) {
     }
 }
 
-if (!function_exists('has_messengers')) {
-    /**
-     * Determines whether the site has a messenger.
-     *
-     * @see get_messengers()
-     * @return bool
-     */
-    function has_messengers()
-    {
-        return (bool)get_messengers();
-    }
-}
-
 if (!function_exists('get_messengers')) {
     /**
-     * Return Messengers in array
+     * Get Messengers
+     *
+     * @see Messengers::getMessengers()
      *
      * @return array
      */
     function get_messengers()
     {
-        $_messengers = [
-            'skype' => [
-                'tel' => get_theme_mod('jp_messenger_skype'),
-                'text' => 'Skype',
-                'icon' => 'fab fa-skype',
-            ],
-            'viber' => [
-                'tel' => get_theme_mod('jp_messenger_viber'),
-                'text' => 'Viber',
-                'icon' => 'fab fa-viber',
-            ],
-            'whatsapp' => [
-                'tel' => get_theme_mod('jp_messenger_whatsapp'),
-                'text' => 'WhatsApp',
-                'icon' => 'fab fa-whatsapp',
-            ],
-            'telegram' => [
-                'tel' => get_theme_mod('jp_messenger_telegram'),
-                'text' => 'Telegram',
-                'icon' => 'fab fa-telegram-plane',
-            ],
-        ];
+        if (class_exists('Messengers')) {
+            return (new Messengers())->getMessengers();
+        }
 
-        $messengers = array_filter($_messengers, function ($value) {
-            return !empty($value['tel']);
-        });
+        return [];
 
-        return $messengers;
     }
 }
 
-if (!function_exists('messenger')) {
+if (!function_exists('messengers')) {
     /**
-     * Display Messengers
+     * Messengers
      *
-     * @see has_messengers()
-     * @see get_messengers()
+     * @see Messengers::getMarkup()
      *
      * @return void
      */
     function messengers()
     {
-        if (has_messengers()) {
-
-            $items = '';
-
-            foreach (get_messengers() as $name => $messenger) {
-
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($messenger['icon']),
-                    esc_attr($messenger['text'])
-                );
-
-                $link = sprintf(
-                    '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s</a>',
-                    esc_attr($name),
-                    esc_attr(get_phone_number($messenger['tel'])),
-                    $icon
-                );
-
-                $item = sprintf('<li class="messenger-item">%s</li>', $link);
-
-                $items .= $item . PHP_EOL;
-            }
-
-            $list = sprintf('<ul class="messenger">%s</ul>', $items);
-
-            echo $list;
-
+        if (class_exists('Messengers')) {
+            echo (new Messengers())->getMarkup();
         }
-    }
-}
-
-if (!function_exists('has_social')) {
-    /**
-     * Determines whether the site has a social links.
-     *
-     * @see get_social()
-     * @return bool
-     */
-    function has_social()
-    {
-        return (bool)get_social();
     }
 }
 
 if (!function_exists('get_social')) {
     /**
-     * Return Social Link in array
+     * Get Social Networks
+     *
+     * @see Social::getSocial()
+     *
+     * @param array $options
      *
      * @return array
      */
-    function get_social()
+    function get_social($options = [])
     {
-        /** @var WP_Post $post */
-        global $post;
+        if (class_exists('Social')) {
+            return (new Social())->getSocial($options);
+        }
 
-        $url = get_the_permalink();
-        $title = get_the_title();
-        $desc = has_excerpt() ? get_the_excerpt() : wp_trim_words($post->post_content, 55);
-        $thumbnail = has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url()) : '';
+        return [];
 
-        $not_share = ['instagram', 'youtube', 'flickr', 'rss', 'foursquare'];
-
-        $_socials = [
-            'vk' => [
-                'url' => get_theme_mod('jp_social_vk'),
-                // https://vk.com/dev/widget_share
-                'share' => sprintf('https://vk.com/share.php?url=%s&title=%s', $url, $title),
-                'text' => 'Vk',
-                'icon' => 'fab fa-vk',
-            ],
-            'twitter' => [
-                'url' => get_theme_mod('jp_social_twitter'),
-                // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
-                'share' => sprintf('https://twitter.com/intent/tweet?url=%s&text=%s', $url, $desc),
-                'text' => 'Twitter',
-                'icon' => 'fab fa-twitter',
-            ],
-            'facebook' => [
-                'url' => get_theme_mod('jp_social_facebook'),
-                // https://developers.facebook.com/docs/plugins/share-button
-                'share' => sprintf('https://www.facebook.com/sharer/sharer.php?u=%s', $url),
-                'text' => 'Facebook',
-                'icon' => 'fab fa-facebook-f',
-            ],
-            'odnoklassniki' => [
-                'url' => get_theme_mod('jp_social_odnoklassniki'),
-                // https://apiok.ru/ext/like
-                'share' => sprintf('https://connect.ok.ru/offer?url=%s&title=%s', $url, $title),
-                'text' => 'Odnoklassniki',
-                'icon' => 'fab fa-odnoklassniki',
-            ],
-            'linkedin' => [
-                'url' => get_theme_mod('jp_social_linkedin'),
-                // https://developer.linkedin.com/docs/share-on-linkedin
-                'share' => sprintf('https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s&summary=%s', $url, $title, $desc),
-                'text' => 'Linkedin',
-                'icon' => 'fab fa-linkedin-in',
-            ],
-            'instagram' => [
-                'url' => get_theme_mod('jp_social_instagram'),
-                'text' => 'Instagram',
-                'icon' => 'fab fa-instagram',
-            ],
-            'google-plus' => [
-                'url' => get_theme_mod('jp_social_google_plus'),
-                // https://developers.google.com/+/web/share/
-                'share' => sprintf('https://plus.google.com/share?url=%s', $url),
-                'text' => 'Google Plus',
-                'icon' => 'fab fa-google-plus-g',
-            ],
-            'youtube' => [
-                'url' => get_theme_mod('jp_social_youtube'),
-                'text' => 'YouTube',
-                'icon' => 'fab fa-youtube',
-            ],
-            'pinterest' => [
-                'url' => get_theme_mod('jp_social_pinterest'),
-                // https://developers.pinterest.com/tools/widget-builder
-                'share' => sprintf('https://www.pinterest.com/pin/create/button/?url=%s&description=%s&media=%s', $url, $desc, $thumbnail),
-                'text' => 'Pinterest',
-                'icon' => 'fab fa-pinterest-p',
-            ],
-            'tumblr' => [
-                'url' => get_theme_mod('jp_social_tumblr'),
-                // https://www.tumblr.com/docs/ru/share_button
-                'share' => sprintf('https://www.tumblr.com/widgets/share/tool?canonicalUrl=%s&title=%s', $url, $title),
-                'text' => 'Tumblr',
-                'icon' => 'fab fa-tumblr',
-            ],
-            'flickr' => [
-                'url' => get_theme_mod('jp_social_flickr'),
-                'text' => 'Flickr',
-                'icon' => 'fab fa-flickr',
-            ],
-            'reddit' => [
-                'url' => get_theme_mod('jp_social_reddit'),
-                // https://www.reddit.com/wiki/submitting
-                'share' => sprintf('https://www.reddit.com/submit?url=%s&title=%s', $url, $title),
-                'text' => 'Reddit',
-                'icon' => 'fab fa-reddit-alien',
-            ],
-            'rss' => [
-                'url' => get_theme_mod('jp_social_rss'),
-                'text' => 'RSS',
-                'icon' => 'fas fa-rss',
-            ],
-            'foursquare' => [
-                'url' => get_theme_mod('jp_social_foursquare'),
-                'text' => 'Foursquare',
-                'icon' => 'fab fa-foursquare',
-            ],
-        ];
-
-        $socials = array_filter($_socials, function ($value) {
-            return $value['url'] !== '#' && !empty($value['url']) && filter_var($value['url'], FILTER_VALIDATE_URL);
-        });
-
-        return $socials;
     }
 }
 
 if (!function_exists('social')) {
     /**
-     * Display Social Networks
+     * Social Networks
      *
-     * @see has_social()
-     * @see get_social()
+     * @see Social::getMarkup()
+     *
+     * @param array $options
      *
      * @return void
      */
-    function social()
+    function social($options = [])
     {
-        if (has_social()) {
-
-            $items = '';
-
-            foreach (get_social() as $name => $social) {
-
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($social['icon']),
-                    esc_attr($social['text'])
-                );
-
-                $link = sprintf(
-                    '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s</a>',
-                    esc_attr($name),
-                    esc_attr(esc_url($social['url'])),
-                    $icon
-                );
-
-                $item = sprintf('<li class="social-item">%s</li>', $link);
-
-                $items .= $item . PHP_EOL;
-            }
-
-            $list = sprintf('<ul class="social">%s</ul>', $items);
-
-            echo $list;
+        if (class_exists('Social')) {
+            echo (new Social())->getMarkup($options);
         }
     }
 }
 
-if (!function_exists('svg_sprite')) {
+if (!function_exists('scroll_top')) {
     /**
-     * Display svg sprite markup
+     * HTML Markup Scroll Top
      *
-     * @see get_svg_sprite()
+     * @see ScrollTop::getMarkup()
+     *
      * @return void
      */
-    function svg_sprite()
+    function scroll_top()
     {
-        echo get_svg_sprite();
-    }
-}
-
-if (!function_exists('has_svg_sprite')) {
-    /**
-     * Determines file exist and file size > 0.
-     *
-     * @param string $file SVG Sprite file
-     *
-     * @return bool
-     */
-    function has_svg_spite($file)
-    {
-        return file_exists($file) && filesize($file);
+        if (class_exists('ScrollTop')) {
+            echo (new ScrollTop())->getMarkup();
+        }
     }
 }
 
 if (!function_exists('get_svg_sprite')) {
     /**
-     * Return svg sprite markup
+     * Get SVG Sprite markup
      *
      * @return string
      */
     function get_svg_sprite()
     {
-        $svg_file = get_template_directory() . '/assets/img/sprite.svg';
+        $filename = get_template_directory() . '/assets/img/sprite.svg';
 
         ob_start();
 
-        if (has_svg_spite($svg_file)) {
-            load_template($svg_file);
+        if (file_exists($filename) && filesize($filename)) {
+            load_template($filename);
         }
 
         return ob_get_clean();
+    }
+}
+
+if (!function_exists('svg_sprite')) {
+    /**
+     * SVG Sprite markup
+     *
+     * @see get_svg_sprite()
+     *
+     * @return void
+     */
+    function svg_sprite()
+    {
+        echo get_svg_sprite();
     }
 }
 
@@ -711,31 +501,26 @@ if (!function_exists('get_analytics_tracking_code')) {
 
 if (!function_exists('copyright')) {
     /**
-     * Display copyright info
+     * Copyright Info
      *
-     * @see get_copyright()
-     * @return void
-     */
-    function copyright()
-    {
-        echo get_copyright();
-    }
-}
-
-if (!function_exists('get_copyright')) {
-    /**
-     * Return copyright info
+     * @param bool $echo
      *
-     * @return string Copyright info
+     * @return string|void
      */
-    function get_copyright()
+    function copyright($echo = true)
     {
-        return sprintf(
+        $copyright = sprintf(
             __('&copy; %d %s. %s', 'joompress'),
             date('Y'),
             get_bloginfo('name'),
             __('All rights reserved', 'joompress')
         );
+
+        if ($echo) {
+            echo $copyright;
+        } else {
+            return $copyright;
+        }
     }
 }
 
@@ -842,8 +627,11 @@ if (!function_exists('jp_get_ip')) {
 
 if (!function_exists('jp_pagination')) {
     /**
+     * Pagination
+     *
      * @param array $args
-     * @return array
+     *
+     * @return array|string
      */
     function jp_pagination($args = [])
     {
@@ -1242,6 +1030,21 @@ if (!function_exists('get_background_login_page')) {
         }
 
         return trim($style);
+    }
+}
+
+if (!function_exists('pushPreloadFile')) {
+    /**
+     * Push Preload File
+     *
+     * @param string $path - Path to the resource to be preloaded in the href attribute
+     * @param string $type - The type of resource you are preloading in the as attribute
+     *
+     * @return void
+     */
+    function pushPreloadFile($path, $type = 'style')
+    {
+        header("Link: <{$path}>; rel=preload; as={$type}", false);
     }
 }
 

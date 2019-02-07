@@ -47,54 +47,6 @@ if (!function_exists('jp_polylang_shortcode')) {
     add_shortcode('jp_polylang', 'jp_polylang_shortcode');
 }
 
-if (!function_exists('jp_social_shortcode')) {
-    /**
-     * Add Shortcode Socials
-     *
-     * @param $atts
-     *
-     * @return string
-     */
-    function jp_social_shortcode($atts)
-    {
-
-        // Attributes
-        $atts = shortcode_atts(
-            [],
-            $atts
-        );
-
-        $output = '';
-
-        if (has_social()) {
-            $items = '';
-
-            foreach (get_social() as $name => $social) {
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($social['icon']), esc_attr($social['text'])
-                );
-
-                $link = sprintf(
-                    '<a class="social-link social-%s" href="%s" target="_blank">%s</a>',
-                    esc_attr($name), esc_attr(esc_url($social['url'])), $icon
-                );
-
-                $item = sprintf('<li class="social-item">%s</li>', $link);
-
-                $items .= $item . PHP_EOL;
-            }
-
-            $output = sprintf('<ul class="social">%s</ul>', $items);
-        }
-
-        return $output;
-
-    }
-
-    add_shortcode('jp_social', 'jp_social_shortcode');
-}
-
 if (!function_exists('jp_phones_shortcode')) {
     /**
      * Add Shortcode Phones
@@ -139,57 +91,6 @@ if (!function_exists('jp_phones_shortcode')) {
     }
 
     add_shortcode('jp_phones', 'jp_phones_shortcode');
-}
-
-if (!function_exists('jp_messengers_shortcode')) {
-    /**
-     * Add Shortcode Messengers
-     *
-     * @param $atts
-     *
-     * @return string
-     */
-    function jp_messengers_shortcode($atts)
-    {
-
-        // Attributes
-        $atts = shortcode_atts(
-            [],
-            $atts
-        );
-
-        $output = '';
-
-        if (has_messengers()) {
-            $items = '';
-
-            foreach (get_messengers() as $name => $messenger) {
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($messenger['icon']),
-                    esc_attr($messenger['text'])
-                );
-
-                $link = sprintf(
-                    '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s</a>',
-                    esc_attr($name),
-                    esc_attr(get_phone_number($messenger['tel'])),
-                    $icon
-                );
-
-                $item = sprintf('<li class="messenger-item">%s</li>', $link);
-
-                $items .= $item . PHP_EOL;
-            }
-
-            $output = sprintf('<ul class="messenger">%s</ul>', $items);
-        }
-
-        return $output;
-
-    }
-
-    add_shortcode('jp_messengers', 'jp_messengers_shortcode');
 }
 
 if (!function_exists('jp_sitemap_shortcode')) {

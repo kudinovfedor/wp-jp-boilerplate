@@ -45,36 +45,36 @@ if (!class_exists('LoadMorePosts')) {
         /**
          * Customize
          *
-         * @param $wp_customize WP_Customize_Manager
+         * @param $customize WP_Customize_Manager
          * @return void
          */
-        public function customizeRegister($wp_customize)
+        public function customizeRegister($customize)
         {
             // Section Load More
-            $wp_customize->add_section('jp_load_more', [
+            $customize->add_section('jp_load_more', [
                 'title' => 'Load More',
                 'description' => 'If this function enabled, the pagination will ignore.',
                 'panel' => 'jp_theme_options',
             ]);
 
-            $wp_customize->add_setting('jp_load_more_enable', [
+            $customize->add_setting('jp_load_more_enable', [
                 'default' => 0,
                 'sanitize_callback' => 'wp_validate_boolean',
             ]);
 
-            $wp_customize->add_setting('jp_load_more_label', [
+            $customize->add_setting('jp_load_more_label', [
                 'default' => 'Load more posts...',
                 'sanitize_callback' => '',
             ]);
 
-            $wp_customize->add_control('jp_load_more_enable', [
+            $customize->add_control('jp_load_more_enable', [
                 'label' => 'Enable/Disable',
                 'section' => 'jp_load_more',
                 'settings' => 'jp_load_more_enable',
                 'type' => 'checkbox',
             ]);
 
-            $wp_customize->add_control('jp_load_more_label', [
+            $customize->add_control('jp_load_more_label', [
                 'label' => 'Button Label',
                 'section' => 'jp_load_more',
                 'settings' => 'jp_load_more_label',

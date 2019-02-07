@@ -200,7 +200,7 @@
 
         const close = d.querySelector(settings.close);
         const blackout = d.querySelector(settings.blackout);
-        const event = ('ontouchstart' in window ? 'touchstart' : 'click');
+        const event = ('ontouchend' in window ? 'touchend' : 'click');
 
         trigger.addEventListener(event, () => {
             menu.classList.toggle('is-opened');

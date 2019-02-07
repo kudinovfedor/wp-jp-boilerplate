@@ -84,11 +84,11 @@ if (!class_exists('AutoPosting')) {
         }
 
         /**
-         * @param $wp_customize WP_Customize_Manager
+         * @param $customize WP_Customize_Manager
          */
-        public function customizeRegister($wp_customize)
+        public function customizeRegister($customize)
         {
-            $wp_customize->add_panel('auto-posting', [
+            $customize->add_panel('auto-posting', [
                 'title' => 'AutoPosting',
                 'description' => '',
                 'priority' => 205,
@@ -131,7 +131,7 @@ if (!class_exists('AutoPosting')) {
                     $args['description_hidden'] = $section['description_hidden'];
                 }
 
-                $wp_customize->add_section($section['id'], $args);
+                $customize->add_section($section['id'], $args);
             }
 
             $vk = [
@@ -251,7 +251,7 @@ if (!class_exists('AutoPosting')) {
                 $setting = $item['setting'];
                 $control = $item['control'];
 
-                $wp_customize->add_setting($item['id'], [
+                $customize->add_setting($item['id'], [
                     'default' => $setting['default'],
                     'sanitize_callback' => $setting['sanitize_callback'],
                 ]);
@@ -272,7 +272,7 @@ if (!class_exists('AutoPosting')) {
                         break;
                 }
 
-                $wp_customize->add_control($item['id'], $args);
+                $customize->add_control($item['id'], $args);
             }
         }
     }

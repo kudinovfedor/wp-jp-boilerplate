@@ -3,30 +3,30 @@
 /**
  * Customize
  *
- * @param $wp_customize WP_Customize_Manager
+ * @param $customize WP_Customize_Manager
  */
-function jp_customize_register($wp_customize)
+function jp_customize_register($customize)
 {
-    $wp_customize->get_setting('blogname')->transport = 'postMessage';
-    $wp_customize->get_setting('blogdescription')->transport = 'postMessage';
-    $wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
-    $wp_customize->get_setting('background_color')->transport = 'postMessage';
+    $customize->get_setting('blogname')->transport = 'postMessage';
+    $customize->get_setting('blogdescription')->transport = 'postMessage';
+    $customize->get_setting('header_textcolor')->transport = 'postMessage';
+    $customize->get_setting('background_color')->transport = 'postMessage';
 
-    $wp_customize->selective_refresh->add_partial('blogname', [
+    $customize->selective_refresh->add_partial('blogname', [
         'selector' => '.blog-name',
         'render_callback' => function () {
             return get_bloginfo('name', 'display');
         },
     ]);
 
-    $wp_customize->selective_refresh->add_partial('blogdescription', [
+    $customize->selective_refresh->add_partial('blogdescription', [
         'selector' => '.blog-description',
         'render_callback' => function () {
             return get_bloginfo('description', 'display');
         },
     ]);
 
-    $wp_customize->selective_refresh->add_partial('custom_logo', [
+    $customize->selective_refresh->add_partial('custom_logo', [
         'selector' => '.logo',
         'render_callback' => function () {
             return get_custom_logo();
@@ -34,37 +34,37 @@ function jp_customize_register($wp_customize)
     ]);
 
     // Panel Theme Options
-    $wp_customize->add_panel('jp_theme_options', [
+    $customize->add_panel('jp_theme_options', [
         'title' => 'Theme Options',
         'description' => 'Theme Options Customizer',
         'priority' => 201,
     ]);
 
     // Section Analytics Tracking Code
-    $wp_customize->add_section('jp_analytics', [
+    $customize->add_section('jp_analytics', [
         'title' => 'Analytics',
         'description' => 'Analytics Tracking Code',
         'panel' => 'jp_theme_options',
     ]);
 
-    $wp_customize->add_setting('jp_analytics_google_placed', [
+    $customize->add_setting('jp_analytics_google_placed', [
         'default' => 'body',
         'sanitize_callback' => 'sanitize_select',
     ]);
-    $wp_customize->add_setting('jp_analytics_yandex_placed', [
+    $customize->add_setting('jp_analytics_yandex_placed', [
         'default' => 'body',
         'sanitize_callback' => 'sanitize_select',
     ]);
-    $wp_customize->add_setting('jp_analytics_custom_placed', [
+    $customize->add_setting('jp_analytics_custom_placed', [
         'default' => 'body',
         'sanitize_callback' => 'sanitize_select',
     ]);
 
-    $wp_customize->add_setting('jp_analytics_google', ['sanitize_callback' => 'esc_js',]);
-    $wp_customize->add_setting('jp_analytics_yandex', ['sanitize_callback' => 'esc_js',]);
-    $wp_customize->add_setting('jp_analytics_custom', ['sanitize_callback' => 'esc_js',]);
+    $customize->add_setting('jp_analytics_google', ['sanitize_callback' => 'esc_js',]);
+    $customize->add_setting('jp_analytics_yandex', ['sanitize_callback' => 'esc_js',]);
+    $customize->add_setting('jp_analytics_custom', ['sanitize_callback' => 'esc_js',]);
 
-    $wp_customize->add_control('jp_analytics_google_placed', [
+    $customize->add_control('jp_analytics_google_placed', [
         'label' => 'Google Analytics',
         'description' => 'Placed (head/body)',
         'section' => 'jp_analytics',
@@ -76,7 +76,7 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_google', [
+    $customize->add_control(new WP_Customize_Code_Editor_Control($customize, 'jp_analytics_google', [
         'description' => 'Paste tracking code here &dArr;',
         'section' => 'jp_analytics',
         'settings' => 'jp_analytics_google',
@@ -86,7 +86,7 @@ function jp_customize_register($wp_customize)
         ],
     ]));
 
-    $wp_customize->add_control('jp_analytics_yandex_placed', [
+    $customize->add_control('jp_analytics_yandex_placed', [
         'label' => 'Yandex Metrika',
         'description' => 'Placed (head/body)',
         'section' => 'jp_analytics',
@@ -98,7 +98,7 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_yandex', [
+    $customize->add_control(new WP_Customize_Code_Editor_Control($customize, 'jp_analytics_yandex', [
         'description' => 'Paste tracking code here &dArr;',
         'section' => 'jp_analytics',
         'settings' => 'jp_analytics_yandex',
@@ -108,7 +108,7 @@ function jp_customize_register($wp_customize)
         ],
     ]));
 
-    $wp_customize->add_control('jp_analytics_custom_placed', [
+    $customize->add_control('jp_analytics_custom_placed', [
         'label' => 'Custom Analytics',
         'description' => 'Placed (head/body)',
         'section' => 'jp_analytics',
@@ -120,7 +120,7 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Code_Editor_Control($wp_customize, 'jp_analytics_custom', [
+    $customize->add_control(new WP_Customize_Code_Editor_Control($customize, 'jp_analytics_custom', [
         'description' => 'Paste tracking code here &dArr;',
         'section' => 'jp_analytics',
         'settings' => 'jp_analytics_custom',
@@ -131,53 +131,53 @@ function jp_customize_register($wp_customize)
     ]));
 
     // Section Login
-    $wp_customize->add_section('jp_login', [
+    $customize->add_section('jp_login', [
         'title' => 'Login',
         'description' => 'Customizer Custom Login logo',
         'panel' => 'jp_theme_options',
     ]);
 
-    $wp_customize->add_setting('jp_login_logo', [
+    $customize->add_setting('jp_login_logo', [
         'default' => JP_IMG . '/login-logo.png',
         'sanitize_callback' => 'esc_url_raw',
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'jp_login_logo', [
+    $customize->add_control(new WP_Customize_Image_Control($customize, 'jp_login_logo', [
         'label' => 'Logo',
         'description' => 'Image size 80x80 px',
         'section' => 'jp_login',
         'settings' => 'jp_login_logo',
     ]));
 
-    $wp_customize->add_setting('jp_login_background_color', [
+    $customize->add_setting('jp_login_background_color', [
         'default' => '',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_hex_color_no_hash',
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'jp_login_background_color', [
+    $customize->add_control(new WP_Customize_Color_Control($customize, 'jp_login_background_color', [
         'label' => 'Background Color',
         'section' => 'jp_login',
     ]));
 
-    $wp_customize->add_setting('jp_login_background_image', [
+    $customize->add_setting('jp_login_background_image', [
         'default' => '',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_background_setting',
     ]);
 
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'jp_login_background_image', [
+    $customize->add_control(new WP_Customize_Image_Control($customize, 'jp_login_background_image', [
         'label' => 'Background Image',
         'section' => 'jp_login',
     ]));
 
-    $wp_customize->add_setting('jp_login_background_position', [
+    $customize->add_setting('jp_login_background_position', [
         'default' => 'left top',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_background_setting',
     ]);
 
-    $wp_customize->add_control('jp_login_background_position', [
+    $customize->add_control('jp_login_background_position', [
         'label' => 'Image Position',
         'section' => 'jp_login',
         'type' => 'select',
@@ -194,13 +194,13 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_setting('jp_login_background_size', [
+    $customize->add_setting('jp_login_background_size', [
         'default' => 'auto',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_background_setting',
     ]);
 
-    $wp_customize->add_control('jp_login_background_size', [
+    $customize->add_control('jp_login_background_size', [
         'label' => 'Image Size',
         'section' => 'jp_login',
         'type' => 'select',
@@ -211,13 +211,13 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_setting('jp_login_background_repeat', [
+    $customize->add_setting('jp_login_background_repeat', [
         'default' => 'repeat',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_background_setting',
     ]);
 
-    $wp_customize->add_control('jp_login_background_repeat', [
+    $customize->add_control('jp_login_background_repeat', [
         'label' => 'Repeat Background Image',
         'section' => 'jp_login',
         'type' => 'select',
@@ -229,13 +229,13 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    $wp_customize->add_setting('jp_login_background_attachment', [
+    $customize->add_setting('jp_login_background_attachment', [
         'default' => 'scroll',
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_background_setting',
     ]);
 
-    $wp_customize->add_control('jp_login_background_attachment', [
+    $customize->add_control('jp_login_background_attachment', [
         'label' => 'Scroll with Page',
         'section' => 'jp_login',
         'type' => 'select',
@@ -245,220 +245,52 @@ function jp_customize_register($wp_customize)
         ],
     ]);
 
-    // Section Messenger
-    $wp_customize->add_section('jp_messenger', [
-        'title' => 'Messenger',
-        'description' => 'Customizer Custom Messenger links',
-        'panel' => 'jp_theme_options',
-    ]);
-
-    $wp_customize->add_setting('jp_messenger_skype', ['default' => '', 'sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_messenger_viber', ['default' => '', 'sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_messenger_whatsapp', ['default' => '', 'sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_messenger_telegram', ['default' => '', 'sanitize_callback' => '',]);
-
-    $wp_customize->selective_refresh->add_partial('jp_messenger_skype', [
-        'selector' => '.messenger',
-    ]);
-
-    $wp_customize->add_control('jp_messenger_skype', [
-        'label' => 'Skype',
-        'section' => 'jp_messenger',
-        'settings' => 'jp_messenger_skype',
-        'type' => 'tel',
-    ]);
-
-    $wp_customize->add_control('jp_messenger_viber', [
-        'label' => 'Viber',
-        'section' => 'jp_messenger',
-        'settings' => 'jp_messenger_viber',
-        'type' => 'tel',
-    ]);
-
-    $wp_customize->add_control('jp_messenger_whatsapp', [
-        'label' => 'WhatsApp',
-        'section' => 'jp_messenger',
-        'settings' => 'jp_messenger_whatsapp',
-        'type' => 'tel',
-    ]);
-
-    $wp_customize->add_control('jp_messenger_telegram', [
-        'label' => 'Telegram',
-        'section' => 'jp_messenger',
-        'settings' => 'jp_messenger_telegram',
-        'type' => 'tel',
-    ]);
-
-    // Section Social
-    $wp_customize->add_section('jp_social', [
-        'title' => 'Social',
-        'description' => 'Customizer Custom Social links',
-        'panel' => 'jp_theme_options',
-    ]);
-
-    $wp_customize->add_setting('jp_social_vk', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_twitter', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_facebook', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_linkedin', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_instagram', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_odnoklassniki', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_google_plus', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_youtube', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_pinterest', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_tumblr', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_flickr', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_reddit', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_rss', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-    $wp_customize->add_setting('jp_social_foursquare', ['default' => '', 'sanitize_callback' => 'esc_url_raw',]);
-
-    $wp_customize->selective_refresh->add_partial('jp_social_vk', [
-        'selector' => '.social',
-    ]);
-
-    $wp_customize->add_control('jp_social_vk', [
-        'label' => 'Vk',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_vk',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_twitter', [
-        'label' => 'Twitter',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_twitter',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_facebook', [
-        'label' => 'Facebook',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_facebook',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_linkedin', [
-        'label' => 'Linkedin',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_linkedin',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_instagram', [
-        'label' => 'Instagram',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_instagram',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_odnoklassniki', [
-        'label' => 'Odnoklassniki',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_odnoklassniki',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_google_plus', [
-        'label' => 'Google Plus',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_google_plus',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_youtube', [
-        'label' => 'YouTube',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_youtube',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_pinterest', [
-        'label' => 'Pinterest',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_pinterest',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_tumblr', [
-        'label' => 'Tumblr',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_tumblr',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_flickr', [
-        'label' => 'Flickr',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_flickr',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_reddit', [
-        'label' => 'Reddit',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_reddit',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_rss', [
-        'label' => 'RSS',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_rss',
-        'type' => 'url',
-    ]);
-
-    $wp_customize->add_control('jp_social_foursquare', [
-        'label' => 'Foursquare',
-        'section' => 'jp_social',
-        'settings' => 'jp_social_foursquare',
-        'type' => 'url',
-    ]);
-
     // Section Phones
-    $wp_customize->add_section('jp_phones', [
+    $customize->add_section('jp_phones', [
         'title' => 'Phones',
         'description' => 'Customizer Custom Phone numbers',
         'panel' => 'jp_theme_options',
     ]);
 
-    $wp_customize->add_setting('jp_phone_one', ['sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_phone_two', ['sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_phone_three', ['sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_phone_four', ['sanitize_callback' => '',]);
-    $wp_customize->add_setting('jp_phone_five', ['sanitize_callback' => '',]);
+    $customize->add_setting('jp_phone_one', ['sanitize_callback' => '',]);
+    $customize->add_setting('jp_phone_two', ['sanitize_callback' => '',]);
+    $customize->add_setting('jp_phone_three', ['sanitize_callback' => '',]);
+    $customize->add_setting('jp_phone_four', ['sanitize_callback' => '',]);
+    $customize->add_setting('jp_phone_five', ['sanitize_callback' => '',]);
 
-    $wp_customize->selective_refresh->add_partial('jp_phone_one', [
+    $customize->selective_refresh->add_partial('jp_phone_one', [
         'selector' => '.phone',
     ]);
 
-    $wp_customize->add_control('jp_phone_one', [
+    $customize->add_control('jp_phone_one', [
         'label' => 'Phone 1',
         'section' => 'jp_phones',
         'settings' => 'jp_phone_one',
         'type' => 'tel',
     ]);
 
-    $wp_customize->add_control('jp_phone_two', [
+    $customize->add_control('jp_phone_two', [
         'label' => 'Phone 2',
         'section' => 'jp_phones',
         'settings' => 'jp_phone_two',
         'type' => 'tel',
     ]);
 
-    $wp_customize->add_control('jp_phone_three', [
+    $customize->add_control('jp_phone_three', [
         'label' => 'Phone 3',
         'section' => 'jp_phones',
         'settings' => 'jp_phone_three',
         'type' => 'tel',
     ]);
 
-    $wp_customize->add_control('jp_phone_four', [
+    $customize->add_control('jp_phone_four', [
         'label' => 'Phone 4',
         'section' => 'jp_phones',
         'settings' => 'jp_phone_four',
         'type' => 'tel',
     ]);
 
-    $wp_customize->add_control('jp_phone_five', [
+    $customize->add_control('jp_phone_five', [
         'label' => 'Phone 5',
         'section' => 'jp_phones',
         'settings' => 'jp_phone_five',

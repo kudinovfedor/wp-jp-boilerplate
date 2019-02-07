@@ -126,7 +126,7 @@ if (is_single()) {
 <?php } ?>
 <!-- HEADER -->
 <span class="empty-space js-header-space" aria-hidden="true"></span>
-<header class="header js-header" itemscope itemtype="http://schema.org/WPHeader">
+<header class="header js-header">
     <div class="container header-wrap">
         <div class="logo header-logo">
             <?php if (has_custom_logo()) {
@@ -147,8 +147,8 @@ if (is_single()) {
     <div class="container">
 
         <?php if (is_front_page()) { ?>
-            <h2 class="blog-name" itemprop="name"><?php bloginfo('name'); ?></h2>
-            <p class="blog-description" itemprop="description"><?php bloginfo('description'); ?></p>
+            <h2 class="blog-name"><?php bloginfo('name'); ?></h2>
+            <p class="blog-description"><?php bloginfo('description'); ?></p>
 
             <div style="margin-bottom: 16px;"><?php google_map(); ?></div>
 

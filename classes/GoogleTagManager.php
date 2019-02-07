@@ -102,24 +102,24 @@ if (!class_exists('GoogleTagManager')) {
         /**
          * Google Tag Manager Customizer
          *
-         * @param $wp_customize WP_Customize_Manager
+         * @param $customize WP_Customize_Manager
          */
-        public function customizer($wp_customize)
+        public function customizer($customize)
         {
-            // Section reCAPTCHA
-            $wp_customize->add_section('jp_google_tag_manager', [
+            // Section Google Tag Manager
+            $customize->add_section('jp_google_tag_manager', [
                 'title' => 'Google Tag Manager',
                 'description' => '',
                 'priority' => 204,
                 //'panel' => 'jp_theme_options',
             ]);
 
-            $wp_customize->add_setting('jp_google_tag_manager_id', [
+            $customize->add_setting('jp_google_tag_manager_id', [
                 'default' => '',
                 'sanitize_callback' => 'esc_attr',
             ]);
 
-            $wp_customize->add_control('jp_google_tag_manager_id', [
+            $customize->add_control('jp_google_tag_manager_id', [
                 'label' => 'Google Tag Manager ID',
                 'description' => 'You can get yours <b>container ID</b> <a href="https://www.google.com/analytics/tag-manager/" target="_blank">here</a>! 
                 Use comma without space (,) to enter multiple IDs. <br> Add a hook <b><code>do_action(\'wp_body\')</code></b> after opening tag <b>&lt;body&gt;</b> if not added.',

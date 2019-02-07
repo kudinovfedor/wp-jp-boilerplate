@@ -11,7 +11,7 @@ function jp_widgets_init()
         'description' => __('Sidebar Left', 'joompress'),
         'before_widget' => '<div id="%1$s" class="sidebar-item widget %2$s">',
         'after_widget' => "</div>\n",
-        'before_title' => '<div class="widget-title" itemprop="name">',
+        'before_title' => '<div class="widget-title">',
         'after_title' => "</div>\n",
     ]);
 
@@ -21,7 +21,7 @@ function jp_widgets_init()
         'description' => __('Sidebar Right', 'joompress'),
         'before_widget' => '<div id="%1$s" class="sidebar-item widget %2$s">',
         'after_widget' => "</div>\n",
-        'before_title' => '<div class="widget-title" itemprop="name">',
+        'before_title' => '<div class="widget-title">',
         'after_title' => "</div>\n",
     ]);
 }
