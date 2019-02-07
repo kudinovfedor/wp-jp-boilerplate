@@ -18,18 +18,6 @@ if (!class_exists('Social')) {
         }
 
         /**
-         * Determines whether the site has a social links.
-         *
-         * @see getSocial()
-         *
-         * @return bool
-         */
-        public function hasSocial()
-        {
-            return (bool)$this->getSocial();
-        }
-
-        /**
          * Return Social Link in array
          *
          * @param array $options
@@ -53,13 +41,6 @@ if (!class_exists('Social')) {
             $title = get_the_title();
             $desc = has_excerpt() ? get_the_excerpt() : wp_trim_words($post->post_content, 55);
             $thumbnail = has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url()) : '';
-
-            $notShare = ['instagram', 'youtube', 'flickr', 'rss', 'foursquare'];
-
-            if (count($args['only']) || count($args['exclude'])) {
-                $args['only'] = array_map('strtolower', $args['only']);
-                $args['exclude'] = array_map('strtolower', $args['exclude']);
-            }
 
             $_socials = [
                 'vk' => [
@@ -161,7 +142,14 @@ if (!class_exists('Social')) {
                 ],
             ];
 
-            if(count($args['only'])) {
+            $notShare = ['instagram', 'youtube', 'flickr', 'rss', 'foursquare'];
+
+            if (count($args['only']) || count($args['exclude'])) {
+                $args['only'] = array_map('strtolower', $args['only']);
+                $args['exclude'] = array_map('strtolower', $args['exclude']);
+            }
+
+            if (count($args['only'])) {
 
                 $only = $args['share'] ? array_diff($args['only'], $notShare) : $args['only'];
 
@@ -170,7 +158,7 @@ if (!class_exists('Social')) {
                 }, ARRAY_FILTER_USE_KEY);
 
             } elseif ($args['share'] || count($args['exclude'])) {
-                
+
                 $exclude = $args['share'] ? array_merge($args['exclude'], $notShare) : $args['exclude'];
 
                 $_socials = array_filter($_socials, function ($key) use ($exclude) {
@@ -179,7 +167,7 @@ if (!class_exists('Social')) {
 
             }
 
-            if($args['share']) {
+            if ($args['share']) {
 
                 $socials = $_socials;
 
@@ -199,7 +187,6 @@ if (!class_exists('Social')) {
         /**
          * HTML Markup (Social Networks)
          *
-         * @see hasSocial()
          * @see getSocial()
          *
          * @param array $options
@@ -208,39 +195,37 @@ if (!class_exists('Social')) {
          */
         public function getMarkup($options = [])
         {
-            if ($this->hasSocial()) {
+            $items = '';
 
-                $items = '';
+            foreach ($this->getSocial($options) as $name => $social) {
 
-                foreach ($this->getSocial($options) as $name => $social) {
+                $icon = sprintf(
+                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
+                    esc_attr($social['icon']),
+                    esc_attr($social['text'])
+                );
 
-                    $icon = sprintf(
-                        '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                        esc_attr($social['icon']),
-                        esc_attr($social['text'])
-                    );
+                $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($social['text']));
 
-                    $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($social['text']));
+                $url = (isset($options['share']) && $options['share']) ? $social['share'] : $social['url'];
 
-                    $link = sprintf(
-                        '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s %s</a>',
-                        esc_attr($name),
-                        esc_attr(esc_url($social['url'])),
-                        $icon,
-                        $text
-                    );
+                $link = sprintf(
+                    '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s %s</a>',
+                    esc_attr($name),
+                    esc_attr(esc_url($url)),
+                    $icon,
+                    $text
+                );
 
-                    $item = sprintf('<li class="social-item">%s</li>', $link);
+                $item = sprintf('<li class="social-item">%s</li>', $link);
 
-                    $items .= $item . PHP_EOL;
-                }
-
-                $list = sprintf('<ul class="social">%s</ul>', $items);
-
-                return $list;
+                $items .= $item . PHP_EOL;
             }
 
-            return null;
+            $html = empty($items) ? $items : sprintf('<ul class="social">%s</ul>', $items);
+
+            return $html;
+
         }
 
         /**
@@ -252,8 +237,10 @@ if (!class_exists('Social')) {
          */
         public function addShortcode($atts)
         {
-            $atts['only'] = isset($atts['only']) ? explode(',', $atts['only']) : [];
-            $atts['exclude'] = isset($atts['exclude']) ? explode(',', $atts['exclude']) : [];
+            $atts = (array)$atts;
+
+            $atts['only'] = !empty($atts['only']) ? explode(',', $atts['only']) : [];
+            $atts['exclude'] = !empty($atts['exclude']) ? explode(',', $atts['exclude']) : [];
 
             // Attributes
             $atts = shortcode_atts(
@@ -265,38 +252,7 @@ if (!class_exists('Social')) {
                 $atts
             );
 
-            $output = '';
-
-            if ($this->hasSocial()) {
-
-                $items = '';
-
-                foreach ($this->getSocial($atts) as $name => $social) {
-                    $icon = sprintf(
-                        '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                        esc_attr($social['icon']),
-                        esc_attr($social['text'])
-                    );
-
-                    $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($social['text']));
-
-                    $link = sprintf(
-                        '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s %s</a>',
-                        esc_attr($name),
-                        esc_attr(esc_url($social['url'])),
-                        $icon,
-                        $text
-                    );
-
-                    $item = sprintf('<li class="social-item">%s</li>', $link);
-
-                    $items .= $item . PHP_EOL;
-                }
-
-                $output = sprintf('<ul class="social">%s</ul>', $items);
-            }
-
-            return $output;
+            return $this->getMarkup($atts);
 
         }
 

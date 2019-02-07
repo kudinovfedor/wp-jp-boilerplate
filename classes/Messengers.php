@@ -18,18 +18,6 @@ if (!class_exists('Messengers')) {
         }
 
         /**
-         * Determines whether the site has a messenger.
-         *
-         * @see getMessengers()
-         *
-         * @return bool
-         */
-        public function hasMessengers()
-        {
-            return (bool)$this->getMessengers();
-        }
-
-        /**
          * Return Messengers in array
          *
          * @return array
@@ -69,47 +57,40 @@ if (!class_exists('Messengers')) {
         /**
          * HTML Markup (Messengers)
          *
-         * @see hasMessengers()
          * @see getMessengers()
          *
          * @return string
          */
         public function getMarkup()
         {
-            if ($this->hasMessengers()) {
+            $items = '';
 
-                $items = '';
+            foreach ($this->getMessengers() as $name => $messenger) {
 
-                foreach ($this->getMessengers() as $name => $messenger) {
+                $icon = sprintf(
+                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
+                    esc_attr($messenger['icon']),
+                    esc_attr($messenger['text'])
+                );
 
-                    $icon = sprintf(
-                        '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                        esc_attr($messenger['icon']),
-                        esc_attr($messenger['text'])
-                    );
+                $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($messenger['text']));
 
-                    $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($messenger['text']));
+                $link = sprintf(
+                    '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s %s</a>',
+                    esc_attr($name),
+                    esc_attr(get_phone_number($messenger['tel'])),
+                    $icon,
+                    $text
+                );
 
-                    $link = sprintf(
-                        '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s %s</a>',
-                        esc_attr($name),
-                        esc_attr(get_phone_number($messenger['tel'])),
-                        $icon,
-                        $text
-                    );
+                $item = sprintf('<li class="messenger-item">%s</li>', $link);
 
-                    $item = sprintf('<li class="messenger-item">%s</li>', $link);
-
-                    $items .= $item . PHP_EOL;
-                }
-
-                $list = sprintf('<ul class="messenger">%s</ul>', $items);
-
-                return $list;
-
+                $items .= $item . PHP_EOL;
             }
 
-            return null;
+            $html = empty($items) ? $items : sprintf('<ul class="messenger">%s</ul>', $items);
+
+            return $html;
         }
 
         /**
@@ -127,37 +108,7 @@ if (!class_exists('Messengers')) {
                 $atts
             );
 
-            $output = '';
-
-            if ($this->hasMessengers()) {
-                $items = '';
-
-                foreach ($this->getMessengers() as $name => $messenger) {
-                    $icon = sprintf(
-                        '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                        esc_attr($messenger['icon']),
-                        esc_attr($messenger['text'])
-                    );
-
-                    $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($messenger['text']));
-
-                    $link = sprintf(
-                        '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s %s</a>',
-                        esc_attr($name),
-                        esc_attr(get_phone_number($messenger['tel'])),
-                        $icon,
-                        $text
-                    );
-
-                    $item = sprintf('<li class="messenger-item">%s</li>', $link);
-
-                    $items .= $item . PHP_EOL;
-                }
-
-                $output = sprintf('<ul class="messenger">%s</ul>', $items);
-            }
-
-            return $output;
+            return $this->getMarkup();
         }
 
         /**
