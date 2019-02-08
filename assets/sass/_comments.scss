@@ -24,7 +24,7 @@
 
     &-body {
         border-top: 1px solid #c4c4c4;
-        padding: 15px 0;
+        padding: 15px;
     }
 
     &-meta {
@@ -82,6 +82,10 @@
         .comment-item {
             padding-left: 30px;
         }
+    }
+
+    &-form {
+        max-width: 600px;
     }
 }
 

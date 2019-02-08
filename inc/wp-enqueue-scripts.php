@@ -11,9 +11,9 @@ function jp_enqueue_style_script()
     $commonJS = JP_JS . "/common{$suffix}.js";
 
     $libs = [
-        'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate' . $suffix . '.js',
-        'html5shiv' => 'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js',
-        'respond' => 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
+        'validate' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate' . $suffix . '.js',
+        'respond' => 'https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js',
+        'html5shiv' => 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js',
     ];
 
     wp_enqueue_style('jp-style', $styleCss, [], null);

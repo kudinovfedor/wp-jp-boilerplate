@@ -258,8 +258,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  color: inherit;
+  line-height: 1.2;
+  font-weight: 700;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 p {
@@ -1904,7 +1908,7 @@ textarea.form-field {
 
 .comment-body {
   border-top: 1px solid #c4c4c4;
-  padding: 15px 0;
+  padding: 15px;
 }
 
 .comment-author .avatar {
@@ -1948,6 +1952,10 @@ textarea.form-field {
 
 .comment-children .comment-item {
   padding-left: 30px;
+}
+
+.comment-form {
+  max-width: 600px;
 }
 
 .bypostauthor {
