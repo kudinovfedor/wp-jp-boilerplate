@@ -24,6 +24,8 @@
 
     <div class="is-hide"><?php svg_sprite(); ?></div>
 
+    <?php //get_template_part('template-parts/cookie-consent'); ?>
+
     <?php wp_footer(); ?>
 
     </body>

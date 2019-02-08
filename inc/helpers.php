@@ -243,79 +243,36 @@ if (!function_exists('get_phone_number')) {
     }
 }
 
-if (!function_exists('has_phones')) {
-    /**
-     * Determines whether the site has a phone numbers.
-     *
-     * @see get_phones()
-     *
-     * @return bool
-     */
-    function has_phones()
-    {
-        return (bool)get_phones();
-    }
-}
-
 if (!function_exists('get_phones')) {
     /**
-     * Return Phone Numbers in array
+     * Get Phone Numbers
+     *
+     * @see Phones::getPhones()
      *
      * @return array
      */
     function get_phones()
     {
-        $_phones = [
-            get_theme_mod('jp_phone_one'),
-            get_theme_mod('jp_phone_two'),
-            get_theme_mod('jp_phone_three'),
-            get_theme_mod('jp_phone_four'),
-            get_theme_mod('jp_phone_five'),
-        ];
+        if (class_exists('Phones')) {
+            return (new Phones())->getPhones();
+        }
 
-        $phones = array_filter($_phones, function ($value) {
-            return !empty($value);
-        });
-
-        return $phones;
+        return [];
     }
 }
 
 if (!function_exists('phones')) {
     /**
-     * Display Phone Numbers
+     * Phone Numbers
      *
-     * @see has_phones()
-     * @see get_phones()
+     * @see Phones::getPhones()
      *
      * @return void
      */
     function phones()
     {
-        if (has_phones()) {
-
-            $items = '';
-
-            foreach (get_phones() as $phone) {
-
-                $icon = '<i class="fas fa-phone fa-fw" aria-hidden="true"></i>';
-
-                $number = sprintf(
-                    '<a href="tel:%s" class="phone-number">%s %s</a>',
-                    esc_attr(get_phone_number($phone)),
-                    $icon,
-                    esc_html($phone)
-                );
-
-                $item = sprintf('<li class="phone-item">%s</li>', $number);
-
-                $items .= $item . PHP_EOL;
-
-            }
-
-            $list = sprintf('<ul class="phone">%s</ul>', $items);
-
-            echo $list;
+        if (class_exists('Phones')) {
+            echo (new Phones())->getMarkup();
         }
     }
 }

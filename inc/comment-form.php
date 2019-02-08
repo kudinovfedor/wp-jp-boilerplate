@@ -23,7 +23,7 @@ function jp_comment_fields($fields)
     );
 
     $email = sprintf(
-        '<div class="form-row comment-form-email"><label for="email" class="form-label">%s %s</label>%s<input id="email" class="form-field" name="email" type="email" value="%s" size="30" maxlength="100" aria-describedby="email-notes" %s></div>',
+        '<div class="form-row comment-form-email"><label for="email" class="form-label">%s %s</label><input id="email" class="form-field" name="email" type="email" value="%s" size="30" maxlength="100" aria-describedby="email-notes" %s></div>',
         __('Email', 'joompress'),
         ($req ? '<span class="required">*</span>' : ''),
         esc_attr($commenter['comment_author_email']),

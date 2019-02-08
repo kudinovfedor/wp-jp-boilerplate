@@ -16,6 +16,7 @@
 
         mobileMenu();
         stickyHeader();
+        //cookieConsent();
 
         scrollTop('.js-scroll-top');
 
@@ -275,6 +276,33 @@
             }
         });
     };
+
+    /**
+     * Cookie Consent PopUp
+     *
+     * @example
+     * cookiePrivacy();
+     * @author Fedor Kudinov <brothersrabbits@mail.ru>
+     *
+     * @returns {void}
+     */
+    /*const cookieConsent = () => {
+        const wrapper = selector('.cookie-consent');
+        const accept = selector('.cookie-accept', wrapper);
+
+        if (!wrapper || !accept) return;
+
+        if (localStorage.privacyBannerClosed) {
+            wrapper.style.display = 'none';
+        } else {
+            wrapper.style.display = 'block';
+        }
+
+        accept.addEventListener('click', () => {
+            wrapper.style.display = 'none';
+            localStorage.privacyBannerClosed = true;
+        });
+    };*/
 
     /**
      * Scroll Top Native JS

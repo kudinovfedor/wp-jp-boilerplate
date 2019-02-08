@@ -225,7 +225,6 @@ if (!class_exists('Social')) {
             $html = empty($items) ? $items : sprintf('<ul class="social">%s</ul>', $items);
 
             return $html;
-
         }
 
         /**
@@ -253,7 +252,6 @@ if (!class_exists('Social')) {
             );
 
             return $this->getMarkup($atts);
-
         }
 
         /**

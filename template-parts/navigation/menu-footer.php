@@ -9,6 +9,7 @@
         'link_after' => '</span>',
         'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
         'fallback_cb' => false,
+        'depth' => 1,
     ]); ?>
     <!-- /END FOOTER MENU -->
 <?php } ?>

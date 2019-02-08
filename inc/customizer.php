@@ -244,59 +244,6 @@ function jp_customize_register($customize)
             'fixed' => 'Fixed',
         ],
     ]);
-
-    // Section Phones
-    $customize->add_section('jp_phones', [
-        'title' => 'Phones',
-        'description' => 'Customizer Custom Phone numbers',
-        'panel' => 'jp_theme_options',
-    ]);
-
-    $customize->add_setting('jp_phone_one', ['sanitize_callback' => '',]);
-    $customize->add_setting('jp_phone_two', ['sanitize_callback' => '',]);
-    $customize->add_setting('jp_phone_three', ['sanitize_callback' => '',]);
-    $customize->add_setting('jp_phone_four', ['sanitize_callback' => '',]);
-    $customize->add_setting('jp_phone_five', ['sanitize_callback' => '',]);
-
-    $customize->selective_refresh->add_partial('jp_phone_one', [
-        'selector' => '.phone',
-    ]);
-
-    $customize->add_control('jp_phone_one', [
-        'label' => 'Phone 1',
-        'section' => 'jp_phones',
-        'settings' => 'jp_phone_one',
-        'type' => 'tel',
-    ]);
-
-    $customize->add_control('jp_phone_two', [
-        'label' => 'Phone 2',
-        'section' => 'jp_phones',
-        'settings' => 'jp_phone_two',
-        'type' => 'tel',
-    ]);
-
-    $customize->add_control('jp_phone_three', [
-        'label' => 'Phone 3',
-        'section' => 'jp_phones',
-        'settings' => 'jp_phone_three',
-        'type' => 'tel',
-    ]);
-
-    $customize->add_control('jp_phone_four', [
-        'label' => 'Phone 4',
-        'section' => 'jp_phones',
-        'settings' => 'jp_phone_four',
-        'type' => 'tel',
-    ]);
-
-    $customize->add_control('jp_phone_five', [
-        'label' => 'Phone 5',
-        'section' => 'jp_phones',
-        'settings' => 'jp_phone_five',
-        'type' => 'tel',
-    ]);
-
 }
 
 add_action('customize_register', 'jp_customize_register');

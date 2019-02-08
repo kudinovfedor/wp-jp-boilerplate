@@ -47,52 +47,6 @@ if (!function_exists('jp_polylang_shortcode')) {
     add_shortcode('jp_polylang', 'jp_polylang_shortcode');
 }
 
-if (!function_exists('jp_phones_shortcode')) {
-    /**
-     * Add Shortcode Phones
-     *
-     * @param $atts
-     *
-     * @return string
-     */
-    function jp_phones_shortcode($atts)
-    {
-
-        // Attributes
-        $atts = shortcode_atts(
-            [],
-            $atts
-        );
-
-        $output = '';
-
-        if (has_phones()) {
-            $items = '';
-
-            foreach (get_phones() as $phone) {
-
-                $link = sprintf(
-                    '<a class="phone-number" href="tel:%s">%s</a>',
-                    esc_attr(get_phone_number($phone)),
-                    esc_html($phone)
-                );
-
-                $item = sprintf('<li class="phone-item">%s</li>', $link);
-
-                $items .= $item . PHP_EOL;
-
-            }
-
-            $output = sprintf('<ul class="phone">%s</ul>', $items);
-        }
-
-        return $output;
-
-    }
-
-    add_shortcode('jp_phones', 'jp_phones_shortcode');
-}
-
 if (!function_exists('jp_sitemap_shortcode')) {
     /**
      * Add Shortcode HTML Sitemap

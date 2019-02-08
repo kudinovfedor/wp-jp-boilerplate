@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-21 15:45+0000\n"
+"POT-Creation-Date: 2019-02-08 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -22,17 +22,17 @@ msgstr ""
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: archive.php:65 template-parts/archive/content.php:48
-#: template-parts/post/content.php:38
+#: archive.php:65 template-parts/archive/content.php:59
+#: template-parts/post/content.php:49
 msgid "Categories"
 msgstr ""
 
-#: archive.php:73 template-parts/archive/content.php:50
-#: template-parts/post/content.php:39
+#: archive.php:73 template-parts/archive/content.php:61
+#: template-parts/post/content.php:50
 msgid "Tags"
 msgstr ""
 
-#: archive.php:79 search.php:32 template-parts/archive/content.php:56
+#: archive.php:79 search.php:32 template-parts/archive/content.php:67
 msgid "Read more"
 msgstr ""
 
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Kudinov Fedor"
 msgstr ""
 
-#: header.php:164
+#: header.php:167
 msgid "Edit Analytics Tracking Code"
 msgstr ""
 
-#: header.php:167
+#: header.php:170
 msgid "Edit Login Logo"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Using %d Mb memory (including unused pages %d Mb)."
 msgstr ""
 
-#: inc/admin.php:62 inc/comment-form.php:22
+#: inc/admin.php:62 inc/comment-form.php:27
 msgid "Email"
 msgstr ""
 
@@ -189,53 +189,53 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: inc/comment-form.php:25
+#: inc/comment-form.php:35
 msgid "Website"
 msgstr ""
 
-#: inc/comment-form.php:49 inc/comment-form.php:53
+#: inc/comment-form.php:64 inc/comment-form.php:68
 msgctxt "noun"
 msgid "Comment"
 msgstr ""
 
-#: inc/helpers.php:168
+#: inc/helpers.php:169
 msgid "Trigger mobile menu."
 msgstr ""
 
-#: inc/helpers.php:198
+#: inc/helpers.php:187
 msgid "Close mobile menu."
 msgstr ""
 
-#: inc/helpers.php:216
+#: inc/helpers.php:206
 msgid "Skip to content"
 msgstr ""
 
-#: inc/helpers.php:736
+#: inc/helpers.php:470
 #, php-format
 msgid "&copy; %d %s. %s"
 msgstr ""
 
-#: inc/helpers.php:739
+#: inc/helpers.php:473
 msgid "All rights reserved"
 msgstr ""
 
-#: inc/helpers.php:768
+#: inc/helpers.php:508
 msgid "Delete This"
 msgstr ""
 
-#: inc/helpers.php:970
+#: inc/helpers.php:713
 msgid "&hellip;"
 msgstr ""
 
-#: inc/helpers.php:1039
+#: inc/helpers.php:782
 msgid "&laquo; Previous"
 msgstr ""
 
-#: inc/helpers.php:1040
+#: inc/helpers.php:783
 msgid "Next &raquo;"
 msgstr ""
 
-#: inc/helpers.php:1305
+#: inc/helpers.php:1063
 msgid "Uncategorized"
 msgstr ""
 
@@ -253,6 +253,23 @@ msgstr ""
 
 #: inc/widgets-init.php:19 inc/widgets-init.php:21
 msgid "Sidebar Right"
+msgstr ""
+
+#: template-parts/cookie-consent.php:3
+msgctxt "cookie"
+msgid ""
+"This website uses cookies to ensure you get the best experience on our "
+"website."
+msgstr ""
+
+#: template-parts/cookie-consent.php:4
+msgctxt "cookie"
+msgid "Learn more"
+msgstr ""
+
+#: template-parts/cookie-consent.php:6
+msgctxt "cookie"
+msgid "Got it!"
 msgstr ""
 
 #: classes/ajax/ContactForm.php:99

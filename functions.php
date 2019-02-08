@@ -25,6 +25,7 @@ require_once 'classes/ajax/LoadMorePosts.php';
 
 require_once 'classes/SnazzyMaps.php';
 
+require_once 'classes/Phones.php';
 require_once 'classes/Social.php';
 require_once 'classes/Messengers.php';
 require_once 'classes/ScrollTop.php';
