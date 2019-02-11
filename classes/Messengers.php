@@ -128,9 +128,13 @@ if (!class_exists('Messengers')) {
             ]);
 
             $customize->add_setting('jp_messenger_skype', ['default' => '', 'sanitize_callback' => '',]);
+            $customize->add_setting('jp_messenger_skype_action', ['default' => 'none', 'sanitize_callback' => '',]);
             $customize->add_setting('jp_messenger_viber', ['default' => '', 'sanitize_callback' => '',]);
+            $customize->add_setting('jp_messenger_viber_action', ['default' => 'none', 'sanitize_callback' => '',]);
             $customize->add_setting('jp_messenger_whatsapp', ['default' => '', 'sanitize_callback' => '',]);
+            $customize->add_setting('jp_messenger_whatsapp_action', ['default' => 'none', 'sanitize_callback' => '',]);
             $customize->add_setting('jp_messenger_telegram', ['default' => '', 'sanitize_callback' => '',]);
+            $customize->add_setting('jp_messenger_telegram_action', ['default' => 'none', 'sanitize_callback' => '',]);
 
             $customize->selective_refresh->add_partial('jp_messenger_skype', [
                 'selector' => '.messenger',
@@ -143,11 +147,38 @@ if (!class_exists('Messengers')) {
                 'type' => 'tel',
             ]);
 
+            $customize->add_control('jp_messenger_skype_action', [
+                'label' => 'Action',
+                'section' => 'jp_messenger',
+                'settings' => 'jp_messenger_skype_action',
+                'type' => 'select',
+                'choices' => [
+                    'none' => 'None',
+                    'add' => 'Add user',
+                    'chat' => 'Chat',
+                    'call' => 'Call',
+                    'video' => 'Video',
+                    'userinfo' => 'User profile',
+                    'sendfile' => 'Send file to share',
+                    'voicemail' => 'Send voice email',
+                ],
+            ]);
+
             $customize->add_control('jp_messenger_viber', [
                 'label' => 'Viber',
                 'section' => 'jp_messenger',
                 'settings' => 'jp_messenger_viber',
                 'type' => 'tel',
+            ]);
+
+            $customize->add_control('jp_messenger_viber_action', [
+                'label' => 'Action',
+                'section' => 'jp_messenger',
+                'settings' => 'jp_messenger_viber_action',
+                'type' => 'select',
+                'choices' => [
+                    'none' => 'None',
+                ],
             ]);
 
             $customize->add_control('jp_messenger_whatsapp', [
@@ -157,11 +188,31 @@ if (!class_exists('Messengers')) {
                 'type' => 'tel',
             ]);
 
+            $customize->add_control('jp_messenger_whatsapp_action', [
+                'label' => 'Action',
+                'section' => 'jp_messenger',
+                'settings' => 'jp_messenger_whatsapp_action',
+                'type' => 'select',
+                'choices' => [
+                    'none' => 'None',
+                ],
+            ]);
+
             $customize->add_control('jp_messenger_telegram', [
                 'label' => 'Telegram',
                 'section' => 'jp_messenger',
                 'settings' => 'jp_messenger_telegram',
                 'type' => 'tel',
+            ]);
+
+            $customize->add_control('jp_messenger_telegram_action', [
+                'label' => 'Action',
+                'section' => 'jp_messenger',
+                'settings' => 'jp_messenger_telegram_action',
+                'type' => 'select',
+                'choices' => [
+                    'none' => 'None',
+                ],
             ]);
         }
     }
