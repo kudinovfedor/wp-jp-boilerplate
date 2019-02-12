@@ -26,29 +26,33 @@ if (!class_exists('Messengers')) {
         {
             $_messengers = [
                 'skype' => [
-                    'tel' => get_theme_mod('jp_messenger_skype'),
+                    'value' => get_theme_mod('jp_messenger_skype'),
+                    'action' => get_theme_mod('jp_messenger_skype_action'),
                     'text' => 'Skype',
                     'icon' => 'fab fa-skype',
                 ],
                 'viber' => [
-                    'tel' => get_theme_mod('jp_messenger_viber'),
+                    'value' => get_theme_mod('jp_messenger_viber'),
+                    'action' => get_theme_mod('jp_messenger_viber_action'),
                     'text' => 'Viber',
                     'icon' => 'fab fa-viber',
                 ],
                 'whatsapp' => [
-                    'tel' => get_theme_mod('jp_messenger_whatsapp'),
+                    'value' => get_theme_mod('jp_messenger_whatsapp'),
+                    'action' => get_theme_mod('jp_messenger_whatsapp_action'),
                     'text' => 'WhatsApp',
                     'icon' => 'fab fa-whatsapp',
                 ],
                 'telegram' => [
-                    'tel' => get_theme_mod('jp_messenger_telegram'),
+                    'value' => get_theme_mod('jp_messenger_telegram'),
+                    'action' => get_theme_mod('jp_messenger_telegram_action'),
                     'text' => 'Telegram',
                     'icon' => 'fab fa-telegram-plane',
                 ],
             ];
 
             $messengers = array_filter($_messengers, function ($value) {
-                return !empty($value['tel']);
+                return !empty($value['value']);
             });
 
             return $messengers;
@@ -63,6 +67,28 @@ if (!class_exists('Messengers')) {
          */
         public function getMarkup()
         {
+            $actions = [
+                'skype' => [
+                    'none' => 'tel:%s',
+                    'add' => 'skype:%s?add',
+                    'chat' => 'skype:%s?chat',
+                    'call' => 'skype:%s?call',
+                    'video' => 'skype:%s?call&video=true',
+                    'userinfo' => 'skype:%s?userinfo',
+                    'sendfile' => 'skype:%s?sendfile',
+                    'voicemail' => 'skype:%s?voicemail',
+                ],
+                'viber' => [
+                    'none' => 'tel:%s',
+                ],
+                'whatsapp' => [
+                    'none' => 'tel:%s',
+                ],
+                'telegram' => [
+                    'none' => 'tel:%s',
+                ],
+            ];
+
             $items = '';
 
             foreach ($this->getMessengers() as $name => $messenger) {
@@ -75,10 +101,13 @@ if (!class_exists('Messengers')) {
 
                 $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($messenger['text']));
 
+                $value = $this->clearPhoneNumber($messenger['value']);
+                $action = $messenger['action'] ? sprintf($actions[$name][$messenger['action']], $value) : sprintf('tel:%s', $value);
+
                 $link = sprintf(
-                    '<a class="messenger-link messenger-%s" href="tel:%s" target="_blank" rel="nofollow noopener">%s %s</a>',
+                    '<a class="messenger-link messenger-%s" href="%s">%s %s</a>',
                     esc_attr($name),
-                    esc_attr(get_phone_number($messenger['tel'])),
+                    esc_attr($action),
                     $icon,
                     $text
                 );
@@ -142,9 +171,10 @@ if (!class_exists('Messengers')) {
 
             $customize->add_control('jp_messenger_skype', [
                 'label' => 'Skype',
+                'description' => 'Telephone or Username (for multichat, specify usernames separated by a semicolon) <br><b>Use action setting only when username is specified.</b> ',
                 'section' => 'jp_messenger',
                 'settings' => 'jp_messenger_skype',
-                'type' => 'tel',
+                'type' => 'text',
             ]);
 
             $customize->add_control('jp_messenger_skype_action', [
@@ -214,6 +244,18 @@ if (!class_exists('Messengers')) {
                     'none' => 'None',
                 ],
             ]);
+        }
+
+        /**
+         * Clean Phone Number
+         *
+         * @param string $phoneNumber
+         *
+         * @return string
+         */
+        private function clearPhoneNumber($phoneNumber)
+        {
+            return str_replace(['-', '(', ')', ' '], '', $phoneNumber);
         }
     }
 
