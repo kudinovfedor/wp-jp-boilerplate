@@ -94,7 +94,6 @@ if (is_single()) {
     global $post;
     setup_postdata($post);
     $image = wp_get_attachment_image_url(get_post_thumbnail_id($post->ID), 'full');
-    $timestamp = strtotime($post->post_date);
     ?>
     <script type="application/ld+json">
         {
@@ -106,7 +105,7 @@ if (is_single()) {
             },
             "headline": "<?php the_title(); ?>",
             "image": "<?php echo $image; ?>",
-            "datePublished": "<?php echo date('c', $timestamp); ?>",
+            "datePublished": "<?php echo get_the_date('c'); ?>",
             "dateModified": "<?php the_modified_date('c'); ?>",
             "author": {
                 "@type": "Person",

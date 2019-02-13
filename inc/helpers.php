@@ -75,11 +75,10 @@ if (!function_exists('get_logo_url')) {
      */
     function get_logo_url()
     {
-        $custom_logo_id = get_theme_mod('custom_logo');
-        $custom_logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : '';
-        $logo_url = $custom_logo_url ?: get_template_directory_uri() . '/assets/img/logo.png';
+        $attachment_id = get_theme_mod('custom_logo');
+        $logo_url = $attachment_id ? wp_get_attachment_image_url($attachment_id, 'full') : JP_IMG . '/logo.png';
 
-        return $logo_url;
+        return esc_url($logo_url);
     }
 }
 

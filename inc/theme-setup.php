@@ -627,3 +627,14 @@ function jp_remove_width_height_attribute($html)
 
 add_filter('post_thumbnail_html', 'jp_remove_width_height_attribute');
 add_filter('image_send_to_editor', 'jp_remove_width_height_attribute');
+
+function jp_amp_site_icon_url($schema_img_url)
+{
+    if (empty($schema_img_url)) {
+        $schema_img_url = get_logo_url();
+    }
+
+    return $schema_img_url;
+}
+
+add_filter('amp_site_icon_url', 'jp_amp_site_icon_url');
