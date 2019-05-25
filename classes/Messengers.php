@@ -93,23 +93,20 @@ if (!class_exists('Messengers')) {
 
             foreach ($this->getMessengers() as $name => $messenger) {
 
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($messenger['icon']),
-                    esc_attr($messenger['text'])
-                );
+	            $icon = sprintf('<i class="%s" aria-hidden="true"></i>', esc_attr($messenger['icon']));
 
-                $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($messenger['text']));
+                $readerText = sprintf('<span class="screen-reader-text">%s</span>', esc_html($messenger['text']));
 
                 $value = $this->clearPhoneNumber($messenger['value']);
                 $action = $messenger['action'] ? sprintf($actions[$name][$messenger['action']], $value) : sprintf('tel:%s', $value);
 
                 $link = sprintf(
-                    '<a class="messenger-link messenger-%s" href="%s">%s %s</a>',
+                    '<a class="messenger-link messenger-%s" href="%s" aria-label="%s">%s %s</a>',
                     esc_attr($name),
                     esc_attr($action),
+	                esc_attr($messenger['text']),
                     $icon,
-                    $text
+	                $readerText
                 );
 
                 $item = sprintf('<li class="messenger-item">%s</li>', $link);

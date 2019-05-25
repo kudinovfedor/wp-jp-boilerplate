@@ -199,22 +199,19 @@ if (!class_exists('Social')) {
 
             foreach ($this->getSocial($options) as $name => $social) {
 
-                $icon = sprintf(
-                    '<i class="%s" aria-hidden="true" aria-label="%s"></i>',
-                    esc_attr($social['icon']),
-                    esc_attr($social['text'])
-                );
+	            $icon = sprintf('<i class="%s" aria-hidden="true"></i>', esc_attr( $social['icon']));
 
-                $text = sprintf('<span class="screen-reader-text">%s</span>', esc_attr($social['text']));
+	            $readerText = sprintf('<span class="screen-reader-text">%s</span>', esc_html($social['text']));
 
                 $url = (isset($options['share']) && $options['share']) ? $social['share'] : $social['url'];
 
                 $link = sprintf(
-                    '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener">%s %s</a>',
+                    '<a class="social-link social-%s" href="%s" target="_blank" rel="nofollow noopener" aria-label="%s">%s %s</a>',
                     esc_attr($name),
                     esc_attr(esc_url($url)),
+	                esc_attr($social['text']),
                     $icon,
-                    $text
+	                $readerText
                 );
 
                 $item = sprintf('<li class="social-item">%s</li>', $link);

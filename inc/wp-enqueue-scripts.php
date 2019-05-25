@@ -51,7 +51,7 @@ function jp_enqueue_style_script()
     pushPreloadFile($commonJS, 'script');
 }
 
-add_action('wp_enqueue_scripts', 'jp_enqueue_style_script');
+add_action('wp_enqueue_scripts', 'jp_enqueue_style_script', 11, 0);
 
 /**
  * WP Default Styles

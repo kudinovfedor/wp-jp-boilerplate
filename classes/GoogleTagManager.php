@@ -26,7 +26,7 @@ if (!class_exists('GoogleTagManager')) {
 
             if ($this->getId()) {
                 add_action('wp_head',[$this, 'printHead']);
-                add_action('wp_body', [$this, 'printBody']);
+                add_action('wp_body_open', [$this, 'printBody']);
             }
         }
 
@@ -122,7 +122,7 @@ if (!class_exists('GoogleTagManager')) {
             $customize->add_control('jp_google_tag_manager_id', [
                 'label' => 'Google Tag Manager ID',
                 'description' => 'You can get yours <b>container ID</b> <a href="https://www.google.com/analytics/tag-manager/" target="_blank">here</a>! 
-                Use comma without space (,) to enter multiple IDs. <br> Add a hook <b><code>do_action(\'wp_body\')</code></b> after opening tag <b>&lt;body&gt;</b> if not added.',
+                Use comma without space (,) to enter multiple IDs. <br> Add action <b><code>do_action(\'wp_body_open\')</code></b> after opening tag <b>&lt;body&gt;</b> if not added or <b><code>wp_body_open();</code></b>.',
                 'section' => 'jp_google_tag_manager',
                 'settings' => 'jp_google_tag_manager_id',
                 'type' => 'text',

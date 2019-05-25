@@ -22,7 +22,7 @@
 </head>
 <body id="top" <?php body_class(); ?>>
 
-<?php wp_body(); ?>
+<?php wp_body_open(); ?>
 
 <?php skip_to_content('content'); ?>
 

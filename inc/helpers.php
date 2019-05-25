@@ -1,18 +1,5 @@
 <?php
 
-if (!function_exists('wp-body')) {
-    /**
-     * Fire the wp_body action.
-     */
-    function wp_body()
-    {
-        /**
-         * Prints scripts or data in the body tag on the front end.
-         */
-        do_action('wp_body');
-    }
-}
-
 if (!function_exists('theme_mod')) {
     /**
      * Display theme modification value for the current theme.
@@ -1000,7 +987,11 @@ if (!function_exists('pushPreloadFile')) {
      */
     function pushPreloadFile($path, $type = 'style')
     {
-        header("Link: <{$path}>; rel=preload; as={$type}", false);
+	    /*if (headers_sent()) {
+		    return;
+	    }*/
+
+        //header("Link: <{$path}>; rel=preload; as={$type}", false);
     }
 }
 

@@ -27,12 +27,12 @@ if (!class_exists('ScrollTop')) {
             $options = [
                 'display' => get_theme_mod('jp_scroll_top_enable', true),
                 'shape' => get_theme_mod('jp_scroll_top_shape', 'circle'),
-                'width' => get_theme_mod('jp_scroll_top_width', 50),
-                'height' => get_theme_mod('jp_scroll_top_height', 50),
-                'bottom' => get_theme_mod('jp_scroll_top_offset_bottom', 20),
-                'border-width' => get_theme_mod('jp_scroll_top_border_width', 1),
+                'width' => get_theme_mod('jp_scroll_top_width', '50'),
+                'height' => get_theme_mod('jp_scroll_top_height', '50'),
+                'bottom' => get_theme_mod('jp_scroll_top_offset_bottom', '20'),
+                'border-width' => get_theme_mod('jp_scroll_top_border_width', '1'),
                 'side-position' => get_theme_mod('jp_scroll_top_position', 'right'),
-                'side-offset' => get_theme_mod('jp_scroll_top_offset_left_right', 20),
+                'side-offset' => get_theme_mod('jp_scroll_top_offset_left_right', '20'),
                 'border-color' => get_theme_mod('jp_scroll_top_border_color', '#000000'),
                 'background-color' => get_theme_mod('jp_scroll_top_background_color', '#000000'),
                 'arrow-border-color' => get_theme_mod('jp_scroll_top_arrow_color', '#ffffff'),
@@ -175,6 +175,7 @@ if (!class_exists('ScrollTop')) {
                 'section' => 'jp_scroll_top',
                 'settings' => 'jp_scroll_top_width',
                 'type' => 'number',
+                'input_attrs' => ['min' => 25, 'step' => 1],
             ]);
 
             $customize->add_control('jp_scroll_top_height', [
@@ -182,6 +183,7 @@ if (!class_exists('ScrollTop')) {
                 'section' => 'jp_scroll_top',
                 'settings' => 'jp_scroll_top_height',
                 'type' => 'number',
+                'input_attrs' => ['min' => 25, 'step' => 1],
             ]);
 
             $customize->add_control('jp_scroll_top_shape', [
@@ -212,6 +214,7 @@ if (!class_exists('ScrollTop')) {
                 'section' => 'jp_scroll_top',
                 'settings' => 'jp_scroll_top_offset_left_right',
                 'type' => 'number',
+                'input_attrs' => ['min' => 0, 'step' => 1],
             ]);
 
             $customize->add_control('jp_scroll_top_offset_bottom', [
@@ -219,6 +222,7 @@ if (!class_exists('ScrollTop')) {
                 'section' => 'jp_scroll_top',
                 'settings' => 'jp_scroll_top_offset_bottom',
                 'type' => 'number',
+                'input_attrs' => ['min' => 0, 'step' => 1],
             ]);
 
             $customize->add_control('jp_scroll_top_border_width', [
@@ -226,6 +230,7 @@ if (!class_exists('ScrollTop')) {
                 'section' => 'jp_scroll_top',
                 'settings' => 'jp_scroll_top_border_width',
                 'type' => 'number',
+                'input_attrs' => ['min' => 0, 'step' => 1],
             ]);
 
             $customize->add_control('jp_scroll_top_border_color', [
