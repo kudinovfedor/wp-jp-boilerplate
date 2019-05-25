@@ -38,7 +38,13 @@ function jp_login_header_title()
     return esc_attr(get_bloginfo('name'));
 }
 
-add_filter('login_headertitle', 'jp_login_header_title');
+global $wp_version;
+
+if (version_compare($wp_version, '5.2', '>=')) {
+	add_filter('login_headertext', 'jp_login_header_title');
+} else {
+	add_filter('login_headertitle', 'jp_login_header_title');
+}
 
 /**
  * Login Form (error messages displayed above the login form)
