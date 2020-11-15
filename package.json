@@ -25,6 +25,9 @@
       "@babel/preset-env"
     ]
   },
+  "browserslist": [
+    "last 2 versions"
+  ],
   "scripts": {
     "start": "yarn install --modules-folder ./../node_modules"
   },

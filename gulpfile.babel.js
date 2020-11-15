@@ -1,6 +1,6 @@
 'use strict';
 
-import gulp from 'gulp';
+import {task, src, dest, watch, series, parallel} from 'gulp';
 import sass from 'gulp-sass';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
@@ -15,8 +15,8 @@ import autoprefixer from 'gulp-autoprefixer';
 
 const browserSync = browser_sync.create();
 
-gulp.task('svg', () => {
-    return gulp.src('assets/img/svg/*.svg')
+task('svg', () => {
+    return src('assets/img/svg/*.svg')
         .pipe(plumber())
         .pipe(svgmin({
             plugins: [
@@ -27,11 +27,11 @@ gulp.task('svg', () => {
         }))
         .pipe(svgstore({inlineSvg: true}))
         .pipe(rename({basename: 'sprite', extname: '.svg'}))
-        .pipe(gulp.dest('assets/img/'));
+        .pipe(dest('assets/img/'));
 });
 
-gulp.task('sass', () => {
-    return gulp.src('assets/sass/**/*.scss')
+task('sass', () => {
+    return src('assets/sass/**/*.scss')
         .pipe(plumber())
         //.pipe(sourcemaps.init())
         .pipe(sass({
@@ -43,27 +43,24 @@ gulp.task('sass', () => {
             precision: 5,
             sourceComments: false
         }).on('error', sass.logError))
-        .pipe(autoprefixer({
-            browsers: ['last 5 versions'],
-            cascade: false
-        }))
+        .pipe(autoprefixer({cascade: false, grid: 'autoplace'}))
         //.pipe(sourcemaps.write('/'))
-        .pipe(gulp.dest('./'))
+        .pipe(dest('./'))
         .pipe(browserSync.stream());
 });
 
-gulp.task('css', () => {
-    return gulp.src('style.css')
+task('css', () => {
+    return src('style.css')
         .pipe(plumber())
         //.pipe(sourcemaps.init())
         .pipe(cleancss({compatibility: 'ie7', debug: true}))
         .pipe(rename({suffix: '.min'}))
         //.pipe(sourcemaps.write('/'))
-        .pipe(gulp.dest('./'));
+        .pipe(dest('./'));
 });
 
-gulp.task('babel', () => {
-    return gulp.src('assets/js/es6/**/*.js')
+task('babel', () => {
+    return src('assets/js/es6/**/*.js')
         .pipe(plumber())
         .pipe(babel())
         .pipe(uglify({
@@ -73,11 +70,11 @@ gulp.task('babel', () => {
                 beautify: true,
             },
         }))
-        .pipe(gulp.dest('assets/js'));
+        .pipe(dest('assets/js'));
 });
 
-gulp.task('js', () => {
-    return gulp.src('assets/js/common.js')
+task('js', () => {
+    return src('assets/js/common.js')
         .pipe(plumber())
         //.pipe(sourcemaps.init())
         .pipe(uglify({
@@ -86,29 +83,29 @@ gulp.task('js', () => {
         }))
         .pipe(rename({suffix: '.min'}))
         //.pipe(sourcemaps.write('/'))
-        .pipe(gulp.dest('assets/js'));
+        .pipe(dest('assets/js'));
 });
 
-gulp.task('min', gulp.parallel('css', 'js'));
+task('min', parallel('css', 'js'));
 
-gulp.task('watch', () => {
-    gulp.watch('assets/img/svg/*.svg', gulp.series('svg'));
-    gulp.watch('assets/sass/**/*.scss', gulp.series('sass'));
-    gulp.watch('assets/js/es6/**/*.js', gulp.series('babel'));
+task('watch', () => {
+    watch('assets/img/svg/*.svg', series('svg'));
+    watch('assets/sass/**/*.scss', series('sass'));
+    watch('assets/js/es6/**/*.js', series('babel'));
 });
 
-gulp.task('default', () => {
+task('default', () => {
     browserSync.init({
         baseDir: './',
         ghostMode: false,
         //proxy: 'http://yourlocal.dev',
     });
-    gulp.watch('assets/img/svg/*.svg', gulp.series('svg'));
-    gulp.watch('assets/sass/**/*.scss', gulp.series('sass'));
-    gulp.watch('assets/js/es6/**/*.js', gulp.series('babel'));
-    //gulp.watch('style.css', gulp.series('css'));
-    //gulp.watch('assets/js/common.js', gulp.series('js'));
-    gulp.watch('style.css').on('change', browserSync.reload);
-    gulp.watch('assets/js/common.js').on('change', browserSync.reload);
-    gulp.watch('**/*.php').on('change', browserSync.reload);
+    watch('assets/img/svg/*.svg', series('svg'));
+    watch('assets/sass/**/*.scss', series('sass'));
+    watch('assets/js/es6/**/*.js', series('babel'));
+    //watch('style.css', series('css'));
+    //watch('assets/js/common.js', series('js'));
+    watch('style.css').on('change', browserSync.reload);
+    watch('assets/js/common.js').on('change', browserSync.reload);
+    watch('**/*.php').on('change', browserSync.reload);
 });
