@@ -142,6 +142,7 @@ if (!class_exists('GoogleTagManager')) {
 
 	    /**
 	     * @param array $data
+	     * @return array
 	     */
 	    public function enableAmpAnalytics($data)
 	    {
@@ -149,6 +150,8 @@ if (!class_exists('GoogleTagManager')) {
 		    	$data['amp_component_scripts'],
 			    ['amp-analytics' => true]
 		    );
+
+		    return $data;
 	    }
 
         /**
@@ -158,7 +161,6 @@ if (!class_exists('GoogleTagManager')) {
          */
         public function customizer($customize)
         {
-            // Section Google Tag Manager
             $customize->add_section('jp_gtm', [
                 'title' => 'Google Tag Manager',
                 'description' => '',
@@ -190,7 +192,6 @@ if (!class_exists('GoogleTagManager')) {
 
 	        $customize->add_control('jp_gtm_amp_id', [
 		        'label' => 'GTM AMP Container ID',
-		        //'description' => '',
 		        'section' => 'jp_gtm',
 		        'settings' => 'jp_gtm_amp_id',
 		        'type' => 'text',
@@ -201,5 +202,5 @@ if (!class_exists('GoogleTagManager')) {
         }
     }
 
-    new GoogleTagManager;
+    new GoogleTagManager();
 }
