@@ -135,7 +135,7 @@ if (!class_exists('GoogleTagManager')) {
 	    public function printComponent()
 	    {
 		    printf(
-			    '<amp-analytics config="https://www.googletagmanager.com/amp.json?id=%s" data-credentials="include"></amp-analytics>',
+			    '<amp-analytics config="https://www.googletagmanager.com/amp.json?id=%s&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>',
 			    esc_attr($this->getAmpId())
 		    );
 	    }
